@@ -1,0 +1,46 @@
+---
+export interface Props {
+	title: string
+}
+
+import '../assets/styles/global.css'
+const { title } = Astro.props as Props
+const { frontmatter } = Astro.props
+---
+
+<style>
+	article :global(p) {
+		font-size: 1.8rem;
+		margin: 1rem auto;
+	}
+
+	article :global(pre) {
+		margin: 2rem auto;
+	}
+</style>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<meta name="generator" content={Astro.generator} />
+<title>{title}</title>
+
+<body>
+	<div class="container px-5 py-8 mx-auto">
+		<div class="flex flex-col text-center w-full mt-10">
+			<h1
+				class="sm:text-6xl text-2xl font-medium title-font text-gray-900"
+			>
+				{frontmatter.title}
+			</h1>
+			<h2
+				class="text-indigo-500 tracking-widest font-medium title-font mb-1"
+			>
+				by: {frontmatter.author}
+			</h2>
+		</div>
+	</div>
+	<article class="md:container md:mx-auto mt-8 mb-8">
+		<slot />
+	</article>
+</body>

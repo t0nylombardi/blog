@@ -1,0 +1,27 @@
+{
+  "name": "@example/basics",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "devDependencies": {
+    "@astrojs/netlify": "^1.0.1",
+    "@types/react": "^18.0.17",
+    "astro": "^1.0.6",
+    "autoprefixer": "^10.4.8",
+    "tailwindcss": "^3.1.8"
+  },
+  "dependencies": {
+    "@astrojs/react": "^1.0.0",
+    "moment": "^2.29.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-spring": "^9.5.2",
+    "react-visibility-sensor": "^5.1.1"
+  }
+}

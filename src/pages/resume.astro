@@ -1,0 +1,359 @@
+---
+import Layout from '../layouts/BaseLayout.astro'
+import SkillList from '../components/skills/skills.jsx'
+---
+
+<style lang="css">
+    .resume {
+        margin: 2rem 2.5rem;
+    }
+    .resume h1 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        line-height: 1;
+    }
+
+    .resume hr {
+        background-color: #b9301c;
+        border: 1px solid #b9301c;
+        margin: 0.8rem 0 1.2rem 0;
+        width: 40px;
+        height: 0.3rem;
+    }
+
+    .resume .resume-header h1 {
+        width: 0.5rem;
+        font-size: 4.5rem;
+        font-weight: 800;
+        line-height: 1;
+    }
+
+    .resume .resume-body-wrapper {
+        height: 100%;
+        display: flex;
+        margin-top: 2rem;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .resume .skills-hobbies {
+        width: 30%;
+        padding-top: 1rem;
+        padding-right: 1rem;
+        margin-right: 1rem;
+    }
+
+    .resume .skills-hobbies .skills {
+        padding: 0 2rem 4rem 0;
+    }
+
+    .resume .skills-hobbies .skills h1 {
+        margin: 0.6rem 0;
+    }
+
+    .resume .skills-hobbies .skills h2 {
+        margin: 0.8rem 0;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    .resume .resume-main {
+        width: 70%;
+        margin: 1.5rem 0;
+    }
+
+    .resume .resume-main .profile {
+        padding-bottom: 1.2rem;
+    }
+
+    .resume .resume-main .profile p {
+        padding-bottom: 1.6rem;
+    }
+
+    .resume .resume-main .profile .employment-history {
+        padding: 1rem 0;
+    }
+
+    .resume .resume-main .profile .employment-history .highlights {
+        padding: 2rem 0 0 1.5rem;
+    }
+
+    @media screen and (max-width: 425px) {
+        .resume-body-wrapper > div {
+            flex-direction: column;
+        }
+
+        .resume .skills-hobbies {
+            width: 100%;
+            border: none;
+        }
+
+        .resume .resume-header h1 {
+            font-size: 13vw;
+        }
+
+        .resume .resume-main {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="md:container md:mx-auto">
+    <div class="resume">
+        <div class="resume-header">
+            <h1 class="">ANTHONY LOMBARDI</h1>
+            <h3 class="text-2xl text-blog-red">
+                Father &#8226; Consultant &#8226; Mentor &#8226; FullStack
+                Engineer
+            </h3>
+        </div>
+        <div class="resume-body-wrapper border-t-2 border-gray-c7">
+            <div class="flex flex-row">
+                <div
+                    class="flex-initial skills-hobbies border-r-2 border-gray-c7"
+                >
+                    <div class="skills">
+                        <h1>SKILLS</h1>
+                        <hr />
+                        <div class="py-4">
+                            <SkillList />
+                        </div>
+                    </div>
+
+                    <div class="hobbies">
+                        <h1>HOBBIES</h1>
+                        <hr />
+                        <p>
+                            Building guitars && Woodworking , Playing Guitar,
+                            Cooking, Spending Time with my two Children, and
+                            Exploring the Outdoors.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex-auto w-full resume-main">
+                    <div class="profile">
+                        <h1>PROFILE</h1>
+                        <hr />
+                        <p class="border-b-2 border-gray-c7">
+                            Meticulous & motivated Full Stack Developer with 10+
+                            years of hands-on experience in: IT, Ruby on Rails,
+                            E-Commerce, Project Management, Development, and
+                            Consulting through the Full Software Life Cycle.
+                        </p>
+                    </div>
+                    <div class="employment-history border-b-2 border-gray-c7">
+                        <h1>EMPLOYMENT HISTORY</h1>
+                        <hr />
+                        {/* AVAIL/RDC  */}
+                        <div class="employment mb-4">
+                            <div class="grid grid-cols-4">
+                                <div
+                                    class="col-span-3 text-left font-bold text-blog-red"
+                                >
+                                    Senior Software Engineer, Avail/Realtor.com
+                                </div>
+                                <div class="text-right">New York City</div>
+                            </div>
+                            <p class="employment-date">
+                                June 2021 &hyphen; August 2022
+                            </p>
+                            <div class="highlights">
+                                <ul class="list-inside list-disc">
+                                    <li>
+                                        Built applications using Ruby on Rails
+                                        for the backend and React on the
+                                        frontend.
+                                    </li>
+
+                                    <li>
+                                        Designed and implemented planning and
+                                        execution of taking a momolyth to
+                                        microservices.
+                                    </li>
+
+                                    <li>
+                                        Implemented microservices for listing
+                                        currated data in listing apartments.
+                                    </li>
+
+                                    <li>Deployed better Logging for apis</li>
+
+                                    <li>
+                                        Facilitated root cause analysis of
+                                        common system issues to meet customer
+                                        needs.
+                                    </li>
+
+                                    <li>
+                                        Monitored systems for defects and
+                                        employed bug resolution
+                                    </li>
+
+                                    <li>
+                                        Built and Facilitated code quality
+                                        checks by using CI/CD to analyze PRs.
+                                    </li>
+
+                                    <li>
+                                        Mentored teammates with code issues.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        {/* LENDKEY  */}
+                        <div class="employment mb-4">
+                            <div class="grid grid-cols-4">
+                                <div
+                                    class="col-span-3 text-left font-bold text-blog-red"
+                                >
+                                    Software Engineer, LendKey Technologies
+                                </div>
+                                <div class="text-right">New York City</div>
+                            </div>
+                            <p class="employment-date">
+                                Oct 2017 &hyphen; Jun 2020
+                            </p>
+                            <div class="highlights">
+                                <ul class="list-inside list-disc">
+                                    <li>
+                                        Built and maintained APIs, moving away
+                                        from Legacy Monolith infrastructure to a
+                                        more domain-driven micro service through
+                                        Docker Ruby on Rails, Java Spring-Boot
+                                        and ReactJS
+                                    </li>
+                                    <li>
+                                        Worked with ReactJS and TypeScript to
+                                        build a front end
+                                    </li>
+                                    <li>
+                                        Used higher order of components to make
+                                        small, reusable sections{' '}
+                                    </li>
+                                    <li>
+                                        Built login feature using MS Azure, JWT,
+                                        and Apigee
+                                    </li>
+                                    <li>
+                                        Utilized crucial design software skills
+                                        to complete projects
+                                    </li>
+                                    <li>
+                                        Effectively coded software changes and
+                                        alterations based on speciqc design
+                                        re’uirements
+                                    </li>
+                                    <li>
+                                        Applied & stayed current with existing
+                                        and emerging technologies{' '}
+                                    </li>
+                                    <li>
+                                        Brought forth a passion and dedication
+                                        to software development
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        {/* TMPG  */}
+                        <div class="employment mb-4">
+                            <div class="grid grid-cols-4">
+                                <div
+                                    class="col-span-3 text-left font-bold text-blog-red"
+                                >
+                                    Full-Stack Developer, TMPG
+                                </div>
+                                <div class="text-right">White Plains, NY</div>
+                            </div>
+                            <p class="employment-date">
+                                Aug 2015 &hyphen; Oct 2017
+                            </p>
+                            <div class="highlights">
+                                <ul class="list-inside list-disc">
+                                    <li>
+                                        Managed a development team building
+                                        rich, interactive websites
+                                    </li>
+                                    <li>
+                                        Built and maintained new infrastructures
+                                        while merging our legacy infrastructure
+                                        over
+                                    </li>
+                                    <li>
+                                        Brought forth extensive experience
+                                        developing APIs to connect and curate
+                                        new and existing data through multiple
+                                        platforms
+                                    </li>
+                                    <li>
+                                        Implemented procedural changes in server
+                                        infrastructures
+                                    </li>
+                                    <li>
+                                        Created new internal portal for managing
+                                        client data and assets
+                                    </li>
+                                    <li>
+                                        Successfully worked to meet tight client
+                                        deadlines
+                                    </li>
+                                    <li>
+                                        Worked well with internal and external
+                                        teams
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* Ferguson */}
+                        <div class="employment mb-4">
+                            <div class="grid grid-cols-4">
+                                <div
+                                    class="col-span-3 text-left font-bold text-blog-red"
+                                >
+                                    Full-Stack Developer, Ferguson Enterprise
+                                </div>
+                                <div class="text-right">Goshen, NY</div>
+                            </div>
+                            <p class="employment-date">
+                                Apr 2013 &hyphen; Jul 2015
+                            </p>
+                            <div class="highlights">
+                                <ul class="list-inside list-disc">
+                                    <li>
+                                        Transformed a large e&hyphen;commerce
+                                        website with new Ruby on Rails
+                                        back&hyphen;end technology
+                                    </li>
+                                    <li>
+                                        Maintained store locations, websites and
+                                        back-end databases
+                                    </li>
+                                    <li>
+                                        Developed a user&hyphen;friendly SMS
+                                        solution for customer service
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        {/*  */}
+                    </div>
+                    <div class="education pt-5">
+                        <h1>EDUCATION</h1>
+                        <hr />
+                        <div class="grid grid-cols-4">
+                            <div
+                                class="col-span-3 text-left font-bold text-gray-dark"
+                            >
+                                CSM, College of Westchester
+                            </div>
+                            <div class="text-right">White Plains, NY</div>
+                        </div>
+                        <p class="employment-date">
+                            Sep 2004 &hyphen; May 2006
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

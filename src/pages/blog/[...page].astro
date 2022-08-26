@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import moment from 'moment'
+
+const posts = await Astro.glob('./*.md')
+const title = 'Blog'
+const page = Astro.props
+const { frontmatter } = Astro.props
+---
+
+<BaseLayout title={title}>
+    <div class="md:container md:mx-auto">
+        {
+            posts.map((post) => (
+                <div class="max-w-2xl mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 mb-4 mt-4">
+                    <img
+                        class="object-cover w-full h-64"
+                        src={post.frontmatter.image}
+                        alt="Article"
+                    />
+
+                    <div class="p-6">
+                        <div>
+                            <span class="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">
+                                {post.frontmatter.tags}
+                            </span>
+                            <a
+                                href={post.url}
+                                class="block mt-2 text-2xl font-semibold text-gray-800 transition-colors duration-200 transform dark:text-white hover:text-gray-600 hover:underline"
+                            >
+                                {post.frontmatter.title}
+                            </a>
+                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                {post.frontmatter.description}
+                            </p>
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="flex items-center">
+                                <div class="flex items-center">
+                                    <img
+                                        class="object-cover h-10 rounded-full"
+                                        src="https://placebeard.it/256x256"
+                                        alt="Avatar"
+                                    />
+                                    <a
+                                        href="#"
+                                        class="mx-2 font-semibold text-gray-700 dark:text-gray-200"
+                                    >
+                                        {post.frontmatter.author}
+                                    </a>
+                                </div>
+                                <span class="mx-1 text-xs text-gray-600 dark:text-gray-300">
+                                    {`${moment(
+                                        post.frontmatter.date
+                                    ).fromNow()} | ${moment(
+                                        post.frontmatter.date
+                                    ).format('LL')}`}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</BaseLayout>
