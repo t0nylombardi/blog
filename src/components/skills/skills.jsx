@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
-import { useSpring, animated, config } from 'react-spring';
+import { animated } from 'react-spring';
 
 
 const skillsWeb = [
@@ -17,15 +17,7 @@ const skillsWeb = [
 ];
 
 const SkillProgress = ({ percent, skillname }) => {
-  const [isInView, setIsInView] = useState(false);
 
-  const onVisibilityChange = (isInView) => setIsInView(isInView);
-
-  const progressSpringStyleProps = useSpring({
-    width: isInView ? `${percent}%` : `${percent}%`,
-    config: config.molasses,
-  });
-  console.log({progressSpringStyleProps})
   return (
     <VisibilitySensor onChange={onVisibilityChange}>
       <div>
@@ -34,7 +26,7 @@ const SkillProgress = ({ percent, skillname }) => {
           <div className={'progressbar'}>
             <animated.div
               className={'progressbarprg'}
-              style={progressSpringStyleProps}
+              style={{width: `${percent}%`}}
             />
           </div>
 
@@ -66,7 +58,6 @@ const SkillList = () => {
   return (
     <div>
       {skillsWeb.map((name, index) => {
-        {console.log(name[0])}
         return (
           <SkillProgress key={index} percent={name[0]} skillname={name[1]} />
         );
