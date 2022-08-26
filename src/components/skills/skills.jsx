@@ -19,7 +19,6 @@ const skillsWeb = [
 const SkillProgress = ({ percent, skillname }) => {
 
   return (
-    <VisibilitySensor onChange={onVisibilityChange}>
       <div>
         <div className="relative pt-1">
           <div>{skillname}</div>
@@ -50,7 +49,6 @@ const SkillProgress = ({ percent, skillname }) => {
           `}</style>
         </div>
       </div>
-    </VisibilitySensor>
   );
 };
 
