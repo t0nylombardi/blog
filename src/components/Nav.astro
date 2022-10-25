@@ -1,0 +1,15 @@
+---
+
+const routes =[{
+  slug: '/',
+  label: "Home"
+}, {
+  slug: '/resume',
+  label: "Resume"
+}]
+
+---
+
+<nav class="flex gap-4">
+  {routes.map(r => <a href={r.slug} class="text-gray-500 hover:text-red-500 transition-all">{r.label}</a>)}
+</nav>
