@@ -4,32 +4,28 @@
 
 <section class="relative bg-white">
     <img
-        class="absolute inset-0 object-[75%] sm:object-[25%] object-cover w-full h-full opacity-25 sm:opacity-100"
+        class="absolute  object-cover w-full h-screen opacity-25 sm:opacity-100"
         src="https://images.unsplash.com/photo-1453950357290-38ae7a99541f"
     />
 
     <div
-        class="hidden sm:block sm:inset-0 sm:absolute sm:bg-gradient-to-r sm:from-white sm:to-transparent"
+        class="hidden h-screen sm:block sm:inset-0 sm:absolute sm:bg-gradient-to-r sm:from-white sm:to-transparent"
     >
     </div>
 
-    <div
-        class="relative max-w-screen-xl px-4 py-32 mx-auto lg:h-screen lg:items-center lg:flex"
-    >
-        <div class="max-w-x2l text-center sm:text-left">
-            <h1 class="text-6xl font-extrabold sm:text-6xl">
+    <div class="title-content max-w-2xl flex flex-col justify-center p-10">
+            <h1 class="text-6xl font-extrabold">
                 Anthony Lombardi
             </h1>
             <h2>
                 <strong
-                    class="text-2xl sm:text-2xl font-bold text-rose-700 sm:block"
+                    class="text-2xl font-bold text-rose-700"
                 >
                     Father &#8226; Consultant &#8226; Mentor &#8226; FullStack
                     Engineer
                 </strong>
             </h2>
 
-            <p class="max-w-lg mt-4 sm:leading-relaxed sm:text-xl"></p>
 
             <div class="flex flex-wrap gap-4 mt-8 text-center">
                 <a
@@ -47,5 +43,14 @@
                 </a>
             </div>
         </div>
-    </div>
 </section>
+
+<style>
+    .title-content {
+        position:absolute;
+        top: 50vh;
+        transform: translateY(-50%);
+        left: 100px;
+    }
+
+</style>
