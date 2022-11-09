@@ -6,6 +6,10 @@ const posts = await Astro.glob('./*.md')
 const title = 'Blog'
 const page = Astro.props
 const { frontmatter } = Astro.props
+
+posts.sort(
+    (a, b) => Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date)
+)
 ---
 
 <BaseLayout title={title}>
