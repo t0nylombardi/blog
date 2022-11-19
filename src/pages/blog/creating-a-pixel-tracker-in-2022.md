@@ -20,15 +20,21 @@ The simplest way to do this is via a tracking pixel – a small, invisible image
 
 ## The Setup
 
-`npx create-next-app@latest —typescript`
+```
+npx create-next-app@latest —typescript
+```
 
 This will give you a prompt of what to call the app. 
 
 Next, you will set up Prisma and connect it to your PostgreSQL database. Start by installing the Prisma CLI via npm:
-`npm install prisma —save-dev`
+```
+npm install prisma —save-dev
+```
 
 Now, you can use the Prisma CLI to bootstrap a basic Prisma setup using the following command:
-`npx prisma init`
+```
+npx prisma init
+```
 
 Open the **.env** file and replace the dummy connection URL with the connection URL of your PostgreSQL database. 
 ```
@@ -64,19 +70,27 @@ model Pixel {
 
 
 To actually create the tables in your database, you now can use the following command of the Prisma CLI:
-`npx prisma db push`
+```
+npx prisma db push
+```
 
 ### Install Prisma client
 
 Before you can access your database from Next.js using Prisma, you first need to install Prisma Client in your app. You can install it via npm as follows:
-`npm install @prisma/client`
+```
+npm install @prisma/client
+```
 
 
 Because Prisma Client is *tailored* to your own schema, you need to update it every time your Prisma schema file is changing by running the following command:
-`npx prisma generate`
+```
+npx prisma generate
+```
 
 You’ll use a single PrismaClient instance that you can import into any file where it’s needed. The instance will be created in a prisma.ts file inside the lib/ directory. Go ahead and create the missing directory and file:
-`mkdir lib && touch lib/prisma.ts`
+```
+mkdir lib && touch lib/prisma.ts
+```
 
 ```javascript
 // lib/prisma.ts
@@ -103,7 +117,9 @@ NextJS allows you gather info via requests through their Api Routes.
 
 ### Create an Api Route
 
-`mkdir pages/api && touch pages/api/tracker.ts`
+```shell
+mkdir pages/api && touch pages/api/tracker.ts
+```
 
 Add the following boilerplate code and we will walk through what we need from it: 
 ```javascript
@@ -121,9 +137,12 @@ export default function handler(
 }
 ```
 
-Most of what we need from here is the request `req` We will change what is returned shortly as well.  
+Most of what we need from here is the request ```req``` We will change what is returned shortly as well.  
 
-First we want to gather anything in the query string after the URL `example.com/api/tracker?campaign=SomeCampaign&content_type=blog`
+First we want to gather anything in the query string after the URL: 
+```
+example.com/api/tracker?campaign=SomeCampaign&content_type=blog
+```
 
 ```javascript
 import type { NextApiRequest, NextApiResponse } from 'next'
