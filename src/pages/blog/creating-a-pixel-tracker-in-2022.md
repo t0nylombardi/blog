@@ -77,18 +77,18 @@ npx prisma db push
 ### Install Prisma client
 
 Before you can access your database from Next.js using Prisma, you first need to install Prisma Client in your app. You can install it via npm as follows:
-```
+```shell
 npm install @prisma/client
 ```
 
 
 Because Prisma Client is *tailored* to your own schema, you need to update it every time your Prisma schema file is changing by running the following command:
-```
+```shell
 npx prisma generate
 ```
 
 You’ll use a single PrismaClient instance that you can import into any file where it’s needed. The instance will be created in a prisma.ts file inside the lib/ directory. Go ahead and create the missing directory and file:
-```
+```shell
 mkdir lib && touch lib/prisma.ts
 ```
 
@@ -349,5 +349,10 @@ let headers = new Headers({
 }
 ```
 
+## conclusion
 
-I’ve created a 1x1 pixel and put it in a folder in the root directory.  This could be made many different ways and could be googled to figure that out.  Im sure there is a purely JS way of generating a pixel on the fly.  
+there you have it, I’ve created a 1x1 pixel and put it in a folder in the root directory.  This could be made many different ways and could be googled to figure that out.  Im sure there is a purely JS way of generating a pixel on the fly. We've created a away to track user interactions with a pixel the same way Google Analytics, MailChimp and the like track interactions. 
+
+### Repo: 
+
+[Aries Pixel](https://github.com/t0nylombardi/ariesPixel)
