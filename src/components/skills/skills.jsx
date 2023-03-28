@@ -11,9 +11,9 @@ const skillsWeb = [
   [80, 'Typescript'],
   [70, 'SQL'],
   [50, 'NodeJS'],
-  [95, 'Html/Css'],
-  [30, 'Go'],
-  [30, 'Python'],
+  [95, 'Html/CSS'],
+  [20, 'Go'],
+  [20, 'Python'],
 ];
 
 const SkillProgress = ({ percent, skillname }) => {
