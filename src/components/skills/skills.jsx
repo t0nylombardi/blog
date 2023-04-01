@@ -6,8 +6,8 @@ import { animated } from 'react-spring';
 const skillsWeb = [
   [95, 'Ruby'],
   [95, 'Ruby on Rails'],
-  [90, 'React'],
-  [85, 'Javascript'],
+  [85, 'React'],
+  [90, 'Javascript'],
   [80, 'Typescript'],
   [70, 'SQL'],
   [50, 'NodeJS'],
