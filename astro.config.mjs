@@ -7,6 +7,7 @@ export default defineConfig({
   output: 'server',
   adapter: netlify(),
   integrations: [react()],
+  server: { port: 3031 },
   markdown: {
     shikiConfig: {
       // Choose from Shiki's built-in themes (or add your own)
