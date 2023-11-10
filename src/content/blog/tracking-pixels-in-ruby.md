@@ -1,5 +1,4 @@
 ---
-layout: '../../layouts/BlogLayout.astro'
 title: Tracking Pixels in ruby
 date: '2020-12-29T20:59:56.707Z'
 coverImage: ''

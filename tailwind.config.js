@@ -38,6 +38,11 @@ module.exports = {
         "gray-900-spotify": "#121212",
         "gray-800-spotify": "#181818",
         "gray-700-spotify": "#282828",
+        "blog-blue": "#232339",
+        "peacoat": "#4F567C",
+        "space-cadet": "#1E2952",
+        "azure": "#3B82F6",
+        "md-purple": "#A478E8"
       },
     },
   },

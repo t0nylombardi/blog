@@ -1,5 +1,4 @@
 import React from 'react';
-import VisibilitySensor from 'react-visibility-sensor';
 import { animated } from 'react-spring';
 
 
@@ -20,7 +19,7 @@ const SkillProgress = ({ percent, skillname }) => {
 
   return (
       <div>
-        <div className="relative pt-1">
+        <div className="relative pt-1 text-gray-100">
           <div>{skillname}</div>
           <div className={'progressbar'}>
             <animated.div
@@ -44,7 +43,7 @@ const SkillProgress = ({ percent, skillname }) => {
               text-align: center;
               width: 0%;
               border-radius: 10px;
-              background-color: #b9301c;
+              background-color: #3B82F6;
             }
           `}</style>
         </div>
