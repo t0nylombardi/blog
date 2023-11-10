@@ -1,6 +1,6 @@
 {
-  "name": "@example/basics",
-  "version": "0.0.1",
+  "name": "@t0nylombardi/bblog",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "astro dev",
@@ -10,18 +10,21 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@astrojs/netlify": "^1.0.1",
-    "@types/react": "^18.0.17",
-    "astro": "^1.0.6",
+    "@astrojs/netlify": "^3.0.4",
+    "@types/react": "^18.0.21",
+    "astro": "^3.5.0",
     "autoprefixer": "^10.4.8",
-    "tailwindcss": "^3.1.8"
+    "tailwindcss": "^3.0.24"
   },
   "dependencies": {
-    "@astrojs/react": "^1.0.0",
+    "@astrojs/react": "^3.0.4",
+    "@astrojs/tailwind": "^5.0.2",
+    "@types/react-dom": "^18.0.6",
     "moment": "^2.29.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-spring": "^9.5.2",
-    "react-visibility-sensor": "^5.1.1"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-spring": "^9.7.3",
+    "react-visibility-sensor": "^5.1.1",
+    "typescript": "^5.2.2"
   }
 }

@@ -1,105 +1,107 @@
 ---
-import Header from '../components/Header.astro'
-export interface Props {
-    title: string
-}
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 
-import '../assets/styles/global.css'
-const { title } = Astro.props as Props
-const { frontmatter } = Astro.props
+type Props = CollectionEntry<'blog'>['data'];
+
+const {
+  title,
+  description,
+  date,
+  originalDatePublished,
+  heroImage,
+  author
+} = Astro.props;
 ---
 
-<style>
-article :global(p) {
-    font-size: 1.2rem;
-    margin: 1rem auto;
-}
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+      article :global(p) {
+          font-size: 1.2rem;
+          margin: 1rem auto;
+      }
 
-article :global(pre) {
-    margin: 2rem auto;
-    padding: 1rem 2.5rem;
-}
+      article :global(pre) {
+          margin: 2rem auto;
+          padding: 1rem 2.5rem;
+      }
 
-article :global(p code) {
-    @apply bg-slate-200
-}
+      article :global(p a) {
+          @apply text-indigo-500  font-bold
+      }
 
-article :global(p a) {
-    @apply text-indigo-500  font-bold
-}
+      article :global(ul) {
+          margin: 0.5rem auto;
+          padding: 1rem 2.5rem;
+          @apply list-disc
+      }
 
-article :global(ul) {
-    margin: 0.5rem auto;
-    padding: 1rem 2.5rem;
-    @apply list-disc
-}
+      article :global(h1) {
+          font-weight: 700;
+          font-size: 2.5rem;
+      }
+      article :global(h2) {
+          font-weight: 700;
+          font-size: 2rem;
+      }
+      article :global(h3) {
+          font-size: 1.6rem;
+          font-weight: 700;
+      }
+      article :global(h4) {
+          font-weight: 700;
+      }
+      article :global(h5) {
+          font-weight: 700;
+      }
+      article :global(h6) {
+          font-weight: 700;
+      }
 
-article :global(h1) {
-    font-weight: 700;
-    font-size: 2.5rem;
-}
-article :global(h2) {
-    font-weight: 700;
-    font-size: 2rem;
-}
-article :global(h3) {
-    font-size: 1.6rem;
-    font-weight: 700;
-}
-article :global(h4) {
-    font-weight: 700;
-}
-article :global(h5) {
-    font-weight: 700;
-}
-article :global(h6) {
-    font-weight: 700;
-}
+      article :global(.copy-code) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        @apply bg-indigo-500 text-white;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        line-height: 1rem;
+      }
 
-article :global(.copy-code) {
-  position: absolute;
-  top: 0;
-  right: 0;
-  @apply bg-indigo-500 text-white;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
+      article globsl(.copy-code:hover) {
+        background-color: #312e81;
+      }
+		</style>
+	</head>
 
-article globsl(.copy-code:hover) {
-  background-color: #312e81;
-}
-</style>
-
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<meta name="generator" content={Astro.generator} />
-<title>{title}</title>
-
-<body>
+  <body class="bg-blog-blue">
     <Header />
-    <div class="my-10 max-w-screen-xl ml-auto mr-auto">
-        <div class="overflow-auto">
-            <div class="container p-5 mx-auto overflow-auto">
-                <div class="flex flex-col text-center w-full mt-10">
-                    <h1 class="sm:text-6xl text-2xl font-medium title-font text-gray-900">
-                        {frontmatter.title}
-                    </h1>
-                    <h2 class="text-indigo-500 tracking-widest font-medium title-font mb-1">
-                        by: {frontmatter.author}
-                    </h2>
-                    <div class="m4">
-                        <h3>{frontmatter.description}</h3>
-                    </div>
-                </div>
+    <div class="my-10 max-w-screen-md ml-auto mr-auto bg-blog-blue">
+      <div class="overflow-auto">
+        <div class="container p-5 mx-auto overflow-auto">
+          <div class="flex flex-col text-center w-full mt-10">
+            <h1 class="sm:text-6xl text-2xl font-medium title-font text-gray-100">
+              {title}
+            </h1>
+            <h2 class="text-azure/50 tracking-widest font-medium title-font mb-1">
+            by: {author}
+            </h2>
+            <div class="m4 text-gray-100">
+              <h3>{description}</h3>
             </div>
-            <article class="md:container md:mx-auto mt-8 mb-8">
-                <slot />
-            </article>
+          </div>
         </div>
+        <article class="md:container md:mx-auto mt-8 mb-8 text-gray-100">
+          <slot />
+        </article>
+      </div>
     </div>
-</body>
+  </body>
+</html>
 
 <script>
 let copyButtonLabel = "Copy Code";

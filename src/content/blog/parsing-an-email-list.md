@@ -1,5 +1,4 @@
 ---
-layout: '../../layouts/BlogLayout.astro'
 title: Parsing An Email List
 date: '2020-12-29T20:57:55.934Z'
 coverImage: ''
