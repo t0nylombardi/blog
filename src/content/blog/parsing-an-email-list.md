@@ -8,6 +8,7 @@ author: 't0nylombardi'
 image: 'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7'
 categories: [ruby]
 tags: [ruby]
+draft: false
 ---
 
 Haven’t wrote in this in a while. I wanted this to be a portal to show all the work I do. Coding, Graphics, Music, random thoughts. I been written a code to parse through an email list a client gave me that has roughly 94 emails. The list is old and we don’t know how many of them are actually legit. So my thoughts where to run through the script and first get out all the emails that are misspelled. Second would be to check if the mx record of that email address still exist. The whole loop through create 3 list. Bad_emails(all misspelled emails) Good_emails(all that I going to assume that are good) and Rejected_emails(based off a regex code on the assumption of what a regular email would be) The initial run of my idea came out to be roughly 54k emails. The reason I separated the list into three categories is that, well there is many debated on to what is a real email address and what is not. Plus the assumption of checking the mx record could give false negatives and vice verse.

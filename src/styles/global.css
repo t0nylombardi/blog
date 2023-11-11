@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  font-family: 'Fira Code', monospace;
+  color: #e5e9f0;
+  scroll-padding-top: 8rem;
+  scroll-behavior: smooth;
+  height: 100%
+}
+

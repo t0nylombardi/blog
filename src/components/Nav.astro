@@ -1,15 +1,54 @@
 ---
+import { Sprite } from "astro-icon";
 
 const routes =[{
-  slug: '/',
-  label: "Home"
+  slug: '/#hello',
+  label: "_hello"
 }, {
-  slug: '/resume',
-  label: "Resume"
-}]
-
+  slug: '/#about',
+  label: "_about"
+}, {
+  slug: '/#projects',
+  label: "_projects"
+}, {
+  slug: '/#blog',
+  label: "_blog"
+},
+]
 ---
 
-<nav class="flex gap-4">
-  {routes.map(r => <a href={r.slug} class="text-azure/50 hover:text-white transition-all">{r.label}</a>)}
+
+<nav class="fixed z-50 w-full text-[#7790a8] bg-[#232339] mb-4">
+  <ul class="container flex flex-col lg:flex-row justify-between mx-auto relative">
+    <li class=" px-8 py-4">
+      <a href="/" class="hover:text-gray-200">Anthony Lombardi</a>
+    </li>
+
+    <li id="navlinks" class="hidden lg:block lg:border-x-0" >
+      <ul class="flex flex-col lg:flex-row px-8 pb-4 lg:py-4 space-y-1 lg:space-y-0 lg:space-x-8">
+      {
+        routes.map((route) => (
+          <li class="">
+            <a href={route.slug} class="flex items-center hover:text-gray-200">
+              <Sprite name="bi:chevron-compact-right" class="h-4 w-4 lg:hidden"/>
+              {route.label}
+            </a>
+          </li>
+        ))
+      }
+      </ul>
+    </li>
+
+    <li id="hamburger" class="p-2 w-fit cursor-pointer absolute right-6 top-2 lg:hidden rounded-sm">
+      <div class="space-y-[0.3rem]">
+        <span class="block w-5 h-0.5 bg-[#7790a8]"></span>
+        <span class="block w-5 h-0.5 bg-[#7790a8]"></span>
+        <span class="block w-3 h-0.5 bg-[#7790a8] ml-auto"></span>
+      </div>
+    </li>
+
+    <li class="px-8 py-4 hidden lg:block border-r border-[#1E2D3D]">
+      <a href="/#contact" class="hover:text-gray-200">_contact-me</a>
+    </li>
+  </ul>
 </nav>

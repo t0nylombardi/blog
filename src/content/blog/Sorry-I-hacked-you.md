@@ -8,6 +8,7 @@ author: 't0nylombardi'
 image: 'https://images.unsplash.com/photo-1511376777868-611b54f68947'
 categories: [javascript]
 tags: [javascript]
+draft: false
 ---
 
 My biggest concern in developing a website, especially in the current role I have, is to worry about how well a site will perform and how secure it will be. Someone I know from the interwebs posted a site with form that allowed you to sign up to a class of his. I like his work so I was intrigued into how he wrote his backend for the form since he is a front-end developer. His credentials of his backend was in his JS.

@@ -8,6 +8,7 @@ author: 't0nylombardi'
 image: 'https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81'
 categories: ["rails"]
 tags: ["rails", "console"]
+draft: false
 ---
 
 

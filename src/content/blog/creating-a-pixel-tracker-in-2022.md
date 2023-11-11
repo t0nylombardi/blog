@@ -8,6 +8,7 @@ author: 't0nylombardi'
 image: 'https://images.unsplash.com/photo-1579616043939-95d87a6e8512'
 categories: [ruby]
 tags: [ruby]
+draft: false
 ---
 
 Several thousand years ago I wrote about tracking pixels and how to implement it in Ruby on Rails using the Rack to collect data and store it into an api.  Here I am going to replicate the same thing using NextJS and Prisma.

@@ -8,6 +8,7 @@ description: 'I been trying to help a friend gain more attention to his twitter 
 image: 'https://images.unsplash.com/photo-1610878785620-3ab2d3a2ae7b'
 categories: [ruby]
 tags: [ruby]
+draft: false
 ---
 
 ### UPDATE: (2023)
