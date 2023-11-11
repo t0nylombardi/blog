@@ -8,6 +8,7 @@ author: 't0nylombardi'
 image: 'https://images.unsplash.com/photo-1584907797065-0bbcaf9c489b'
 categories: [ruby]
 tags: [ruby]
+draft: false
 ---
 
 My now wife asked me to make some vows for our wedding. I thought I would merge the my two loves together and wrote this little code poem. The original was written in PHP(yuk!).

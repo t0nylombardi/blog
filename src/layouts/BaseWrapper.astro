@@ -1,0 +1,25 @@
+---
+import { Sprite } from 'astro-icon'
+import { socials, SITE_TITLE, SITE_DESCRIPTION } from '../constants'
+import BaseHead from '../components/BaseHead.astro'
+import Footer from '../components/Footer.astro'
+import Nav from '../components/Nav.astro'
+import { ViewTransitions } from 'astro:transitions'
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <ViewTransitions />
+  </head>
+  <body class="bg-[#232339]">
+    <Sprite.Provider>
+      <Nav />
+      <div id="show-bg" class="relative"></div>
+      <div id="bg-gradient" class="relative"></div>
+      <slot />
+      <Footer />
+    </Sprite.Provider>
+  </body>
+</html>

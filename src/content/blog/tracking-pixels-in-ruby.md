@@ -8,6 +8,7 @@ author: "t0nylombardi"
 image: 'https://images.unsplash.com/flagged/photo-1562599838-8cc871c241a5'
 categories: [ruby]
 tags: [ruby]
+draft: false
 ---
 
 If you are sending out content to your customers, it pretty handy to know if the content is loading. I speak if you are sending out emails, newsletters, ads, etc. If you have ever sent out an email newsletter from a service like Mailchimp, you would have seen email open graphs. Of course, tracking this stuff is super important for a campaign, but it would also be interesting to see if users are seeing your content.

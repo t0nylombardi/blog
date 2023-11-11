@@ -1,5 +1,6 @@
 ---
-import BaseHead from '../components/BaseHead.astro'
+import BaseHead from '../components/BaseHead.astro.jsx'
+import BaseWrapper from '../layouts/BaseWrapper.astro'
 import Header from '../components/Header.astro'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts'
 import SkillList from '../components/skills/skills.jsx'
@@ -107,15 +108,10 @@ import SkillList from '../components/skills/skills.jsx'
 }
 </style>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body class="bg-blog-blue">
 
+<BaseWrapper>
 
-    <div class="md:container md:mx-auto bg-blog-blue">
+    <div class="md:container md:mx-auto bg-blog-blue py-40">
         <div class="resume">
             <div class="resume-header">
                 <a  href="/blog">
@@ -428,5 +424,4 @@ import SkillList from '../components/skills/skills.jsx'
             </div>
         </div>
     </div>
-  </body>
-</html>
+</BaseWrapper>

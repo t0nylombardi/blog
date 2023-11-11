@@ -8,6 +8,7 @@ author: 't0nylombardi'
 image: 'https://images.unsplash.com/photo-1655720035861-ba4fd21a598d'
 categories: [ruby]
 tags: [ruby]
+draft: false
 ---
 
 I wrote a script that allows me to take several images rename them, and then create two resized images in addition. The specifics of the naming and re-sizing convention required me to name each image as:
