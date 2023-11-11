@@ -7,9 +7,9 @@ import ContactForm from '../components/ContactForm.astro'
 import CTA from '../components/CTA.astro'
 import {socials, DOB} from '../constants/index.ts'
 
-let ageDifMs = Date.now() - DOB
+let ageDifMs = Date.now() - new Date(DOB).getTime()
 let ageDate = new Date(ageDifMs)
-let yearsOld = Math.abs(ageDate.getUTCFullYear() - 1983)
+let yearsOld = Math.abs(ageDate.getUTCFullYear() - 1970)
 ---
 
 <BaseWrapper>
