@@ -2,16 +2,16 @@
 const { link } = Astro.props
 ---
 
-<div class="max-w-[19%] mt-10">
-  <a class="btnAzureGradiant flex space-x-4 pt-12" href=`/${link}`>
-    {link.toUpperCase()}
-  </a>
+<div class="mt-10 text-center">
+  <a href=`${link}` class="btnAzureGradiant">{link.toUpperCase()}</a>
 </div>
+
 
 <style>
   .btnAzureGradiant {
-    @apply z-0 block w-full px-12 py-3 text-sm font-medium text-white hover:text-white/75;
-    @apply rounded shadow sm:w-auto focus:outline-none focus:ring bg-gradient-to-r from-md-purple to-azure/75;
+    @apply hover:text-white/75 text-white font-medium rounded-lg;
+    @apply text-sm px-10 py-2.5 bg-gradient-to-r from-md-purple to-azure/75;
+    @apply rounded shadow sm:w-auto focus:outline-none focus:ring;
     @apply hover:scale-110 transform transition;
   }
 </style>
