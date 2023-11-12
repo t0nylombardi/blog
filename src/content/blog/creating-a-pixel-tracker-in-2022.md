@@ -100,8 +100,6 @@ npm install @prisma/client
 ```
 
 
-
-
 Because Prisma Client is *tailored* to your own schema, you need to update it every time your Prisma schema file is changing by running the following command:
 ```shell
 npx prisma generate
@@ -134,9 +132,6 @@ if (process.env.NODE_ENV === 'production') {
 
 export default prisma;
 ```
-
-
-
 
 ## The Pixel Tracker.
 
@@ -198,77 +193,36 @@ export default function handler(
 
 
  res.status(200).json({ name: 'John Doe' })
-}
 ```
 
 
 
 
-Next we want to gather info about the request. Ip address, and user_agent
+Next we want to gather info about the request. Ip address, and user_agent inside the handler
 
 
 ```javascript
-import type { NextApiRequest, NextApiResponse } from 'next'
-
-
-type Data = {
- name: string
-}
-
-
-export default function handler(
- req: NextApiRequest,
- res: NextApiResponse<Data>
-) {
- query: { campaign, content_type }
- } = req;
-
 
 const forwarded = req.headers["x-forwarded-for"]
- const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
- const user_agent = req.headers['user-agent']
+const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
+const user_agent = req.headers['user-agent']
 
-
-
-
- res.status(200).json({ name: 'John Doe' })
-}
 ```
-
-
-
 
 The following is to send the IP address to an api to get the location back:
 
 
 ```javascript
-import type { NextApiRequest, NextApiResponse } from 'next'
-
-
-type Data = {
- name: string
-}
-
-
-export default function handler(
- req: NextApiRequest,
- res: NextApiResponse<Data>
-) {
- query: { campaign, content_type }
- } = req;
-
 
 const forwarded = req.headers["x-forwarded-for"]
- const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
- const user_agent = req.headers['user-agent']
-
+const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
+const user_agent = req.headers['user-agent']
 
 let headers = new Headers({
    "Accept"       : "application/json",
    "Content-Type" : "application/json",
    "User-Agent"   : "keycdn-tools:https://localhost"
  });
-
 
  let locationData  = await fetch(`https://tools.keycdn.com/geo.json?host=${ip}`, {
    method  : 'GET',
@@ -281,60 +235,12 @@ let headers = new Headers({
    return json.data.geo
  });
 
-
-
-
- res.status(200).json({ name: 'John Doe' })
-}
 ```
-
-
-
 
 Next thing is to do is save to the database:
 
 
 ```javascript
-import type { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '../../lib/prisma';
-
-
-type Data = {
- name: string
-}
-
-
-export default function handler(
- req: NextApiRequest,
- res: NextApiResponse<Data>
-) {
- query: { campaign, content_type }
- } = req;
-
-
-const forwarded = req.headers["x-forwarded-for"]
- const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
- const user_agent = req.headers['user-agent']
-
-
-let headers = new Headers({
-   "Accept"       : "application/json",
-   "Content-Type" : "application/json",
-   "User-Agent"   : "keycdn-tools:https://localhost"
- });
-
-
- let locationData  = await fetch(`https://tools.keycdn.com/geo.json?host=${ip}`, {
-   method  : 'GET',
-   headers : headers
- })
- .then((response) => {
-   return response.json();
- })
- .then((json) => {
-   return json.data.geo
- });
-
 
  // Create new Pixel
  await prisma.pixel.create({
@@ -348,15 +254,7 @@ let headers = new Headers({
    },
  });
 
-
- res.status(200).json({ name: 'John Doe' })
-}
 ```
-
-
-
-
-
 
 The Last thing we want to do is return a 1x1 pixel:
 
@@ -367,12 +265,8 @@ import prisma from '../../lib/prisma';
 import fs from 'fs'
 import path from 'path'
 
-
 const filePath = path.resolve('.', 'tracker/tracker.gif')
 const imageBuffer = fs.readFileSync(filePath)
-
-
-
 
 type Data = {
  name: string
