@@ -10,3 +10,21 @@ html {
   height: 100%
 }
 
+@media (min-width: 640px) {
+  h1 {
+    @apply text-6xl;
+  }
+
+  h2 {
+    @apply text-5xl font-medium;
+  }
+
+  h3 {
+    @apply text-4xl font-medium;
+  }
+
+  btn {
+    @apply flex justify-center
+  }
+
+}

@@ -6,5 +6,5 @@ export const DOB = '03/31/1983'
 export const socials = {
   github: "https://github.com/t0nylombardi",
   twitter: "https://twitter.com/t0nylombardi",
-  instagram: "https://www.instagram.com/t0nylombardi/",
+  instagram: "https://instagram.com/t0nylombardi",
 };
