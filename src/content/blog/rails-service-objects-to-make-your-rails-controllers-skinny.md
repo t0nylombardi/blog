@@ -8,7 +8,7 @@ author: 't0nylombardi'
 image: 'https://images.unsplash.com/photo-1579616043939-95d87a6e8512'
 categories: [ruby]
 tags: [ruby]
-draft: true
+draft: false
 ---
 
 When studying Rails design patterns, you may have heard the axiom "fat model, skinny controller" (or the inverse, "fat controller, skinny model"). Both of these describe a pattern of where to put business logic, which tends to take up a lot of lines of code.
@@ -28,423 +28,150 @@ Thus, we achieve the trifecta:
 - our business logic is wrapped in a service object (with the bonus that service objects are easily testable...
 
 ### Example:
-A perfect example of a "fat controller" we could refactor with service objects is my previous post's app to render Magic: the Gathering card art.
+A perfect example of a "fat controller" we could refactor with service objects is a controller I had used for ElasticSearch...search. This controller needed to search Users, Hashtags, and first/last name in a Profile model. This initial logic of the code is not DRY. It's mostly repeatable since its searching three different models.
 
-Here, we defined a bunch of business logic in our pages_controller.rb to query the Scryfall API:
-# /app/controller/pages_controller.rb
+Here, we defined a bunch of business logic in the mentions_controller.rb to query the ElasticSearch:
+# /app/controller/mentions_controller.rb
 
-class PagesController < ApplicationController
+```ruby
+class MentionsController < ApplicationController
+
   def index
-    session[:img_array] ||= []  # refactor with ||= pointed out by Andrew Brown
+    @mentions = search_for_mentions
 
-    if session[:img_array].empty? || params["button_action"] == "refresh"
-      session[:img_array] = get_scryfall_images
+    respond_to do |format|
+      format.json { render json: @mentions.to_json }
     end
   end
-
 
   private
 
-  def get_json(url)
-    response = RestClient.get(url)
-    json = JSON.parse(response)
+  def search_for_mentions
+    Searchkick.multi_search([hashtags, users, profiles])
+    [hashtags, users, profiles].flatten
   end
 
-  def parse_cards(json, img_array)
-    data_array = json["data"]
-    data_array.each do |card_hash|
-      if card_hash["image_uris"]
-        img_hash = {
-          "image" => card_hash["image_uris"]["art_crop"],
-          "name" => card_hash["name"],
-          "artist" => card_hash["artist"]
-        }
-        img_array << img_hash
-      end
-    end
-
-    if json["next_page"]
-      json = get_json(json["next_page"])
-      parse_cards(json, img_array)
-    end
+  def hashtags
+    HashTag.search(params[:query], boost_by_recency: { created_at: { scale: '7d', decay: 0.5 } },
+                                   limit: 4)
   end
 
-  def get_scryfall_images
-    api_url = "https://api.scryfall.com/cards/search?q="
-    img_array = []
-    creature_search_array = ["merfolk", "goblin", "angel", "sliver"]
+  def users
+    User.search(params[:query], boost_by_recency: { created_at: { scale: '7d', decay: 0.5 } },
+                                limit: 5)
+  end
 
-    creature_search_array.each do |creature_str|
-      search_url = api_url + "t%3Alegend+t%3A" + creature_str
-      json = get_json(search_url)
-      parse_cards(json, img_array)
-
-      sleep(0.1)  # per the API documentation: https://scryfall.com/docs/api
-    end
-
-    img_array.sample(9)
+  def profiles
+    Profile.search(params[:query], fields: [:first_name, :last_name],
+                                   boost_by_recency: { created_at: { scale: '7d', decay: 0.5 } },
+                                   limit: 5)
   end
 end
-But pretty much everything below the private keyword is NOT related to the controller--it's just logic to query a specific API.
 
-What if we wanted to query a different card game's API, and wrote a bunch of new functions to fetch and parse its data? Our controller could get out of control (and hard to understand/maintain) VERY quickly!
+```
 
-So, let's create a new /app/services/ directory, and a dedicated service object to handle the Scryfall API-querying logic--let's call it scryfall_query_service.rb:
-# /app/services/scryfall_query_service.rb
-class ScryfallQueryService
-    def get_json(url)
-        response = RestClient.get(url)
-        json = JSON.parse(response)
+
+Pretty much everything below the private keyword is NOT related to the controller--it's just logic to query a specific API.
+
+What if we wanted to different models, and wrote a bunch of new functions to search and parse its data? Our controller could get out of control (and hard to understand/maintain) VERY quickly!
+
+So, let's create a new /app/services/ directory, and a dedicated service object to handle the ElasticSearch querying logic --let's call it `mentions_query_service.rb`:
+
+```ruby
+# /app/services/mentions_query_service.rb
+# frozen_string_literal: true
+
+class MentionsQueryService < ApplicationService
+  SEARCH_MODELS = %w(HashTag User Profile).freeze
+  LIMIT = 5
+
+  attr_accessor :query
+
+  def initialize(query: String)
+    @query = query
+  end
+
+  def execute!
+    multi_search
+
+    if @mentions.nil?
+      errors.add(:base, 'query is empty')
+    else
+      { success: true, data: @mentions, errors: [] }
+    end
+  end
+
+  private
+
+  def multi_search
+    return false if query.blank?
+
+    search_array = []
+    SEARCH_MODELS.each do |model|
+      search_array << mention_query(model)
     end
 
-    def parse_cards(json, img_array)
-        data_array = json["data"]
-        data_array.each do |card_hash|
-            if card_hash["image_uris"]
-                img_hash = {
-                    "image" => card_hash["image_uris"]["art_crop"],
-                    "name" => card_hash["name"],
-                    "artist" => card_hash["artist"]
-                }
-                img_array << img_hash
-            end
-        end
+    @mentions = Searchkick.multi_search(search_array)
+  end
 
-        if json["next_page"]
-        json = self.get_json(json["next_page"])
-        self.parse_cards(json, img_array)
-        end
+  def mention_query(model)
+    model.constantize.search(query, fields: fields(model), boost_by_recency:, limit:)
+  end
+
+  def boost_by_recency
+    {
+      created_at: {
+        scale: '7d',
+        decay: 0.5
+      }
+    }
+  end
+
+  def fields(model)
+    case model.downcase.to_sym
+    when :user
+      %i(username)
+    when :profile
+      %i(first_name last_name)
+    when :hashtag
+      %i(name)
+    else
+      []
     end
+  end
 
-    def get_scryfall_images
-        api_url = "https://api.scryfall.com/cards/search?q="
-        img_array = []
-        creature_search_array = ["merfolk", "goblin", "angel", "sliver"]
-
-        creature_search_array.each do |creature_str|
-            search_url = api_url + "t%3Alegend+t%3A" + creature_str
-            json = self.get_json(search_url)
-            self.parse_cards(json, img_array)
-
-            sleep(0.1)  # per the API documentation: https://scryfall.com/docs/api
-        end
-
-        img_array.sample(9)
-    end
+  def limit
+    LIMIT
+  end
 end
-Note that we need to add self. before our calls to these instance methods! (self.get_json and self.parse_cards)
 
-And now, we can make our pages_controller.rb much "skinnier" by completely removing those same methods:
-# /app/controllers/pages_controller.rb
+```
 
-class PagesController < ApplicationController
+
+Note: to not use self for every method, I created  `ApplicationService` that `MentionsQueryService` extends. you can check out the code [here](https://gist.github.com/t0nylombardi/c6671135e208e23cb71e46fd61c1ae37).
+
+And now, we can make our `mentions_controller.rb` much "skinnier" by completely removing those same methods:
+```ruby
+# /app/controllers/mentions_controller.rb
+# frozen_string_literal: true
+
+class MentionsController < ApplicationController
   def index
-    session[:img_array] ||= []
+    @mentions ||= MentionsQueryService.new(params[:query]).call
 
-    if session[:img_array].empty? || params["button_action"] == "refresh"
-      scryfall_query_service = ScryfallQueryService.new
-      session[:img_array] = scryfall_query_service.get_scryfall_images
+    respond_to do |format|
+      format.json { render json: @mentions.to_json }
     end
-
-
-    session[:refresh_counter] ||= 0
-
-    if params["button_action"] == "refresh"
-      session[:refresh_counter] += 1
-    end
-
-    @refresh_counter = session[:refresh_counter]
   end
 end
-Now, we can instantiate a ScryfallQueryService object, and all its get_scryfall_images method to handle all of the API-querying and data-parsing outside of the controller. This makes our controller a lot easier to read and understand!
+```
+
+
+Now, we can call  `MentionsQueryService` to handle all of the ElasticSearch-querying and data-parsing outside of the controller. This makes our controller a lot easier to read and understand!
 
 Note: Although the examples here are exclusively related to making "skinny" controllers, the same types of logic/methods can be moved from models to service objects as well!
 
-Service Objects and Modular Design: Adding a new API-querying service object
-One of the benefits of having this API-querying business logic wrapped in the ScryfallQueryService object is that we can now expand our app to include other service objects that query other APIs, without interrupting the functionality of our ScryfallQueryService or adding more logic to our pages_controller.rb.
-
-Let's say we want to add a route to our app that will render card art from the Star Wars CCG instead. This will require us to query a different API altogether, and thus parse the JSON we get back in a different way than ScryfallQueryService.
-
-The API we'll be using for card art from the Star Wars CCG is SWCCGDB, a fan-maintained database for the now-fan-maintained game that was "officially" discontinued in 2001.
-
-Since the JSON we get back from the API is structured differently, both our parse_cards and get_swccgdb_images methods will be different from ScryfallQueryService. Here's the code:
-# /app/services/swccgdb_query_service.rb
-
-class SWCCGDBQueryService
-    def get_json(url)
-        response = RestClient.get(url)
-        json = JSON.parse(response)
-    end
-
-    def parse_cards(json, img_array)
-        data_array = json   # api returns all cards in a single array at top level of json
-        data_array.each do |card_hash|
-            if card_hash["type_code"] == "character"
-                img_hash = {
-                    "image" => card_hash["image_url"],
-                    "name" => card_hash["name"],
-                    "artist" => "Lucasfilm / Decipher / Wizards of the Coast / SWCCG Player's Committee"
-                }
-                img_array << img_hash
-            end
-        end
-    end
-
-    def get_swccgdb_images
-        api_url = "https://swccgdb.com/api/public/cards/"
-        img_array = []
-        set_search_array = ["pr", "hoth", "cc"]     # premiere, hoth, and cloud city sets
-
-        set_search_array.each do |set_str|
-            search_url = api_url + set_str + ".json?_format=json"
-            json = self.get_json(search_url)
-            self.parse_cards(json, img_array)
-        end
-
-        img_array.sample(9)
-    end
-end
-Most of our code can be copied directly from scryfall_query_service.rb, but note several differences:
-
-in get_swccgdb_images, we are now searching through different game sets ("Premiere", "Hoth", and "Cloud City") instead of creature types
-also in get_swccgdb_images, the API URL is different (obviously), and our search_url string is constructed differently
-in parse_cards, we assign the JSON directly to the data_array variable due to the structure of the API's JSON response
-also in parse_cards, we are now filtering cards for card_hash["type_code"] == "creature"
-Now, we can build another route in our pages_controller.rb and routes.rb files to use the ScryfallQueryService at localhost:3000/mtg, and SWCCGDBQueryService at localhost:3000/swccg.
-
-Let's update pages_controller.rb first. Instead of one index method, let's define one for mtg (Magic: the Gathering) and one for swccg (Star Wars CCG):
-class PagesController < ApplicationController
-  # def index
-  #   session[:img_array] ||= []
-
-  #   if session[:img_array].empty? || params["button_action"] == "refresh"
-  #     scryfall_query_service = ScryfallQueryService.new
-  #     session[:img_array] = scryfall_query_service.get_scryfall_images
-  #   end
-
-
-  #   session[:refresh_counter] ||= 0
-
-  #   if params["button_action"] == "refresh"
-  #     session[:refresh_counter] += 1
-  #   end
-
-  #   @refresh_counter = session[:refresh_counter]
-  # end
-
-
-  def mtg
-    # use ScryfallQueryService here
-  end
-
-
-  def swccg
-    # use SWCCGDBQueryService here
-  end
-
-end
-Now, let's copy the logic from index into our two new methods. Under swccg, we'll also change our service object to be an instance of SWCCGDBQueryService:
-# /app/controller/pages_controller.rb
-
-class PagesController < ApplicationController
-  def mtg
-    session[:img_array] ||= []
-
-    if session[:img_array].empty? || params["button_action"] == "refresh"
-      scryfall_query_service = ScryfallQueryService.new
-      session[:img_array] = scryfall_query_service.get_scryfall_images
-    end
-
-
-    session[:refresh_counter] ||= 0
-
-    if params["button_action"] == "refresh"
-      session[:refresh_counter] += 1
-    end
-
-    @refresh_counter = session[:refresh_counter]
-  end
-
-
-  def swccg
-    session[:img_array] ||= []
-
-    if session[:img_array].empty? || params["button_action"] == "refresh"
-      swccgdb_query_service = SWCCGDBQueryService.new
-      session[:img_array] = swccgdb_query_service.get_swccgdb_images
-    end
-
-
-    session[:refresh_counter] ||= 0
-
-    if params["button_action"] == "refresh"
-      session[:refresh_counter] += 1
-    end
-
-    @refresh_counter = session[:refresh_counter]
-  end
-
-end
-Next, let's add an if block to the top of both methods so our session can keep track of which game its storing card art for--that way, if we switch from localhost:3000/mtg to localhost:3000/swccg, the API will know to empty out our session[:img_array] and fetch new cards from the correct game:
-# /app/controller/pages_controller.rb
-
-class PagesController < ApplicationController
-  def mtg
-    if session[:game] == "swccg" || !session[:game]   # empty img_array if switching games
-      session[:img_array] = []
-      session[:game] = "mtg"
-    end
-
-    session[:img_array] ||= []
-
-    if session[:img_array].empty? || params["button_action"] == "refresh"
-      scryfall_query_service = ScryfallQueryService.new
-      session[:img_array] = scryfall_query_service.get_scryfall_images
-    end
-
-
-    session[:refresh_counter] ||= 0
-
-    if params["button_action"] == "refresh"
-      session[:refresh_counter] += 1
-    end
-
-    @refresh_counter = session[:refresh_counter]
-  end
-
-
-  def swccg
-    if session[:game] == "mtg" || !session[:game]   # empty img_array if switching games
-      session[:img_array] = []
-      session[:game] = "swccg"
-    end
-
-    session[:img_array] ||= []
-
-    if session[:img_array].empty? || params["button_action"] == "refresh"
-      swccgdb_query_service = SWCCGDBQueryService.new
-      session[:img_array] = swccgdb_query_service.get_swccgdb_images
-    end
-
-
-    session[:refresh_counter] ||= 0
-
-    if params["button_action"] == "refresh"
-      session[:refresh_counter] += 1
-    end
-
-    @refresh_counter = session[:refresh_counter]
-  end
-
-end
-This is great, but our controller isn't very "skinny" now, which is why we're creating service objects in the first place! The problem is that our code is not DRY--we have mostly duplicated the code from index, and it now appears twice in our controller.
-
-Let's refactor the session-checking-and-setting logic into its own private method update_session, where we can pass the parameter "mtg" or "swccg" to set the session[:game] variable and use the correct service object:
-# /app/controllers/pages_controller.rb
-
-class PagesController < ApplicationController
-  def mtg
-    update_session("mtg")
-    @refresh_counter = session[:refresh_counter]
-  end
-
-  def swccg
-    update_session("swccg")
-    @refresh_counter = session[:refresh_counter]
-  end
-
-
-  private
-
-  def update_session(current_game)
-    if session[:game] != current_game || !session[:game]   # empty img_array if switching games
-      session[:img_array] = []
-      session[:game] = current_game
-    end
-
-    session[:img_array] ||= []
-
-    if session[:img_array].empty? || params["button_action"] == "refresh"
-      if current_game == "mtg"
-        scryfall_query_service = ScryfallQueryService.new
-        session[:img_array] = scryfall_query_service.get_scryfall_images
-
-      elsif current_game == "swccg"
-        swccgdb_query_service = SWCCGDBQueryService.new
-        session[:img_array] = swccgdb_query_service.get_swccgdb_images
-
-      # add additional games here
-      end
-    end
-
-    session[:refresh_counter] ||= 0
-
-    if params["button_action"] == "refresh"
-      session[:refresh_counter] += 1
-    end
-  end
-
-end
-Perfect! We can now add additional games into our app by adding another elsif current_game == String branch inside our update_session method, and adding another public method (with only two lines of code inside it!) to pages_controller.rb.
-
-Now, let's update our routes.rb with a Get and Post route to both localhost:3000/mtg and localhost:3000/swccg:
-# /config/routes.rb
-
-Rails.application.routes.draw do
-  get "/mtg", to: "pages#mtg"
-  post "/mtg", to: "pages#mtg"
-
-  get "/swccg", to: "pages#swccg"
-  post "/swccg", to: "pages#swccg"
-end
-And, let's go ahead and make a set of mtg.html.erb and swccg.html.erb views (in the same /app/views/pages/ directory where index.html.erb currently lives). These will automatically render at the end of the mtg and swccg controller methods respectively, and we can customize them with the name of each game:
-<%# /app/views/pages/mtg.html.erb %>
-
-<h1>Pages#mtg</h1>
-<p>Find me in app/views/pages/mtg.html.erb</p>
-
-<h2>Let's add some Magic: the Gathering card art!</h2>
-
-<div class="card_container">
-    <%= render partial: '/pages/cards/card', collection: session[:img_array], as: :img_hash %>
-</div>
-
-<div class="refresh_form">
-    <%= render partial: '/pages/forms/refresh_button' %>
-    <%= render partial: '/pages/forms/refresh_counter', locals: {counter: @refresh_counter} %>
-</div>
-<%# /app/views/pages/swccg.html.erb %>
-
-<h1>Pages#swccg</h1>
-<p>Find me in app/views/pages/swccg.html.erb</p>
-
-<h2>Let's add some Star Wars CCG card art!</h2>
-
-<div class="card_container">
-    <%= render partial: '/pages/cards/card', collection: session[:img_array], as: :img_hash %>
-</div>
-
-<div class="refresh_form">
-    <%= render partial: '/pages/forms/refresh_button' %>
-    <%= render partial: '/pages/forms/refresh_counter', locals: {counter: @refresh_counter} %>
-</div>
-Great! Let's test out our new routes. In your console, run rails s. Navigate to localhost:3000 and you will see the default Rails index page (since we got rid of our index method in pages_controller.rb).
-
-Now let's check out localhost:3000/mtg to see our Magic: the Gathering card art...
-
-screenshot of localhost:3000/mtg showing magic: the gathering card art
-
-And now, let's go to localhost:3000/swccg to see our Star Wars CCG card art...
-
-screenshot of localhost:3000/swccg showing star wars ccg card art
-
-Perfect! As you can see, creating individual service objects to handle each API allows us to separate our concerns, so that the controller can focus on handling controller logic and our API-querying business logic is handled within its own API-specific service object.
-
-Conclusion
+### Conclusion
 Rails service objects allow us to move business logic from controllers (or models) to a separate class, which helps us keep our controllers (and models) "skinny" and focused on their own logic. They also allow us to make our codebase more modular, as we can build our individual service objects instead of cramming more logic into our controllers indefinitely.
 
 Next time you see a lot of logic in your controllers (or models), think about moving some of it to a service object!
-
-Special thanks to Anthony Hernandez for introducing me to service objects! :)
-And additional thanks to Andrew Brown for feedback/refactor suggestions on my previous post!
-Further reading/links/resources for Rails service objects
