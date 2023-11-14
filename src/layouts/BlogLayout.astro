@@ -1,185 +1,92 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import { Sprite } from 'astro-icon'
+import type {CollectionEntry} from 'astro:content'
+import BaseHead from '../components/BaseHead.astro'
+import Nav from '../components/Nav.astro'
+import Footer from '../components/Footer.astro'
+import { ViewTransitions } from 'astro:transitions'
 
-import FormattedDate from '../components/FormattedDate.astro';
+import FormattedDate from '../components/FormattedDate.astro'
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data']
 
-const {
-  title,
-  description,
-  date,
-  originalDatePublished,
-  heroImage,
-  author
-} = Astro.props;
+const {title, description, date, originalDatePublished, heroImage, author} = Astro.props
 ---
 
+<script>
+  let copyButtonLabel = 'Copy Code'
+  let codeBlocks = Array.from(document.querySelectorAll('pre'))
+
+  for (let codeBlock of codeBlocks) {
+    let wrapper = document.createElement('div')
+    wrapper.style.position = 'relative'
+
+    let copyButton = document.createElement('button')
+    copyButton.className = 'copy-code'
+    copyButton.innerHTML = copyButtonLabel
+
+    codeBlock.setAttribute('tabindex', '0')
+    codeBlock.appendChild(copyButton)
+    // wrap codebock with relative parent element
+    codeBlock.parentNode.insertBefore(wrapper, codeBlock)
+    wrapper.appendChild(codeBlock)
+
+    copyButton.addEventListener('click', async () => {
+      await copyCode(codeBlock, copyButton)
+    })
+  }
+
+  async function copyCode(block, button) {
+    let code = block.querySelector('code')
+    let text = code.innerText
+
+    await navigator.clipboard.writeText(text)
+
+    // visual feedback that task is completed
+    button.innerText = 'Code Copied'
+
+    setTimeout(() => {
+      button.innerText = copyButtonLabel
+    }, 700)
+  }
+</script>
+
+<!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-      article :global(p) {
-          font-size: 1.2rem;
-          margin: 1rem auto;
-      }
-
-      article :global(pre) {
-          margin: 2rem auto;
-          padding: 1rem 2.5rem;
-      }
-
-      article :global(p a) {
-          @apply text-indigo-500  font-bold
-      }
-
-      article :global(ul) {
-          margin: 0.5rem auto;
-          padding: 1rem 2.5rem;
-          @apply list-disc
-      }
-
-      article :global(h1) {
-          font-weight: 700;
-          font-size: 2.5rem;
-      }
-      article :global(h2) {
-          font-weight: 700;
-          font-size: 2rem;
-      }
-      article :global(h3) {
-          font-size: 1.6rem;
-          font-weight: 700;
-      }
-      article :global(h4) {
-          font-weight: 700;
-      }
-      article :global(h5) {
-          font-weight: 700;
-      }
-      article :global(h6) {
-          font-weight: 700;
-      }
-
-      article :global(.copy-code) {
-        position: absolute;
-        top: 0;
-        right: 0;
-        @apply bg-indigo-500 text-white;
-        padding: 0.25rem 0.5rem;
-        font-size: 0.75rem;
-        line-height: 1rem;
-      }
-
-      article globsl(.copy-code:hover) {
-        background-color: #312e81;
-      }
-
-        @media screen and (min-width: 668px) {
-          article :global(p) {
-            font-size: 0.9rem;
-            margin: 1rem auto;
-          }
-          article :global(h1) {
-            font-size: 0.9rem;
-            margin: 1rem auto;
-          }
-          article :global(h3) {
-            font-size: 1.1rem;
-            margin: 1rem auto;
-          }
-          h1 {
-            font-weight: 700;
-            font-size: 1.5rem;
-          }
-          h2 {
-            font-weight: 700;
-            font-size: 1rem;
-          }
-          h3 {
-            font-weight: 700;
-            font-size: 1rem;
-          }
-          h4 {
-            font-weight: 700;
-            font-size: 1.5rem;
-          }
-          h5 {
-            font-weight: 700;
-            font-size: 1.5rem;
-          }
-          h6 {
-            font-weight: 700;
-            font-size: 1.5rem;
-          }
-
-        }
-		</style>
-	</head>
+  <head>
+    <BaseHead title={title} description={description} />
+    <ViewTransitions />
+  </head>
 
   <body class="bg-blog-blue">
-    <Header />
-    <div class="my-10 max-w-screen-md ml-auto mr-auto bg-blog-blue">
+    <Sprite.Provider>
+    <Nav />
+    <div class="mb-10 max-w-screen-lg container-2xl mx-auto bg-blog-blue py-20">
       <div class="overflow-auto">
         <div class="container p-5 mx-auto overflow-auto">
           <div class="flex flex-col text-center w-full mt-10">
-            <h1 class="sm:text-6xl text-2xl font-medium title-font text-gray-100">
+            <h1 class="sm:text-[2rem] text-[2.5rem] py-4 font-medium title-font text-gray-100">
               {title}
             </h1>
-            <h2 class="text-azure/50 tracking-widest font-medium title-font mb-1">
-            by: {author}
-            </h2>
+            <h4 class=" text-azure/50 tracking-widest font-medium title-font mb-1">
+              by: {author}
+            </h4>
             <div class="m4 text-gray-100">
-              <h3>{description}</h3>
+              <h2 class="sm:text-[2rem] text-[2.25rem] pt-6">{description}</h2>
             </div>
           </div>
         </div>
-        <article class="md:container md:mx-auto mt-8 mb-8 text-gray-100">
+        <article class="md:container md:mx-auto mt-8 mb-8 px-6 text-gray-100">
           <slot />
         </article>
       </div>
     </div>
     <Footer />
+    </Sprite.Provider>
   </body>
 </html>
 
-<script>
-let copyButtonLabel = "Copy Code";
-let codeBlocks = Array.from(document.querySelectorAll("pre"));
+<style>
 
-for (let codeBlock of codeBlocks) {
-  let wrapper = document.createElement("div");
-  wrapper.style.position = "relative";
+</style>
 
-  let copyButton = document.createElement("button");
-  copyButton.className = "copy-code";
-  copyButton.innerHTML = copyButtonLabel;
-
-  codeBlock.setAttribute("tabindex", "0");
-  codeBlock.appendChild(copyButton);
-  // wrap codebock with relative parent element
-  codeBlock.parentNode.insertBefore(wrapper, codeBlock);
-  wrapper.appendChild(codeBlock);
-
-  copyButton.addEventListener("click", async () => {
-    await copyCode(codeBlock, copyButton);
-  });
-}
-
-async function copyCode(block, button) {
-  let code = block.querySelector("code");
-  let text = code.innerText;
-
-  await navigator.clipboard.writeText(text);
-
-  // visual feedback that task is completed
-  button.innerText = "Code Copied";
-
-  setTimeout(() => {
-    button.innerText = copyButtonLabel;
-  }, 700);
-}
-</script>
