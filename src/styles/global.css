@@ -10,7 +10,84 @@ html {
   height: 100%
 }
 
+article p {
+  font-size: 1rem;
+  margin: 1rem auto;
+}
+
+article pre {
+  margin: 2rem auto;
+  padding: 1rem 2.5rem;
+}
+
+article p a {
+  @apply text-indigo-500  font-bold;
+}
+
+article ul {
+  margin: 0.5rem auto;
+  padding: 1rem 2.5rem;
+  @apply list-disc;
+}
+
+article h1 {
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+article h2 {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+article h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1rem 0 0 0;
+}
+
+article h4 {
+  font-weight: 700;
+}
+
+article h5 {
+  font-weight: 700;
+}
+
+article h6 {
+  font-weight: 700;
+}
+
+article .copy-code {
+  position: absolute;
+  top: 0;
+  right: 0;
+  @apply bg-indigo-500 text-white;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+article .copy-code:hover {
+  background-color: #312e81;
+}
+
 @media (min-width: 640px) {
+  article :global(p) {
+    font-size: 0.9rem;
+    margin: 1rem auto;
+  }
+
+  article :global(h1) {
+    font-size: 0.9rem;
+    margin: 1rem auto;
+  }
+
+  article :global(h3) {
+    font-size: 1.1rem;
+    margin: 1rem auto;
+  }
+
   h1 {
     @apply text-6xl;
   }
@@ -20,11 +97,25 @@ html {
   }
 
   h3 {
-    @apply text-4xl font-medium;
+    @apply text-3xl font-medium;
+  }
+
+  h4 {
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  h5 {
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  h6 {
+    font-weight: 700;
+    font-size: 1.5rem;
   }
 
   btn {
     @apply flex justify-center
   }
-
 }

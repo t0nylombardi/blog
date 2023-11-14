@@ -31,9 +31,9 @@ Thus, we achieve the trifecta:
 A perfect example of a "fat controller" we could refactor with service objects is a controller I had used for ElasticSearch...search. This controller needed to search Users, Hashtags, and first/last name in a Profile model. This initial logic of the code is not DRY. It's mostly repeatable since its searching three different models.
 
 Here, we defined a bunch of business logic in the mentions_controller.rb to query the ElasticSearch:
-# /app/controller/mentions_controller.rb
 
 ```ruby
+# /app/controller/mentions_controller.rb
 class MentionsController < ApplicationController
 
   def index
@@ -67,7 +67,6 @@ class MentionsController < ApplicationController
                                    limit: 5)
   end
 end
-
 ```
 
 
@@ -151,6 +150,7 @@ end
 Note: to not use self for every method, I created  `ApplicationService` that `MentionsQueryService` extends. you can check out the code [here](https://gist.github.com/t0nylombardi/c6671135e208e23cb71e46fd61c1ae37).
 
 And now, we can make our `mentions_controller.rb` much "skinnier" by completely removing those same methods:
+
 ```ruby
 # /app/controllers/mentions_controller.rb
 # frozen_string_literal: true
