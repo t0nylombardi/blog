@@ -28,7 +28,7 @@ const {title, description, date, originalDatePublished, heroImage, author} = Ast
     codeBlock.setAttribute('tabindex', '0')
     codeBlock.appendChild(copyButton)
     // wrap codebock with relative parent element
-    codeBlock.parentNode.insertBefore(wrapper, codeBlock)
+    codeBlock?.parentNode?.insertBefore(wrapper, codeBlock)
     wrapper.appendChild(codeBlock)
 
     copyButton.addEventListener('click', async () => {

@@ -1,0 +1,70 @@
+---
+import {Sprite} from 'astro-icon'
+---
+
+<div class="flex-1 flex justify-center items-center">
+  <div class="flex flex-wrap showcase gap-16 mt-12 justify-center">
+    <Sprite name="logos:ruby" />
+    <Sprite name="logos:rails" />
+    <Sprite name="vscode-icons:file-type-html" />
+    <Sprite name="vscode-icons:file-type-css" />
+
+    <Sprite name="logos:javascript" />
+    <Sprite name="logos:typescript-icon" />
+    <Sprite name="logos:react" />
+    <Sprite name="vscode-icons:file-type-astro" />
+
+    <Sprite name="logos:nodejs-icon" />
+    <Sprite name="logos:postgresql" />
+    <Sprite name="logos:docker-icon" />
+    <Sprite name="logos:go" />
+
+    <Sprite name="ion:logo-github" class="text-azure" />
+    <div class="hidden sm:block md:hidden lg:block">
+      <Sprite name="emojione:taco" />
+    </div>
+    <Sprite name="vscode-icons:file-type-vscode" />
+    <Sprite name="vscode-icons:file-type-tailwind" />
+  </div>
+</div>
+
+<style>
+  section {
+    margin: 8rem 0;
+  }
+
+  @media screen and (min-width: 668px) {
+    section {
+      margin: 12rem 0;
+    }
+  }
+
+  section:last-of-type {
+    margin-top: 12rem;
+    margin-bottom: 0;
+  }
+
+  .icon svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .showcase {
+    max-width: calc(4 * 4rem + 3 * 4rem);
+  }
+
+  .showcase svg {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .hover {
+    @apply hover:text-gray-200;
+  }
+
+  .text-gradient {
+    background: -webkit-linear-gradient(90deg, #a478e8 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>

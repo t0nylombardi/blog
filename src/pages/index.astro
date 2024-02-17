@@ -1,11 +1,11 @@
 ---
-import {Sprite} from 'astro-icon'
 import BaseWrapper from '../layouts/BaseWrapper.astro'
 import BlogPostList from '../components/BlogPostList.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import ContactForm from '../components/ContactForm.astro'
+import LanguagesSprites from '../components/LanguagesSprites.astro'
 import CTA from '../components/CTA.astro'
-import {socials, DOB} from '../constants/index.ts'
+import {socials, DOB, Projects, AboutMe} from '../constants/index.ts'
 
 let ageDifMs = Date.now() - new Date(DOB).getTime()
 let ageDate = new Date(ageDifMs)
@@ -57,42 +57,14 @@ let yearsOld = Math.abs(ageDate.getUTCFullYear() - 1970)
 
     <section id="about" class="flex items-center flex-col-reverse md:flex-row">
       <div class="flex-1 flex justify-center items-center">
-        <div class="flex flex-wrap showcase gap-16 mt-12 justify-center">
-          <Sprite name="logos:ruby" />
-          <Sprite name="logos:rails" />
-          <Sprite name="vscode-icons:file-type-html" />
-          <Sprite name="vscode-icons:file-type-css" />
-
-          <Sprite name="logos:javascript" />
-          <Sprite name="logos:typescript-icon" />
-          <Sprite name="logos:react" />
-          <Sprite name="vscode-icons:file-type-astro" />
-
-          <Sprite name="logos:nodejs-icon" />
-          <Sprite name="logos:postgresql" />
-          <Sprite name="logos:docker-icon" />
-          <Sprite name="logos:go" />
-
-          <Sprite name="ion:logo-github" class="text-azure" />
-          <div class="hidden sm:block md:hidden lg:block">
-            <Sprite name="emojione:taco" />
-          </div>
-          <Sprite name="vscode-icons:file-type-vscode" />
-          <Sprite name="vscode-icons:file-type-tailwind" />
-        </div>
+        <LanguagesSprites />
       </div>
+
       <div class="flex-1">
         <h3 class="text-4xl font-medium">_about-me</h3>
         <p class="comment mt-2">// get a small overview of who i am</p>
         <p class="mt-9">
-          A self-taught meticulous & motivated Full Stack Developer with 10+ years of hands-on experience particularly
-          in Ruby and Ruby on Rails. I have worked on Ruby on Rails e-commerce architecture, breaking down monoliths,
-          working on microservices, helping with devops, and leading a team through the full stack life cycle. From my
-          first professional job as a Jr developer, My journey has been driven by an insatiable curiosity for emerging
-          technologies. With a passion for staying at the forefront of innovation, I'm excited to contribute to this
-          dynamic field and be a part of its remarkable journey. I am also committed to actively learning from every
-          experience that I have. During every job and position I have held, I learned about what it takes to succeed in
-          this field, and I've carried that lesson throughout the years as I've worked.
+          {AboutMe}
         </p>
         <CTA link="resume" />
       </div>
@@ -102,23 +74,16 @@ let yearsOld = Math.abs(ageDate.getUTCFullYear() - 1970)
       <h3 class="text-4xl font-medium">_projects</h3>
       <div>
         <div id="projects-list" class="flex flex-col justify-between w-full mt-12">
-          <ProjectCard
-            img="/projects/churp.png"
-            width="w-[12rem]"
-            link="https://github.com/t0nylombardi/churp"
-            title="Churp Solical"
-            technologies="Ruby on Rails 7.1, Redis, EslaticSearch, Docker"
-            description="Let's face it. Twitter/X has become a dumpster fire 🔥This is my attempt to bring back the good ole days twitter used to be.This project is not an attempt to be a decentralized network or some blockchain application."
-          />
-
-          <ProjectCard
-            img="/projects/rails_template.png"
-            width="w-[23rem]"
-            link="https://github.com/t0nylombardi/rails_template"
-            title="Rails Template"
-            technologies="Ruby"
-            description="Alot of time starting a new Rails project can be tedious(for me at least). Mostly setting up all the tools/technologies you want to use. This template script attempts to making the setup of a new app faster. The app sets up A Rails project with Docker, Rspec, Devise, Sidekiq, Active Storage, Action Text and Tailwind."
-          />
+          {Projects.map((project) => (
+            <ProjectCard
+              img={project.img}
+              width={project.width}
+              link={project.link}
+              title={project.title}
+              technologies={project.technologies}
+              description={project.description}
+            />
+          ))}
         </div>
       </div>
     </section>

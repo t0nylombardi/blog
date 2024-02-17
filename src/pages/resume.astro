@@ -1,8 +1,6 @@
 ---
-import BaseHead from '../components/BaseHead.astro.jsx'
 import BaseWrapper from '../layouts/BaseWrapper.astro'
-import Header from '../components/Header.astro'
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts'
+import { Profile, WorkHistory } from '../constants/resume'
 import SkillList from '../components/skills/skills.jsx'
 ---
 
@@ -137,9 +135,10 @@ import SkillList from '../components/skills/skills.jsx'
                             <h1>HOBBIES</h1>
                             <hr />
                             <p>
-                                Building guitars && Woodworking , Playing Guitar,
-                                Cooking, Spending Time with my two Children, and
-                                Exploring the Outdoors.
+                                Spending time with my two beautiful children,
+                                Exploring the Outdoors, Building guitars && Woodworking,
+                                Playing Guitar, and Cooking. I am also a huge fan of
+                                the Pittsburgh Steelers and the New York Yankees.
                             </p>
                         </div>
                     </div>
@@ -147,264 +146,37 @@ import SkillList from '../components/skills/skills.jsx'
                         <div class="profile">
                             <h1>PROFILE</h1>
                             <hr />
-                            <p class="border-b-2 border-gray-c7">
-                                Meticulous & motivated Full Stack Developer with 8+
-                                years of hands-on experience in: Ruby/Ruby on Rails,
-                                ReactJS, SQL, Project Management & Development, and
-                                Consulting through the Full Software Life Cycle.
+                            <p class="border-b-2 border-gray-c7 mb-8">
+                                {Profile}
                             </p>
                         </div>
                         <div class="employment-history border-b-2 border-gray-c7">
                             <h1>EMPLOYMENT HISTORY</h1>
                             <hr />
 
-                            {/* Lead Consultant, Lombardi Consulting */}
-                            <div class="employment mb-4">
-                                <div class="grid grid-cols-4">
-                                    <div class="col-span-3 text-left font-bold text-azure">
-                                        Lead Consultant, Lombardi Consulting
+                            {WorkHistory.map((job, _i) => () => (
+                                <div class="employment mb-4">
+                                    <div class="grid grid-cols-4">
+                                        <div class="col-span-3 text-left font-bold text-azure">
+                                            {`${job.title}, ${job.company}`}
+                                        </div>
+                                        <div class="text-right">{ job.location}</div>
                                     </div>
-                                    <div class="text-right">South Salem, NY</div>
-                                </div>
 
-                                <p class="employment-date">
-                                    June 2022 &hyphen; Present
-                                </p>
+                                    <p class="employment-date text-slate-500 opacity-75 mb-2">
+                                        {job.date}
+                                    </p>
 
-                                <div class="highlights">
-                                    <ul class="list-inside list-disc">
-                                        <li> Created various websites using Javascript, Typescript, NextJS, AstroJS, and Ruby on Rails </li>
-
-                                        <li> Converted websites from WordPress to other platforms. </li>
-
-                                        <li> Built analytics engine to track customer websites. </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            {/* AVAIL/RDC LEAD */}
-                            <div class="employment mb-4">
-                                <div class="grid grid-cols-4">
-                                    <div class="col-span-3 text-left font-bold text-azure">
-                                        Lead Software Engineer, Avail/Realtor.com
+                                    <div class="highlights">
+                                        <ul class="list-inside list-disc">
+                                            {job.highlights.map((highlight, index) => (
+                                                <li key={index} class="pl-4">{highlight}</li>
+                                            ))}
+                                        </ul>
                                     </div>
-                                    <div class="text-right">New York City</div>
                                 </div>
-                                <p class="employment-date">
-                                    June 2021 &hyphen; August 2022
-                                </p>
-                                <div class="highlights">
-                                    <ul class="list-inside list-disc">
-                                        <li>
-                                            Coordinated with the development team into making successful products
-                                        </li>
+                            ))}
 
-                                        <li>
-                                            Worked along with other tech leads, product managers
-                                            and engineering managers fostering a good work environment.
-                                        </li>
-
-                                        <li>
-                                            Implemented microservices for listing
-                                            currated data in listing apartments.
-                                        </li>
-
-                                        <li>Applied best practices in development while following standardized coding conventions.</li>
-
-                                        <li>
-                                            Mentored junior and mid-level engineers with code issues.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            {/* AVAIL/RDC  */}
-                            <div class="employment mb-4">
-                                <div class="grid grid-cols-4">
-                                    <div class="col-span-3 text-left font-bold text-azure">
-                                        Senior Software Engineer, Avail/Realtor.com
-                                    </div>
-                                    <div class="text-right">New York City</div>
-                                </div>
-                                <p class="employment-date">
-                                    June 2021 &hyphen; August 2022
-                                </p>
-                                <div class="highlights">
-                                    <ul class="list-inside list-disc">
-                                        <li>
-                                            Built applications using Ruby on Rails
-                                            for the backend and React on the
-                                            frontend.
-                                        </li>
-
-                                        <li>
-                                            Designed and implemented planning and
-                                            execution of taking a momolyth to
-                                            microservices.
-                                        </li>
-
-                                        <li>
-                                            Implemented microservices for listing
-                                            currated data in listing apartments.
-                                        </li>
-
-                                        <li>Deployed better Logging for apis</li>
-
-                                        <li>
-                                            Facilitated root cause analysis of
-                                            common system issues to meet customer
-                                            needs.
-                                        </li>
-
-                                        <li>
-                                            Monitored systems for defects and
-                                            employed bug resolution
-                                        </li>
-
-                                        <li>
-                                            Built and Facilitated code quality
-                                            checks by using CI/CD to analyze PRs.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            {/* LENDKEY  */}
-                            <div class="employment mb-4">
-                                <div class="grid grid-cols-4">
-                                    <div class="col-span-3 text-left font-bold text-azure">
-                                        Software Engineer, LendKey Technologies
-                                    </div>
-                                    <div class="text-right">New York City</div>
-                                </div>
-                                <p class="employment-date">
-                                    Oct 2017 &hyphen; Jun 2020
-                                </p>
-                                <div class="highlights">
-                                    <ul class="list-inside list-disc">
-                                        <li>
-                                            Built and maintained APIs, moving away
-                                            from Legacy Monolith infrastructure to a
-                                            more domain-driven micro service through
-                                            Docker Ruby on Rails, Java/SpringBoot
-                                            and ReactJS
-                                        </li>
-                                        <li>
-                                            Worked with ReactJS and TypeScript to
-                                            build a front end
-                                        </li>
-                                        <li>
-                                            Used higher order of components to make
-                                            small, reusable sections{' '}
-                                        </li>
-                                        <li>
-                                            Built login feature using MS Azure, JWT,
-                                            and Apigee
-                                        </li>
-                                        <li>
-                                            Utilized crucial design software skills
-                                            to complete projects
-                                        </li>
-                                        <li>
-                                            Effectively coded software changes and
-                                            alterations based on specific design
-                                            requirements
-                                        </li>
-                                        <li>
-                                            Applied & stayed current with existing
-                                            and emerging technologies
-                                        </li>
-                                        <li>
-                                            Brought forth a passion and dedication
-                                            to software development
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            {/* TMPG  */}
-                            <div class="employment mb-4">
-                                <div class="grid grid-cols-4">
-                                    <div
-                                        class="col-span-3 text-left font-bold text-azure"
-                                    >
-                                        Full-Stack Developer, TMPG
-                                    </div>
-                                    <div class="text-right">White Plains, NY</div>
-                                </div>
-                                <p class="employment-date">
-                                    Aug 2015 &hyphen; Oct 2017
-                                </p>
-                                <div class="highlights">
-                                    <ul class="list-inside list-disc">
-                                        <li>
-                                            Managed a development team building
-                                            rich, interactive websites
-                                        </li>
-                                        <li>
-                                            Built and maintained new infrastructures
-                                            while merging our legacy infrastructure
-                                            over
-                                        </li>
-                                        <li>
-                                            Brought forth extensive experience
-                                            developing APIs to connect and curate
-                                            new and existing data through multiple
-                                            platforms
-                                        </li>
-                                        <li>
-                                            Implemented procedural changes in server
-                                            infrastructures
-                                        </li>
-                                        <li>
-                                            Created new internal portal for managing
-                                            client data and assets
-                                        </li>
-                                        <li>
-                                            Successfully worked to meet tight client
-                                            deadlines
-                                        </li>
-                                        <li>
-                                            Worked well with internal and external
-                                            teams
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            {/* Ferguson */}
-                            <div class="employment mb-4">
-                                <div class="grid grid-cols-4">
-                                    <div
-                                        class="col-span-3 text-left font-bold text-azure"
-                                    >
-                                        Full-Stack Developer, Ferguson Enterprise
-                                    </div>
-                                    <div class="text-right">Goshen, NY</div>
-                                </div>
-                                <p class="employment-date">
-                                    Apr 2013 &hyphen; Jul 2015
-                                </p>
-                                <div class="highlights">
-                                    <ul class="list-inside list-disc">
-                                        <li>
-                                            Transformed a large e&hyphen;commerce
-                                            website with new Ruby on Rails
-                                            back&hyphen;end technology
-                                        </li>
-                                        <li>
-                                            Maintained store locations, websites and
-                                            back-end databases
-                                        </li>
-                                        <li>
-                                            Developed a user&hyphen;friendly SMS
-                                            solution for customer service
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            {/*  */}
                         </div>
                         <div class="education pt-5">
                             <h1>EDUCATION</h1>

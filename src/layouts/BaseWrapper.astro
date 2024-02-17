@@ -1,6 +1,7 @@
 ---
 import { Sprite } from 'astro-icon'
-import { socials, SITE_TITLE, SITE_DESCRIPTION } from '../constants'
+import { SEO } from 'astro-seo'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../constants'
 import BaseHead from '../components/BaseHead.astro'
 import Footer from '../components/Footer.astro'
 import Nav from '../components/Nav.astro'
@@ -10,6 +11,38 @@ import { ViewTransitions } from 'astro:transitions'
 <!doctype html>
 <html lang="en">
   <head>
+    <SEO
+      title={SITE_TITLE}
+      description={ SITE_DESCRIPTION }
+      openGraph={{
+        basic: {
+          title: SITE_TITLE ,
+          type: "website",
+          image: "https://www.t0nylombardi.dev/amoji_avatar.svg",
+        }
+      }}
+      twitter={{
+        creator: "@t0nylombardi"
+      }}
+      extend={{
+        // extending the default link tags
+        link: [{ rel: "icon", href: "/favicon/favicon.ico" }],
+        // extending the default meta tags
+        meta: [
+          { name: "twitter:image", content: "https://pbs.twimg.com/profile_images/498278137092796416/FtXRi2RG_400x400.jpeg" },
+          { name: "twitter:title", content: "Anthony Lombardi" },
+          { name: "twitter:description", content: SITE_DESCRIPTION },
+          { name: "twitter:card", content: "summary" },
+          { name: "twitter:site", content: "@t0nylombardi" },
+          { name: "twitter:creator", content: "@t0nylombardi" },
+          { name: "twitter:image:alt", content: "Anthony Lombardi" },
+          { name: "twitter:creator:id", content: "t0nylombardi" },
+          { name: "twitter:site:id", content: "t0nylombardi" },
+          { name: "twitter:card", content: "summary_large_image" },
+          { name: "twitter:domain", content: "t0nylombardi.dev" },
+        ],
+      }}
+    />
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <ViewTransitions />
   </head>

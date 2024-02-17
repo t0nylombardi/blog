@@ -1,19 +1,6 @@
-import React from 'react';
 import { animated } from 'react-spring';
+import { SkillsWeb } from '../../constants/resume';
 
-
-const skillsWeb = [
-  [95, 'Ruby'],
-  [95, 'Ruby on Rails'],
-  [85, 'React'],
-  [90, 'Javascript'],
-  [80, 'Typescript'],
-  [70, 'SQL'],
-  [50, 'NodeJS'],
-  [95, 'Html/CSS'],
-  [20, 'Go'],
-  [20, 'Python'],
-];
 
 const SkillProgress = ({ percent, skillname }) => {
 
@@ -54,7 +41,7 @@ const SkillProgress = ({ percent, skillname }) => {
 const SkillList = () => {
   return (
     <div>
-      {skillsWeb.map((name, index) => {
+      {SkillsWeb.map((name, index) => {
         return (
           <SkillProgress key={index} percent={name[0]} skillname={name[1]} />
         );
