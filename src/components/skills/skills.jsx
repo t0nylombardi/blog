@@ -1,4 +1,4 @@
-import { useSpring, easeInElastic, animated } from 'react-spring';
+import { useSpring, easeInElastic, animated } from '@react-spring/web';
 import { SkillsWeb } from '../../constants/resume';
 
 
