@@ -1,5 +1,5 @@
 ---
-import { Sprite } from "astro-icon";
+import { Icon } from 'astro-icon/components';
 
 const routes =[{
   slug: '/#hello',
@@ -147,7 +147,7 @@ document.addEventListener('astro:page-load', (ev) => {
         routes.map((route) => (
           <li class="">
             <a href={route.slug} class="flex items-center hover:text-gray-200">
-              <Sprite name="bi:chevron-compact-right" class="h-4 w-4 lg:hidden"/>
+              <Icon name="bi:chevron-compact-right" class="h-4 w-4 lg:hidden"/>
               {route.label}
             </a>
           </li>

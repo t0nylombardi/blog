@@ -15,7 +15,7 @@ posts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.d
 if (limit) posts = posts.slice(0, limit)
 ---
 
-<div class="container mx-auto py-36">
+<div class="container mx-auto py-18">
   <div class="flex w-full flex-wrap">
     {
       posts.length < 1 ? (

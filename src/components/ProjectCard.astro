@@ -1,5 +1,5 @@
 ---
-import {Sprite} from 'astro-icon'
+import {Icon} from 'astro-icon/components'
 
 interface Props {
   class?: string
@@ -31,7 +31,7 @@ const {width, link, img, title, technologies, description} = Astro.props
         <div class="mt-2 text-sm text-[#95AAFB]">
           <a href={link} class="flex cursor-pointer items-center">
             <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#2A337E]">
-              <Sprite name="akar-icons:link-chain" class="h-4 w-4" />
+              <Icon name="mdi:link-variant" class="h-4 w-4" />
             </span>
             <span class="ml-3">{link}</span>
           </a>
