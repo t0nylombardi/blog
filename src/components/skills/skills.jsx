@@ -1,11 +1,11 @@
-import { useSpring, easeInElastic, animated } from '@react-spring/web';
+import { useSpring, animated } from '@react-spring/web';
 import { SkillsWeb } from '../../constants/resume';
 
 
 const SkillProgress = ({ percent, skillname }) => {
   const props = useSpring({
     width: `${percent}%`,
-    config: { duration: 2000, easing: easeInElastic },
+    config: { duration: 2000 },
   });
 
   return (
