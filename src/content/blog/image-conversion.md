@@ -1,7 +1,7 @@
 ---
 title: 'Image Conversion'
 date: '2020-12-29'
-coverImage: ''
+heroImage: 'https://images.unsplash.com/photo-1655720035861-ba4fd21a598d'
 originalDatePublished: '2014-11-18'
 description: "I wrote a script that allows me to take several images rename them, and then create two resized images in addition."
 author: 'Anthony Lombardi'
@@ -11,65 +11,88 @@ tags: [ruby]
 draft: false
 ---
 
-I wrote a script that allows me to take several images rename them, and then create two resized images in addition. The specifics of the naming and re-sizing convention required me to name each image as:
+In the realm of digital content management, streamlining repetitive tasks can save invaluable time and effort. Recently, I embarked on a quest to simplify the process of renaming and resizing a batch of images. The goal was to create a script that allows me to take several images rename them, and then create two resized images. Not only does this accomplish these tasks efficiently but also ensures optimal image quality throughout the process.
 
-```
-1.jpg
-2.jpg
-3.jpg
-etc.....
-```
+## The Challenge
 
-The file name comes up as a string “OHV May1.jpg” and so on. Recursively parsing through the images came up with a hurtle. In the array of the directory the list would show:
+The initial challenge revolved around parsing through a directory of images, each with filenames in a specific format. While the images themselves had numerical identifiers, such as "1.jpg," "2.jpg," and so forth, there were instances where the filenames included additional text, like "OHV May1.jpg" or "OHV May39.jpg." This necessitated a method to extract and utilize the numerical component for renaming purposes.
 
-```
-OHV May39.jpg
-OHV May4.jpg
-OHV May40.jpg
-```
+## Solution Approach
+To tackle this challenge, I leveraged the capabilities of Ruby 3.0 along with the mini_magick gem, a powerful tool for image processing. Here's a breakdown of the solution approach:
 
-So I simply grabbed the number from the string and renamed it from that variable.
+- **Iterative Processing**: Utilizing Ruby's Dir.glob method, the script recursively traverses through the specified directory, identifying image files and initiating the renaming and resizing operations.
+- Filename Parsing: Employing regular expressions, the script extracts the numerical identifier from each filename, essential for the subsequent renaming process.
+- **Renaming Images**: With the numerical identifier obtained, the script systematically renames each image file to adhere to the desired naming convention, ensuring consistency and orderliness.
 
-The next two parts where I create the two re-sized images, They needed to named a certain way. The second is creating a new variable so the resize can come from the original file which is bigger and better quality. The First run I did went from original image(big) to small back to big. This made the third image pixelated and blurry.
+- **Image Resizing**: The script employs the mini_magick gem to resize the images to predefined dimensions. Crucially, the resizing operation occurs in two stages, with the larger, higher-quality original image being used for the second resizing iteration to maintain optimal image fidelity.
 
 ### idea
 I could easily just replace the order of the re-sizing, but I rather just go to the source again for quality sake(if there is one at all.)
 
-Here is the code:
+### Code Implementation
 
 ```ruby
 require 'rubygems'
 require 'mini_magick'
 
-@sizes = [ "76x100", "770x1000" ]
+class ImageProcessor
+  THUMBNAIL_SIZE = "76x100"
+  RESIZED_IMAGE_SIZE = "770x1000"
+  FOLDER_PATH = "pages"
 
-# puts "Script complete.\n\n"
-folder_path = "pages"
-Dir.glob(folder_path + "/*").sort.each do |f|
-   number = f.scan(/[0-9]{1,}/)
+  def initialize
+    @images = Dir.glob("#{FOLDER_PATH}/*").sort
+  end
 
-    #rename first
-    filename = File.basename(f, File.extname(f))
-    renamed_file = "#{folder_path}/"+number[0].to_s+"-large"+File.extname(f)
-    File.rename(f, renamed_file)
+  def process_images
+    @images.each do |image_path|
+      number = extract_number(image_path)
+      renamed_file = rename_image(image_path, number)
 
-    # prints image its working on
-    puts "imaging: "+number[0]+File.extname(f)
-    file = number[0]+File.extname(f)
+      create_thumbnail(renamed_file, number)
+      create_resized_image(renamed_file, number)
 
-    # creates 76x100 thumb
-    ri = MiniMagick::Image.open(renamed_file)
-    ri.resize "#{@sizes[0]}!"
-    ri.write "#{folder_path}/#{File.basename(file, '.jpg')}-thumb.jpg"
-    printf("%25s - %s\n", "Created: ", "#{File.basename(file, '.jpg')}-thumb.jpg")
+      clear_console
+    end
+  end
 
-    # creates 770x1000
-    ri2 = MiniMagick::Image.open(renamed_file)
-    ri2.resize "#{@sizes[1]}!"
-    ri2.write "#{folder_path}/#{File.basename(file, '.jpg')}.jpg"
-    printf("%25s - %s\n", "Created: ", "#{File.basename(file, '.jpg')}.jpg")
+  private
 
+  def extract_number(image_path)
+    File.basename(image_path).scan(/[0-9]{1,}/).first
+  end
+
+  def rename_image(image_path, number)
+    new_filename = "#{FOLDER_PATH}/#{number}-large#{File.extname(image_path)}"
+    File.rename(image_path, new_filename)
+    new_filename
+  end
+
+  def create_thumbnail(image_path, number)
+    image = MiniMagick::Image.open(image_path)
+    image.resize "#{THUMBNAIL_SIZE}!"
+    image.write "#{FOLDER_PATH}/#{number}-thumb.jpg"
+    puts "Thumbnail created: #{number}-thumb.jpg"
+  end
+
+  def create_resized_image(image_path, number)
+    image = MiniMagick::Image.open(image_path)
+    image.resize "#{RESIZED_IMAGE_SIZE}!"
+    image.write "#{FOLDER_PATH}/#{number}.jpg"
+    puts "Resized image created: #{number}.jpg"
+  end
+
+  def clear_console
     system('clear')
+  end
 end
 
+# Main
+processor = ImageProcessor.new
+processor.process_images
+
 ```
+
+### Conclusion
+
+By harnessing the power mini_magick gem, I successfully automated the process of renaming and resizing images, thereby streamlining content management workflows. This endeavor not only exemplifies the versatility of Ruby for handling such tasks but also underscores the importance of optimizing image processing methodologies for superior results. With this script in hand, managing batches of images becomes a seamless and efficient endeavor, empowering content creators to focus on their creative endeavors with confidence.

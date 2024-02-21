@@ -1,7 +1,7 @@
 ---
 title: 'Creating a Pixel Tracker with NextJS and Prisma (2022)'
 date: '2022-10-31T20:37:52.538Z'
-coverImage: ''
+heroImage: 'https://images.unsplash.com/photo-1579616043939-95d87a6e8512'
 originalDatePublished:
 description: 'An updated version of Pixel Tracking with NextJS and Prisma'
 author: 'Anthony Lombardi'
@@ -78,14 +78,11 @@ model Pixel {
  state        String
  user_agent   String
 }
-
-
 ```
 
 
-
-
 To actually create the tables in your database, you now can use the following command of the Prisma CLI:
+
 ```
 npx prisma db push
 ```
@@ -93,32 +90,29 @@ npx prisma db push
 
 ### Install Prisma client
 
-
 Before you can access your database from Next.js using Prisma, you first need to install Prisma Client in your app. You can install it via npm as follows:
+
 ```shell
 npm install @prisma/client
 ```
 
-
 Because Prisma Client is *tailored* to your own schema, you need to update it every time your Prisma schema file is changing by running the following command:
+
 ```shell
 npx prisma generate
 ```
 
-
 You’ll use a single PrismaClient instance that you can import into any file where it’s needed. The instance will be created in a prisma.ts file inside the lib/ directory. Go ahead and create the missing directory and file:
+
 ```shell
 mkdir lib && touch lib/prisma.ts
 ```
-
 
 ```javascript
 // lib/prisma.ts
 import { PrismaClient } from '@prisma/client';
 
-
 let prisma: PrismaClient;
-
 
 if (process.env.NODE_ENV === 'production') {
  prisma = new PrismaClient();
@@ -129,33 +123,28 @@ if (process.env.NODE_ENV === 'production') {
  prisma = global.prisma;
 }
 
-
 export default prisma;
 ```
 
 ## The Pixel Tracker.
-
 
 NextJS allows you to gather info via requests through their Api Routes.
 
 
 ### Create an Api Route
 
-
 ```shell
 mkdir pages/api && touch pages/api/tracker.ts
 ```
 
-
 Add the following boilerplate code and we will walk through what we need from it:
+
 ```javascript
 import type { NextApiRequest, NextApiResponse } from 'next'
-
 
 type Data = {
  name: string
 }
-
 
 export default function handler(
  req: NextApiRequest,
@@ -165,11 +154,10 @@ export default function handler(
 }
 ```
 
-
-Most of what we need from here is the request ```req``` We will change what is returned shortly as well.
-
+Most of what we need from here is the request `req` We will change what is returned shortly as well.
 
 First we want to gather anything in the query string after the URL:
+
 ```
 example.com/api/tracker?campaign=SomeCampaign&content_type=blog
 ```
@@ -178,31 +166,27 @@ example.com/api/tracker?campaign=SomeCampaign&content_type=blog
 ```javascript
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-
 type Data = {
  name: string
 }
-
 
 export default function handler(
  req: NextApiRequest,
  res: NextApiResponse<Data>
 ) {
  query: { campaign, content_type }
- } = req;
+} = req;
 
-
- res.status(200).json({ name: 'John Doe' })
+res.status(200).json({ name: 'John Doe' })
 ```
-
-
-
 
 Next we want to gather info about the request. Ip address, and user_agent inside the handler
 
 
 ```javascript
-
+.
+.
+.
 const forwarded = req.headers["x-forwarded-for"]
 const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
 const user_agent = req.headers['user-agent']
@@ -214,31 +198,26 @@ The following is to send the IP address to an api to get the location back:
 
 ```javascript
 
-const forwarded = req.headers["x-forwarded-for"]
-const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
-const user_agent = req.headers['user-agent']
-
 let headers = new Headers({
-   "Accept"       : "application/json",
-   "Content-Type" : "application/json",
-   "User-Agent"   : "keycdn-tools:https://localhost"
- });
+  "Accept"       : "application/json",
+  "Content-Type" : "application/json",
+  "User-Agent"   : "keycdn-tools:https://localhost"
+});
 
- let locationData  = await fetch(`https://tools.keycdn.com/geo.json?host=${ip}`, {
-   method  : 'GET',
-   headers : headers
- })
- .then((response) => {
-   return response.json();
- })
- .then((json) => {
-   return json.data.geo
- });
+let locationData  = await fetch(`https://tools.keycdn.com/geo.json?host=${ip}`, {
+  method  : 'GET',
+  headers : headers
+})
+.then((response) => {
+  return response.json();
+})
+.then((json) => {
+  return json.data.geo
+});
 
 ```
 
 Next thing is to do is save to the database:
-
 
 ```javascript
 
@@ -258,79 +237,21 @@ Next thing is to do is save to the database:
 
 The Last thing we want to do is return a 1x1 pixel:
 
-
 ```javascript
-import type { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '../../lib/prisma';
-import fs from 'fs'
-import path from 'path'
-
-const filePath = path.resolve('.', 'tracker/tracker.gif')
-const imageBuffer = fs.readFileSync(filePath)
-
-type Data = {
- name: string
-}
-
-
-export default function handler(
- req: NextApiRequest,
- res: NextApiResponse<Data>
-) {
- query: { campaign, content_type }
- } = req;
-
-
-const forwarded = req.headers["x-forwarded-for"]
- const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
- const user_agent = req.headers['user-agent']
-
-
-let headers = new Headers({
-   "Accept"       : "application/json",
-   "Content-Type" : "application/json",
-   "User-Agent"   : "keycdn-tools:https://localhost"
- });
-
-
- let locationData  = await fetch(`https://tools.keycdn.com/geo.json?host=${ip}`, {
-   method  : 'GET',
-   headers : headers
- })
- .then((response) => {
-   return response.json();
- })
- .then((json) => {
-   return json.data.geo
- });
-
-
- // Create new Pixel
- await prisma.pixel.create({
-   data: {
-     ip_address: `${locationData.host}`,
-     campaign: `${campaign}`,
-     content_type: `${content_type}`,
-     city: `${locationData.city}`,
-     state: `${locationData.region_code}`,
-     user_agent: `${user_agent}`,
-   },
- });
-
-
- res.setHeader('Content-Type', 'image/jpg')
- res.send(imageBuffer)
+.
+.
+.
+res.setHeader('Content-Type', 'image/jpg')
+res.send(imageBuffer)
 }
 ```
 
 
 ## conclusion
 
-
-there you have it, I’ve created a 1x1 pixel and put it in a folder in the root directory.  This could be made many different ways and could be googled to figure that out.  I'm sure there is a purely JS way of generating a pixel on the fly. We've created a way to track user interactions with a pixel the same way Google Analytics, MailChimp and the like track interactions.
-
+There you have it, I’ve created a 1x1 pixel and put it in a folder of the root directory. This could be made many different ways and could be googled to figure that out. I'm sure there is a purely JS way of generating a pixel on the fly. We've created a way to track user interactions with a pixel the same way Google Analytics, MailChimp and the like track interactions.
 
 ### Repo:
 
-
 [Aries Pixel](https://github.com/t0nylombardi/ariesPixel)
+
