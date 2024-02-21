@@ -1,5 +1,4 @@
 ---
-import { Sprite } from 'astro-icon'
 import type {CollectionEntry} from 'astro:content'
 import BaseHead from '../components/BaseHead.astro'
 import Nav from '../components/Nav.astro'
@@ -59,30 +58,37 @@ const {title, description, date, originalDatePublished, heroImage, author} = Ast
   </head>
 
   <body class="bg-blog-blue">
-    <Sprite.Provider>
     <Nav />
-    <div class="mb-10 max-w-screen-lg container-2xl mx-auto bg-blog-blue py-20">
-      <div class="overflow-auto">
-        <div class="container p-5 mx-auto overflow-auto">
+    <div class="mb-10 max-w-screen-2xl container-2xl mx-auto bg-blog-blue py-20">
+      <main class="overflow-auto">
+        <div class="container mx-auto overflow-auto">
           <div class="flex flex-col text-center w-full mt-10">
-            <h1 class="sm:text-[2rem] text-[2.5rem] py-4 font-medium title-font text-gray-100">
+            <h1 class="text-[2rem] md:text-[4.5rem] py-4 font-medium title-font text-gray-100">
               {title}
             </h1>
-            <h4 class=" text-azure/50 tracking-widest font-medium title-font mb-1">
-              by: {author}
-            </h4>
-            <div class="m4 text-gray-100">
-              <h2 class="sm:text-[2rem] text-[2.25rem] pt-6">{description}</h2>
+            <div class="m-4 text-gray-100 flex justify-center">
+              <h2 class="text-[1rem] md:text-[1.5rem] w-full font-normal ">{description}</h2>
             </div>
+            <h4 class=" text-azure/50 tracking-widest text-sm font-light title-font mb-1">
+              by: {author} on {`date` ? <FormattedDate date={date} /> : `originalDatePublished`}
+            </h4>
+          </div>
+          <div class="my-16 object-contain object-center">
+            {heroImage && (
+              <img
+                class="hidden w-max md:block "
+                src={heroImage}
+                alt={title}
+              />
+            )}
           </div>
         </div>
-        <article class="md:container md:mx-auto mt-8 mb-8 px-6 text-gray-100">
+        <article class="container-sm mx-auto w-full mt-16 mb-8 px-[4rem] text-gray-100">
           <slot />
         </article>
-      </div>
+      </main>
     </div>
     <Footer />
-    </Sprite.Provider>
   </body>
 </html>
 

@@ -4,7 +4,7 @@ date: '2020-12-29T20:57:55.934Z'
 coverImage: ''
 originalDatePublished: '2014-11-18'
 description: 'I been written a code to parse through an email list a client gave me that has roughly 94 emails.'
-author: 't0nylombardi'
+author: 'Anthony Lombardi'
 image: 'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7'
 categories: [ruby]
 tags: [ruby]

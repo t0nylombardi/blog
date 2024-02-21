@@ -12,6 +12,47 @@ let ageDate = new Date(ageDifMs)
 let yearsOld = Math.abs(ageDate.getUTCFullYear() - 1970)
 ---
 
+<style>
+  section {
+    margin: 8rem 0;
+  }
+
+  @media screen and (min-width: 668px) {
+    section {
+      margin: 4rem 0;
+    }
+  }
+
+  section:last-of-type {
+    margin-top: 8rem;
+    margin-bottom: 0;
+  }
+
+  .icon svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .showcase {
+    max-width: calc(4 * 4rem + 3 * 4rem);
+  }
+
+  .showcase svg {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .hover {
+    @apply hover:text-gray-200;
+  }
+
+  .text-gradient {
+    background: -webkit-linear-gradient(90deg, #a478e8 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>
+
 <BaseWrapper>
   <div class="sm:container sm:mx-auto lg:container lg:mx-auto px-4 sm:px-4 md:px-4 py-24 lg:py-40">
     <header id="hello" class="sm:container sm:mx-auto container mx-auto flex items-center flex-col-reverse md:flex-row w-full">
@@ -56,7 +97,7 @@ let yearsOld = Math.abs(ageDate.getUTCFullYear() - 1970)
     </header>
 
     <section id="about" class="flex items-center flex-col-reverse md:flex-row">
-      <div class="flex-1 flex justify-center items-center">
+      <div class="hidden flex-1 lg:flex justify-center items-center">
         <LanguagesSprites />
       </div>
 
@@ -90,52 +131,9 @@ let yearsOld = Math.abs(ageDate.getUTCFullYear() - 1970)
 
     <section id="blog" class="flex flex-col items-center justify-center">
       <h3 class="text-4xl font-medium">_blog</h3>
-
       <BlogPostList limit={3} />
-
-      <a href="/blog/" class="btn-primary mt-12 block">See more blog posts</a>
+      <a href="/blog/" class="btn-primary text-2xl block py-16">See more blog posts</a>
     </section>
     <ContactForm />
   </div>
 </BaseWrapper>
-
-<style>
-  section {
-    margin: 8rem 0;
-  }
-
-  @media screen and (min-width: 668px) {
-    section {
-      margin: 12rem 0;
-    }
-  }
-
-  section:last-of-type {
-    margin-top: 12rem;
-    margin-bottom: 0;
-  }
-
-  .icon svg {
-    width: 1rem;
-    height: 1rem;
-  }
-
-  .showcase {
-    max-width: calc(4 * 4rem + 3 * 4rem);
-  }
-
-  .showcase svg {
-    width: 4rem;
-    height: 4rem;
-  }
-
-  .hover {
-    @apply hover:text-gray-200;
-  }
-
-  .text-gradient {
-    background: -webkit-linear-gradient(90deg, #a478e8 0%, #3b82f6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-</style>

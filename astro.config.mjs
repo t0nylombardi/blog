@@ -1,14 +1,24 @@
 import react from '@astrojs/react';
 import { defineConfig } from 'astro/config';
 import netlify from '@astrojs/netlify/functions';
-
 import tailwind from "@astrojs/tailwind";
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
   output: 'hybrid',
   adapter: netlify(),
-  integrations: [react(), tailwind()],
+  integrations: [react(), tailwind(), icon({
+      include: {
+        bi: ["*"],
+        emojione: ["*"],
+        feather: ["*"],
+        logos: ["*"],
+        mdi: ["*"],
+        'vscode-icons': ["*"],
+
+      },
+    })],
   server: {
     port: 3031
   },
@@ -26,6 +36,7 @@ export default defineConfig({
     }
   }
 });
+
 devOptions: {
   tailwindConfig: './tailwind.config.js';
 }

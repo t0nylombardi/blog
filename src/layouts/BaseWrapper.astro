@@ -1,5 +1,4 @@
 ---
-import { Sprite } from 'astro-icon'
 import { SEO } from 'astro-seo'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../constants'
 import BaseHead from '../components/BaseHead.astro'
@@ -17,7 +16,7 @@ import { ViewTransitions } from 'astro:transitions'
       openGraph={{
         basic: {
           title: SITE_TITLE ,
-          type: "website",
+          type: "image/svg+xml",
           image: "https://www.t0nylombardi.dev/amoji_avatar.svg",
         }
       }}
@@ -47,12 +46,10 @@ import { ViewTransitions } from 'astro:transitions'
     <ViewTransitions />
   </head>
   <body class="bg-[#232339]">
-    <Sprite.Provider>
       <Nav />
       <div id="show-bg" class="relative"></div>
       <div id="bg-gradient" class="relative"></div>
       <slot />
       <Footer />
-    </Sprite.Provider>
   </body>
 </html>

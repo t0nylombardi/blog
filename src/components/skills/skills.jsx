@@ -1,18 +1,19 @@
-import { animated } from 'react-spring';
+import { useSpring, easeInElastic, animated } from 'react-spring';
 import { SkillsWeb } from '../../constants/resume';
 
 
 const SkillProgress = ({ percent, skillname }) => {
+  const props = useSpring({
+    width: `${percent}%`,
+    config: { duration: 2000, easing: easeInElastic },
+  });
 
   return (
       <div>
         <div className="relative pt-1 text-gray-100">
           <div>{skillname}</div>
           <div className={'progressbar'}>
-            <animated.div
-              className={'progressbarprg'}
-              style={{width: `${percent}%`}}
-            />
+            <animated.div className={'progressbarprg'} style={props} />
           </div>
 
           <style>{`
