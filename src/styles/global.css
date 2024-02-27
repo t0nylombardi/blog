@@ -11,17 +11,33 @@ html {
 }
 
 article p {
-  font-size: 1rem;
-  margin: 1rem auto;
+  @apply text-lg md:text-2xl my-6 mx-auto font-thin;
+}
+
+article p:has(img) {
+  @apply flex justify-center;
+}
+
+article p a {
+  @apply text-indigo-500;
+}
+
+article img {
+  @apply mx-auto mb-12;
+}
+
+article hr {
+    --n:3;
+    width: 8rem;
+    height:5px;
+    margin:4rem auto;
+    border: none;
+    background:radial-gradient(circle closest-side,#EAF6F6 98%,#0000) 0/calc(100%/var(--n)) 100%;
 }
 
 article pre {
   margin: 2rem auto;
   padding: 1rem 2.5rem;
-}
-
-article p a {
-  @apply text-indigo-500  font-bold;
 }
 
 article ul {
@@ -76,6 +92,15 @@ article .copy-code {
 
 article .copy-code:hover {
   background-color: #312e81;
+}
+
+article blockquote {
+  @apply flex justify-center mx-4 mb-12 md:mx-20 lg:mx-32;
+}
+
+article blockquote p {
+  @apply inline text-gray-400 text-lg md:text-2xl font-thin;
+  display: inline;
 }
 
 @media (min-width: 640px) {
