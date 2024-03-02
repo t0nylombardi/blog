@@ -105,39 +105,30 @@ article blockquote p {
 
 @media (max-width: 640px) {
   article p {
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     margin: 1rem auto;
   }
 
-  article :global(h1) {
-    font-size: 0.9rem;
+  article h1 {
+    font-size: 1rem;
     margin: 1rem auto;
-  }
-
-  article :global(h3) {
-    font-size: 1.1rem;
-    margin: 1rem auto;
-  }
-
-  h1 {
-    @apply text-6xl;
   }
 
   article h2 {
-    @apply text-[0.8rem] font-bold;
+    @apply text-[1rem] font-bold;
   }
 
   article h3 {
-    @apply text-[0.6rem] font-bold;
+    @apply text-[0.8rem] font-bold;
   }
 
   .astro-code {
     @apply py-[0.5rem]  px-[0.5rem] my-4;
-    line-height: 0.3rem;
+    line-height: 0.8rem;
   }
 
   .line {
-    @apply text-[0.4rem];
+    @apply text-[0.8rem];
   }
 
 

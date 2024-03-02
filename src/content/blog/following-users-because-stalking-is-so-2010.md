@@ -5,13 +5,11 @@ heroImage: 'https://images.unsplash.com/photo-1606323516801-54354ac53b16'
 image: 'https://images.unsplash.com/photo-1606323516801-54354ac53b16'
 originalDatePublished:
 description: 'Adding Some Social Stalking Flair with follow/unfollow users'
-author: 'Anthony "The Code Whisperer" Lombardi'
+author: 'Anthony Lombardi'
 categories: [ruby, rails]
 tags: [ruby, social network]
 draft: false
 ---
-
-## How to Become a Professional Social Stalker with Ruby on Rails
 
 In the world of social networking, being able to keep tabs on your friends, favorite influencers, and the occasional ex is practically an Olympic sport. So why not embrace it and learn how to implement follow/unfollow functionality in your Ruby on Rails app? Let's dive into the wonderfully creepy world of user stalking and build something truly captivating.
 
