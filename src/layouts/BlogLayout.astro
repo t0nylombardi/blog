@@ -63,17 +63,17 @@ const {title, description, date, originalDatePublished, heroImage, author} = Ast
       <main class="overflow-auto">
         <div class="container mx-auto overflow-auto">
           <div class="flex flex-col text-center w-full mt-10">
-            <h1 class="text-[2rem] md:text-[4.5rem] py-4 font-medium title-font text-gray-100">
+            <h1 class="text-[1.5rem] md:text-[4.5rem] py-4 font-medium title-font text-gray-100">
               {title}
             </h1>
             <div class="m-4 text-gray-100 flex justify-center">
-              <h2 class="text-[1rem] md:text-[1.5rem] w-full font-normal ">{description}</h2>
+              <h2 class="text-[0.8rem] md:text-[1.5rem] w-full font-normal ">{description}</h2>
             </div>
-            <h4 class=" text-azure/50 tracking-widest text-sm font-light title-font mb-1">
+            <h4 class=" text-azure/50 tracking-widest text-[0.6rem] md:text-sm font-light title-font mb-1">
               by: {author} on {`date` ? <FormattedDate date={date} /> : `originalDatePublished`}
             </h4>
           </div>
-          <div class="my-16 object-contain object-center">
+          <div class="hidden md:block my-8 md:my-16 object-contain object-center">
             {heroImage && (
               <img
                 class="hidden w-max md:block "
@@ -83,13 +83,14 @@ const {title, description, date, originalDatePublished, heroImage, author} = Ast
             )}
           </div>
         </div>
-        <article class="container-sm mx-auto w-full mt-16 mb-8 px-[4rem] text-gray-100">
+        <article class="container-2xl mx-auto w-full mt-8 mb-8 px-[4rem] text-gray-100">
           <slot />
         </article>
       </main>
     </div>
     <Footer />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-H56C6BEBLS"></script>
+
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}

@@ -103,9 +103,9 @@ article blockquote p {
   display: inline;
 }
 
-@media (min-width: 640px) {
-  article :global(p) {
-    font-size: 0.9rem;
+@media (max-width: 640px) {
+  article p {
+    font-size: 0.5rem;
     margin: 1rem auto;
   }
 
@@ -123,30 +123,57 @@ article blockquote p {
     @apply text-6xl;
   }
 
-  h2 {
-    @apply text-5xl font-medium;
+  article h2 {
+    @apply text-[0.8rem] font-bold;
   }
 
-  h3 {
-    @apply text-3xl font-medium;
+  article h3 {
+    @apply text-[0.6rem] font-bold;
   }
 
-  h4 {
-    font-weight: 700;
-    font-size: 1.5rem;
+  .astro-code {
+    @apply py-[0.5rem]  px-[0.5rem] my-4;
+    line-height: 0.3rem;
   }
 
-  h5 {
-    font-weight: 700;
-    font-size: 1.5rem;
+  .line {
+    @apply text-[0.4rem];
   }
 
-  h6 {
-    font-weight: 700;
-    font-size: 1.5rem;
-  }
 
   btn {
     @apply flex justify-center
   }
+
+  article .copy-code {
+    padding: 0.1rem 0.2rem;
+    font-size: 0.4rem;
+    line-height: 1rem;
+  }
+
+  article table {
+    @apply table-auto;
+  }
+
+  article table thead {
+    @apply text-white text-[0.5rem] font-bold text-left;
+  }
+
+  article table tbody tr td {
+    @apply text-[0.3rem] font-thin;
+  }
+
+  article ul {
+    padding: 0.2rem 1rem;
+  }
+
+  article ul li {
+    @apply text-[0.5rem] font-thin px-2;
+  }
+
+  article img {
+    @apply mx-auto mb-4;
+    width: 100%;
+  }
+
 }
