@@ -3,7 +3,7 @@ title: All you need is love
 date: '2014-11-18'
 heroImage: 'https://images.unsplash.com/photo-1584907797065-0bbcaf9c489b'
 originalDatePublished: '2014-11-18'
-description: 'My now wife aded me to make some vows for our wedding. I thought I would merge the two loves together and wrote this little code poem. The original was written in PHP.'
+description: 'My now wife asked me to make some vows for our wedding. I thought I would merge the two loves together and wrote this little code poem.'
 author: 'Anthony Lombardi'
 image: 'https://images.unsplash.com/photo-1584907797065-0bbcaf9c489b'
 categories: [ruby]
@@ -11,10 +11,15 @@ tags: [ruby]
 draft: false
 ---
 
-My now wife asked me to make some vows for our wedding. I thought I would merge the my two loves together and wrote this little code poem. The original was written in PHP(yuk!).
+
+So, picture this: there I am, standing at the altar, nerves kicking in like a freight train, and my beautiful, amazing, now-wife asks me to drop some vows. Now, most guys would go for the standard "I promise to love you forever" spiel, but not me. Oh no, I had to bring a little flair to the table.
+
+I whipped out my laptop, fired up some Ruy (yeah, I know, not exactly Shakespeare, but hey, it's my thing), and penned a code poem that merged my two loves: her and, well, coding.
+
+It went a little something like this:
 
 ```ruby
-#all you need is love
+# all you need is love
 require 'date'
 require 'love'
 
@@ -32,3 +37,5 @@ begin
   end
 end while death(status) != nil
 ```
+
+And let me tell you, the look on her face when I dropped that poetic PHP bombshell? Priceless. That's just how I roll, folks. Mixing romance with a dash of geekiness, because why the heck not?

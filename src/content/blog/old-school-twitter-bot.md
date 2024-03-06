@@ -4,14 +4,14 @@ date: '2014-11-18'
 heroImage: 'https://images.unsplash.com/photo-1610878785620-3ab2d3a2ae7b'
 author: 'Anthony Lombardi'
 originalDatePublished: '2014-11-18'
-description: 'I been trying to help a friend gain more attention to his twitter and his music. I had an idea to try to automate search results and reply back to each user with a message.'
+description: 'I had an idea to try to automate search results and reply back to each user with a message on twitter.'
 image: 'https://images.unsplash.com/photo-1610878785620-3ab2d3a2ae7b'
 categories: [ruby]
 tags: [ruby]
 draft: false
 ---
 
-### UPDATE: (2023)
+### UPDATE: (2022)
 X formally know as Twitter no longer allows you to use their api freely and they're much more strict about which apps are allowed to use their api.
 
  ---
@@ -20,11 +20,15 @@ I been trying to help a friend gain more attention to his twitter and his music.
 
 First was twitter gem:
 
-`sudo gem install twitter`
+```bash
+sudo gem install twitter
+```
 
 second is tweetstream:
 
-`sudo gem install tweetstream`
+```bash
+sudo gem install tweetstream
+```
 
 The Twitter gem has streaming aspects in their latest version 5.8.0 say its experimental so I didn’t use it. This is a simple simple bot to run. The main hurtle is to tweet to users that are tweeting about my search field, is that I needed not to get caught by twitter.
 
