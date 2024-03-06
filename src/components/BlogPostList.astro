@@ -21,7 +21,7 @@ if (limit) posts = posts.slice(0, limit)
       posts.length < 1 ? (
         <h2 class="mt-6 text-center text-8xl text-[#6d6d8e]">Coming Soon</h2>
       ) : (
-        <div class="mt-12 flex w-full flex-col gap-y-16 justify-between md:flex-row md:flex-wrap">
+        <div class="px-16 mt-12 flex w-full flex-col gap-x-8 justify-between md:flex-row md:flex-wrap">
           {posts.map((post) => {
             const {title, image, tags, author, date, description} = post.data
             const url = '/' + post.collection + '/' + post.slug

@@ -23,16 +23,16 @@ const FormattedDate = (date: Date) => {
 const {link, image, tags, title, description, author, date, slug} = Astro.props
 ---
 
-<div class="lg:w-[30%] bg-[#232339">
+<div class="lg:w-[30%] py-6 bg-[#232339">
   <a href={link} class="block">
     <img class="w-full h-56 rounded-t-lg object-cover" src={image} />
-    <div class="py-6 px-4 bg-[#27273f] drop-shadow-lg rounded-b-lg">
+    <div class="py-6 px-4 h-[16rem] bg-[#27273f] drop-shadow-lg rounded-b-lg">
       <p class="text-xl font-bold">{title}</p>
       <p class="comment mt-1 text-sm">// Written at: {FormattedDate(date)}</p>
       <p class="mt-2 text-md">{description}</p>
       <div class="mt-2 text-sm text-[#95AAFB]">
-        <a href={link} class="flex items-center cursor-pointer"
-          ><span class="inline-flex w-6 h-6 justify-center items-center bg-[#2A337E] rounded-full">
+        <a href={link} class="flex items-center cursor-pointer">
+          <span class="inline-flex w-6 h-6 justify-center items-center bg-[#2A337E] rounded-full">
             <Icon name="mdi:book-open-blank-variant-outline" class="w-4 h-4" />
           </span>
           <span class="ml-3">Read more</span>
