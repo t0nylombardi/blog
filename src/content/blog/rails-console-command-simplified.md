@@ -15,20 +15,21 @@ draft: false
 ### What are Rails console commands?
 Rails console commands what you can politely ask Rails to execute, like launching a local web server, launch test, and so on.
 
-For example, **rails** new will create a new Rails application.
+For example, `rails` new will create a new Rails application.
 
-Another example: **bin/rails server** to launch your local web server.
+Another example: `bin/rails server` to launch your local web server.
 
-**Side note**: I would advise to use **bin/rails** most of the time. Except maybe to create a new application, because at this moment the command is not available. However, there’s a clever trick for this.
+**Side note**: I would advise to use `bin/rails` most of the time. Except maybe to create a new application, because at this moment the command is not available. However, there’s a clever trick for this.
 
 ### How do I know which command needs a shortcut?
-It’s a matter of feeling. If it’s painful to write **bin/rails db:migrate** again and again, maybe it’s time to define an alias.
+It’s a matter of feeling. If it’s painful to write `bin/rails db:migrate` again and again, maybe it’s time to define an alias.
 
 How do I define a shortcut?
 In linux-based systems, aliases are available through the .bash_aliases or if you are on a newer macOS, it would be [.zshrc](https://ohmyz.sh/) file. Google around if you have never heard about it. It allows you to define shortcuts for the command line, the same way you use acronyms to shorten expressions in your spoken language.
 
 ### My shortcut list
 This is part of my .zshrc for Rails.
+
 ```ruby
 alias br='bin/rails'
 alias bd="./bin/dev"
