@@ -8,10 +8,13 @@ import Footer from '../components/Footer.astro'
 import { ViewTransitions } from 'astro:transitions'
 
 import FormattedDate from '../components/FormattedDate.astro'
+import amoji_avatar from '../../public/amoji_avatar.svg'
 
 type Props = CollectionEntry<'blog'>['data']
 
 const {title, description, date, originalDatePublished, heroImage, author} = Astro.props
+
+console.log("url", Astro.url.href)
 ---
 
 <script>
@@ -58,11 +61,13 @@ const {title, description, date, originalDatePublished, heroImage, author} = Ast
     <SEO
       title={SITE_TITLE}
       description={ SITE_DESCRIPTION }
+      canonical={"https://t0nylombardi.dev"}
       openGraph={{
         basic: {
           title: SITE_TITLE ,
+          url: "https://t0nylombardi.dev",
           type: "image/svg+xml",
-          image: "https://www.t0nylombardi.dev/amoji_avatar.svg",
+          image: amoji_avatar.src,
         }
       }}
       twitter={{
