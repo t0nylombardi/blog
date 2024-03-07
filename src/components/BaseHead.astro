@@ -14,19 +14,24 @@ interface Props {
 const { title, description } = Astro.props
 ---
 
-<!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<meta name="generator" content={Astro.generator} />
+
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
 
 <link
   href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&display=swap"
   rel="stylesheet"
 />
 
-<title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&display=swap" media="print" onload="this.onload=null;this.removeAttribute('media');" fetchpriority="high">
+
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&display=swap">
+</noscript>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H56C6BEBLS"></script>

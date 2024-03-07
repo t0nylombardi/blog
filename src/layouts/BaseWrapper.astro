@@ -5,6 +5,7 @@ import BaseHead from '../components/BaseHead.astro'
 import Footer from '../components/Footer.astro'
 import Nav from '../components/Nav.astro'
 import { ViewTransitions } from 'astro:transitions'
+import amoji_avatar from '../../public/amoji_avatar.svg'
 ---
 
 <!doctype html>
@@ -13,20 +14,20 @@ import { ViewTransitions } from 'astro:transitions'
     <SEO
       title={SITE_TITLE}
       description={ SITE_DESCRIPTION }
+      canonical={"https://www.t0nylombardi.dev"}
       openGraph={{
         basic: {
           title: SITE_TITLE ,
+          url: "https://www.t0nylombardi.dev",
           type: "image/svg+xml",
-          image: "https://www.t0nylombardi.dev/amoji_avatar.svg",
+          image: amoji_avatar.src,
         }
       }}
       twitter={{
         creator: "@t0nylombardi"
       }}
       extend={{
-        // extending the default link tags
         link: [{ rel: "icon", href: "/favicon/favicon.ico" }],
-        // extending the default meta tags
         meta: [
           { name: "twitter:image", content: "https://pbs.twimg.com/profile_images/498278137092796416/FtXRi2RG_400x400.jpeg" },
           { name: "twitter:title", content: "Anthony Lombardi" },
