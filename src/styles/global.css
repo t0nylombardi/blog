@@ -94,6 +94,12 @@ article .copy-code:hover {
   background-color: #312e81;
 }
 
+article code {
+  @apply bg-[#1a1b26] text-white py-1;
+  font-size: 1.5rem;
+  border-radius: 0.25rem;
+}
+
 article blockquote {
   @apply flex justify-center mx-4 mb-12 md:mx-20 lg:mx-32;
 }
