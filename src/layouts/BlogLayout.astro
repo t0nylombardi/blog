@@ -13,7 +13,7 @@ import amoji_avatar from '../../public/amoji_avatar.svg'
 type Props = CollectionEntry<'blog'>['data']
 
 const {title, description, date, originalDatePublished, heroImage, author} = Astro.props
-
+const currentPath = Astro.url.pathname;
 console.log("url", Astro.url.href)
 ---
 
@@ -59,15 +59,15 @@ console.log("url", Astro.url.href)
 <html lang="en">
   <head>
     <SEO
-      title={SITE_TITLE}
-      description={ SITE_DESCRIPTION }
-      canonical={"https://t0nylombardi.dev"}
+      title={title}
+      description={ description }
+      canonical={currentPath}
       openGraph={{
         basic: {
-          title: SITE_TITLE ,
-          url: "https://t0nylombardi.dev",
+          title: title ,
+          url: currentPath,
           type: "image/svg+xml",
-          image: amoji_avatar.src,
+          image: heroImage ? heroImage : amoji_avatar.src,
         }
       }}
       twitter={{
@@ -78,8 +78,6 @@ console.log("url", Astro.url.href)
         meta: [
           { name: "twitter:image", content: heroImage },
           { name: "twitter:image:src", content: heroImage },
-          { name: "twitter:image:width", content: "1200" },
-          { name: "twitter:image:height", content: "630" },
           { name: "twitter:image:alt", content: "Anthony Lombardi" },
           { name: "twitter:title", content: "Anthony Lombardi" },
           { name: "twitter:description", content: description.substring(0, 200) },
