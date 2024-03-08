@@ -10,6 +10,10 @@ const {limit} = Astro.props
 
 let posts = await getCollection('blog')
 posts = posts.filter((post) => !post.data.draft)
+posts = posts.filter((post) => {
+  const isScheduled = new Date(post.data.date).getTime() > Date.now();
+  return !isScheduled;
+});
 posts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
 
 if (limit) posts = posts.slice(0, limit)

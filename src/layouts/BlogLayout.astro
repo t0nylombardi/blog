@@ -6,7 +6,7 @@ import BaseHead from '../components/BaseHead.astro'
 import Nav from '../components/Nav.astro'
 import Footer from '../components/Footer.astro'
 import { ViewTransitions } from 'astro:transitions'
-
+import {Icon} from 'astro-icon/components'
 import FormattedDate from '../components/FormattedDate.astro'
 import amoji_avatar from '../../public/amoji_avatar.svg'
 
@@ -122,6 +122,13 @@ console.log("url", Astro.url.href)
         </div>
         <article class="w-full mt-8 mb-8 px-[1.5rem] md:px-[4rem] text-gray-100">
           <slot />
+          <div class="mt-4 md:mt-[8rem]">
+            <p class="text-[1rem] md:text-[1.5rem]">
+              If you liked this article, please consider
+              <a href="https://www.buymeacoffee.com/t0nylombardi" class="hover:underline hover:cursor-pointer"> buying me a coffee</a> <Icon name="vscode-icons:file-type-coffeescript" class="w-8 h-8 mx-2 inline-block" />
+            </p>
+            <p class="text-[1rem] md:text-[1.5rem]">Cheers!</p>
+          </div>
         </article>
       </main>
     </div>
