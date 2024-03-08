@@ -59,6 +59,8 @@ article h1 {
 article h2 {
   font-weight: 700;
   font-size: 2rem;
+  padding: 4rem 0 0 0;
+
 }
 
 article h3 {
