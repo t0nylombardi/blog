@@ -12,12 +12,12 @@ draft: false
 ---
 
 
-Hey there, fellow web aficionados! Ever dreamed of crafting web applications at warp speed while sipping on a fancy beverage? Well, strap in because I'm about to take you on a joyride through the marvelous world of Ruby on Rails! Picture this: you, your laptop, and the power of Ruby on Rails at your fingertips. Let's dive in, shall we?
+Hey there, fellow web aficionados! Let's talk 2024 – the year where Ruby on Rails (Rails) refuses to fade into the digital sunset, despite the shiny new toys trying to steal their thunder. Here's the lowdown, straight from the source.
 
 
 ## Origins of Ruby On Rails
 
-Alright, picture this: 20 odd years ago, a young, ambitious programmer named David Heinemeier Hansson(DHH) sets out to conquer the web development world. Armed with a keen mind and a passion for simplicity, he creates Ruby On Rails—a web framework that's as sleek and stylish as a tailored suit on the red carpet. Drawing inspiration from his work on the Basecamp project, DHH crafts Rails with the goal of making web development not just powerful, but also pleasurable. And boy, did he succeed.
+Alright, picture this: 20 odd years ago, a young, ambitious programmer named David Heinemeier Hansson(DHH) sets out to conquer the web development world. While working on the project management tool Basecamp at the web application company 37signals. Armed with a keen mind and a passion for simplicity, he creates Ruby On Rails—a web framework that's as sleek and stylish as a tailored suit on the red carpet. Rails was first released as open source in July 2004, and it has since become a cornerstone of web application development, influencing many other frameworks and languages. Rails has the goal of making web development not just powerful, but also pleasurable. And boy, did he succeed.
 
 Ruby on Rails quickly gains traction, attracting a legion of devoted followers who are drawn to its elegance and efficiency. From its early days powering the burgeoning startup scene to its current status as a staple of the tech industry, Rails has come a long way. Along the journey, it has evolved and matured, incorporating new features and improvements while staying true to its core principles.
 
@@ -27,25 +27,43 @@ Ruby on Rails quickly gains traction, attracting a legion of devoted followers w
 
 ![charm](/public/blog/ruby-on-rails-2024/charm.png)
 
-Why choose Ruby On Rails, you ask? Well, imagine having the power to build robust, scalable web applications in record time. It's more than just a framework; it's a philosophy. With its elegant syntax and convention-over-configuration approach, Rails lets you focus on what truly matters—creating kick-ass digital experiences without getting bogged down in the nitty-gritty details. Ruby is a charming, elegant language, and Rails is the powerhouse framework that brings it all together. Together, they form a dynamic duo that makes web development not just efficient, but downright enjoyable. So whether you're a seasoned veteran or a wide-eyed newcomer, Ruby on Rails welcomes you with open arms. It's more than just a framework; it's a community, a philosophy, and a way of life. Lets discover the magic of Ruby on Rails.
+Why choose Ruby On Rails, you ask? Well, imagine having the power to build robust, scalable web applications in record time. It's more than just a framework; it's a philosophy. With its elegant syntax and convention-over-configuration approach, Rails lets you focus on what truly matters—creating kick-ass digital experiences without getting bogged down in the nitty-gritty details. Ruby is a charming, elegant language, and Rails is the powerhouse framework that brings it all together. Together, they form a dynamic duo that makes web development not just efficient, but downright enjoyable. So whether you're a seasoned veteran or a wide-eyed newcomer, Ruby on Rails welcomes you with open arms. It's more than just a framework; it's a community, a philosophy, and a way of life. Let's discover the magic of Ruby on Rails.
 
 
 
 ## The Power of Community
 
-let's not forget the X-factor that sets Rails apart, the community. that surrounds Ruby on Rails. Much like the Avengers assembling to save the world, the Rails community is a force to be reckoned with. From gem libraries to community forums, there's no shortage of resources to help you level up your Rails game. Whether you're seeking advice, troubleshooting a bug, or just geeking out over the latest tech trends, the Rails community has your back.
+let's not forget the X-factor that sets Rails apart, the community. Thousands of developers from every corner of the globe coming together like some sort of coding SEAL Team Six. Take the [2022 Ruby on Rails Community Survey](https://rails-hosting.com/2022/), for example. We're talking 2,660 Rails devs from a whopping 102 countries. That's like a United Nations summit, but with more tacos and fewer suits. This survey isn't just some checkbox exercise; it's a showcase of the global love affair with Rails, highlighting the active chatter about tools, frameworks, and workflows that keeps this community buzzing.
+
+Beyond the official squads and core contributors, there's an army of code warriors out there making Rails better every day. From squashing bugs to writing docs to spreading the Rails gospel, these folks are the unsung heroes of the digital age. And don't even get me started on the Rails Contributors site – it's like the Hall of Fame for coding legends, showcasing the blood, sweat, and tears poured into this framework.
+
+But it doesn't stop there. Oh no, this community's got its fingers in more pies than a bakery on cheat day. We're talking open-source projects, gem libraries – you name it, they've probably built it. Sure, balancing all this with real-world work can feel like juggling chainsaws, but that's just part of the thrill, right?
 
 
 ## Speed, Efficiency, and Agility
 
 ![speed, efficiency, and agility](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTgzZnVtOGtqMjl0bXN5aXN1OTZhdGk0dHI3ZzFqMXB2a3NmNG0zNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6Zth7pE7aPKqAEEM/giphy.gif)
 
-In the fast-paced world of web development, time is of the essence. And let me tell you, folks, Ruby On Rails is the Flash of frameworks. With its built-in tools and conventions, you can go from concept to deployment faster than Deadpool can crack a joke. With Ruby on Rails, you're not just coding; you're soaring through lines of code like a phoenix rising from the ashes. Thanks to its convention over configuration philosophy, you spend less time configuring and more time building features that matter. That's what I call 10x developer productivity, baby!
+Ruby on Rails is renowned for its speed, efficiency, and agility in web application development, thanks to several key features and principles that facilitate rapid development and maintainability:
 
-Need to prototype rapidly? Ruby on Rails has your back. With its scaffolding feature, you can whip up a functional prototype faster than you can say "Hollywood blockbuster." Whether you're sketching out ideas or impressing stakeholders, Rails gets you from concept to reality in record time.
+### Speed and Efficiency
+- **Agile Methodology**: Rails is built on Agile development principles, which breaks down those big tasks into bite-sized chunks. It's like going from climbing Mount Everest to conquering a flight of stairs. With Rails, you can sprint through development cycles in as little as six weeks, saving you time and money.
+- **Fewer Code Writing**: Rails comes with a treasure trove of pre-loaded code libraries, so you're not reinventing the wheel every time you fire up your editor. That means fewer errors, less stress, and more time for coffee breaks.
+- **Principle of DRY (Don't Repeat Yourself)**: Rails adheres to the DRY principle, which encourages avoiding code duplication. So, you're not copy-pasting your way into a tangled mess of spaghetti code. Nah, you're keeping it clean, efficient, and oh-so-sexy.
+- Convention over Configuration: Rails's convention-based approach simplifies configuration, making development faster. Ergo, you spend less time configuring and more time coding like a boss.
+- **Modular Design**: The readability and self-documenting nature of Ruby code, along with RoR's modular design, increases productivity and makes it easier for developers to work on existing projects without extensive documentation 3.
+- **Mature Plugin Architecture**: The extensive library of Gems (libraries) available in the Rails community allows developers to extend or override any part of the Rails framework, accelerating development and maintenance time 3.
+
+### Agility
+- **Rapid Prototyping**: Rails's capability for rapid prototyping is a critical advantage for your unicorn startups, enabling them to develop and refine their ideas swiftly. This agility allows for quick iterations, adapting to market changes and staying ahead of the competition. You've got an idea? Boom! Rails turns it into reality faster than a cheetah in a hotdog costume.
+- **Cross-Platform Compatibility**: Rails applications can run seamlessly on multiple platforms and cloud providers, offering businesses the flexibility and adaptability they need as they grow and expand.
+- **Enhanced Developer Productivity**: Rails's developer-friendly syntax and adherence to principles like Convention over Configuration (CoC) and DRY streamline development, empowering developers to focus on innovative solutions rather than complexities.
+- **Scalability and Reliability**: Rails provides a cost-effective approach to scalability, incorporating tools like load balancing and database optimization. Its reputation for stability and reliability makes it a preferred choice for mission-critical applications.
 
 
 ## ORM: Mapping databases
+
+For the layman, An ORM, or Object-Relational Mapping, is a programming technique used to convert data between incompatible type systems: object-oriented programming languages and relational databases. In Ruby on Rails, an ORM called ActiveRecord is used.
 
 ActiveRecord is like having a loyal sidekick who does all the heavy lifting when it comes to database interactions. With ActiveRecord, you can manipulate your database with ease, whether you're querying, updating, or migrating. It's database magic, straight out of the box.
 
@@ -86,9 +104,13 @@ As your web empire grows, so too will your need for scalability. Fear not, intre
 
 ## Job Opportunities: The Future of Web Development
 
-As of February 2022, Ruby on Rails remained a popular framework for web development according to the [TIOBE INDEX](https://www.tiobe.com/tiobe-index/), particularly for startups and companies looking to build scalable web applications quickly. In the ever-evolving landscape of technology, it’s important to stay ahead of the curve. Rails has a long healthy history behind many large companies(AirBnB, Shopify, Github) so the future of Rails opportunities looks brighter than ever. In a world where tech talent is worth its weight in gold, Rails opens doors to a treasure trove of career opportunities. Companies are clamoring for Rails developers who can hit the ground running and deliver results with style.
+You know what's hotter than a chimichanga? The job market's love affair with Ruby on Rails. More and more job postings are shouting from the rooftops about their undying affection for Ruby on Rails. Programming languages aren't like your Aunt Mildred's fruitcake that gets shoved in the back of the pantry and forgotten about. Nah, they're more like the spice of the digital world, and Ruby? Well, Ruby's holding its own. According to [Stack Overflow's Developer Survey](https://insights.stackoverflow.com/survey) Ruby is sitting pretty in 16th place out of 51. Not too shabby, right?
 
-So if you're an experienced dev, you're probably cruising along just fine in the job market. But hey, for all you fresh faces itching to dive into the world of web development, listen up. Rails is like that shiny new toy everyone wants to play with. So yeah, there might just be a bunch of junior roles popping up like mushrooms after a rainstorm. But hey, no guarantees. Time's gotta do its thing and tell us how this whole situation pans out.
+![Stack Overflow's Developer Survey](/public/blog/ruby-on-rails-2024/graph-bg.png)
+
+And get this, in 2023, Ruby actually climbed up a few rungs on that ladder compared to previous years. So, rumors about Ruby kicking the bucket? As believable as me winning an Oscar for playing a potato in a rom-com. Sure, there might've been a slight dip in Ruby on Rails's popularity over the last decade, but even the stock market has their off days, right? Rails remains a popular framework for web development, particularly for startups and companies looking to build scalable web applications quickly. In the ever-evolving landscape of technology, it’s important to stay ahead of the curve. Rails has a long healthy history behind many large companies(Airbnb, Shopify, Netflix, and Stripe) so the future of Rails opportunities looks brighter than ever. In a world where tech talent is worth its weight in gold, Rails opens doors to a treasure trove of career opportunities. Companies are clamoring for Rails developers who can hit the ground running and deliver results with style.
+
+So if you're an experienced dev, you're probably cruising along just fine in the job market. For all you fresh faces itching to dive into the world of web development, listen up. Rails is like that shiny toy everyone wants to play with. So yeah, there might just be a bunch of junior roles popping up like mushrooms after a rainstorm. But hey, no guarantees. Time's gotta do its thing and tell us how this whole situation pans out.
 
 Now, let's talk about the big, bad AI wave crashing down on us all. Yeah, it's got us all wondering about job security. Will our gigs get snatched up by robots? Well, maybe not snatched, but you gotta up your game, amigo. Embrace the AI mojo. Life is a river, you either ride with the current or stand still and get left behind. It's the name of the game in this brave new world.
 
@@ -101,6 +123,12 @@ Cross-platform compatibility? Check. Whether you're deploying on Linux, macOS, o
 
 ## Conclusion
 
-Alright, so let's wrap this up in a bow, shall we? Ruby on Rails isn't just your run-of-the-mill web framework; it's the caped crusader of the coding world, swooping in to save the day with its unrivaled productivity, scalability, and flexibility. It's like having a Swiss Army knife in your toolkit, ready to tackle any challenge that comes your way. With Rails by your side, the possibilities are endless. From sleek, user-friendly interfaces to robust, data-driven applications, Rails has everything you need to make your coding dreams a reality. 
 
-But hey, building something amazing isn't just about lines of code; it's about the thrill of creation, the satisfaction of seeing your vision come to life. With Rails as your trusty sidekick, you're not just coding; you're embarking on an epic adventure filled with twists, turns, and triumphs. So strap in, my friends, and get ready for the ride of a lifetime. Your web adventure awaits, and Ruby on Rails is here to make sure it's one for the history books.
+OK Time to wrap this up tighter than an accountant during tax season! Building something amazing isn't just about lines of code; it's about the thrill of creation, the satisfaction of seeing your vision come to life. With Rails as your trusty sidekick, you're not just coding; you're embarking on an epic adventure filled with twists, turns, and triumphs. Think of it this way: It's like the classic car you find tucked away in a garage – still turning heads and kicking asphalt. They've got this powerful, mature framework that's like the Swiss Army knife of coding. Need a solution? Boom, there's probably a gem for that. And don't even get me started on the community – it's like a never-ending party where everyone's a coding rockstar.
+
+Now, before you jump on the Ruby bandwagon, let's address the elephant in the room: the learning curve. Yeah, it's there, but so is the satisfaction of mastering a craft. And sure, there might be some performance limitations, but with Ruby 3.2 and beyond things are looking brighter.
+
+So, should you choose Ruby && Ruby on Rails for your project? Well, that depends on a few factors – like your project's needs, your team's skills, and how much tacos you've had. But one thing's for sure: Ruby's simplicity, flexibility, and downright charm make it a programming language worth wrapping your brain around in 2024.
+
+![here's to you](https://media.giphy.com/media/14cDsqOkks6O8U/giphy.gif)
+

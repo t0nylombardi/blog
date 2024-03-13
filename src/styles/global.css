@@ -41,6 +41,7 @@ article pre {
 }
 
 article ul {
+  font-size: large;
   margin: 0.5rem auto;
   padding: 1rem 2.5rem;
   @apply list-disc;
@@ -97,7 +98,7 @@ article .copy-code:hover {
 }
 
 article code {
-  @apply bg-[#1a1b26] text-white py-1;
+  @apply bg-[#282A36] text-white py-1;
   font-size: 1.5rem;
   border-radius: 0.25rem;
 }
