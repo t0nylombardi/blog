@@ -126,36 +126,20 @@ console.log('url', Astro.url.href)
             <p class='text-[1rem] md:text-[1.5rem]'>Cheers!</p>
           </div>
         </article>
-        <script
-          src='https://giscus.app/client.js'
-          data-repo='t0nylombardi/blog'
-          data-repo-id='R_kgDOH4y3ig'
-          data-category='Blog Post Comments'
-          data-category-id='DIC_kwDOH4y3is4Cd-rY'
-          data-mapping='url'
-          data-strict='0'
-          data-reactions-enabled='1'
-          data-emit-metadata='0'
-          data-input-position='top'
-          data-theme='/public/comments.css'
-          data-lang='en'
-          data-loading='lazy'
-          crossorigin='anonymous'
-          async></script>
       </main>
+
+      <Footer />
+      <script async src='https://www.googletagmanager.com/gtag/js?id=G-H56C6BEBLS'></script>
+
+      <script>
+        window.dataLayer = window.dataLayer || []
+        function gtag() {
+          dataLayer.push(arguments)
+        }
+        gtag('js', new Date())
+
+        gtag('config', 'G-H56C6BEBLS')
+      </script>
     </div>
-
-    <Footer />
-    <script async src='https://www.googletagmanager.com/gtag/js?id=G-H56C6BEBLS'></script>
-
-    <script>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
-
-      gtag('config', 'G-H56C6BEBLS')
-    </script>
   </body>
 </html>
