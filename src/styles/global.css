@@ -99,7 +99,7 @@ article .copy-code:hover {
 
 article code {
   @apply bg-[#282A36] text-white py-1;
-  font-size: 1.5rem;
+  font-size: 1rem;
   border-radius: 0.25rem;
 }
 
