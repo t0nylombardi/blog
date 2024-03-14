@@ -1,11 +1,11 @@
 ---
-import { SEO } from 'astro-seo'
-import { SITE_TITLE, SITE_DESCRIPTION } from '../constants'
-import type { CollectionEntry } from 'astro:content'
+import {SEO} from 'astro-seo'
+import {SITE_TITLE, SITE_DESCRIPTION} from '../constants'
+import type {CollectionEntry} from 'astro:content'
 import BaseHead from '../components/BaseHead.astro'
 import Nav from '../components/Nav.astro'
 import Footer from '../components/Footer.astro'
-import { ViewTransitions } from 'astro:transitions'
+import {ViewTransitions} from 'astro:transitions'
 import {Icon} from 'astro-icon/components'
 import FormattedDate from '../components/FormattedDate.astro'
 import amoji_avatar from '../../public/amoji_avatar.svg'
@@ -13,8 +13,8 @@ import amoji_avatar from '../../public/amoji_avatar.svg'
 type Props = CollectionEntry<'blog'>['data']
 
 const {title, description, date, originalDatePublished, heroImage, author} = Astro.props
-const currentPath = Astro.url.pathname;
-console.log("url", Astro.url.href)
+const currentPath = Astro.url.pathname
+console.log('url', Astro.url.href)
 ---
 
 <script>
@@ -55,38 +55,37 @@ console.log("url", Astro.url.href)
   }
 </script>
 
-<!doctype html>
-<html lang="en">
+<html lang='en'>
   <head>
     <SEO
       title={title}
-      description={ description }
+      description={description}
       canonical={currentPath}
       openGraph={{
         basic: {
-          title: title ,
+          title: title,
           url: currentPath,
-          type: "image/svg+xml",
+          type: 'image/svg+xml',
           image: heroImage ? heroImage : amoji_avatar.src,
-        }
+        },
       }}
       twitter={{
-        creator: "@t0nylombardi"
+        creator: '@t0nylombardi',
       }}
       extend={{
-        link: [{ rel: "icon", href: "/favicon/favicon.ico" }],
+        link: [{rel: 'icon', href: '/favicon/favicon.ico'}],
         meta: [
-          { name: "twitter:image", content: heroImage },
-          { name: "twitter:image:src", content: heroImage },
-          { name: "twitter:image:alt", content: "Anthony Lombardi" },
-          { name: "twitter:title", content: "Anthony Lombardi" },
-          { name: "twitter:description", content: description.substring(0, 200) },
-          { name: "twitter:card", content: "summary" },
-          { name: "twitter:site", content: "@t0nylombardi" },
-          { name: "twitter:creator", content: "@t0nylombardi" },
-          { name: "twitter:creator:id", content: "t0nylombardi" },
-          { name: "twitter:site:id", content: "t0nylombardi" },
-          { name: "twitter:domain", content: "t0nylombardi.dev" },
+          {name: 'twitter:image', content: heroImage},
+          {name: 'twitter:image:src', content: heroImage},
+          {name: 'twitter:image:alt', content: 'Anthony Lombardi'},
+          {name: 'twitter:title', content: 'Anthony Lombardi'},
+          {name: 'twitter:description', content: description.substring(0, 200)},
+          {name: 'twitter:card', content: 'summary'},
+          {name: 'twitter:site', content: '@t0nylombardi'},
+          {name: 'twitter:creator', content: '@t0nylombardi'},
+          {name: 'twitter:creator:id', content: 't0nylombardi'},
+          {name: 'twitter:site:id', content: 't0nylombardi'},
+          {name: 'twitter:domain', content: 't0nylombardi.dev'},
         ],
       }}
     />
@@ -94,55 +93,69 @@ console.log("url", Astro.url.href)
     <ViewTransitions />
   </head>
 
-  <body class="bg-blog-blue">
+  <body class='bg-blog-blue'>
     <Nav />
-    <div class="mb-10 max-w-screen-2xl container-2xl mx-auto bg-blog-blue py-20">
-      <main class="overflow-auto">
-        <div class="container mx-auto overflow-auto">
-          <div class="flex flex-col text-center w-full mt-10">
-            <h1 class="text-[1.5rem] md:text-[4.5rem] py-4 font-medium title-font text-gray-100">
+    <div class='mb-10 max-w-screen-2xl container-2xl mx-auto bg-blog-blue py-20'>
+      <main class='overflow-auto'>
+        <div class='container mx-auto overflow-auto'>
+          <div class='flex flex-col text-center w-full mt-10'>
+            <h1 class='text-[1.5rem] md:text-[4.5rem] py-4 font-medium title-font text-gray-100'>
               {title}
             </h1>
-            <div class="m-4 text-gray-100 flex justify-center">
-              <h2 class="text-[1rem] md:text-[1.5rem] w-full font-thin ">{description}</h2>
+            <div class='m-4 text-gray-100 flex justify-center'>
+              <h2 class='text-[1rem] md:text-[1.5rem] w-full font-thin'>{description}</h2>
             </div>
-            <h4 class=" text-azure/50 tracking-widest px-[5rem] text-[0.6rem] md:text-sm font-light title-font mb-1">
+            <h4 class='text-azure/50 tracking-widest px-[5rem] text-[0.6rem] md:text-sm font-light title-font mb-1'>
               by: {author} on {`date` ? <FormattedDate date={date} /> : `originalDatePublished`}
             </h4>
           </div>
-          <div class="hidden md:block my-8 md:my-16 object-contain object-center">
-            {heroImage && (
-              <img
-                class="hidden w-max md:block "
-                src={heroImage}
-                alt={title}
-              />
-            )}
+          <div class='hidden md:block my-8 md:my-16 object-contain object-center'>
+            {heroImage && <img class='hidden w-max md:block ' src={heroImage} alt={title} />}
           </div>
         </div>
-        <article class="w-full mt-8 mb-8 px-[1.5rem] md:px-[4rem] text-gray-100">
+        <article class='w-full mt-8 mb-8 px-[1.5rem] md:px-[4rem] text-gray-100'>
           <slot />
-          <div class="mt-4 md:mt-[8rem]">
-            <p class="text-[1rem] md:text-[1.5rem]">
+          <div class='mt-4 md:mt-[8rem]'>
+            <p class='text-[1rem] md:text-[1.5rem]'>
               If you liked this article, please consider
-              <a href="https://www.buymeacoffee.com/t0nylombardi" class="hover:underline hover:cursor-pointer"> buying me a coffee</a> <Icon name="vscode-icons:file-type-coffeescript" class="w-8 h-8 mx-2 inline-block" />
+              <a href='https://www.buymeacoffee.com/t0nylombardi' class='hover:underline hover:cursor-pointer'>
+                buying me a coffee</a
+              >
+              <Icon name='vscode-icons:file-type-coffeescript' class='w-8 h-8 mx-2 inline-block' />
             </p>
-            <p class="text-[1rem] md:text-[1.5rem]">Cheers!</p>
+            <p class='text-[1rem] md:text-[1.5rem]'>Cheers!</p>
           </div>
         </article>
+        <script
+          src='https://giscus.app/client.js'
+          data-repo='t0nylombardi/blog'
+          data-repo-id='R_kgDOH4y3ig'
+          data-category='Blog Post Comments'
+          data-category-id='DIC_kwDOH4y3is4Cd-rY'
+          data-mapping='url'
+          data-strict='0'
+          data-reactions-enabled='1'
+          data-emit-metadata='0'
+          data-input-position='top'
+          data-theme='comments.css'
+          data-lang='en'
+          data-loading='lazy'
+          crossorigin='anonymous'
+          async></script>
       </main>
     </div>
+
     <Footer />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H56C6BEBLS"></script>
+    <script async src='https://www.googletagmanager.com/gtag/js?id=G-H56C6BEBLS'></script>
 
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
 
-      gtag('config', 'G-H56C6BEBLS');
+      gtag('config', 'G-H56C6BEBLS')
     </script>
   </body>
 </html>
-
-
