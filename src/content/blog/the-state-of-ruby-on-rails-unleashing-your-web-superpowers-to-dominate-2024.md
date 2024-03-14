@@ -23,7 +23,7 @@ Picture this: 20-odd years ago, a young, ambitious programmer named David Heinem
 
 ## The Charm of Ruby On Rails ⚡
 
-![charm](/public/blog/ruby-on-rails-2024/charm.png)
+![charm](/blog/ruby-on-rails-2024/charm.png)
 
 Why choose Ruby On Rails, you ask? Well, imagine having the power to build robust, scalable web applications in record time. It's more than just a framework; it's a philosophy. With its elegant syntax and convention-over-configuration approach, Rails lets you focus on what truly matters—creating kick-ass digital experiences without getting bogged down in the nitty-gritty details. Ruby is a charming, elegant language, and Rails is the powerhouse framework that brings it all together. Together, they form a dynamic duo that makes web development not just efficient but downright enjoyable. So whether you're a seasoned veteran or a wide-eyed newcomer, Ruby on Rails welcomes you with open arms. It's more than just a framework; it's a community, a philosophy, and a way of life. Let's discover the magic of Ruby on Rails.
 
