@@ -32,11 +32,12 @@ export const Projects = [
   }
 ];
 
-export const AboutMe = `A self-taught meticulous & motivated Full Stack Developer with 10+ years of hands-on
-  experience particularly in Ruby and Ruby on Rails. I have worked on Ruby on Rails e-commerce architecture,
-  breaking down monoliths, working on microservices, helping with devops, and leading a team through the
-  full stack life cycle. From my first professional job as a Jr developer, My journey has been driven by an
-  insatiable curiosity for emerging technologies. With a passion for staying at the forefront of innovation,
-  I'm excited to contribute to this dynamic field and be a part of its remarkable journey. I am also committed
-  to actively learning from every experience that I have. During every job and position I have held, I learned
-  about what it takes to succeed in this field, and I've carried that lesson throughout the years as I've worked.`
+export const AboutMe = `A self-taught, meticulous & motivated Full Stack Developer with 10+ years of hands-on experience,
+                        particularly in Ruby and Ruby on Rails. I have worked on Ruby on Rails e-commerce architecture,
+                        breaking down monoliths, working on microservices, helping with DevOps, and leading a team through
+                        the full-stack life cycle. From my first professional job as a junior developer, My journey has been
+                        driven by an insatiable curiosity for emerging technologies. With a passion for staying at the forefront
+                        of innovation, I'm excited to contribute to this dynamic field and participate in its remarkable journey.
+                        I am also committed to actively learning from every experience that I have. During every job and position
+                        I have held, I learned about what it takes to succeed in this field, and I've carried that lesson throughout
+                        the years as I've worked.`

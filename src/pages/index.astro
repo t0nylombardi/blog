@@ -48,84 +48,89 @@ let yearsOld = Math.abs(ageDate.getUTCFullYear() - 1970)
 </style>
 
 <BaseWrapper>
-  <div class="sm:container sm:mx-auto lg:container lg:mx-auto px-4 sm:px-4 md:px-4 py-24 lg:py-40">
-    <header id="hello" class="sm:container sm:mx-auto container mx-auto flex items-center flex-col-reverse md:flex-row w-full">
-      <div class="flex-1 px-4 md:px-0 py-24 lg:py-40">
-        <p class="text-lg font-medium">Hey, I'm</p>
-        <h1 class="text-4xl bold">Anthony Lombardi</h1>
-        <h2 class="text-gradient text-2xl">&gt; Full-Stack Engineer</h2>
-        <div class="font-medium mt-9 flex flex-col space-y-1">
-          <p class="comment">// personal data</p>
+  <div class='sm:container sm:mx-auto lg:container lg:mx-auto px-4 sm:px-4 md:px-4 py-24 lg:py-40'>
+    <header
+      id='hello'
+      class='sm:container sm:mx-auto container mx-auto flex items-center flex-col-reverse md:flex-row w-full'
+    >
+      <div class='flex-1 px-4 md:px-0 py-24 lg:py-40'>
+        <p class='text-lg font-medium'>Hey, I'm</p>
+        <h1 class='text-4xl bold'>Anthony Lombardi</h1>
+        <h2 class='text-gradient text-2xl'>&gt; Full-Stack Engineer</h2>
+        <div class='font-medium mt-9 flex flex-col space-y-1'>
+          <p class='comment'>// personal data</p>
           <p>
-            <span class="text-[#4D5BCE]">let{' '}</span>
-            <span class="text-[#43D9AD]">age</span> =
-            <span id="age" class="text-[#E99287]">{yearsOld}</span>
+            <span class='text-[#4D5BCE]'>let{' '}</span>
+            <span class='text-[#43D9AD]'>age</span> =
+            <span id='age' class='text-[#E99287]'>{yearsOld}</span>
           </p>
           <p>
-            <span class="text-[#4D5BCE]">let{' '}</span>
-            <span class="text-[#43D9AD]">location</span> =
-            <span class="text-[#E99287]">"Westchester, New York"</span>
+            <span class='text-[#4D5BCE]'>let{' '}</span>
+            <span class='text-[#43D9AD]'>location</span> =
+            <span class='text-[#E99287]'>"Westchester, New York"</span>
           </p>
-          <p class="comment pt-4">// list of my social links</p>
+          <p class='comment pt-4'>// list of my social links</p>
           <p>
-            <span class="text-[#4D5BCE]">const{' '}</span>
-            <span class="text-[#43D9AD]">github</span> =
-            <a class="text-[#E99287] hover" href={socials.github}>“{socials.github}”</a>
-          </p>
-          <p>
-            <span class="text-[#4D5BCE]">const{' '}</span>
-            <span class="text-[#43D9AD]">twitter</span> =
-            <a href={socials.twitter} class="text-[#E99287] hover">“{socials.twitter}”</a>
+            <span class='text-[#4D5BCE]'>const{' '}</span>
+            <span class='text-[#43D9AD]'>github</span> =
+            <a class='text-[#E99287] hover' href={socials.github}>“{socials.github}”</a>
           </p>
           <p>
-            <span class="text-[#4D5BCE]">const{' '}</span>
-            <span class="text-[#43D9AD]">Instagram</span> =
-            <a href={socials.instagram} class="text-[#E99287] hover">“{socials.instagram}”</a>
+            <span class='text-[#4D5BCE]'>const{' '}</span>
+            <span class='text-[#43D9AD]'>twitter</span> =
+            <a href={socials.twitter} class='text-[#E99287] hover'>“{socials.twitter}”</a>
+          </p>
+          <p>
+            <span class='text-[#4D5BCE]'>const{' '}</span>
+            <span class='text-[#43D9AD]'>Instagram</span> =
+            <a href={socials.instagram} class='text-[#E99287] hover'>“{socials.instagram}”</a>
           </p>
         </div>
-        <CTA link="resume" />
+        <CTA link='resume' />
       </div>
-      <div class="flex-1 flex justify-center items-center">
-        <img src="/amoji_avatar.svg" />
+      <div class='flex-1 flex justify-center items-center'>
+        <img src='/amoji_avatar.svg' />
       </div>
     </header>
 
-    <section id="about" class="flex items-center flex-col-reverse md:flex-row">
-      <div class="hidden flex-1 lg:flex justify-center items-center">
+    <section id='about' class='flex items-center flex-col-reverse md:flex-row'>
+      <div class='hidden flex-1 lg:flex justify-center items-center'>
         <LanguagesSprites />
       </div>
 
-      <div class="flex-1 mb-8">
-        <h3 class="text-4xl font-medium">_about-me</h3>
-        <p class="comment mt-2">// get a small overview of who i am</p>
-        <p class="mt-9">
+      <div class='flex-1 mb-8'>
+        <h3 class='text-4xl font-medium'>_about-me</h3>
+        <p class='comment mt-2'>// get a small overview of who I am</p>
+        <p class='mt-9'>
           {AboutMe}
         </p>
       </div>
     </section>
 
-    <section id="projects" class="flex flex-col mt-[10rem]">
-      <h3 class="text-4xl font-medium">_projects</h3>
+    <section id='projects' class='flex flex-col mt-[10rem]'>
+      <h3 class='text-4xl font-medium'>_projects</h3>
       <div>
-        <div id="projects-list" class="flex flex-col justify-between w-full mt-12">
-          {Projects.map((project) => (
-            <ProjectCard
-              img={project.img}
-              width={project.width}
-              link={project.link}
-              title={project.title}
-              technologies={project.technologies}
-              description={project.description}
-            />
-          ))}
+        <div id='projects-list' class='flex flex-col justify-between w-full mt-12'>
+          {
+            Projects.map((project) => (
+              <ProjectCard
+                img={project.img}
+                width={project.width}
+                link={project.link}
+                title={project.title}
+                technologies={project.technologies}
+                description={project.description}
+              />
+            ))
+          }
         </div>
       </div>
     </section>
 
-    <section id="blog" class="flex flex-col items-center justify-center">
-      <h3 class="text-4xl font-medium">_blog</h3>
+    <section id='blog' class='flex flex-col items-center justify-center'>
+      <h3 class='text-4xl font-medium'>_blog</h3>
       <BlogPostList limit={3} />
-      <a href="/blog/" class="btn-primary text-2xl block py-16">See more blog posts</a>
+      <a href='/blog/' class='btn-primary text-2xl block py-16'>See more blog posts</a>
     </section>
     <ContactForm />
   </div>
