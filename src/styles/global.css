@@ -38,6 +38,7 @@ article hr {
 article pre {
   margin: 2rem auto;
   padding: 1rem 2.5rem;
+  @apply bg-[#282a36] !important;
 }
 
 article ul {
