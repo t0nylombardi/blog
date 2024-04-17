@@ -85,7 +85,66 @@ JavaScript does the heavy lifting when passing around `this` Most of the time, w
 
 Now, picture this: we've got two scenarios to mull over. First, we've got your "bare" function calls—no frills, no fuss. It's like throwing a dart blindfolded and hoping for a bullseye. But fear not because JavaScript has a trick up its sleeve for handling these situations. Then, we've got calling a function expression that's cozying up as a property of an object. It's like inviting your favorite celebrity over for dinner and hoping they overlook the burnt lasagna. But don't worry, JavaScript's got our back here, too.
 
-## The Execution Context of Methods
+## How to Override Context Like a Boss with *call* and *apply*
+
+Now that I chewed your ear off, `call` and `apply` are more than just methods on functions—they're like the secret sauce that gives us ultimate control. Picture this: you've got a function, and you want to shake things up a bit, maybe switch up the context object. Well, that's where call and apply swoop in to save the day. Remember when we talked about punch cards? Ah, good times. Now, imagine invoking those functions like we always do, but with a twist. We'll throw in some call or apply action and watch the magic unfold. It's like adding a pinch of spice to an already delicious dish—same great taste, but with an extra kick.
+
+```javascript
+const asgardianBrothers = [
+  {
+    firstName: "Thor",
+    familyName: "Odinsson"
+  },
+  {
+    firstName: "Loki",
+    familyName: "Laufeysson-Odinsson"
+  }
+]
+
+function intro(person, line) {
+  return `${person.firstName} ${person.familyName} says: ${line}`
+}
+
+const phrase = "I like this brown drink very much, bring me another!"
+intro(asgardianBrothers[0], phrase) //=> Thor Odinsson says: I like this brown drink very much, bring me another!
+```
+
+Speaking of punching cards, most of you would probably run multiple functions having the same first parameter:
+
+```javascript
+function createTimeInEvent(employee, dateStamp){ /* */ }
+function createTimeOutEvent(employee, dateStamp){ /* */ }
+function hoursWorkedOnDate(employee, soughtDate){ /* */ }
+```
+
+What if we told JavaScript that instead of the record being a parameter, it could be assumed as a context and thus accessible via `this`. To accomplish this, we can use either `call` or `apply`:
+
+```javascript
+function introWithContext(line){
+  return `${this.firstName} ${this.familyName} says: ${line}`
+}
+
+introWithContext.call(asgardianBrothers[0], phrase)
+//=> Thor Odinsson says: I like this brown drink very much, bring me another!
+
+introWithContext.apply(asgardianBrothers[0], [phrase])
+//=> Thor Odinsson says: I like this brown drink very much, bring me another!
+```
+
+Alright, let's break this down like a septic tank after Taco Tuesday. So, we've got this `introWithContext` function. It's like the sidekick to our primary intro function, but with a twist. Instead of taking a bunch of arguments, introWithContext needs one thing: a catchphrase. Simple enough, huh? But here's where things get interesting. We can take `introWithContext` for a spin and use either `call` or `apply` to shake things up. We toss in `thisArg` object as the first argument, and bam! Suddenly, that object becomes the star of the show inside the function. It's like passing the Olympic torch to a new hero.
+
+Now, let's talk about the nitty-gritty. When it comes to using call or apply, the game plan is pretty much the same. You've got your function, you've got your thisArg object, and you've got your catchphrase. The only difference? How you pass along any additional arguments. With call, it's like throwing a handful of confetti—each argument gets its own spotlight, listed out one by one after the thisArg. It's like a party, and everyone's invited. But with apply, it's a bit more laid-back. You bundle up those extra arguments in an array, and boom! They get passed along just like that. It's like tossing a whole pizza into the mix and watching everyone dig in.
+
+```javascript
+intro(asgardianBrothers[0], phrase) === introWithContext.call(asgardianBrothers[0], phrase) //=> true
+intro(asgardianBrothers[0], phrase) === introWithContext.apply(asgardianBrothers[0], [phrase]) //=> true
+
+const complaint = "I was falling for thirty minutes!"
+intro(asgardianBrothers[1], complaint) === introWithContext.call(asgardianBrothers[1], complaint) //=> true
+intro(asgardianBrothers[1], complaint) === introWithContext.apply(asgardianBrothers[1], [complaint]) //=> true
+```
 
 
 
+
+You've got this introWithContext function. It's like the life of the party, but sometimes you want to keep it in check, you know? So, let's say we want to create a new version of this function where the context is locked in, like a chastity belt at a medieval fair. That's where bind swoops in to save the day.
