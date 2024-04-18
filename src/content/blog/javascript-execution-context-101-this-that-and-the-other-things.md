@@ -1,21 +1,19 @@
 ---
-title: 'JavaScript Context 101: Elevate Your Code Game'
+title: 'JavaScript Execution Context 101: This, that, and the other things'
 date: '04-25-2024'
 heroImage: '/blog/search-feature/inspector.png'
 image: '/blog/search-feature/inspector.png'
 originalDatePublished:
-description: "Contextual Commando: Conquering JavaScript's Terrain Like a Boss"
+description: "Learn how to use this, call, apply, and bind like a Asgardian hammer-wielding mofo."
 author: 'Anthony Lombardi'
 categories: [ruby, rails]
 tags: [search]
 draft: true
 ---
 
-## Foreword
+Today, we're exploring Javascript execution contexts. Yeah, I know. It sounds about as fun as a colonoscopy without anesthesia. But fear not, because by the time we're done here, you'll be navigating through Javascript contexts like a pro.
 
-Today, we're diving into Javascript contexts. Yeah, I know. It sounds about as fun as a colonoscopy without anesthesia. But fear not, because by the time we're done here, you'll be navigating through Javascript contexts like a pro.
-
-So, what's the deal with JavaScript context anyway? Well, think of it as the backstage area of your JavaScript code. It's where all the magic happens before your functions and variables step into the spotlight. And let me tell you, understanding this stuff is crucial if you want to avoid those pesky bugs that can turn your code into a real-life horror show.
+So, what's the deal with execution context anyway? Well, think of it as the backstage area of your JavaScript code. It's where all the magic happens before your functions and variables step into the spotlight. And let me tell you, understanding this stuff is crucial if you want to avoid those pesky bugs that can turn your code into a real-life horror show.
 
 But hey, no need to break a sweat just yet. We already know `functions`,` map`, `reduce`, and `forEach` like a boss. So, consider this just another thrilling chapter in our JavaScript saga. And remember, with excellent coding skills comes great responsibility... or something like that. Let's do this!
 
@@ -144,7 +142,6 @@ intro(asgardianBrothers[1], complaint) === introWithContext.call(asgardianBrothe
 intro(asgardianBrothers[1], complaint) === introWithContext.apply(asgardianBrothers[1], [complaint]) //=> true
 ```
 
+## Explicitly Lock Context For a Function With bind
 
-
-
-You've got this introWithContext function. It's like the life of the party, but sometimes you want to keep it in check, you know? So, let's say we want to create a new version of this function where the context is locked in, like a chastity belt at a medieval fair. That's where bind swoops in to save the day.
+Alright, let's get all hypothetical for a moment. Picture this: you've got your introWithContext function. It's like the show's star, but sometimes you want to lock it in and stick it to one spot like glue. Let's say we want to clone this function, but with a twist—where the context is locked in tighter than a celebrity's NDA. That's where bind comes swooping in, like a superhero with a cape made of JavaScript code.
