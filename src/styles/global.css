@@ -99,9 +99,9 @@ article .copy-code:hover {
 }
 
 article code {
-  @apply bg-[#282A36] text-white py-1;
-  font-size: 1rem;
-  border-radius: 0.25rem;
+  @apply bg-[#252732] text-[#7AA2F7] py-1;
+  font-size: 1.2rem;
+  /* border-radius: 0.25rem; */
 }
 
 article blockquote {
