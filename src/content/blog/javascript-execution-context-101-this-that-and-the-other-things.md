@@ -7,7 +7,7 @@ originalDatePublished:
 description: "Learn how to use this, call, apply, and bind like a Asgardian hammer-wielding mofo."
 author: 'Anthony Lombardi'
 categories: [javascript]
-tags: [javascript]
+tags: [javascript, context]
 draft: false
 ---
 
