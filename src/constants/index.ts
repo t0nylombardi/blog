@@ -5,6 +5,8 @@ export const SITE_DESCRIPTION = `Unlock the expertise of a self-taught,
   With a proven track record in e-commerce architecture, microservices, DevOps,
   and team leadership, I've navigated the full stack life cycle with precision and passion.`;
 
+export const ASTRO_PUBLIC_GA_ID = 'G-H56C6BEBLS';
+
 export const DOB = '03/31/1983'
 
 export const socials = {

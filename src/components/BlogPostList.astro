@@ -27,7 +27,6 @@ if (limit) posts = posts.slice(0, limit)
       ) : (
         <div class='px-16 mt-12 flex w-full flex-col gap-x-8 justify-between md:flex-row md:flex-wrap'>
           {posts.map((post) => {
-            console.log(post)
             const {title, image, tags, author, date, description} = post.data
             const url = '/' + post.collection + '/' + post.slug
 

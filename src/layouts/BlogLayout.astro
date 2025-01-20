@@ -1,12 +1,13 @@
 ---
 import {SEO} from 'astro-seo'
-import {SITE_TITLE, SITE_DESCRIPTION} from '../constants'
+import {ViewTransitions} from 'astro:transitions'
+import {SITE_TITLE, SITE_DESCRIPTION, ASTRO_PUBLIC_GA_ID} from '../constants'
 import type {CollectionEntry} from 'astro:content'
 import BaseHead from '../components/BaseHead.astro'
 import Nav from '../components/Nav.astro'
 import Footer from '../components/Footer.astro'
-import {ViewTransitions} from 'astro:transitions'
 import {Icon} from 'astro-icon/components'
+import Analytics from '../components/Analytics';
 import FormattedDate from '../components/FormattedDate.astro'
 import amoji_avatar from '../../public/amoji_avatar.svg'
 
@@ -14,7 +15,6 @@ type Props = CollectionEntry<'blog'>['data']
 
 const {title, description, date, originalDatePublished, heroImage, author} = Astro.props
 const currentPath = Astro.url.pathname
-console.log('url', Astro.url.href)
 ---
 
 <script>
@@ -40,9 +40,9 @@ console.log('url', Astro.url.href)
     })
   }
 
-  async function copyCode(block, button) {
+  async function copyCode(block: HTMLElement, button: HTMLButtonElement) {
     let code = block.querySelector('code')
-    let text = code.innerText
+    let text = code ? code.innerText : ''
 
     await navigator.clipboard.writeText(text)
 
@@ -58,37 +58,32 @@ console.log('url', Astro.url.href)
 <html lang='en'>
   <head>
     <SEO
-      title={title}
-      description={description}
-      canonical={currentPath}
-      openGraph={{
-        basic: {
-          title: title,
-          url: currentPath,
-          type: 'image/svg+xml',
-          image: heroImage ? heroImage : amoji_avatar.src,
+    title="A Very Descriptive Title"
+    description="A heavily optimized description full of well-researched keywords."
+    openGraph={{
+      basic: {
+        title: "A Very Descriptive Title",
+        type: "A type.",
+        image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+      }
+    }}
+    twitter={{
+      creator: "@jonasmerlins1"
+    }}
+    extend={{
+      // extending the default link tags
+      link: [{ rel: "icon", href: "/favicon.ico" }],
+      // extending the default meta tags
+      meta: [
+        {
+          name: "twitter:image",
+          content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
         },
-      }}
-      twitter={{
-        creator: '@t0nylombardi',
-      }}
-      extend={{
-        link: [{rel: 'icon', href: '/favicon/favicon.ico'}],
-        meta: [
-          {name: 'twitter:image', content: heroImage},
-          {name: 'twitter:image:src', content: heroImage},
-          {name: 'twitter:image:alt', content: 'Anthony Lombardi'},
-          {name: 'twitter:title', content: 'Anthony Lombardi'},
-          {name: 'twitter:description', content: description.substring(0, 200)},
-          {name: 'twitter:card', content: 'summary'},
-          {name: 'twitter:site', content: '@t0nylombardi'},
-          {name: 'twitter:creator', content: '@t0nylombardi'},
-          {name: 'twitter:creator:id', content: 't0nylombardi'},
-          {name: 'twitter:site:id', content: 't0nylombardi'},
-          {name: 'twitter:domain', content: 't0nylombardi.dev'},
-        ],
-      }}
-    />
+        { name: "twitter:title", content: "Tinker Tailor Soldier Spy" },
+        { name: "twitter:description", content: "Agent" },
+      ],
+    }}
+  />
     <BaseHead title={title} description={description} />
     <ViewTransitions />
   </head>
@@ -106,7 +101,7 @@ console.log('url', Astro.url.href)
               <h2 class='text-[1rem] md:text-[1.5rem] w-full font-thin'>{description}</h2>
             </div>
             <h4 class='text-azure/50 tracking-widest px-[5rem] text-[0.6rem] md:text-sm font-light title-font mb-1'>
-              by: {author} on {`date` ? <FormattedDate date={date} /> : `originalDatePublished`}
+              by: {author} on {date ? <FormattedDate date={date} /> : originalDatePublished}
             </h4>
           </div>
           <div class='hidden md:block my-8 md:my-16 object-contain object-center'>
@@ -129,17 +124,7 @@ console.log('url', Astro.url.href)
       </main>
 
       <Footer />
-      <script async src='https://www.googletagmanager.com/gtag/js?id=G-H56C6BEBLS'></script>
-
-      <script>
-        window.dataLayer = window.dataLayer || []
-        function gtag() {
-          dataLayer.push(arguments)
-        }
-        gtag('js', new Date())
-
-        gtag('config', 'G-H56C6BEBLS')
-      </script>
+      <!-- <Analytics /> -->
     </div>
   </body>
 </html>
