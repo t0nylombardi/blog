@@ -1,11 +1,11 @@
 ---
 title: 'Rails Service Objects to Make your Rails Controllers Skinny'
 date: '10-11-2023'
-heroImage: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b'
+heroImage: '/blog/skinny-controllers/service-object.jpeg'
+image: '/blog/skinny-controllers/service-object.jpeg'
 originalDatePublished:
 description: 'Moving logic into services to keep your controllers/models skinny'
 author: 'Anthony Lombardi'
-image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b'
 categories: [ruby]
 tags: [ruby]
 draft: false
@@ -209,4 +209,3 @@ Note: Although the examples here are exclusively related to making "skinny" cont
 Utilizing Rails service objects constitutes a robust strategy for consolidating business logic and fortifying code organization within your application. By harnessing the advantages of service objects, we can elevate the maintainability, reusability, and testability of our controllers and models. Integrating service objects into your development workflow fosters clarity and enhances the long-term scalability of your application.
 
 When confronted with intricate business logic in your controllers or models, contemplate employing service objects to encapsulate that logic. This approach ensures streamlined and efficient controllers/models, fostering a codebase that is both agile and resilient over time.
-

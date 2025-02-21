@@ -1,11 +1,11 @@
 ---
 title: Rails Console Simplified
 date: '2023-08-31T21:00:56.707Z'
-heroImage: 'https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81'
+heroImage: '/blog/rails-console/rails-console.jpeg'
+image: '/blog/rails-console/rails-console.jpeg'
 originalDatePublished:
 description: 'An article on how to simplify the Rails console command with aliases'
 author: 'Anthony Lombardi'
-image: 'https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81'
 categories: ["rails"]
 tags: ["rails", "console"]
 draft: false

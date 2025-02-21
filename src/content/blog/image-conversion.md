@@ -1,11 +1,11 @@
 ---
 title: 'Image Conversion'
 date: '2020-12-29'
-heroImage: 'https://images.unsplash.com/photo-1655720035861-ba4fd21a598d'
+heroImage: '/blog/image-conversion/image-conversion.jpeg'
+image: '/blog/image-conversion/image-conversion.jpeg'
 originalDatePublished: '2014-11-18'
 description: "I wrote a script that allows me to take several images rename them, and then create two resized images in addition."
 author: 'Anthony Lombardi'
-image: 'https://images.unsplash.com/photo-1655720035861-ba4fd21a598d'
 categories: [ruby]
 tags: [ruby]
 draft: false

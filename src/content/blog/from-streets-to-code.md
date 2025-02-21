@@ -1,11 +1,11 @@
 ---
 title: 'From Streets to Code'
 date: '03-27-2017'
-heroImage: 'https://miro.medium.com/v2/resize:fit:4800/format:webp/1*zDdNGDeZzmjWEmDlZ_Xa6A.jpeg'
+heroImage: '/blog/streets-to-code/streets-to-code.jpg'
+image: '/blog/streets-to-code/streets-to-code.jpg'
 originalDatePublished:
 description: 'High School dropout to Full Stack Developer'
 author: 'Anthony Lombardi'
-image: 'https://miro.medium.com/v2/resize:fit:4800/format:webp/1*zDdNGDeZzmjWEmDlZ_Xa6A.jpeg'
 categories: [life]
 tags: [programing, life, pursuit of happyiness]
 draft: false
@@ -70,4 +70,3 @@ I am a high school dropout with a bootleg college degree. The streets told me I 
 ### Resources:
 
 If you want to become a programmer like myself, these are some resources that helped me out learning to code. [Kevin Skoglund](https://www.lynda.com/Kevin-Skoglund/104-1.html) was the person who taught me PHP and later Ruby/Ruby on Rails. Between Books and online videos, It has cleared a way for me to become a better programer. Both [Travis Neilson](travisneilson.com)(DevTips) and [Mackenzie Child](https://www.mackenziechild.me/) have helped me become a better front-end developer.
-

@@ -1,11 +1,11 @@
 ---
 title: Old-school Twitter Bot in ruby
 date: '2014-11-18'
-heroImage: 'https://images.unsplash.com/photo-1610878785620-3ab2d3a2ae7b'
+heroImage: '/blog/twitter-bot/old-school-twitter-bot.jpeg'
+image: '/blog/twitter-bot/old-school-twitter-bot.jpeg'
 author: 'Anthony Lombardi'
 originalDatePublished: '2014-11-18'
 description: 'I had an idea to try to automate search results and reply back to each user with a message on twitter.'
-image: 'https://images.unsplash.com/photo-1610878785620-3ab2d3a2ae7b'
 categories: [ruby]
 tags: [ruby]
 draft: false
