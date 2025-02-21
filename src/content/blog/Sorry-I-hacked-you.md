@@ -1,11 +1,11 @@
 ---
 title: Sorry, I hacked you.
 date: '2016-07-19'
-heroImage: 'https://images.unsplash.com/photo-1511376777868-611b54f68947'
+heroImage: '/blog/hacked/i-hacked-you.jpeg'
 originalDatePublished: '2016-07-19'
 description: " Someone I know from the interwebs posted a site with form that allowed you to sign up to a class of his and he had a huge google sheets security flaw"
 author: 'Anthony Lombardi'
-image: 'https://images.unsplash.com/photo-1511376777868-611b54f68947'
+image: '/blog/hacked/i-hacked-you.jpeg'
 categories: [javascript]
 tags: [javascript]
 draft: false

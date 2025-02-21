@@ -1,8 +1,8 @@
 ---
 title: 'Javascript Execution Context 101: This, that, and the other things'
 date: '04-25-2024'
-heroImage: '/blog/javascript-context/code-unsplash.jpeg'
-image: '/blog/javascript-context/code-unsplash.jpeg'
+heroImage: '/blog/javascript-context/code-unsplash.jpg'
+image: '/blog/javascript-context/code-unsplash.jpg'
 originalDatePublished:
 description: "Learn how to use this, call, apply, and bind like a Asgardian hammer-wielding mofo."
 author: 'Anthony Lombardi'

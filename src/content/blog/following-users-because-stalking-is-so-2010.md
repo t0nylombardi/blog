@@ -1,8 +1,8 @@
 ---
 title: 'Following Users: Because Stalking is so 2010'
 date: '03-02-2024'
-heroImage: 'https://images.unsplash.com/photo-1606323516801-54354ac53b16'
-image: 'https://images.unsplash.com/photo-1606323516801-54354ac53b16'
+heroImage: '/blog/follow-unfollow/follow-users.jpeg'
+image: '/blog/follow-unfollow/follow-users.jpeg'
 originalDatePublished:
 description: 'Adding Some Social Stalking Flair with follow/unfollow users'
 author: 'Anthony Lombardi'
@@ -248,7 +248,7 @@ To manipulate following relationships, we’ll introduce `follow` and `unfollow`
 
 Utility methods are like the punchlines. Sometimes you see them coming, sometimes you don't, but either way, it's all part of the fun. With experience comes the ability to predict these bad boys in advance, but even if you're caught off guard, don't sweat it. Software development is a journey of trial and error, where you write code, test it out, and if it starts to look as ugly as a chimichanga that's been sitting in the sun too long, you roll up your sleeves and refactor it. So, lets keep hacking away, there's always another joke, another punchline, and another chance to make it right 🍕🔥
 
-### Utility methods for following. 
+### Utility methods for following.
 
 ```ruby
 # app/models/user.rb
@@ -407,7 +407,7 @@ For more details on such routing options, see the Rails Guides article on [Rails
 
 Rails.application.routes.draw do
    root     "static_pages#home"
-   
+
    resources :users do
      member do
         get :following, :followers
@@ -424,7 +424,3 @@ Now that you've mastered the art of stalking... I mean, following, it's time to 
 With these tips and tricks, you'll be the master of social stalking... I mean, following, in no time. So go forth, my wayward son, build that social network of your dreams. And remember: with great power comes great stalking... responsibility... and a whole lot of cat videos. Happy coding! 🚀🐱
 
 Cheers
-
-
-
-

@@ -1,13 +1,13 @@
 ---
 title: 'Creating a Pixel Tracker with NextJS and Prisma (2022)'
 date: '2022-10-31T20:37:52.538Z'
-heroImage: 'https://images.unsplash.com/photo-1579616043939-95d87a6e8512'
+heroImage: '/blog/nextjs-pixel-tracker/nextjs-pixel-tracker.jpeg'
 originalDatePublished:
 description: 'An updated version of Pixel Tracking with NextJS and Prisma'
 author: 'Anthony Lombardi'
 image: 'https://images.unsplash.com/photo-1579616043939-95d87a6e8512'
-categories: [ruby]
-tags: [ruby]
+categories: [nextjs]
+tags: [nextjs]
 draft: false
 ---
 
@@ -254,4 +254,3 @@ There you have it, I’ve created a 1x1 pixel and put it in a folder of the root
 ### Repo:
 
 [Aries Pixel](https://github.com/t0nylombardi/ariesPixel)
-
