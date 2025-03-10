@@ -1,8 +1,8 @@
 ---
 title: 'Rails Service Objects to Make your Rails Controllers Skinny'
 date: '10-11-2023'
-heroImage: '/blog/skinny-controllers/service-object.jpeg'
-image: '/blog/skinny-controllers/service-object.jpeg'
+heroImage: '/blog/skinny-controllers/services-object.jpeg'
+image: '/blog/skinny-controllers/service-objects.jpeg'
 originalDatePublished:
 description: 'Moving logic into services to keep your controllers/models skinny'
 author: 'Anthony Lombardi'
@@ -10,6 +10,7 @@ categories: [ruby]
 tags: [ruby]
 draft: false
 ---
+
 In the realm of web development, efficiency and maintainability are paramount. As applications grow in complexity, the need for clean, organized code becomes increasingly apparent. When studying Rails design patterns, you may have heard the axiom "fat model, skinny controller" (or the inverse, "fat controller, skinny model"). Both of these describe a pattern of where to put business logic, which tends to take up a lot of lines of code. In either case is ideal, we want our controllers and our models to be "skinny", with as little code as possible, so that they are easy to understand and maintain. In this blog post, we'll delve into the concept of Rails service objects, exploring their benefits and best practices.
 
 ### Service Objects: Another place to put your business logic
@@ -35,6 +36,7 @@ Ergo, we achieve:
 - Documentation: Document the purpose, inputs, outputs, and usage of each service object to facilitate collaboration and understanding among team members. Clear documentation serves as a valuable resource for developers working on the codebase.
 
 ### Example:
+
 A perfect example of a "fat controller" ripe for refactoring through service objects lies in a controller designed for an ElasticSearch implementation. This particular controller undertakes the task of searching Users, Hashtags, and first/last names within a Profile model. The initial logic of the code lacks the principles of DRY (Don't Repeat Yourself), primarily due to its repetitive nature in traversing three distinct models.
 
 Here, we defined a bunch of business logic in the mentions_controller.rb to query ElasticSearch:
@@ -70,7 +72,6 @@ class MentionsController < ApplicationController
   end
 end
 ```
-
 
 Pretty much everything below the private keyword is NOT related to the controller--it's just logic to query a specific API.
 
@@ -180,8 +181,7 @@ end
 
 ```
 
-
-Note: to not use self for every method, I created  `ApplicationService` that `MentionsQueryService` extends. you can check out the code [here](https://gist.github.com/t0nylombardi/c6671135e208e23cb71e46fd61c1ae37).
+Note: to not use self for every method, I created `ApplicationService` that `MentionsQueryService` extends. you can check out the code [here](https://gist.github.com/t0nylombardi/c6671135e208e23cb71e46fd61c1ae37).
 
 And now, we can make our `mentions_controller.rb` much "skinnier" by completely removing those same methods:
 
@@ -200,12 +200,12 @@ class MentionsController < ApplicationController
 end
 ```
 
-
-We can now call  `MentionsQueryService` to handle all of the ElasticSearch-querying and data-parsing outside of the controller. This makes our controller a lot easier to read and understand!
+We can now call `MentionsQueryService` to handle all of the ElasticSearch-querying and data-parsing outside of the controller. This makes our controller a lot easier to read and understand!
 
 Note: Although the examples here are exclusively related to making "skinny" controllers, the same types of logic/methods can be moved from models to service objects as well.
 
 ### Conclusion
+
 Utilizing Rails service objects constitutes a robust strategy for consolidating business logic and fortifying code organization within your application. By harnessing the advantages of service objects, we can elevate the maintainability, reusability, and testability of our controllers and models. Integrating service objects into your development workflow fosters clarity and enhances the long-term scalability of your application.
 
 When confronted with intricate business logic in your controllers or models, contemplate employing service objects to encapsulate that logic. This approach ensures streamlined and efficient controllers/models, fostering a codebase that is both agile and resilient over time.

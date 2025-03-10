@@ -19,9 +19,9 @@ So you want users to follow each other, huh? Sounds simple enough, but buckle up
 
 Alright, so picture this: you're diving headfirst into the wild world of user stalking... uh, I mean, following. At first glance, you might think, "Hey, I'll just slap a `has_many` relationship on there and call it a day." But hold your horses, because this ain't your grandma's social network. Turns out, there's a twist in the tale, and we're about to embark on a journey through the mystical land of `has_many :through.` It's like discovering that the secret ingredient in grandma's famous cookies is actually unicorn tears. Intrigued? Let's dive in and uncover the magic behind building a data model that'll make even Dumbledore raise an eyebrow.
 
-Imagine you're strolling through the digital streets of your favorite social platform. You've got Morty, your average... piece of defication, just minding his own business. Then there's Rick, the cool cat everyone wants to hang with. Now, Morty decides he wants to be part of Rick's entourage, so he hits that follow button faster than you can say "wubba lubba dub dub." Boom! Morty's now a follower, and Rick? Well, he's officially *followed* by Morty.
+Imagine you're strolling through the digital streets of your favorite social platform. You've got Morty, your average... piece of defication, just minding his own business. Then there's Rick, the cool cat everyone wants to hang with. Now, Morty decides he wants to be part of Rick's entourage, so he hits that follow button faster than you can say "wubba lubba dub dub." Boom! Morty's now a follower, and Rick? Well, he's officially _followed_ by Morty.
 
-Now, let's talk about labels. You see, in the world of Rails, everything's gotta have a label. So, naturally, Morty's got himself a sweet array of followers, because who wouldn't want to follow the guy who's pals with *the* Rick, right? But here's where things get a bit wonky. By default, Rails wants to call the folks Morty's following the *followeds*. Yeah, try saying that three times fast without tripping over your own tongue. We're not about that life. So, we're taking a page out of X(formally know as Twitter)'s playbook. X might not be perfect(let's face it, it's a dumpster fire), but they got one thing right: calling them "followeds" just sounds wrong. We'll adopt their convention and stick with "following" for those you're stalking and "followers" for your loyal fans.
+Now, let's talk about labels. You see, in the world of Rails, everything's gotta have a label. So, naturally, Morty's got himself a sweet array of followers, because who wouldn't want to follow the guy who's pals with _the_ Rick, right? But here's where things get a bit wonky. By default, Rails wants to call the folks Morty's following the _followeds_. Yeah, try saying that three times fast without tripping over your own tongue. We're not about that life. So, we're taking a page out of X(formally know as Twitter)'s playbook. X might not be perfect(let's face it, it's a dumpster fire), but they got one thing right: calling them "followeds" just sounds wrong. We'll adopt their convention and stick with "following" for those you're stalking and "followers" for your loyal fans.
 
 This discussion suggests modeling the followed users, with a `following` table and a `has_many` association. Since `user.following` should be a collection of users, each row of the `following` table would need to be a user, as identified by the `followed_id`, together with the follower_id to establish the association. In addition, since each row is a user, we would need to include the user’s other attributes, including the name, email, password, etc.
 
@@ -43,10 +43,9 @@ We're going to take those active relationships and turn them into something beau
 
 ![second diagram](/blog/follow-unfollow/second_diagram.png)
 
-Because we’ll end up using the same database table for both active and passive relationships, we’ll use the generic term *relationship* for the table name, with a corresponding Relationship model. The result is the Relationship data model shown in the picture below. We’ll see how to use the Relationship model to simulate both Active Relationship and Passive Relationship models.
+Because we’ll end up using the same database table for both active and passive relationships, we’ll use the generic term _relationship_ for the table name, with a corresponding Relationship model. The result is the Relationship data model shown in the picture below. We’ll see how to use the Relationship model to simulate both Active Relationship and Passive Relationship models.
 
 ![third diagram](/blog/follow-unfollow/third_diagram.png)
-
 
 To get started with the implementation, we first generate a migration:
 
@@ -145,7 +144,7 @@ end
 
 Alright, let's take a stroll through the labyrinth of database connections, where foreign keys rule the roost and Rails is the master of puppets(🤘) pulling all the strings. When you see that posts table cozying up to a `user_id` attribute, that's not just some random hookup—it's a full-blown love affair. You see, in the land of databases, that `user_id` is like a secret handshake, linking those tables together faster than a toupee in a hurricane.
 
-Rails has this slick little trick tucked up its sleeve called the underscore method. It's like the magician of class naming, waving its wand and transforming **"FooBar"** into **"foo_bar"**.  And just like that, Rails knows exactly where to find those foreign keys. But hold onto your hats, because when it comes to users following other users, we're throwing a curveball with that `follower_id`. Yeah, we're shaking things up, keeping Rails on its toes. By default, Rails expects a *foreign key* of the form `<class>_id`, where `<class>` is the lowercase version of the class name. In the present case, although we are still dealing with users, the user following another user is now identified with the foreign key `follower_id`. So, next time you're knee-deep in database drama, just remember: Rails may be the mastermind, but we're the ones calling the shots. And with a touch of charm and a boat, anything is possible!
+Rails has this slick little trick tucked up its sleeve called the underscore method. It's like the magician of class naming, waving its wand and transforming **"FooBar"** into **"foo_bar"**. And just like that, Rails knows exactly where to find those foreign keys. But hold onto your hats, because when it comes to users following other users, we're throwing a curveball with that `follower_id`. Yeah, we're shaking things up, keeping Rails on its toes. By default, Rails expects a _foreign key_ of the form `<class>_id`, where `<class>` is the lowercase version of the class name. In the present case, although we are still dealing with users, the user following another user is now identified with the foreign key `follower_id`. So, next time you're knee-deep in database drama, just remember: Rails may be the mastermind, but we're the ones calling the shots. And with a touch of charm and a boat, anything is possible!
 
 ```ruby
 # app/models/user.rb
@@ -162,6 +161,7 @@ class User < ApplicationRecord
   .
 end
 ```
+
 ### Adding the belongs_to associations to the Relationship model.
 
 ```ruby
@@ -181,14 +181,13 @@ By bringing in both sides of the equation, we're not just building a system, we'
 
 A summary of user/active relationship association methods:
 
-| Method | Purpose |
-| ----------- | ----------- |
-| `active_relationship.follower` | returns the follower |
-| `active_relationship.followed `|returns the followed user
-| `user.active_relationships.create (followed_id: other_user.id)` | creates an active relationship associated with `user`
-| `user.active_relationships.create! (followed_id: other_user.id)` | creates an active relationship associated with `user` (exception on failure)
-| `user.active_relationships.build (followed_id: other_user.id)` | returns a new relationship object associated with `user`
-
+| Method                                                           | Purpose                                                                      |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `active_relationship.follower`                                   | returns the follower                                                         |
+| `active_relationship.followed `                                  | returns the followed user                                                    |
+| `user.active_relationships.create (followed_id: other_user.id)`  | creates an active relationship associated with `user`                        |
+| `user.active_relationships.create! (followed_id: other_user.id)` | creates an active relationship associated with `user` (exception on failure) |
+| `user.active_relationships.build (followed_id: other_user.id)`   | returns a new relationship object associated with `user`                     |
 
 ### Adding the Relationship model validations
 
@@ -318,6 +317,7 @@ It’s worth noting that we could actually omit the `:source` key for `followers
 This is because, in the case of a `:followers` attribute, Rails will singularize “followers” and automatically look for the foreign key `follower_id` in this case. This keeps the `:source` key to emphasize the parallel structure with the `has_many` `:following` association.
 
 ### Sample Following Data
+
 I find it convenient to use `rails db:seed` to fill the database with seed data. Here we somewhat arbitrarily arrange for the first user to follow users 3 through 51, and then have users 4 through 41 follow that user back. The resulting relationships will suffice for developing the application interface:
 
 ```ruby
@@ -393,10 +393,10 @@ The intricacies of routing in Rails. Like a well-choreographed tango, each step 
 
 For more details on such routing options, see the Rails Guides article on [Rails Routing from the Outside In ](https://guides.rubyonrails.org/routing.html).
 
-| HTTP request method | URL | Action | Named route
-| ----------- | ----------- | ----------- | -----------
-| GET |  /users/1/following | `following` | `following_user_path(1)`
-| GET |  /users/1/followers | `followers` | `followers_user_path(1)`
+| HTTP request method | URL                | Action      | Named route              |
+| ------------------- | ------------------ | ----------- | ------------------------ |
+| GET                 | /users/1/following | `following` | `following_user_path(1)` |
+| GET                 | /users/1/followers | `followers` | `followers_user_path(1)` |
 
 ### Adding the routes for user relationships.
 

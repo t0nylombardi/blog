@@ -1,8 +1,8 @@
 ---
 title: Parsing An Email List
 date: '2020-12-29T20:57:55.934Z'
-heroImage: '/blog/parsing-email-list/parsing-email-list.jpeg'
-image: '/blog/parsing-email-list/parsing-email-list.jpeg'
+heroImage: '/blog/parsing-email-list/parsing-emails.jpeg'
+image: '/blog/parsing-email-list/parsing-emails.jpeg'
 originalDatePublished: '2014-11-18'
 description: 'I been written a code to parse through an email list a client gave me that has roughly 94 emails.'
 author: 'Anthony Lombardi'
