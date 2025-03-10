@@ -1,158 +1,158 @@
 ---
-import { Icon } from 'astro-icon/components';
+import {Icon} from 'astro-icon/components'
 
-const routes =[{
-  slug: '/#hello',
-  label: "_hello"
-}, {
-  slug: '/#about',
-  label: "_about"
-}, {
-  slug: '/#projects',
-  label: "_projects"
-}, {
-  slug: '/#blog',
-  label: "_blog"
-},
+const routes = [
+  {
+    slug: '/#hello',
+    label: '_hello',
+  },
+  {
+    slug: '/#about',
+    label: '_about',
+  },
+  {
+    slug: '/#projects',
+    label: '_projects',
+  },
+  {
+    slug: '/#blog',
+    label: '_blog',
+  },
 ]
 ---
+
 <script>
   // Hamburger Menu Script
-function setupHamburger() {
-	const hamburger = document.querySelector("#hamburger") as HTMLElement;
-	const links = document.querySelectorAll("#navlinks a")
-	const nav = document.querySelector("#navlinks") as HTMLElement;
-	const bars = hamburger.getElementsByTagName("span");
-	const barStyles = {
-		active: "bg-gray-300",
-		default: "bg-[#7790a8]"
-	};
-	const hamburgerContainerStyles = {
-		active: "border-gray-300",
-		default: "border-[#7790a8]",
-	};
+  function setupHamburger() {
+    const hamburger = document.querySelector('#hamburger') as HTMLElement
+    const links = document.querySelectorAll('#navlinks a')
+    const nav = document.querySelector('#navlinks') as HTMLElement
+    const bars = hamburger.getElementsByTagName('span')
+    const barStyles = {
+      active: 'bg-gray-300',
+      default: 'bg-[#7790a8]',
+    }
+    const hamburgerContainerStyles = {
+      active: 'border-gray-300',
+      default: 'border-[#7790a8]',
+    }
 
-	function closeHamburger() {
-		nav.classList.add("hidden");
-		hamburger.classList.remove(hamburgerContainerStyles.active);
-		hamburger.classList.add(hamburgerContainerStyles.default);
-		for (const bar of bars) {
-			bar.classList.add(barStyles.default);
-			bar.classList.remove(barStyles.active);
-		}
-	}
+    function closeHamburger() {
+      nav.classList.add('hidden')
+      hamburger.classList.remove(hamburgerContainerStyles.active)
+      hamburger.classList.add(hamburgerContainerStyles.default)
+      for (const bar of bars) {
+        bar.classList.add(barStyles.default)
+        bar.classList.remove(barStyles.active)
+      }
+    }
 
-	function openHamburger() {
-		nav.classList.remove("hidden");
-		hamburger.classList.add(hamburgerContainerStyles.active);
-		hamburger.classList.remove(hamburgerContainerStyles.default);
-		for (const bar of bars) {
-			bar.classList.add(barStyles.active);
-			bar.classList.remove(barStyles.default);
-		}
-	}
+    function openHamburger() {
+      nav.classList.remove('hidden')
+      hamburger.classList.add(hamburgerContainerStyles.active)
+      hamburger.classList.remove(hamburgerContainerStyles.default)
+      for (const bar of bars) {
+        bar.classList.add(barStyles.active)
+        bar.classList.remove(barStyles.default)
+      }
+    }
 
-	hamburger.addEventListener("click", () => {
-		if (nav.classList.contains("hidden")) {
-			openHamburger()
-		} else {
-			closeHamburger()
-		}
-	});
+    hamburger.addEventListener('click', () => {
+      if (nav.classList.contains('hidden')) {
+        openHamburger()
+      } else {
+        closeHamburger()
+      }
+    })
 
-	// close hamburger menu after click
-	links.forEach(link => link.addEventListener("click", () => {
-		closeHamburger()
-	}))
-}
+    // close hamburger menu after click
+    links.forEach((link) =>
+      link.addEventListener('click', () => {
+        closeHamburger()
+      })
+    )
+  }
 
-// Intersection Observer Script
-function setupObserver() {
+  // Intersection Observer Script
+  function setupObserver() {
+    // simple function to use for callback in the intersection observer
+    const changeNav: IntersectionObserverCallback = (entries, observer) => {
+      entries.forEach((entry) => {
+        // verify the element is intersecting
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
+          // remove old active class
+          let lastActives = document.querySelectorAll('.active')
+          if (lastActives) lastActives.forEach((lastActive) => lastActive.classList.remove('active'))
+          // get id of the intersecting section
+          var id = entry.target.getAttribute('id')
+          // find matching link & add appropriate class
+          var newLinks = document.querySelectorAll(`[href="#${id}"]`)
+          newLinks.forEach((el) => el.classList.add('active'))
+        }
+      })
+    }
 
-	// simple function to use for callback in the intersection observer
-	const changeNav: IntersectionObserverCallback = (entries, observer) => {
+    // init the observer
+    const options = {
+      threshold: 0.55,
+    }
 
-		entries.forEach((entry) => {
+    const observer = new IntersectionObserver(changeNav, options)
 
-			// verify the element is intersecting
-			if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
-				// remove old active class
-				let lastActives = document.querySelectorAll('.active')
-				if (lastActives) lastActives.forEach(lastActive => lastActive.classList.remove('active'));
-				// get id of the intersecting section
-				var id = entry.target.getAttribute('id');
-				// find matching link & add appropriate class
-				var newLinks = document.querySelectorAll(`[href="#${id}"]`);
-				newLinks.forEach((el) => el.classList.add('active'))
-			}
-		});
-	}
+    // target the elements to be observed
+    let header = document.querySelector('header')
+    let sections: any = document.querySelectorAll('section')
+    sections = [header, ...sections]
 
-	// init the observer
-	const options = {
-		threshold: 0.55
-	}
+    sections.forEach((section: HTMLElement) => {
+      observer.observe(section)
+    })
+  }
 
-	const observer = new IntersectionObserver(changeNav, options);
+  document.addEventListener('astro:page-load', (ev) => {
+    setupHamburger()
 
-	// target the elements to be observed
-	let header = document.querySelector("header")
-	let sections: any = document.querySelectorAll('section');
-	sections = [header, ...sections]
+    const location = (ev.target as Document).location.toString()
+    const pathname = new URL(location).pathname
 
-	sections.forEach((section: HTMLElement) => {
-		observer.observe(section);
-	});
-}
+    if (pathname === '/') {
+      setupObserver()
+    } else if (pathname.startsWith('/blog')) {
+      // Add leading slash to all hrefs in navigationLinks
+      const navigationLinks = document.querySelectorAll('#navlinks a')
 
+      navigationLinks.forEach((link) => {
+        if (link.getAttribute('href')?.startsWith('#blog')) {
+          link.setAttribute('href', '/blog')
+        } else if (!link.getAttribute('href')?.startsWith('/')) {
+          link.setAttribute('href', '/' + link.getAttribute('href'))
+        }
+      })
 
-document.addEventListener('astro:page-load', (ev) => {
-	setupHamburger()
-
-	const location = (ev.target as Document).location.toString()
-	const pathname = new URL(location).pathname
-
-	if (pathname === "/") {
-		setupObserver()
-	} else if (pathname.startsWith("/blog")) {
-		// Add leading slash to all hrefs in navigationLinks
-		const navigationLinks = document.querySelectorAll('#navlinks a');
-
-		navigationLinks.forEach((link) => {
-			if (link.getAttribute("href")?.startsWith("#blog")) {
-				link.setAttribute('href', "/blog")
-			} else if (!link.getAttribute('href')?.startsWith('/')) {
-
-				link.setAttribute('href', '/' + link.getAttribute('href'));
-			}
-		});
-
-		// Add "active" class to the blog link
-		document.querySelector(`[href="/blog"]`)?.classList.add("active");
-	}
-
-});
+      // Add "active" class to the blog link
+      document.querySelector(`[href="/blog"]`)?.classList.add('active')
+    }
+  })
 </script>
 
-
-<nav class="fixed z-50 w-full text-[#7790a8] bg-[#232339] mb-4">
+<nav class="fixed z-50 w-full text-xl text-[#7790a8] bg-[#24273A] mb-4">
   <ul class="container flex flex-col lg:flex-row justify-between mx-auto relative">
-    <li class=" px-8 py-4">
+    <li class="px-8 py-4">
       <a href="/" class="hover:text-gray-200">Anthony Lombardi</a>
     </li>
 
-    <li id="navlinks" class="hidden lg:block lg:border-x-0" >
+    <li id="navlinks" class="hidden lg:block lg:border-x-0">
       <ul class="flex flex-col lg:flex-row px-8 pb-4 lg:py-4 space-y-1 lg:space-y-0 lg:space-x-8">
-      {
-        routes.map((route) => (
-          <li class="">
-            <a href={route.slug} class="flex items-center hover:text-gray-200">
-              <Icon name="bi:chevron-compact-right" class="h-4 w-4 lg:hidden"/>
-              {route.label}
-            </a>
-          </li>
-        ))
-      }
+        {
+          routes.map((route) => (
+            <li class="">
+              <a href={route.slug} class="flex items-center hover:text-gray-200">
+                <Icon name="bi:chevron-compact-right" class="h-4 w-4 lg:hidden" />
+                {route.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </li>
 
