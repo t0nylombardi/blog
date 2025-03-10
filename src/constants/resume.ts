@@ -9,31 +9,74 @@ export const Profile = `A dynamic and results-oriented Full Stack Developer with
   delivering exceptional results with every project undertaken.`
 
 export const SkillsWeb = [
-  [95, 'Ruby'],
-  [95, 'Ruby on Rails'],
-  [85, 'React'],
-  [90, 'Javascript'],
-  [80, 'Typescript'],
-  [80, 'NodeJS'],
-  [70, 'NextJS'],
-  [70, 'AstroJS'],
-  [80, 'PostgreSQL'],
-  [80, 'MySQL'],
-  [65, 'GraphQL'],
-  [65, 'Apollo'],
-  [70, 'TailwindCSS'],
-  [75, 'Amazon Web Services'],
-  [75, 'Digital Ocean'],
-  [90, 'Sass'],
-  [60, 'Jest'],
-  [60, 'Cypress'],
-  [95, 'Html/CSS'],
-  [40, 'Go'],
-  [20, 'Python'],
+  {
+    category: "Programming Languages",
+    skills: [
+      [95, "Ruby"],
+      [80, "TypeScript"],
+      [45, "Go"],
+      [20, "Python"],
+    ],
+  },
+  {
+    category: "Frameworks & Libraries",
+    skills: [
+      [95, "Ruby on Rails"],
+      [85, "React"],
+      [80, "NodeJS"],
+      [70, "NextJS"],
+      [70, "AstroJS"],
+    ],
+  },
+  {
+    category: "Databases",
+    skills: [
+      [80, "PostgreSQL"],
+      [80, "MySQL"],
+      [65, "GraphQL"],
+    ],
+  },
+  {
+    category: "Cloud & Services",
+    skills: [
+      [75, "AWS Cognito"],
+      [70, "Docker"],
+    ],
+  },
+  {
+    category: "Styling",
+    skills: [
+      [95, "HTML/CSS"],
+      [90, "Sass"],
+      [70, "TailwindCSS"],
+    ],
+  },
+  {
+    category: "Testing",
+    skills: [
+      [60, "Jest"],
+      [60, "Cypress"],
+    ],
+  },
 ];
 
 
 export const WorkHistory = [
+  {
+    title: "Lead Backend Engineer",
+    company: "Seamgen",
+    location: "San Diego, CA(remotely)",
+    date: "June 2022 - Present",
+    highlights: [
+      "Designed and developed a scalable application from the ground up using Rails 7.2 as an API.",
+      "Implemented authentication and authorization using AWS Cognito for secure user management.",
+      "Integrated GraphQL to enable efficient and flexible data querying for complex data manipulation.",
+      "Led software architecture planning and implementation, ensuring maintainability and scalability.",
+      "Mentored and guided software engineers through code reviews, sprint unblocking, and best practices.",
+      "Collaborated cross-functionally with the Project Manager, Product team, and UI/UX Designer to define epics and create user stories.",
+      "Broke down features into manageable development tasks to streamline implementation.",
+    ],
+  },
   {
     title: "Lead Consultant",
     company: "Lombardi Consulting",
@@ -84,13 +127,13 @@ export const WorkHistory = [
     location: "New York, NY",
     date: "October 2017 - June 2020",
     highlights: [
-      "Built and maintained APIs, moving away from Legacy Monolith infrastructure to a more domain-driven microservice through Docker, Ruby on Rails, Java Spring-Boot and ReactJS.", 
+      "Built and maintained APIs, moving away from Legacy Monolith infrastructure to a more domain-driven microservice through Docker, Ruby on Rails, Java Spring-Boot and ReactJS.",
       "Worked with ReactJS and TypeScript to build a front end for a new markeyplace product.",
       "Used higher order of components to make small, reusable sections",
       "Built login feature using MS Azure, JWT, and Apigee",
       "Utilized crucial design software skills to complete projects on time and within budget.",
       "Effectively coded software changes and alterations based on specific design requirements.",
-      "Applied & stayed current with existing and emerging technologies and techniques.",            
+      "Applied & stayed current with existing and emerging technologies and techniques.",
       "Brought forth a passion and dedication to software development.",
     ],
   },
