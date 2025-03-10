@@ -46,5 +46,14 @@
     "shiki-languages": "^0.2.7",
     "tm-themes": "^1.2.0",
     "typescript": "^5.2.2"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ],
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
