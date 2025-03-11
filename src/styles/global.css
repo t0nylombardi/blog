@@ -7,11 +7,15 @@ html {
   color: #e5e9f0;
   scroll-padding-top: 8rem;
   scroll-behavior: smooth;
-  height: 100%
+  height: 100%;
+}
+
+article {
+  @apply text-lg md:text-2xl font-thin;
 }
 
 article p {
-  @apply text-lg md:text-2xl my-6 mx-auto font-thin;
+  @apply my-6 mx-auto;
 }
 
 article p:has(img) {
@@ -27,129 +31,104 @@ article img {
 }
 
 article hr {
-    --n:3;
-    width: 8rem;
-    height:5px;
-    margin:4rem auto;
-    border: none;
-    background:radial-gradient(circle closest-side,#EAF6F6 98%,#0000) 0/calc(100%/var(--n)) 100%;
+  --n: 3;
+  width: 8rem;
+  height: 5px;
+  margin: 4rem auto;
+  border: none;
+  background: radial-gradient(circle closest-side, #EAF6F6 98%, #0000) 0/calc(100%/var(--n)) 100%;
 }
 
 article pre {
-  margin: 2rem auto;
-  padding: 1rem 2.5rem;
-  @apply bg-[#282a36] !important;
+  @apply bg-[#282a36] my-8 p-4 md:p-8;
 }
 
-article ul {
-  font-size: large;
-  margin: 0.5rem auto;
-  padding: 1rem 2.5rem;
-  @apply list-disc;
+article ul,
+article ol {
+  @apply list-disc pl-5 my-2;
 }
 
-article ul li {
-  padding: 0.5rem 2.5rem;
-  @apply list-disc;
+article li {
+  @apply px-2;
+}
+
+article strong {
+  @apply font-bold;
 }
 
 article h1 {
-  font-weight: 700;
-  font-size: 2.5rem;
+  @apply font-bold text-4xl;
 }
 
 article h2 {
-  font-weight: 700;
-  font-size: 2rem;
-  padding: 4rem 0 0 0;
-
+  @apply font-bold text-3xl pt-16;
 }
 
 article h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  padding: 1rem 0 0 0;
+  @apply font-bold text-2xl pt-4;
 }
 
 article h4 {
-  font-size: 1rem;
-  font-weight: 700;
+  @apply font-bold text-xl;
 }
 
-article h5 {
-  font-weight: 700;
-}
-
+article h5,
 article h6 {
-  font-weight: 700;
+  @apply font-bold;
 }
 
 article .copy-code {
-  position: absolute;
-  top: 0;
-  right: 0;
-  @apply bg-indigo-500 text-white;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  @apply absolute top-0 right-0 bg-indigo-500 text-white px-2 py-1 text-xs leading-tight;
 }
 
 article .copy-code:hover {
-  background-color: #312e81;
+  @apply bg-indigo-900;
 }
 
 article code {
-  @apply bg-[#252732] text-[#7AA2F7] py-1;
-  font-size: 1.2rem;
-  /* border-radius: 0.25rem; */
+  @apply bg-[#252732] text-[#7AA2F7] py-1 text-xl;
 }
 
 article blockquote {
-  @apply flex justify-center mx-4 mb-12 md:mx-20 lg:mx-32;
+  @apply flex justify-center mx-4 mb-8 md:mx-20 lg:mx-12;
 }
 
 article blockquote p {
   @apply inline text-gray-400 text-lg md:text-2xl font-thin;
-  display: inline;
 }
 
+/* Responsive styles */
 @media (max-width: 640px) {
-  article p {
-    font-size: 0.8rem;
-    margin: 1rem auto;
+  article {
+    @apply text-sm;
   }
 
   article h1 {
-    font-size: 1rem;
-    margin: 1rem auto;
+    @apply text-base my-4;
   }
 
   article h2 {
-    @apply text-[1rem] font-bold;
+    @apply text-base font-bold;
   }
 
   article h3 {
-    @apply text-[0.8rem] font-bold;
+    @apply text-sm font-bold;
   }
 
   .astro-code {
-    @apply py-[0.5rem]  px-[0.5rem] my-4;
-    line-height: 0.8rem;
+    @apply py-2 px-2 my-4 leading-tight;
   }
 
   .line {
-    @apply text-[0.8rem];
+    @apply text-sm;
   }
 
-
   btn {
-    @apply flex justify-center
+    @apply flex justify-center;
   }
 
   article .copy-code {
-    padding: 0.1rem 0.2rem;
-    font-size: 0.4rem;
-    line-height: 1rem;
+    @apply px-1 py-0 text-[0.5rem] leading-tight;
   }
 
   article table {
@@ -157,24 +136,22 @@ article blockquote p {
   }
 
   article table thead {
-    @apply text-white text-[0.5rem] font-bold text-left;
+    @apply text-white text-xs font-bold text-left;
   }
 
   article table tbody tr td {
-    @apply text-[0.3rem] font-thin;
+    @apply text-xs font-thin;
   }
 
   article ul {
-    padding: 0.2rem 1rem;
+    @apply px-4 py-1;
   }
 
   article ul li {
-    @apply text-[0.5rem] font-thin px-2;
+    @apply text-xs font-thin px-2;
   }
 
   article img {
-    @apply mx-auto mb-4;
-    width: 100%;
+    @apply mx-auto mb-4 w-full;
   }
-
 }

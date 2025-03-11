@@ -1,19 +1,16 @@
 ---
 import {SEO} from 'astro-seo'
-import {ViewTransitions} from 'astro:transitions'
-import {SITE_TITLE, SITE_DESCRIPTION, ASTRO_PUBLIC_GA_ID} from '../constants'
 import type {CollectionEntry} from 'astro:content'
 import BaseHead from '../components/BaseHead.astro'
 import Nav from '../components/Nav.astro'
 import Footer from '../components/Footer.astro'
 import {Icon} from 'astro-icon/components'
-import Analytics from '../components/Analytics';
+import Analytics from '../components/Analytics'
 import FormattedDate from '../components/FormattedDate.astro'
-import amoji_avatar from '../../public/amoji_avatar.svg'
 
 type Props = CollectionEntry<'blog'>['data']
 
-const {title, description, date, originalDatePublished, heroImage, author} = Astro.props
+const {title, description, date, originalDatePublished, heroImage, author, seo} = Astro.props
 const currentPath = Astro.url.pathname
 ---
 
@@ -55,76 +52,75 @@ const currentPath = Astro.url.pathname
   }
 </script>
 
-<html lang='en'>
+<html lang="en">
   <head>
     <SEO
-    title="A Very Descriptive Title"
-    description="A heavily optimized description full of well-researched keywords."
-    openGraph={{
-      basic: {
-        title: "A Very Descriptive Title",
-        type: "A type.",
-        image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
-      }
-    }}
-    twitter={{
-      creator: "@jonasmerlins1"
-    }}
-    extend={{
-      // extending the default link tags
-      link: [{ rel: "icon", href: "/favicon.ico" }],
-      // extending the default meta tags
-      meta: [
-        {
-          name: "twitter:image",
-          content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+      title={seo?.title}
+      description={seo?.description}
+      canonical={`https://t0nylombardi.dev${currentPath}`}
+      openGraph={{
+        basic: {
+          title: title,
+          url: `https://t0nylombardi.dev${currentPath}`,
+          type: 'Article',
+          image: heroImage || '',
         },
-        { name: "twitter:title", content: "Tinker Tailor Soldier Spy" },
-        { name: "twitter:description", content: "Agent" },
-      ],
-    }}
-  />
+      }}
+      twitter={{
+        creator: '@t0nylombardi',
+      }}
+      extend={{
+        link: [{rel: 'icon', href: '/favicon.ico'}],
+        meta: [
+          {name: 'twitter:image', content: heroImage},
+          {name: 'twitter:title', content: title},
+          {name: 'twitter:description', content: description},
+          {name: 'twitter:card', content: 'summary_large_image'},
+          {name: 'twitter:site', content: '@t0nylombardi'},
+          {name: 'twitter:creator', content: '@t0nylombardi'},
+        ],
+      }}
+    />
     <BaseHead title={title} description={description} />
-    <ViewTransitions />
   </head>
 
-  <body class='bg-blog-blue'>
+  <body class="bg-[#24273A]">
     <Nav />
-    <div class='mb-10 max-w-screen-2xl container-2xl mx-auto bg-blog-blue py-20'>
-      <main class='overflow-auto'>
-        <div class='container mx-auto overflow-auto'>
-          <div class='flex flex-col text-center w-full mt-10'>
-            <h1 class='text-[1.5rem] md:text-[4.5rem] py-4 font-medium title-font text-gray-100'>
+    <div class="mb-10 max-w-screen-2xl container-2xl mx-auto py-20">
+      <main class="overflow-auto">
+        <div class="container mx-auto overflow-auto">
+          <div class="flex flex-col text-center w-full mt-10">
+            <h1 class="text-[1.3rem] md:text-[4rem] py-4 font-medium title-font text-gray-100">
               {title}
             </h1>
-            <div class='m-4 text-gray-100 flex justify-center'>
-              <h2 class='text-[1rem] md:text-[1.5rem] w-full font-thin'>{description}</h2>
+            <div class="m-4 text-gray-100 flex justify-center">
+              <h2 class="text-[1rem] md:text-[1.5rem] w-full font-thin">{description}</h2>
             </div>
-            <h4 class='text-azure/50 tracking-widest px-[5rem] text-[0.6rem] md:text-sm font-light title-font mb-1'>
+            <h4 class="text-azure/50 tracking-widest px-[5rem] text-[0.6rem] md:text-sm font-light title-font mb-1">
               by: {author} on {date ? <FormattedDate date={date} /> : originalDatePublished}
             </h4>
           </div>
-          <div class='hidden md:block my-8 md:my-16 object-contain object-center'>
-            {heroImage && <img class='hidden w-max md:block ' src={heroImage} alt={title} />}
+          <div class="hidden md:block my-8 md:my-16 object-contain object-center">
+            {heroImage && <img class="hidden w-max md:block " src={heroImage} alt={title} />}
           </div>
         </div>
-        <article class='w-full mt-8 mb-8 px-[1.5rem] md:px-[4rem] text-gray-100'>
+        <article class="w-full mt-8 mb-8 px-[1.5rem] md:px-[4rem] text-gray-100">
           <slot />
-          <div class='mt-4 md:mt-[8rem]'>
-            <p class='text-[1rem] md:text-[1.5rem]'>
+          <div class="mt-4 md:mt-[8rem]">
+            <p class="text-[1rem] md:text-[1.5rem]">
               If you liked this article, please consider
-              <a href='https://www.buymeacoffee.com/t0nylombardi' class='hover:underline hover:cursor-pointer'>
+              <a href="https://www.buymeacoffee.com/t0nylombardi" class="hover:underline hover:cursor-pointer">
                 buying me a coffee</a
               >
-              <Icon name='vscode-icons:file-type-coffeescript' class='w-8 h-8 mx-2 inline-block' />
+              <Icon name="vscode-icons:file-type-coffeescript" class="w-8 h-8 mx-2 inline-block" />
             </p>
-            <p class='text-[1rem] md:text-[1.5rem]'>Cheers!</p>
+            <p class="text-[1rem] md:text-[1.5rem]">Cheers!</p>
           </div>
         </article>
       </main>
 
       <Footer />
-      <!-- <Analytics /> -->
+      <Analytics />
     </div>
   </body>
 </html>
