@@ -1,18 +1,18 @@
-import { motion } from "framer-motion";
-import { SkillsWeb } from "../../constants/resume";
+import {motion} from 'framer-motion'
+import {SkillsWeb} from '../../constants/resume'
 
-const SkillProgress = ({ percent, skillname }) => {
+const SkillProgress = ({percent, skillname}) => {
   const barVariants = {
-    initial: { width: "0%" },
+    initial: {width: '0%'},
     indeterminate: {
-      width: ["0%", "95%", `${percent}%`],
+      width: ['0%', '95%', `${percent}%`],
       transition: {
         ease: [0.35, 1, 0.65, 0.85],
         duration: 1.5,
-        delay: 0.5
-      }
-    }
-  };
+        delay: 0.5,
+      },
+    },
+  }
 
   return (
     <div className="relative pt-1 text-gray-100">
@@ -20,13 +20,13 @@ const SkillProgress = ({ percent, skillname }) => {
       <div className="wrap">
         <motion.div
           className="bar"
-          initial={{ width: "0%" }}
-          animate={{ width: `${percent}%` }}
+          initial={{width: '0%'}}
+          animate={{width: `${percent}%`}}
           transition={{
-            type: "spring",
-            stiffness: 45, // Controls how fast it moves
-            damping: 6, // Controls bounce
-            mass: 0.75 // Affects weight and momentum
+            type: 'spring',
+            stiffness: 45,
+            damping: 6,
+            mass: 0.75,
           }}
         />
       </div>
@@ -47,8 +47,8 @@ const SkillProgress = ({ percent, skillname }) => {
         }
       `}</style>
     </div>
-  );
-};
+  )
+}
 
 const SkillList = () => {
   return (
@@ -56,9 +56,7 @@ const SkillList = () => {
       {SkillsWeb.map((group, groupIndex) => (
         <div key={groupIndex}>
           <div className="py-4">
-            <span className="pt-8 pb-4 text-xl font-bold text-slate-500">
-              // {group.category}
-            </span>
+            <span className="pt-8 pb-4 text-xl font-bold text-slate-500">// {group.category}</span>
           </div>
           <div className="pl-8">
             {group.skills.map(([percent, skillname], index) => (
@@ -68,7 +66,7 @@ const SkillList = () => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default SkillList;
+export default SkillList
