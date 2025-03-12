@@ -40,7 +40,7 @@ article hr {
 }
 
 article pre {
-  @apply bg-[#282a36] my-8 p-4 md:p-8;
+  @apply my-8 p-4 md:p-8;
 }
 
 article ul,
@@ -86,7 +86,7 @@ article .copy-code:hover {
 }
 
 article code {
-  @apply bg-[#252732] text-[#7AA2F7] py-1 text-xl;
+  @apply text-[#7AA2F7] py-1 text-xl;
 }
 
 article blockquote {

@@ -24,14 +24,15 @@ Instead, we get the same cold, lifeless email written by what I assume is an AI 
 
 Cool. Awesome. Thanks, Karen. This totally helps me understand why I wasn't chosen. Was it my resume? My cover letter? The fact that I used the word “synergize” without irony? Did I blink too much? Not enough? Did my email signature offend someone? Did someone else apply with the exact same skills but a cooler name? Did you hate my font choice? (**It was Calibri, you monster!**)
 
-Or was it something more sinister? Did I remind you of your ex? Did my email land in your spam folder and you just assumed I was unqualified? Did I fail some secret hiring test where you drop a pencil on the floor and see if I pick it up to test my kindness? The mystery is killing me.
+Or was it something more sinister? Did I remind you of your ex? Did my email land in your spam folder and you just assumed I was unqualified? Did I fail some secret hiring test where you drop a pencil on the floor and see if I pick it up to test my kindness? The mystery is killing me!
 
 I'm not even mad I got rejected. That's part of the game. I'm mad because there's absolutely nothing I can take away from this.
 
-The “No Feedback” Vortex of Doom
-Now, you might think: Okay, I'll just ask for feedback!
+## The “No Feedback” Vortex of Doom
 
-Ha. Ha ha. No.
+Now, you might think: Okay, I'll just ask for feedback! Ha. Ha ha. No.
+
+![Ha. Ha ha. No.](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjZwb2dvMDU3dWRmdXppeTJ4cGMwa3QxMG91OHV2aTI5aXAzcnJ1MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9RIESpHPpFK0w/giphy.gif)
 
 First, you realize the email is noreply@company.com. Great. Love the direct and personal touch. I feel truly valued. But wait! Maybe you applied through a recruiter. Surely they have answers. So you ask, and what do you get?
 
@@ -86,7 +87,7 @@ Since companies refuse to be helpful, our only options are:
 
 - **Bribery**. (Kidding. Probably.)
 - **Resume Audits**. Get a second pair of eyes on your resume.
-- _Mock Interviews_. Because maybe the problem is that your nervous laugh sounds too much like a villain's.
+- **Mock Interviews**. Because maybe the problem is that your nervous laugh sounds too much like a villain's.
 - **Networking**. Because let's be honest, half of hiring is just knowing the right people.
 - **Sheer, Unrelenting Persistence**. Keep applying until you question your own existence and make it through the mystical, unknowable hiring process. 60% of the time, it works every time.
 
