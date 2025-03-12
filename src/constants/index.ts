@@ -43,3 +43,17 @@ export const AboutMe = `A self-taught, meticulous & motivated Full Stack Develop
                         I am also committed to actively learning from every experience that I have. During every job and position
                         I have held, I learned about what it takes to succeed in this field, and I've carried that lesson throughout
                         the years as I've worked.`
+
+export const SuccessMessage = `Holy s#%t, you did it! You are an absolute legend! Do you know how many people start
+filling out forms and then abandon them because "ooh, shiny thing?" But not you. No, you're built different.
+
+Your message is now embarking on a perilous journey—starting as a humble collection of 1s and 0s, traveling through
+a tangled mess of fiber optics, bouncing between data centers powered by overworked hamsters on treadmills, and
+finally arriving in our inbox where it will stare at us, judgingly, until I respond.
+
+Then and only then, your reply shall materialize. Probably. Maybe. Look, I promise it'll happen faster than Congress passing a bill,
+so at least there's that. In the meantime, go grab a snack, or Google weird animal facts(did you know wombat poop is cube-shaped? Now you do).
+
+See you in your inbox soon. Or later. But definitely before Stranger Things last season. Maybe.
+
+Cheers! 🍻`
