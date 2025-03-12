@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import CodeHighlight from '../CodeHighlight'
+import SuccessPopup from './SuccessPopup'
 import './style.css'
 
 interface FormData {
@@ -8,14 +9,18 @@ interface FormData {
   message: string
 }
 
-export default function NewContactForm() {
-  const [formData, setFormData] = useState({
+export default function ContactForm() {
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     message: '',
   })
 
+  const [showPopup, setShowPopup] = useState(true)
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
     const encode = (data: Record<string, string>) => {
       return Object.keys(data)
         .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
@@ -27,13 +32,22 @@ export default function NewContactForm() {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: encode({'form-name': 'contact', ...formData}),
     })
-      .then(() => (window.location.href = '/form_success'))
+      .then(() => {
+        setShowPopup(true)
+        setFormData({name: '', email: '', message: ''}) // Reset form
+      })
       .catch((error) => alert(error))
-
-    e.preventDefault()
   }
 
-  const truncate = (str, maxLength) => (str.length > maxLength ? str.slice(0, maxLength) + '...' : str)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const {name, value} = e.target
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
+
+  const truncate = (str: string, maxLength: number) => (str.length > maxLength ? str.slice(0, maxLength) + '...' : str)
 
   const Code = `
 class GetInTouch
@@ -47,21 +61,13 @@ class GetInTouch
 end
   `
 
-  const handleChange = (e) => {
-    const {name, value} = e.target
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }))
-  }
-
   return (
-    <section id="contact" className="min-h-[80vh] flex items-center">
+    <section id="contact" className="min-h-[80vh] flex items-center relative">
       <div className="columns-2 gap-8 w-full justify-center">
         <div className="h-full">
           <form
             id="contact-form"
-            className="flex justify-center flex-col w-full "
+            className="flex justify-center flex-col w-full"
             onSubmit={handleSubmit}
             data-netlify="true"
             data-netlify-recaptcha="true"
@@ -113,12 +119,13 @@ end
           </form>
         </div>
         <div className="h-full">
-          {/* Code Preview */}
           <div className="flex justify-center items-center text-2xl">
             <CodeHighlight code={Code.trim()} />
           </div>
         </div>
       </div>
+
+      {showPopup && <SuccessPopup onClose={() => setShowPopup(false)} />}
     </section>
   )
 }
