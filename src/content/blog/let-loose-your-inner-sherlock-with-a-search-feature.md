@@ -1,6 +1,6 @@
 ---
 title: 'Let Loose Your Inner Sherlock with a Search Feature'
-date: '03-15-2024' 
+date: '03-15-2024'
 heroImage: '/blog/search-feature/inspector.png'
 image: '/blog/search-feature/inspector.png'
 originalDatePublished:
@@ -19,13 +19,11 @@ How do we bring this magical search feature to life in a Rails app? Well, buckle
 
 ![Excelsior!](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXJpa3RrdGxwNnEyM3AxdWd6NGZxc2ZjaHhsYjJ0c25nMW9hemFmbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26ufj9ZwxwEaZ8AWk/giphy.gif)
 
-
 ## Implementing a Basic Search Feature
 
 Let's talk about the search method in the controller. This is where the real magic happens. We'll whip up a nifty search method that'll make your app feel like it has its detective on the case. We will use the all-mighty `scaffold` generator to whip up our search feature. When we talk about Rails Scaffold, we're talking about the holy grail of automatic file generation. We're talking controllers, views, models, routes, and migrations - the whole shebang.
 
 Now, to get that ball rolling and scaffold your post, all you have to do is fire off this command:
-
 
 ```bash
 rails g scaffold post title body:text
@@ -42,7 +40,6 @@ rails db:migrate
 Once that's done, you're at the central part of the tutorial. So, let's add the form in the `app/views/posts/index.html.erb` file. This is where the magic happens. We're going to sprinkle a little HTML and tailwind magic to make that search bar pop like a fireworks display. And when users type in their queries, they'll be whisked away to a search page that's as sleek and stylish as a red carpet premiere.
 
 Note: I put a lot of the tailwind CSS inside 'application.css,' so it looks like everything is okay in this blog.
-
 
 ```erb
 <div class="container flex flex-col">
@@ -122,7 +119,6 @@ Fifth, onto the real MVP `.where()`. This little powerhouse is our ticket to fil
 
 Last but not least, we've got the big guns `LIKE`. When I say `LIKE` in all caps, I mean business. It's like the matchmaker of the digital world, trying to find that perfect match between what you're searching for and what's hiding in the depths of your database. So when you see `LIKE` you know it's game on, baby!
 
-
 ## Showing the Search Results
 
 Now, let's discuss the search results in the view. This is where the magic happens. We're going to add some HTML and tailwind magic to make those search results look a little more impressive.
@@ -149,13 +145,11 @@ Now, let's discuss the search results in the view. This is where the magic happe
 
 Here, we add a conditional statement to check if the `@posts` variable is present. If so, we loop through each post and display the title and body.
 
-
 ## Adding the Posts Partial with Turbo Streams
 
 `turbo_stream` is a Rails feature that allows you to update parts of a page without a full page reload. It's like having a magic wand that lets you sprinkle fairy dust on your app and make things happen in real-time. When you're in your controller and toss in the `turbo_stream update` method, you're telling your app, "Hey, buddy, when someone hits that submit button, let's fire up that search method, pronto!"
 
 What we are going to do is add a new file called `_posts.html.erb` inside `app/views/posts` and wrap the posts in a `turbo_frame_tag` and update the posts partial with the new posts. This will allow us to update the posts without a full page reload.
-
 
 ```erb
 <%= turbo_frame_tag "posts" do %>
@@ -198,10 +192,6 @@ Now, let's run the following command to add the data to the database.
 rails db:seed
 ```
 
-
 ## Conclusion
 
 In conclusion, implementing a compelling search feature in a Rails app is crucial for enhancing user experience and application functionality. By following the steps outlined above, including setting up the search method, designing the search form, defining the search route, and utilizing Turbo Streams for real-time updates, developers can create a search feature that meets and exceeds user expectations. With the right tools and techniques, building a robust search functionality can transform an ordinary Rails app into a user-friendly, dynamic platform that keeps users engaged and satisfied. So, let loose your inner Sherlock and start building a search feature that'll make users feel like they've got the world at their fingertips.
-
-
-For the full code, you can check the [GitHub repository](https://github.com/t0nylombardi/search-feature-in-rails).
