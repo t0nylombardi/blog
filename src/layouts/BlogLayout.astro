@@ -120,7 +120,7 @@ const currentPath = Astro.url.pathname
       </main>
 
       <Footer />
-      <Analytics />
+      <Analytics client:only="react" />
     </div>
   </body>
 </html>
