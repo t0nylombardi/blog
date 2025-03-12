@@ -77,7 +77,7 @@ end
               type="submit"
               className="border border-[#A478E8] hover:text-[#A478E8] font-bold mt-8 p-4"
             >
-              <div id="loader" className="flex items-center hidden">
+              <div id="loader" className="flex items-center ">
                 <svg
                   className="mr-3 h-5 w-5 animate-spin text-white"
                   xmlns="http://www.w3.org/2000/svg"

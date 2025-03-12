@@ -4,12 +4,8 @@ import {SITE_TITLE, SITE_DESCRIPTION} from '../constants'
 import BaseHead from '../components/BaseHead.astro'
 import Footer from '../components/Footer.astro'
 import Nav from '../components/Nav.astro'
-import {loadGtag} from '../untils/gtag.ts'
+import Analytics from '../components/Analytics'
 import amoji_avatar from '../../public/amoji_avatar.svg'
-
-document.addEventListener('DOMContentLoaded', () => {
-  loadGtag
-})
 ---
 
 <!doctype html>
@@ -56,6 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     <Nav />
     <slot />
     <Footer />
-    <script></script>
+    <Analytics />
   </body>
 </html>
