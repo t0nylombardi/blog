@@ -3,7 +3,7 @@ command = "astro build"
 publish = "dist"
 
 [[redirects]]
-from = "/blog/:slug"
-to = "/blog/:splat"
+from = "/blog/:slug/"
+to = "/blog/:slug"
 status = 301
 force = true
