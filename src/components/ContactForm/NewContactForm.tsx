@@ -67,17 +67,12 @@ end
         <div className="h-full">
           <form
             id="contact-form"
+            name="contact-form"
             className="flex justify-center flex-col w-full"
             onSubmit={handleSubmit}
             data-netlify="true"
-            data-netlify-recaptcha="true"
-            data-netlify-honeypot="bot-field"
           >
-            <p className="hidden">
-              <label>
-                Don’t fill this out if you’re human: <input name="bot-field" />
-              </label>
-            </p>
+            <input type="hidden" name="contact-form" value="contact" />
             <input
               id="name"
               name="name"
@@ -118,6 +113,7 @@ end
             </button>
           </form>
         </div>
+
         <div className="h-full">
           <div className="flex justify-center items-center text-2xl">
             <CodeHighlight code={Code.trim()} />
