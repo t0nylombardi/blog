@@ -1,0 +1,10 @@
+---
+import {FormSuccess} from '../components/FormSucess/Index'
+import BaseWrapper from '../layouts/BaseWrapper.astro'
+---
+
+<BaseWrapper>
+  <div class="pt-[10rem] flex justify-center items-center">
+    <FormSuccess client:only="react" />
+  </div>
+</BaseWrapper>

@@ -18,12 +18,6 @@ export default function ContactForm() {
 
   const [showPopup, setShowPopup] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setShowPopup(true)
-    setFormData({name: '', email: '', message: ''})
-  }
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = e.target
     setFormData((prevData) => ({
@@ -54,8 +48,8 @@ end
             id="contact-form"
             name="contact-form"
             className="flex justify-center flex-col w-full"
-            onSubmit={handleSubmit}
             data-netlify="true"
+            action="/success"
           >
             <input type="hidden" name="contact-form" value="contact-form" />
             <input
