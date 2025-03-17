@@ -20,23 +20,8 @@ export default function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    const encode = (data: Record<string, string>) => {
-      return Object.keys(data)
-        .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-        .join('&')
-    }
-
-    fetch('/', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: encode({'form-name': 'contact', ...formData}),
-    })
-      .then(() => {
-        setShowPopup(true)
-        setFormData({name: '', email: '', message: ''}) // Reset form
-      })
-      .catch((error) => alert(error))
+    setShowPopup(true)
+    setFormData({name: '', email: '', message: ''})
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -72,7 +57,7 @@ end
             onSubmit={handleSubmit}
             data-netlify="true"
           >
-            <input type="hidden" name="contact-form" value="contact" />
+            <input type="hidden" name="contact-form" value="contact-form" />
             <input
               id="name"
               name="name"
