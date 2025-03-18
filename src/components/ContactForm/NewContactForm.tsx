@@ -10,20 +10,50 @@ interface FormData {
 }
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState<FormData>({
+  const [codeData, setCodeData] = useState<FormData>({
     name: '',
     email: '',
     message: '',
   })
 
+  const [status, setStatus] = useState<'pending' | 'ok' | 'error' | null>(null)
+  const [error, setError] = useState<string | null>(null)
   const [showPopup, setShowPopup] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = e.target
-    setFormData((prevData) => ({
+    setCodeData((prevData) => ({
       ...prevData,
       [name]: value,
     }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setStatus('pending')
+    setError(null)
+    console.log('Event:', e)
+    const formData = new FormData(e.target as HTMLFormElement)
+    const body = new URLSearchParams(formData as any).toString()
+
+    await fetch('/form', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body,
+    })
+      .then((res) => {
+        if (!res.ok) {
+          setStatus('error')
+          setError(`Error: ${res.status} ${res.statusText}`)
+        }
+        setStatus('ok')
+        setShowPopup(true)
+        setCodeData({name: '', email: '', message: ''})
+      })
+      .catch((e) => {
+        setStatus('error')
+        setError(String(e))
+      })
   }
 
   const truncate = (str: string, maxLength: number) => (str.length > maxLength ? str.slice(0, maxLength) + '...' : str)
@@ -31,9 +61,9 @@ export default function ContactForm() {
   const Code = `
 class GetInTouch
   def send_mail
-    name = "${truncate(formData.name, 25)}"
-    email = "${truncate(formData.email, 25)}"
-    message = "${truncate(formData.message, 25)}"
+    name = "${truncate(codeData.name, 25)}"
+    email = "${truncate(codeData.email, 25)}"
+    message = "${truncate(codeData.message, 25)}"
 
     ContactForm.new(name, email, message).submit!
   end
@@ -50,6 +80,7 @@ end
             data-netlify="true"
             method="POST"
             action="/success"
+            onSubmit={handleSubmit} // ✅ Fixed
           >
             <input type="hidden" name="contact-form" value="contact-form" />
             <input
@@ -58,7 +89,7 @@ end
               placeholder="What is your name?"
               className="w-full py-2 px-4 border-[#A478E8] border bg-[#24273A] rounded-sm mt-2"
               required
-              value={formData.name}
+              value={codeData.name}
               onChange={handleChange}
             />
             <input
@@ -67,7 +98,7 @@ end
               placeholder="what-is@your-email.question"
               className="w-full py-2 px-4 bg-[#24273A] border-[#A478E8] border rounded-sm mt-2"
               required
-              value={formData.email}
+              value={codeData.email}
               onChange={handleChange}
             />
             <textarea
@@ -76,7 +107,7 @@ end
               className="w-full py-2 px-4 mt-2 bg-[#24273A] border-[#A478E8] border rounded-sm"
               rows={5}
               required
-              value={formData.message}
+              value={codeData.message}
               onChange={handleChange}
             ></textarea>
             <div data-netlify-recaptcha="true"></div>
@@ -84,10 +115,12 @@ end
               id="submit-form"
               type="submit"
               className="border border-[#A478E8] hover:text-[#A478E8] font-bold mt-8 p-4"
+              disabled={status === 'pending'} // Disable button while submitting
             >
-              <p id="sender">Send Message</p>
+              {status === 'pending' ? 'Submitting...' : 'Send Message'}
             </button>
           </form>
+          {status === 'error' && <div className="text-red-500 mt-2">{error}</div>}
         </div>
 
         <div className="h-full">
