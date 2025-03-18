@@ -45,15 +45,14 @@ end
       <div className="columns-2 gap-8 w-full justify-center">
         <div className="h-full">
           <form
-            id="contact-form"
             name="contact-form"
             className="flex justify-center flex-col w-full"
             data-netlify="true"
+            method="POST"
             action="/success"
           >
             <input type="hidden" name="contact-form" value="contact-form" />
             <input
-              id="name"
               name="name"
               type="text"
               placeholder="What is your name?"
@@ -63,7 +62,6 @@ end
               onChange={handleChange}
             />
             <input
-              id="email"
               name="email"
               type="email"
               placeholder="what-is@your-email.question"
@@ -73,7 +71,6 @@ end
               onChange={handleChange}
             />
             <textarea
-              id="message"
               name="message"
               placeholder="What do you want to talk about?"
               className="w-full py-2 px-4 mt-2 bg-[#24273A] border-[#A478E8] border rounded-sm"
