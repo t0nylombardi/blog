@@ -19,6 +19,11 @@ const {title, description} = Astro.props as Props
     <Header />
     <main class="max-w-screen-md ml-auto mr-auto p-4">
       <slot />
+      <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <textarea name="message"></textarea>
+      </form>
     </main>
   </body>
 </html>
