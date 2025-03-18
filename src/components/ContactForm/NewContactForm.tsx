@@ -28,7 +28,7 @@ export default function ContactForm() {
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus('pending')
     setError(null)
@@ -82,7 +82,7 @@ end
             action="/success"
             onSubmit={handleSubmit} // ✅ Fixed
           >
-            <input type="hidden" name="contact-form" value="contact-form" />
+            <input type="hidden" name="form-name" value="feedback" />
             <input
               name="name"
               type="text"
