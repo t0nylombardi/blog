@@ -82,7 +82,7 @@ end
             action="/success"
             onSubmit={handleSubmit} // ✅ Fixed
           >
-            <input type="hidden" name="form-name" value="feedback" />
+            <input type="hidden" name="form-name" value="contact-form" />
             <input
               name="name"
               type="text"
