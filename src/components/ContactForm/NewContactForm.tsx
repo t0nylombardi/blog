@@ -80,10 +80,15 @@ end
             name="contact-form"
             className="flex justify-center flex-col w-full"
             data-netlify="true"
-            method="POST"
-            action="/success"
+            netlify-honeypot="bot-field"
+            data-netlify-recaptcha="true"
             onSubmit={handleSubmit}
           >
+            <p className="invisible">
+              <label>
+                Don’t fill this out if you’re human: <input name="bot-field" />
+              </label>
+            </p>
             <input type="hidden" name="form-name" value="contact-form" />
             <input
               name="name"
