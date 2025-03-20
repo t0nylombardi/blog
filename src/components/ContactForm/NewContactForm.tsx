@@ -36,7 +36,9 @@ export default function ContactForm() {
     const formData = new FormData(e.target as HTMLFormElement)
     const body = new URLSearchParams(formData as any).toString()
 
-    await fetch('/form', {
+    console.log('Form Data:', body)
+
+    await fetch('/__forms.html', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body,
@@ -80,7 +82,7 @@ end
             data-netlify="true"
             method="POST"
             action="/success"
-            onSubmit={handleSubmit} // ✅ Fixed
+            onSubmit={handleSubmit}
           >
             <input type="hidden" name="form-name" value="contact-form" />
             <input
