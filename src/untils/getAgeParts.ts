@@ -1,10 +1,9 @@
 import type { AgeParts } from "../types/age";
 
 export const getAgeParts = (birthDate: Date, now: Date): AgeParts => {
-  const birthMonth = birthDate.getMonth();
+  const birthMonth = birthDate.getMonth(); // March = 2
   const birthDay = birthDate.getDate();
 
-  // Last birthday (March 31)
   const thisYearBirthday = new Date(now.getFullYear(), birthMonth, birthDay);
   const lastBirthday =
     now >= thisYearBirthday
@@ -25,18 +24,25 @@ export const getAgeParts = (birthDate: Date, now: Date): AgeParts => {
     if (temp <= now) months++;
   }
 
-  // Subtract the month offset to find remaining time
-  const monthStart = new Date(lastBirthday);
-  monthStart.setMonth(monthStart.getMonth() + months);
 
-  const diff = now.getTime() - monthStart.getTime();
-  const diffDate = new Date(diff);
+  // Create a base date to calculate the diff (time since last birthday)
+  const diff = now.getTime() - lastBirthday.getTime();
+  const tempDate = new Date(diff); // epoch + delta
 
-  const days = diffDate.getUTCDate() - 1;
-  const hours = diffDate.getUTCHours();
-  const minutes = diffDate.getUTCMinutes();
-  const seconds = diffDate.getUTCSeconds();
-  const milliseconds = diffDate.getUTCMilliseconds();
+  // const months = now.getMonth() - lastBirthday.getMonth() + (now.getFullYear() - lastBirthday.getFullYear()) * 12;
+  const days = tempDate.getUTCDate() - 1;
+  const hours = tempDate.getUTCHours();
+  const minutes = tempDate.getUTCMinutes();
+  const seconds = tempDate.getUTCSeconds();
+  const milliseconds = tempDate.getUTCMilliseconds();
 
-  return { years, months, days, hours, minutes, seconds, milliseconds };
+  return {
+    years,
+    months: months % 12,
+    days,
+    hours,
+    minutes,
+    seconds,
+    milliseconds,
+  };
 };
