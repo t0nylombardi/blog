@@ -75,7 +75,7 @@ end
   return (
     <section id="contact" className="min-h-[80vh] flex items-center relative">
       <div className="columns-2 gap-8 w-full justify-center">
-        <div className="h-full">
+        <div className="h-full flex flex-col justify-center">
           <form
             name="contact-form"
             className="flex justify-center flex-col w-full"
@@ -130,7 +130,7 @@ end
           {status === 'error' && <div className="text-red-500 mt-2">{error}</div>}
         </div>
 
-        <div className="h-full">
+        <div className="h-full flex flex-col justify-center pt-8">
           <div className="flex justify-center items-center text-2xl">
             <CodeHighlight code={Code.trim()} />
           </div>

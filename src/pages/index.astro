@@ -4,12 +4,10 @@ import BlogPostList from '../components/BlogPostList.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import {ContactForm} from '../components/ContactForm/'
 import LanguagesSprites from '../components/LanguagesSprites.astro'
+import MySocials from '../components/MySocials.tsx'
 import CTA from '../components/CTA.astro'
-import {socials, DOB, Projects, AboutMe} from '../constants/index.ts'
-
-let ageDifMs = Date.now() - new Date(DOB).getTime()
-let ageDate = new Date(ageDifMs)
-let yearsOld = Math.abs(ageDate.getUTCFullYear() - 1970)
+import {Projects, AboutMe} from '../constants/index.ts'
+import AgeCounter from '../components/AgeCounter'
 ---
 
 <style>
@@ -62,29 +60,14 @@ let yearsOld = Math.abs(ageDate.getUTCFullYear() - 1970)
           <p>
             <span class="text-[#4D5BCE]">let{' '}</span>
             <span class="text-[#43D9AD]">age</span> =
-            <span id="age" class="text-[#E99287]">{yearsOld}</span>
+            <span id="age" class="text-[#E99287]"><AgeCounter client:only="react" /></span>
           </p>
           <p>
             <span class="text-[#4D5BCE]">let{' '}</span>
             <span class="text-[#43D9AD]">location</span> =
             <span class="text-[#E99287]">"Westchester, New York"</span>
           </p>
-          <p class="comment pt-4">// list of my social links</p>
-          <p>
-            <span class="text-[#4D5BCE]">const{' '}</span>
-            <span class="text-[#43D9AD]">github</span> =
-            <a class="text-[#E99287] hover" href={socials.github}>“{socials.github}”</a>
-          </p>
-          <p>
-            <span class="text-[#4D5BCE]">const{' '}</span>
-            <span class="text-[#43D9AD]">twitter</span> =
-            <a href={socials.twitter} class="text-[#E99287] hover">“{socials.twitter}”</a>
-          </p>
-          <p>
-            <span class="text-[#4D5BCE]">const{' '}</span>
-            <span class="text-[#43D9AD]">Instagram</span> =
-            <a href={socials.instagram} class="text-[#E99287] hover">“{socials.instagram}”</a>
-          </p>
+          <MySocials />
         </div>
         <CTA link="resume" />
       </div>
@@ -130,7 +113,7 @@ let yearsOld = Math.abs(ageDate.getUTCFullYear() - 1970)
     <section id="blog" class="flex flex-col items-center justify-center">
       <h3 class="text-4xl font-medium">_blog</h3>
       <BlogPostList limit={3} />
-      <a href="/blog/" class="btn-primary text-2xl block py-16">See more blog posts</a>
+      <a href="/blog" class="btn-primary text-2xl block py-16">See more blog posts</a>
     </section>
     <ContactForm client:only="react" />
   </div>
