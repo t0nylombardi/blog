@@ -8,11 +8,12 @@ export const SITE_DESCRIPTION = `Unlock the expertise of a self-taught,
 export const ASTRO_PUBLIC_GA_ID = 'G-H56C6BEBLS';
 
 export const DOB = '03/31/1983'
+export const BIRTHDAY = new Date(1983, 2, 31);
 
 export const socials = {
   github: "https://github.com/t0nylombardi",
-  twitter: "https://twitter.com/t0nylombardi",
-  instagram: "https://instagram.com/t0nylombardi",
+  linkedin: "https://linkedin.com/in/t0nylombardi",
+  bluesky: "https://bsky.app/profile/tonylombardi.bsky.social"
 };
 
 export const Projects = [
@@ -34,7 +35,7 @@ export const Projects = [
   }
 ];
 
-export const AboutMe = `A self-taught, meticulous & motivated Full Stack Developer with 10+ years of hands-on experience,
+export const AboutMe = `I am a self-taught, meticulous & motivated Full Stack Developer with 10+ years of hands-on experience,
                         particularly in Ruby and Ruby on Rails. I have worked on Ruby on Rails e-commerce architecture,
                         breaking down monoliths, working on microservices, helping with DevOps, and leading a team through
                         the full-stack life cycle. From my first professional job as a junior developer, My journey has been
