@@ -16,6 +16,12 @@ export const socials = {
   bluesky: "https://bsky.app/profile/tonylombardi.bsky.social"
 };
 
+export const footerSocials = {
+  twitter: "https://twitter.com/t0nylombardi",
+  github: "https://github.com/t0nylombardi",
+  instagram: "https://instagram.com/t0nylombardi",
+}
+
 export const Projects = [
   {
     img: "/projects/churp.png",
