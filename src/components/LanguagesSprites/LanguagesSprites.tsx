@@ -1,4 +1,5 @@
 import {Icon} from '@iconify/react'
+import './styles.css'
 
 const LanguagesSprites = () => {
   return (
