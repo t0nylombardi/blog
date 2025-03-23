@@ -43,6 +43,12 @@ module.exports = {
         "azure": "#3B82F6",
         "md-purple": "#A478E8"
       },
+      scrollSnapType: {
+        y: 'y mandatory',
+      },
+      scrollSnapAlign: {
+        start: 'start',
+      },
     },
   },
   plugins: [],
