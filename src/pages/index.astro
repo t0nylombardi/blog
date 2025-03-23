@@ -43,7 +43,7 @@ import {AboutSection} from '../components/Sections'
 
 <BaseWrapper>
   <div
-    class="sm:container sm:mx-auto lg:container lg:mx-auto px-4 sm:px-4 md:px-4 py-24 lg:py-40 scroll-snap-y scroll-smooth h-screen overflow-y-scroll"
+    class="sm:container sm:mx-auto lg:container lg:mx-auto px-4 sm:px-4 md:px-4 py-24 lg:py-40 scroll-snap-y scroll-smooth h-screen overflow-auto hide-scrollbar"
   >
     <header
       id="hello"
@@ -74,7 +74,7 @@ import {AboutSection} from '../components/Sections'
       </div>
     </header>
 
-    <AboutSection />
+    <AboutSection client:only="react" />
 
     <section id="projects" class="scroll-snap-start h-screen flex flex-col justify-center items-center mt-[10rem]">
       <h3 class="text-4xl font-medium">_projects</h3>
