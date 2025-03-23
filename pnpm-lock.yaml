@@ -41,6 +41,9 @@ importers:
       '@iconify-json/vscode-icons':
         specifier: ^1.1.33
         version: 1.2.16
+      '@iconify/react':
+        specifier: ^5.2.0
+        version: 5.2.0(react@19.0.0)
       '@types/react-dom':
         specifier: ^19.0.4
         version: 19.0.4(@types/react@19.0.10)
@@ -96,12 +99,24 @@ importers:
       '@shikijs/transformers':
         specifier: ^3.1.0
         version: 3.1.0
+      '@types/graceful-fs':
+        specifier: ^4.1.9
+        version: 4.1.9
       '@types/gtag.js':
         specifier: ^0.0.20
         version: 0.0.20
+      '@types/node-forge':
+        specifier: ^1.3.11
+        version: 1.3.11
       '@types/react':
         specifier: ^19.0.10
         version: 19.0.10
+      '@types/react-reconciler':
+        specifier: ^0.31.0
+        version: 0.31.0(@types/react@19.0.10)
+      '@types/webxr':
+        specifier: ^0.5.21
+        version: 0.5.21
       astro:
         specifier: ^5.3.0
         version: 5.4.2(@netlify/blobs@8.1.1)(@types/node@22.13.10)(jiti@1.21.7)(lightningcss@1.28.2)(rollup@4.35.0)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0)
@@ -474,6 +489,11 @@ packages:
 
   '@iconify-json/vscode-icons@1.2.16':
     resolution: {integrity: sha512-hstc2yVq2UJ6v6FrgjftzXRvphGZBsKxvSeXoFLP1Hgx89TPZKrGE5SV6vqsoeIlLYaQ7OZbXmAoVGroTfGmVQ==}
+
+  '@iconify/react@5.2.0':
+    resolution: {integrity: sha512-7Sdjrqq3fkkQNks9SY3adGC37NQTHsBJL2PRKlQd455PoDi9s+Es9AUTY+vGLFOYs5yO9w9yCE42pmxCwG26WA==}
+    peerDependencies:
+      react: '>=16'
 
   '@iconify/tools@4.1.1':
     resolution: {integrity: sha512-Hybu/HGhv6T8nLQhiG9rKx+ekF7NNpPOEQAy7JRSKht3s3dcFSsPccYzk24Znc9MTxrR6Gak3cg6CPP5dyvS2Q==}
@@ -862,6 +882,9 @@ packages:
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
+  '@types/graceful-fs@4.1.9':
+    resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
+
   '@types/gtag.js@0.0.20':
     resolution: {integrity: sha512-wwAbk3SA2QeU67unN7zPxjEHmPmlXwZXZvQEpbEUQuMCRGgKyE1m6XDuTUA9b6pCGb/GqJmdfMOY5LuDjJSbbg==}
 
@@ -895,6 +918,9 @@ packages:
   '@types/nlcst@2.0.3':
     resolution: {integrity: sha512-vSYNSDe6Ix3q+6Z7ri9lyWqgGhJTmzRjZRqyq15N0Z/1/UnVsno9G/N40NBijoYx2seFDIl0+B2mgAb9mezUCA==}
 
+  '@types/node-forge@1.3.11':
+    resolution: {integrity: sha512-FQx220y22OKNTqaByeBGqHWYz4cl94tpcxeFdvBo3wjG6XPBuZ0BNgNZRV5J5TFmmcsJ4IzsLkmGRiQbnYsBEQ==}
+
   '@types/node@22.10.5':
     resolution: {integrity: sha512-F8Q+SeGimwOo86fiovQh8qiXfFEh2/ocYv7tU5pJ3EXMSSxk1Joj5wefpFK2fHTf/N6HKGSxIDBT9f3gCxXPkQ==}
 
@@ -905,6 +931,11 @@ packages:
     resolution: {integrity: sha512-4fSQ8vWFkg+TGhePfUzVmat3eC14TXYSsiiDSLI0dVLsrm9gZFABjPy/Qu6TKgl1tq1Bu1yDsuQgY3A3DOjCcg==}
     peerDependencies:
       '@types/react': ^19.0.0
+
+  '@types/react-reconciler@0.31.0':
+    resolution: {integrity: sha512-wa1KtV3SHKnWeLHfZFg/7nrPSe/Ejdn+qbanNX4V6i9I7C3ECKPfBnC1KM3ef58KFWEohLmTvoTH5XuEIKGX2g==}
+    peerDependencies:
+      '@types/react': '*'
 
   '@types/react@19.0.10':
     resolution: {integrity: sha512-JuRQ9KXLEjaUNjTWpzuR231Z2WpIwczOkBEIvbHNCzQefFIT0L8IqE6NV6ULLyC1SI/i234JnDoMkfg+RjQj2g==}
@@ -923,6 +954,9 @@ packages:
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
+
+  '@types/webxr@0.5.21':
+    resolution: {integrity: sha512-geZIAtLzjGmgY2JUi6VxXdCrTb99A7yP49lxLr2Nm/uIK0PkkxcEi4OGhoGDO4pxCf3JwGz2GiJL2Ej4K2bKaA==}
 
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
@@ -3767,6 +3801,11 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
+  '@iconify/react@5.2.0(react@19.0.0)':
+    dependencies:
+      '@iconify/types': 2.0.0
+      react: 19.0.0
+
   '@iconify/tools@4.1.1':
     dependencies:
       '@iconify/types': 2.0.0
@@ -4188,6 +4227,10 @@ snapshots:
 
   '@types/estree@1.0.6': {}
 
+  '@types/graceful-fs@4.1.9':
+    dependencies:
+      '@types/node': 22.13.10
+
   '@types/gtag.js@0.0.20': {}
 
   '@types/hast@3.0.4':
@@ -4223,6 +4266,10 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
 
+  '@types/node-forge@1.3.11':
+    dependencies:
+      '@types/node': 22.13.10
+
   '@types/node@22.10.5':
     dependencies:
       undici-types: 6.20.0
@@ -4232,6 +4279,10 @@ snapshots:
       undici-types: 6.20.0
 
   '@types/react-dom@19.0.4(@types/react@19.0.10)':
+    dependencies:
+      '@types/react': 19.0.10
+
+  '@types/react-reconciler@0.31.0(@types/react@19.0.10)':
     dependencies:
       '@types/react': 19.0.10
 
@@ -4251,6 +4302,8 @@ snapshots:
   '@types/unist@2.0.11': {}
 
   '@types/unist@3.0.3': {}
+
+  '@types/webxr@0.5.21': {}
 
   '@types/yargs-parser@21.0.3': {}
 

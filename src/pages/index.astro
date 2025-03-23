@@ -3,18 +3,14 @@ import BaseWrapper from '../layouts/BaseWrapper.astro'
 import BlogPostList from '../components/BlogPostList.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import {ContactForm} from '../components/ContactForm/'
-import LanguagesSprites from '../components/LanguagesSprites.astro'
 import MySocials from '../components/MySocials.tsx'
 import CTA from '../components/CTA.astro'
 import {Projects, AboutMe} from '../constants/index.ts'
 import AgeCounter from '../components/AgeCounter'
+import {AboutSection} from '../components/Sections'
 ---
 
 <style>
-  section {
-    margin: 8rem 0;
-  }
-
   section:last-of-type {
     margin-top: 8rem;
     margin-bottom: 0;
@@ -46,7 +42,9 @@ import AgeCounter from '../components/AgeCounter'
 </style>
 
 <BaseWrapper>
-  <div class="sm:container sm:mx-auto lg:container lg:mx-auto px-4 sm:px-4 md:px-4 py-24 lg:py-40">
+  <div
+    class="sm:container sm:mx-auto lg:container lg:mx-auto px-4 sm:px-4 md:px-4 py-24 lg:py-40 scroll-snap-y scroll-smooth h-screen overflow-y-scroll"
+  >
     <header
       id="hello"
       class="sm:container sm:mx-auto container mx-auto flex items-center flex-col-reverse md:flex-row w-full"
@@ -76,21 +74,9 @@ import AgeCounter from '../components/AgeCounter'
       </div>
     </header>
 
-    <section id="about" class="flex items-center flex-col-reverse md:flex-row">
-      <div class="hidden flex-1 lg:flex justify-center items-center">
-        <LanguagesSprites />
-      </div>
+    <AboutSection />
 
-      <div class="flex-1 mb-8">
-        <h3 class="text-4xl font-medium">_about-me</h3>
-        <p class="comment mt-2">// get a small overview of who I am</p>
-        <p class="mt-9">
-          {AboutMe}
-        </p>
-      </div>
-    </section>
-
-    <section id="projects" class="flex flex-col mt-[10rem]">
+    <section id="projects" class="scroll-snap-start h-screen flex flex-col justify-center items-center mt-[10rem]">
       <h3 class="text-4xl font-medium">_projects</h3>
       <div>
         <div id="projects-list" class="flex flex-col justify-between w-full mt-12">
@@ -110,7 +96,7 @@ import AgeCounter from '../components/AgeCounter'
       </div>
     </section>
 
-    <section id="blog" class="flex flex-col items-center justify-center">
+    <section id="blog" class="scroll-snap-start h-screen flex flex-col items-center justify-center">
       <h3 class="text-4xl font-medium">_blog</h3>
       <BlogPostList limit={3} />
       <a href="/blog" class="btn-primary text-2xl block py-16">See more blog posts</a>
