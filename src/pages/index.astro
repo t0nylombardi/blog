@@ -1,5 +1,5 @@
 ---
-import BaseWrapper from '../layouts/BaseWrapper.astro'
+import BaseWrapper from '../Layouts/BaseWrapper.astro'
 import BlogPostList from '../components/BlogPostList.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import {ContactForm} from '../components/ContactForm/'
@@ -77,7 +77,7 @@ import {AboutSection} from '../components/Sections'
     <AboutSection client:only="react" />
 
     <section id="projects" class="scroll-snap-start h-screen flex flex-col justify-center items-center mt-[10rem]">
-      <h3 class="text-4xl font-medium">_projects</h3>
+      <h3 class="text-5xl font-medium">_projects</h3>
       <div>
         <div id="projects-list" class="flex flex-col justify-between w-full mt-12">
           {
