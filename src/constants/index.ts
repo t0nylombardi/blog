@@ -24,14 +24,6 @@ export const footerSocials = {
 
 export const Projects = [
   {
-    img: "/projects/factuality.png",
-    width: "w-[12rem]",
-    link: "https://factuality.wtf",
-    title: "Factuality WTF",
-    technologies: "Go, React, NextJS, Tailwind",
-    description: "Factuallity is a website that gives random, useless that no one cares about. It was built with Go, React, NextJS and Tailwind. The website is a simple web app that uses the Factuality API to get random facts and display them on the page. The website is hosted on AWS EC2."
-  },
-  {
     img: "/projects/optimus-image.png",
     width: "w-[12rem]",
     link: "https://github.com/t0nylombardi/optimus-image",
@@ -54,6 +46,14 @@ export const Projects = [
     title: "Rails Template",
     technologies: "Ruby",
     description: "Alot of time starting a new Rails project can be tedious(for me at least). Mostly setting up all the tools/technologies you want to use. This template script attempts to making the setup of a new app faster. The app sets up A Rails project with Docker, Rspec, Devise, Sidekiq, Active Storage, Action Text and Tailwind."
+  },
+  {
+    img: "/projects/factuality.png",
+    width: "w-[12rem]",
+    link: "https://factuality.wtf",
+    title: "Factuality WTF",
+    technologies: "Go, React, NextJS, Tailwind",
+    description: "Factuallity is a website that gives random, useless that no one cares about. It was built with Go, React, NextJS and Tailwind. The website is a simple web app that uses the Factuality API to get random facts and display them on the page. The website is hosted on AWS EC2."
   }
 ];
 

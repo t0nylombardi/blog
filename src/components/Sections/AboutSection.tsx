@@ -12,7 +12,7 @@ const AboutSection = () => {
       </div>
 
       <div className="flex-1 mb-8 md:mb-0 text-center md:text-left">
-        <h3 className="text-4xl font-medium">_about-me</h3>
+        <h3 className="text-5xl font-medium">_about-me</h3>
         <p className="comment mt-2">// get a small overview of who I am</p>
         <p className="mt-9">{AboutMe}</p>
       </div>
