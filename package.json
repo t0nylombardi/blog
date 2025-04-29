@@ -10,7 +10,7 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@astrojs/netlify": "^6.2.0",
+    "@astrojs/netlify": "^6.3.1",
     "@shikijs/transformers": "^3.1.0",
     "@types/graceful-fs": "^4.1.9",
     "@types/gtag.js": "^0.0.20",
@@ -18,15 +18,15 @@
     "@types/react": "^19.0.10",
     "@types/react-reconciler": "^0.31.0",
     "@types/webxr": "^0.5.21",
-    "astro": "^5.3.0",
+    "astro": "^5.7.7",
     "autoprefixer": "^10.4.8",
     "tailwindcss": "^3.0.24",
     "vite": "^6.0.7"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.8",
-    "@astrojs/react": "^4.2.1",
-    "@astrojs/tailwind": "^6.0.0",
+    "@astrojs/mdx": "^4.2.5",
+    "@astrojs/react": "^4.2.5",
+    "@astrojs/tailwind": "^6.0.2",
     "@iconify-json/bi": "^1.1.23",
     "@iconify-json/carbon": "^1.1.30",
     "@iconify-json/emojione": "^1.1.10",
