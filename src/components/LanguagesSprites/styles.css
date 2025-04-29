@@ -8,11 +8,6 @@ section {
   }
 }
 
-section:last-of-type {
-  margin-top: 12rem;
-  margin-bottom: 0;
-}
-
 .icon svg {
   width: 1rem;
   height: 1rem;

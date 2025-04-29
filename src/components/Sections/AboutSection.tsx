@@ -1,5 +1,6 @@
 import LanguagesSprites from '../LanguagesSprites/LanguagesSprites'
 import {AboutMe} from '../../constants'
+import SectionHeader from '../UI/SectionHeader'
 
 const AboutSection = () => {
   return (
@@ -12,7 +13,7 @@ const AboutSection = () => {
       </div>
 
       <div className="flex-1 mb-8 md:mb-0 text-center md:text-left">
-        <h3 className="text-5xl font-medium">_about-me</h3>
+        <SectionHeader header="_about-me" />
         <p className="comment mt-2">// get a small overview of who I am</p>
         <p className="mt-9">{AboutMe}</p>
       </div>

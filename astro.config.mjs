@@ -16,7 +16,10 @@ export default defineConfig({
   output: 'server',
   adapter: netlify(),
   integrations: [
-    react(),
+    react({
+      experimentalReactChildren: true,
+      experimental: {clientOnly: true},
+    }),
     tailwind(),
     icon({
       include: {

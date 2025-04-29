@@ -1,19 +1,19 @@
 ---
-import BaseWrapper from '../Layouts/BaseWrapper.astro'
+import BaseWrapper from '../layouts/BaseWrapper.astro'
 import BlogPostList from '../components/BlogPostList.astro'
-import ProjectCard from '../components/ProjectCard.astro'
+import ProjectCard from '../components/ProjectCard/ProjectCard.tsx'
 import {ContactForm} from '../components/ContactForm/'
 import MySocials from '../components/MySocials.tsx'
-import CTA from '../components/CTA.astro'
+import CTA from '../components/UI/CTA.astro'
 import {Projects, AboutMe} from '../constants/index.ts'
 import AgeCounter from '../components/AgeCounter'
-import {AboutSection} from '../components/Sections'
+import {AboutSection, ProjectSection} from '../components/Sections'
 ---
 
 <style>
   section:last-of-type {
-    margin-top: 8rem;
-    margin-bottom: 0;
+    margin-top: 12rem;
+    margin-bottom: 16rem;
   }
 
   .icon svg {
@@ -76,31 +76,14 @@ import {AboutSection} from '../components/Sections'
 
     <AboutSection client:only="react" />
 
-    <section id="projects" class="scroll-snap-start h-screen flex flex-col justify-center items-center mt-[10rem]">
-      <h3 class="text-5xl font-medium">_projects</h3>
-      <div>
-        <div id="projects-list" class="flex flex-col justify-between w-full mt-12">
-          {
-            Projects.map((project) => (
-              <ProjectCard
-                img={project.img}
-                width={project.width}
-                link={project.link}
-                title={project.title}
-                technologies={project.technologies}
-                description={project.description}
-              />
-            ))
-          }
-        </div>
-      </div>
-    </section>
+    <ProjectSection client:load />
 
-    <section id="blog" class="scroll-snap-start h-screen flex flex-col items-center justify-center">
+    <section id="blog" class="scroll-snap-start h-screen flex flex-col items-center justify-center my-[12rem]">
       <h3 class="text-4xl font-medium">_blog</h3>
       <BlogPostList limit={3} />
       <a href="/blog" class="btn-primary text-2xl block py-16">See more blog posts</a>
     </section>
+
     <ContactForm client:only="react" />
   </div>
 </BaseWrapper>

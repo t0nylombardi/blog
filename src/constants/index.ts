@@ -49,7 +49,7 @@ export const Projects = [
   },
   {
     img: "/projects/factuality.png",
-    width: "w-[12rem]",
+    width: "w-[23rem]",
     link: "https://factuality.wtf",
     title: "Factuality WTF",
     technologies: "Go, React, NextJS, Tailwind",

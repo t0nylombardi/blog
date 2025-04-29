@@ -50,6 +50,7 @@
     "react-visibility-sensor": "^5.1.1",
     "remark-toc": "^9.0.0",
     "shiki-languages": "^0.2.7",
+    "styled-components": "^6.1.17",
     "tm-themes": "^1.2.0",
     "typescript": "^5.2.2"
   },
