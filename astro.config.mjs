@@ -3,6 +3,7 @@ import {defineConfig} from 'astro/config'
 import netlify from '@astrojs/netlify'
 import tailwind from '@astrojs/tailwind'
 import mdx from '@astrojs/mdx'
+import fs from 'fs'
 
 const tokyoNight = JSON.parse(fs.readFileSync('./src/layouts/themes/tokyo-night.json', 'utf8'))
 
@@ -35,6 +36,23 @@ export default defineConfig({
       langs: [],
       wrap: false,
     },
+  },
+  vite: {
+    resolve: {
+      alias: {
+        // Example alias for debugging
+        '@components': '/src/components',
+      },
+    },
+    plugins: [
+      {
+        name: 'debug-resolve',
+        resolveId(source) {
+          console.log(`[DEBUG] Resolving: ${source}`)
+          return null // Let Vite handle the resolution
+        },
+      },
+    ],
   },
 })
 
