@@ -5,7 +5,7 @@ import tailwind from '@astrojs/tailwind'
 import mdx from '@astrojs/mdx'
 import icon from 'astro-icon'
 
-const tokyoNight = JSON.parse(fs.readFileSync('./src/Layouts/themes/tokyo-night.json', 'utf8'))
+const tokyoNight = JSON.parse(fs.readFileSync('./src/layouts/themes/tokyo-night.json', 'utf8'))
 
 // https://astro.build/config
 export default defineConfig({
