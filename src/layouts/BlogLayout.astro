@@ -4,7 +4,7 @@ import type {CollectionEntry} from 'astro:content'
 import BaseHead from '../components/Layouts/BaseHeader.astro'
 import Nav from '../components/Layouts/Nav.astro'
 import Footer from '../components/Layouts/Footer.astro'
-import {Icon} from 'astro-icon/components'
+import {Icon} from '@iconify/react'
 import Analytics from '../components/Analytics'
 import FormattedDate from '../components/FormattedDate.astro'
 
@@ -112,7 +112,7 @@ const currentPath = Astro.url.pathname
               <a href="https://www.buymeacoffee.com/t0nylombardi" class="hover:underline hover:cursor-pointer">
                 buying me a coffee</a
               >
-              <Icon name="vscode-icons:file-type-coffeescript" class="w-8 h-8 mx-2 inline-block" />
+              <Icon icon="vscode-icons:file-type-coffeescript" />
             </p>
             <p class="text-[1rem] md:text-[1.5rem]">Cheers!</p>
           </div>
@@ -124,3 +124,9 @@ const currentPath = Astro.url.pathname
     </div>
   </body>
 </html>
+
+<style>
+  Icon {
+    @apply w-8 h-8 mx-2 inline-block;
+  }
+</style>

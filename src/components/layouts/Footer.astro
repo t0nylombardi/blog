@@ -1,5 +1,5 @@
 ---
-import {Icon} from 'astro-icon/components'
+import {Icon} from '@iconify/react'
 import {footerSocials} from '../../constants/index.ts'
 const today = new Date()
 ---
@@ -35,9 +35,16 @@ const today = new Date()
       Object.entries(footerSocials).map(([platform, url]) => (
         <a href={url} target="_blank" rel="noopener noreferrer">
           <span class="sr-only">T0nylombardi's {platform.toUpperCase()}</span>
-          <Icon class="text-4xl" name={`fe:${platform}`} />
+          <Icon icon={`fe:${platform}`} />
         </a>
       ))
     }
   </div>
 </footer>
+
+<style>
+  Icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+</style>

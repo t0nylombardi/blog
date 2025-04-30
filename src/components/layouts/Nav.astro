@@ -1,5 +1,5 @@
 ---
-import {Icon} from 'astro-icon/components'
+import {Icon} from '@iconify/react'
 
 const routes = [
   {
@@ -147,7 +147,7 @@ const routes = [
           routes.map((route) => (
             <li class="">
               <a href={route.slug} class="flex items-center hover:text-gray-200">
-                <Icon name="bi:chevron-compact-right" class="h-4 w-4 lg:hidden" />
+                <Icon icon="bi:chevron-compact-right" />
                 {route.label}
               </a>
             </li>
@@ -169,3 +169,37 @@ const routes = [
     </li>
   </ul>
 </nav>
+
+<style>
+  #navlinks a {
+    transition: all 0.3s ease-in-out;
+  }
+
+  #navlinks a:hover {
+    color: #95aafb;
+  }
+
+  #navlinks a.active {
+    color: #95aafb;
+    border-bottom: 2px solid #95aafb;
+  }
+
+  #hamburger span {
+    transition: all 0.3s ease-in-out;
+  }
+
+  #hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  #hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  #hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+  #hamburger.active {
+    border: 2px solid #95aafb;
+  }
+</style>
