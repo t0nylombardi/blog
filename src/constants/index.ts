@@ -13,7 +13,7 @@ export const BIRTHDAY = new Date(1983, 2, 31);
 export const socials = {
   github: "https://github.com/t0nylombardi",
   linkedin: "https://linkedin.com/in/t0nylombardi",
-  bluesky: "https://bsky.app/profile/tonylombardi.bsky.social"
+  twitter: "https://twitter.com/t0nylombardi"
 };
 
 export const footerSocials = {

@@ -10,7 +10,7 @@ import {AboutSection, ProjectSection} from '../components/Sections'
 
 <style>
   section:last-of-type {
-    margin-top: 12rem;
+    margin-top: 2rem;
     margin-bottom: 16rem;
   }
 
@@ -41,36 +41,47 @@ import {AboutSection, ProjectSection} from '../components/Sections'
 
 <BaseWrapper>
   <div
-    class="sm:container sm:mx-auto lg:container lg:mx-auto px-4 sm:px-4 md:px-4 py-24 lg:py-40 scroll-snap-y scroll-smooth h-screen overflow-auto hide-scrollbar"
+    class="mx-auto bg-red-300 px-6 md:px-8 my-2 md:my-2 py-4 lg:py-40 scroll-snap-y scroll-smooth h-screen overflow-auto hide-scrollbar"
   >
-    <header
-      id="hello"
-      class="sm:container sm:mx-auto container mx-auto flex items-center flex-col-reverse md:flex-row w-full"
-    >
-      <div class="flex-1 px-4 md:px-0 py-24 lg:py-40">
-        <p class="text-lg font-medium">Hey, I'm</p>
-        <h1 class="text-4xl bold">Anthony Lombardi</h1>
-        <h2 class="text-gradient text-2xl">&gt; Full-Stack Engineer</h2>
-        <div class="font-medium mt-9 flex flex-col space-y-1">
+    <section id="hello" class="container mx-auto px-4 sm:px-8 py-16 flex flex-col-reverse md:flex-row items-center">
+      <!-- Text Section -->
+      <div class="w-full md:w-1/2 md:text-left">
+        <div class="text-center md:text-left">
+          <p class="text-base sm:text-2xl font-medium">Hey, I'm</p>
+          <h1 class="text-3xl sm:text-3xl font-bold mt-2">Anthony Lombardi</h1>
+          <h2 class="text-gradient text-2xl mt-1">&gt; Full-Stack Engineer</h2>
+        </div>
+
+        <div class="font-medium mt-6 space-y-1">
           <p class="comment">// personal data</p>
+
           <p>
-            <span class="text-[#4D5BCE]">let{' '}</span>
+            <span class="text-[#4D5BCE]">let </span>
             <span class="text-[#43D9AD]">age</span> =
-            <span id="age" class="text-[#E99287]"><AgeCounter client:only="react" /></span>
+            <span id="age" class="text-[#E99287] block pl-6 md:inline md:pl-0">
+              <AgeCounter client:only="react" /></span
+            >
           </p>
+
           <p>
-            <span class="text-[#4D5BCE]">let{' '}</span>
+            <span class="text-[#4D5BCE]">let </span>
             <span class="text-[#43D9AD]">location</span> =
-            <span class="text-[#E99287]">"Westchester, New York"</span>
+            <span class="text-[#E99287] block pl-6 md:inline md:pl-0">"Westchester, New York"</span>
           </p>
+
           <MySocials />
         </div>
-        <CTA link="resume" />
+
+        <div class="mt-6">
+          <CTA link="resume" />
+        </div>
       </div>
-      <div class="flex-1 flex justify-center items-center">
-        <img src="/amoji_avatar.svg" />
+
+      <!-- Avatar Section -->
+      <div class="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">
+        <img src="/amoji_avatar.svg" alt="Avatar" class="max-w-[200px] sm:max-w-xs md:max-w-sm lg:max-w-md" />
       </div>
-    </header>
+    </section>
 
     <AboutSection client:only="react" />
 
@@ -82,6 +93,6 @@ import {AboutSection, ProjectSection} from '../components/Sections'
       <a href="/blog" class="btn-primary text-2xl block py-16">See more blog posts</a>
     </section>
 
-    <ContactForm client:only="react" />
+    <!-- <ContactForm client:only="react" /> -->
   </div>
 </BaseWrapper>

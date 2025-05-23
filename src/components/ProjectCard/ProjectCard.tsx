@@ -14,8 +14,8 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({img, width, link, title, technologies, description}) => {
   return (
-    <div className="project w-full py-16 flex flex-col md:flex-row items-center">
-      <div className="project-img w-full md:w-auto lg:flex-1 flex justify-center">
+    <div className="project w-full md:mx-[12rem] py-16 flex flex-col md:flex-row items-center">
+      <div className="project-img block w-full md:w-auto md:flex-1 md:flex md:justify-center">
         <img
           src={img}
           className={`${width} lg:h-auto object-center object-cover md:object-cover md:object-center rounded-md`}
