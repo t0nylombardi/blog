@@ -1,5 +1,3 @@
-// src/components/ProjectCard.tsx
-import React from 'react'
 import {Icon} from '@iconify/react'
 import './style.css'
 
