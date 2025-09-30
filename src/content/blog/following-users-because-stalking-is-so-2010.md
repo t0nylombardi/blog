@@ -1,8 +1,8 @@
 ---
 title: 'Following Users: Because Stalking is so 2010'
 date: '03-02-2024'
-heroImage: '/blog/follow-unfollow/follow-users.jpeg'
-image: '/blog/follow-unfollow/follow-users.jpeg'
+heroImage: '/blog/follow-unfollow/following-users.jpeg'
+image: '/blog/follow-unfollow/following-users.jpeg'
 originalDatePublished:
 description: 'Adding Some Social Stalking Flair with follow/unfollow users'
 author: 'Anthony Lombardi'
