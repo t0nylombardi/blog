@@ -1,0 +1,143 @@
+article {
+  @apply text-lg font-thin;
+}
+
+article p {
+  @apply my-6 mx-auto;
+}
+
+article p:has(img) {
+  @apply flex justify-center;
+}
+
+article p a {
+  @apply text-indigo-500;
+}
+
+article img {
+  @apply mx-auto mb-12;
+}
+
+article hr {
+  --n: 3;
+  width: 8rem;
+  height: 5px;
+  margin: 4rem auto;
+  border: none;
+  background: radial-gradient(circle closest-side, #eaf6f6 98%, #0000) 0 / calc(100% / var(--n)) 100%;
+}
+
+article pre {
+  @apply my-8 p-4 md:p-8;
+}
+
+article ul,
+article ol {
+  @apply list-disc pl-5 my-2;
+}
+
+article li {
+  @apply px-2;
+}
+
+article strong {
+  @apply font-bold;
+}
+
+article h1 {
+  @apply font-bold text-4xl;
+}
+
+article h2 {
+  @apply font-bold text-3xl pt-16;
+}
+
+article h3 {
+  @apply font-bold text-2xl pt-4;
+}
+
+article h4 {
+  @apply font-bold text-xl;
+}
+
+article h5,
+article h6 {
+  @apply font-bold;
+}
+
+article .copy-code {
+  @apply absolute top-0 right-0 bg-indigo-500 text-white px-2 py-1 text-xs leading-tight;
+}
+article .copy-code:hover {
+  @apply bg-indigo-900;
+}
+
+article code {
+  @apply text-[#7AA2F7] py-1 text-xl;
+}
+
+article blockquote {
+  @apply flex justify-center mx-4 mb-8 md:mx-20 lg:mx-12;
+}
+article blockquote p {
+  @apply inline text-gray-400 text-lg font-thin;
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+  article {
+    @apply text-sm;
+  }
+
+  article h1 {
+    @apply text-base my-4;
+  }
+
+  article h2 {
+    @apply text-base font-bold;
+  }
+
+  article h3 {
+    @apply text-sm font-bold;
+  }
+
+  .astro-code {
+    @apply py-2 px-2 my-4 leading-tight;
+  }
+
+  .line {
+    @apply text-sm;
+  }
+
+  btn {
+    @apply flex justify-center;
+  }
+
+  article .copy-code {
+    @apply px-1 py-0 text-[0.5rem] leading-tight;
+  }
+
+  article table {
+    @apply table-auto;
+  }
+
+  article table thead {
+    @apply text-white text-xs font-bold text-left;
+  }
+
+  article table tbody tr td {
+    @apply text-xs font-thin;
+  }
+
+  article ul {
+    @apply px-4 py-1;
+  }
+
+  article ul li {
+    @apply text-xs font-thin px-2;
+  }
+
+  article img {
+    @apply mx-auto mb-4 w-full;
+  }
+}

@@ -1,0 +1,16 @@
+@reference "tailwindcss";
+.project-img {
+  @apply md:justify-start md:items-center;
+}
+.project:nth-child(2n) {
+  @apply md:flex-row-reverse;
+  @apply md:justify-end;
+}
+
+.project:nth-child(2n) .project-img {
+  @apply md:justify-end;
+}
+
+.project:nth-child(2n) .project-info {
+  @apply md:pr-[4rem] md:pl-0;
+}

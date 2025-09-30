@@ -1,0 +1,50 @@
+---
+import {Icon} from '@iconify/react'
+
+interface Props {
+  title: string
+  image: string
+  description: string
+  link: string
+  date: Date
+  tags: string[]
+  author: string
+  slug: string
+}
+
+const FormattedDate = (date: Date) => {
+  return date.toLocaleDateString('en-us', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
+}
+
+const {link, image, tags, title, description, author, date, slug} = Astro.props
+---
+
+<div class="lg:w-[30%] py-6 bg-[#232339">
+  <a href={link} class="block">
+    <img class="w-full h-56 rounded-t-lg object-cover" src={image} />
+    <div class="py-6 px-4 h-[16rem] bg-[#27273f] drop-shadow-lg rounded-b-lg">
+      <p class="text-xl font-bold">{title}</p>
+      <p class="comment mt-1 text-sm">// Written at: {FormattedDate(date)}</p>
+      <p class="mt-2 text-md">{description}</p>
+      <div class="mt-2 text-sm text-[#95AAFB]">
+        <a href={link} class="flex items-center cursor-pointer">
+          <span class="inline-flex w-6 h-6 justify-center items-center bg-[#2A337E] rounded-full">
+            <Icon icon="mdi:book-open-blank-variant-outline" />
+          </span>
+          <span class="ml-3">Read more</span>
+        </a>
+      </div>
+    </div>
+  </a>
+</div>
+
+<style>
+  Icon {
+    width: 1rem;
+    height: 1rem;
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+import {SEO} from 'astro-seo'
+import {SITE_TITLE, SITE_DESCRIPTION} from '../../constants'
+import BaseHeader from './BaseHeader.astro'
+import amoji_avatar from '../../../public/amoji_avatar.svg'
+---
+
+<head>
+  <SEO
+    title={SITE_TITLE}
+    description={SITE_DESCRIPTION}
+    canonical={'https://t0nylombardi.dev'}
+    openGraph={{
+      basic: {
+        title: SITE_TITLE,
+        url: 'https://t0nylombardi.dev',
+        type: 'image/svg+xml',
+        image: amoji_avatar.src,
+      },
+    }}
+    twitter={{
+      creator: '@t0nylombardi',
+    }}
+    extend={{
+      link: [{rel: 'icon', href: '/favicon/favicon.ico'}],
+      meta: [
+        {
+          name: 'twitter:image',
+          content: 'https://pbs.twimg.com/profile_images/498278137092796416/FtXRi2RG_400x400.jpeg',
+        },
+        {name: 'twitter:title', content: 'Anthony Lombardi'},
+        {name: 'twitter:description', content: SITE_DESCRIPTION},
+        {name: 'twitter:card', content: 'summary'},
+        {name: 'twitter:site', content: '@t0nylombardi'},
+        {name: 'twitter:creator', content: '@t0nylombardi'},
+        {name: 'twitter:image:alt', content: 'Anthony Lombardi'},
+        {name: 'twitter:creator:id', content: 't0nylombardi'},
+        {name: 'twitter:site:id', content: 't0nylombardi'},
+        {name: 'twitter:card', content: 'summary_large_image'},
+        {name: 'twitter:domain', content: 't0nylombardi.dev'},
+      ],
+    }}
+  />
+  <BaseHeader title={SITE_TITLE} description={SITE_DESCRIPTION} />
+</head>

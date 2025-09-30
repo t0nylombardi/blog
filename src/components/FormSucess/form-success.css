@@ -1,0 +1,19 @@
+.episode {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  margin-bottom: 5rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 5rem;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  text-transform: uppercase;
+  @apply flex flex-col justify-center text-center leading-[3.5rem];
+}

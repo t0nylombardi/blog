@@ -1,0 +1,51 @@
+---
+import {type CollectionEntry, getCollection} from 'astro:content'
+import BlogCard from './BlogCard.astro'
+
+type Props = {
+  limit?: number
+}
+
+const {limit} = Astro.props
+
+let posts = await getCollection('blog')
+posts = posts.filter((post) => !post.data.draft)
+posts = posts.filter((post) => {
+  const isScheduled = new Date(post.data.date).getTime() > Date.now()
+  return !isScheduled
+})
+posts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+
+if (limit) posts = posts.slice(0, limit)
+---
+
+<div class='container mx-auto py-18'>
+  <div class='flex w-full flex-wrap'>
+    {
+      posts.length < 1 ? (
+        <h2 class='mt-6 text-center text-8xl text-[#6d6d8e]'>Coming Soon</h2>
+      ) : (
+        <div class='px-16 mt-12 flex w-full flex-col gap-x-8 justify-between md:flex-row md:flex-wrap'>
+          {posts.map((post) => {
+            const {title, image, tags, author, date, description} = post.data
+            const url = '/' + post.collection + '/' + post.slug
+
+            return (
+              <BlogCard
+                title={title}
+                slug={post.slug}
+                link={url}
+                image={image}
+                tags={tags}
+                description={description}
+                link={url}
+                date={date}
+                author={author}
+              />
+            )
+          })}
+        </div>
+      )
+    }
+  </div>
+</div>
