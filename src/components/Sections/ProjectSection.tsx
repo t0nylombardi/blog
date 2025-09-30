@@ -5,10 +5,10 @@ import SectionHeader from '../UI/SectionHeader'
 
 const ProjectSection = () => {
   return (
-    <section id="projects" className="my-[12rem]">
+    <section id="projects" className="my-[12rem] mx-[2rem]">
       <SectionHeader header="_projects" />
       <div>
-        <div id="projects-list" className="flex flex-col justify-between w-full">
+        <div id="projects-list" className="">
           {Projects.map((project) => (
             <ProjectCard
               img={project.img}
