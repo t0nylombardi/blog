@@ -3,7 +3,7 @@ import './styles.css'
 
 const LanguagesSprites = () => {
   return (
-    <div className="flex-1 flex justify-center items-center">
+    <div className="flex-1 flex justify-start items-center">
       <div className="flex flex-wrap showcase gap-16 mt-12 justify-center">
         <Icon icon="logos:ruby" />
         <Icon icon="logos:rails" />
