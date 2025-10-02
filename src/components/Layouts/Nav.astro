@@ -135,39 +135,39 @@ const routes = [
   })
 </script>
 
-<nav class="text-xl text-[#7790a8] bg-[#24273A] shadow-xl fixed top-0 left-0 right-0 z-50">
-    <ul class="flex flex-row justify-between min-w-full relative px-[4rem]">
-      <li class="px-8 py-4">
-        <a href="/" class="hover:text-gray-200">Anthony Lombardi</a>
-      </li>
+<nav class="text-xl text-[#7790a8] bg-ctp-base shadow-xl fixed top-0 left-0 right-0 z-50">
+  <ul class="flex flex-row justify-between min-w-full relative px-[4rem]">
+    <li class="px-8 py-4">
+      <a href="/" class="hover:text-gray-200">Anthony Lombardi</a>
+    </li>
 
-      <li id="navlinks" class="hidden lg:block lg:border-x-0">
-        <ul class="flex flex-col lg:flex-row px-8 pb-4 lg:py-4 space-y-1 lg:space-y-0 lg:space-x-8">
-          {
-            routes.map((route) => (
-              <li class="">
-                <a href={route.slug} class="flex items-center hover:text-gray-200">
-                  <Icon icon="bi:chevron-compact-right" />
-                  {route.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </li>
+    <li id="navlinks" class="hidden lg:block lg:border-x-0">
+      <ul class="flex flex-col lg:flex-row px-8 pb-4 lg:py-4 space-y-1 lg:space-y-0 lg:space-x-8">
+        {
+          routes.map((route) => (
+            <li class="">
+              <a href={route.slug} class="flex items-center hover:text-gray-200">
+                <Icon icon="bi:chevron-compact-right" />
+                {route.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </li>
 
-      <li id="hamburger" class="p-2 w-fit cursor-pointer absolute right-6 top-2 lg:hidden rounded-sm">
-        <div class="space-y-[0.3rem]">
-          <span class="block w-5 h-0.5 bg-[#7790a8]"></span>
-          <span class="block w-5 h-0.5 bg-[#7790a8]"></span>
-          <span class="block w-3 h-0.5 bg-[#7790a8] ml-auto"></span>
-        </div>
-      </li>
+    <li id="hamburger" class="p-2 w-fit cursor-pointer absolute right-6 top-2 lg:hidden rounded-sm">
+      <div class="space-y-[0.3rem]">
+        <span class="block w-5 h-0.5 bg-[#7790a8]"></span>
+        <span class="block w-5 h-0.5 bg-[#7790a8]"></span>
+        <span class="block w-3 h-0.5 bg-[#7790a8] ml-auto"></span>
+      </div>
+    </li>
 
-      <li class="px-8 py-4 hidden lg:block border-r border-[#1E2D3D]">
-        <a href="/#contact" class="hover:text-gray-200">_contact-me</a>
-      </li>
-    </ul>
+    <li class="px-8 py-4 hidden lg:block border-r border-[#1E2D3D]">
+      <a href="/#contact" class="hover:text-gray-200">_contact-me</a>
+    </li>
+  </ul>
 </nav>
 
 <style>

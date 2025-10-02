@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@astrojs/netlify": "^6.5.11",
+    "@catppuccin/tailwindcss": "^1.0.0",
     "@shikijs/transformers": "^3.13.0",
     "@types/graceful-fs": "^4.1.9",
     "@types/gtag.js": "^0.0.20",
