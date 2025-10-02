@@ -1,9 +1,12 @@
 import react from '@astrojs/react'
 import {defineConfig} from 'astro/config'
+import sitemap from '@astrojs/sitemap'
 import netlify from '@astrojs/netlify'
 import tailwindcss from '@tailwindcss/vite'
 import mdx from '@astrojs/mdx'
 import fs from 'fs'
+
+import sitemap from '@astrojs/sitemap'
 
 const tokyoNight = JSON.parse(fs.readFileSync('./src/layouts/themes/tokyo-night.json', 'utf8'))
 
@@ -25,6 +28,7 @@ export default defineConfig({
       shikiConfig: {theme: 'dracula'},
       gfm: false,
     }),
+    sitemap(),
   ],
   server: {
     port: 3031,

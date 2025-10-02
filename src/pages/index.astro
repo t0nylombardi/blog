@@ -39,59 +39,53 @@ import {AboutSection, ProjectSection} from '../components/Sections'
 </style>
 
 <BaseWrapper>
-
-    <section id="hello" class="min-h-screen mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center">
-      <!-- Text Section -->
-      <div class="w-full md:w-1/2 flex flex-col justify-center">
-        <div class="text-center md:text-left">
-          <p class="text-base sm:text-2xl font-medium">Hey, I'm</p>
-          <h1 class="text-3xl sm:text-3xl font-bold mt-2">Anthony Lombardi</h1>
-          <h2 class="text-gradient text-2xl mt-1">&gt; Full-Stack Engineer</h2>
-        </div>
-
-        <div class="font-medium mt-6 space-y-1">
-          <p class="comment">// personal data</p>
-
-          <p>
-            <span class="text-[#4D5BCE]">let </span>
-            <span class="text-[#43D9AD]">age</span> =
-            <span id="age" class="text-[#E99287] block pl-6 md:inline md:pl-0">
-              <AgeCounter client:only="react" /></span
-            >
-          </p>
-
-          <p>
-            <span class="text-[#4D5BCE]">let </span>
-            <span class="text-[#43D9AD]">location</span> =
-            <span class="text-[#E99287] block pl-6 md:inline md:pl-0">"Westchester, New York"</span>
-          </p>
-
-          <MySocials />
-        </div>
-
-        <div class="mt-6">
-          <CTA link="resume" />
-        </div>
+  <section id="hello" class="min-h-screen mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center">
+    <!-- Text Section -->
+    <div class="w-full md:w-1/2 flex flex-col justify-center">
+      <div class="text-center md:text-left">
+        <p class="text-base sm:text-2xl font-medium">Hey, I'm</p>
+        <h1 class="text-3xl sm:text-3xl font-bold mt-2">Anthony Lombardi</h1>
+        <h2 class="text-gradient text-2xl mt-1">&gt; Full-Stack Engineer</h2>
       </div>
 
-      <!-- Avatar Section -->
-      <div class="w-full md:w-1/2 flex justify-center md:justify-end items-center">
-        <img
-          src="/amoji_avatar.svg"
-          alt="Avatar"
-          class="max-w-[200px] sm:max-w-xs md:max-w-sm lg:max-w-md" />
+      <div class="font-medium mt-6 space-y-1">
+        <p class="comment">// personal data</p>
+
+        <p>
+          <span class="text-[#4D5BCE]">let </span>
+          <span class="text-[#43D9AD]">age</span> =
+          <span id="age" class="text-[#E99287] block pl-6 md:inline md:pl-0"> <AgeCounter client:only="react" /></span>
+        </p>
+
+        <p>
+          <span class="text-[#4D5BCE]">let </span>
+          <span class="text-[#43D9AD]">location</span> =
+          <span class="text-[#E99287] block pl-6 md:inline md:pl-0">"Westchester, New York"</span>
+        </p>
+
+        <MySocials />
       </div>
-    </section>
 
-    <AboutSection client:load />
+      <div class="mt-6">
+        <CTA link="resume" />
+      </div>
+    </div>
 
-    <ProjectSection client:visible />
+    <!-- Avatar Section -->
+    <div class="w-full md:w-1/2 flex justify-center md:justify-end items-center">
+      <img src="/amoji_avatar.svg" alt="Avatar" class="max-w-[200px] sm:max-w-xs md:max-w-sm lg:max-w-md" />
+    </div>
+  </section>
 
-    <section id="blog" class="scroll-snap-start h-screen flex flex-col items-center justify-center my-[12rem]">
-      <h3 class="text-4xl font-medium">_blog</h3>
-      <BlogPostList limit={3} />
-      <a href="/blog" class="btn-primary text-2xl block py-16">See more blog posts</a>
-    </section>
+  <AboutSection client:load />
 
-    <!-- <ContactForm client:only="react" /> -->
+  <!-- <ProjectSection client:visible /> -->
+
+  <section id="blog" class="scroll-snap-start h-screen flex flex-col items-center justify-center my-[12rem]">
+    <h3 class="text-4xl font-medium">_blog</h3>
+    <BlogPostList limit={3} />
+    <a href="/blog" class="btn-primary text-2xl block py-16">See more blog posts</a>
+  </section>
+
+  <!-- <ContactForm client:only="react" /> -->
 </BaseWrapper>

@@ -26,6 +26,7 @@
   "dependencies": {
     "@astrojs/mdx": "^4.3.6",
     "@astrojs/react": "^4.3.1",
+    "@astrojs/sitemap": "^3.6.0",
     "@iconify-json/bi": "^1.2.6",
     "@iconify-json/carbon": "^1.2.13",
     "@iconify-json/emojione": "^1.2.3",
