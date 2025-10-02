@@ -1,20 +1,17 @@
 ---
-import Footer from '../components/Layouts/Footer.astro'
+import Footer from '../components/Layouts/Footer'
 import Nav from '../components/Layouts/Nav.astro'
 import Head from '../components/Layouts/Head.astro'
 import Analytics from '../components/Analytics'
-
 ---
 
 <!doctype html>
 <html lang="en">
   <Head />
-  <body class="bg-[#24273A]">
+  <body class="min-h-screen mx-[4rem] bg-[#24273A]">
     <Nav />
-    <div class="min-h-screen mx-[4rem] scroll-snap-y scroll-smooth overflow-auto hide-scrollbar">
-      <slot />
-      <Footer />
-      <Analytics client:only="react" />
-    </div>
+    <slot />
+    <Footer />
+    <Analytics client:only="react" />
   </body>
 </html>

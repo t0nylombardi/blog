@@ -40,6 +40,8 @@ export const SkillsWeb = [
     category: "Cloud & Services",
     skills: [
       [75, "AWS Cognito"],
+      [80, "AWS EC2"],
+      [80, "AWS S3"],
       [70, "Docker"],
     ],
   },
@@ -54,6 +56,8 @@ export const SkillsWeb = [
   {
     category: "Testing",
     skills: [
+      [80, "RSpec"],
+      [70, "Cucumber"],
       [60, "Jest"],
       [60, "Cypress"],
     ],

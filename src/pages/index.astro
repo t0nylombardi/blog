@@ -5,6 +5,7 @@ import MySocials from '../components/MySocials'
 import CTA from '../components/UI/CTA.astro'
 import AgeCounter from '../components/AgeCounter'
 import {AboutSection, ProjectSection} from '../components/Sections'
+import {ContactForm} from '../components/ContactForm'
 ---
 
 <style>
@@ -16,15 +17,6 @@ import {AboutSection, ProjectSection} from '../components/Sections'
   .icon svg {
     width: 1rem;
     height: 1rem;
-  }
-
-  .showcase {
-    max-width: calc(4 * 4rem + 3 * 4rem);
-  }
-
-  .showcase svg {
-    width: 4rem;
-    height: 4rem;
   }
 
   .hover {
@@ -39,8 +31,8 @@ import {AboutSection, ProjectSection} from '../components/Sections'
 </style>
 
 <BaseWrapper>
-
-    <section id="hello" class="min-h-screen mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center">
+  <main class="snap-y snap-mandatory h-screen overflow-y-scroll overflow-auto hide-scrollbar">
+    <section id="hello" class="h-screen snap-start mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center">
       <!-- Text Section -->
       <div class="w-full md:w-1/2 flex flex-col justify-center">
         <div class="text-center md:text-left">
@@ -76,22 +68,18 @@ import {AboutSection, ProjectSection} from '../components/Sections'
 
       <!-- Avatar Section -->
       <div class="w-full md:w-1/2 flex justify-center md:justify-end items-center">
-        <img
-          src="/amoji_avatar.svg"
-          alt="Avatar"
-          class="max-w-[200px] sm:max-w-xs md:max-w-sm lg:max-w-md" />
+        <img src="/amoji_avatar.svg" alt="Avatar" class="max-w-[200px] sm:max-w-xs md:max-w-sm lg:max-w-md" />
       </div>
     </section>
 
     <AboutSection client:load />
 
-    <ProjectSection client:visible />
-
-    <section id="blog" class="scroll-snap-start h-screen flex flex-col items-center justify-center my-[12rem]">
+    <section id="blog" class="h-screen snap-start flex flex-col items-center justify-center my-[12rem]">
       <h3 class="text-4xl font-medium">_blog</h3>
       <BlogPostList limit={3} />
       <a href="/blog" class="btn-primary text-2xl block py-16">See more blog posts</a>
     </section>
 
-    <!-- <ContactForm client:only="react" /> -->
+    <ContactForm client:only="react" />
+  </main>
 </BaseWrapper>

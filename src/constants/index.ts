@@ -17,9 +17,9 @@ export const socials = {
 };
 
 export const footerSocials = {
-  twitter: "https://twitter.com/t0nylombardi",
+  "twitter-bird": "https://twitter.com/t0nylombardi",
   github: "https://github.com/t0nylombardi",
-  instagram: "https://instagram.com/t0nylombardi",
+  linkedin: "https://www.linkedin.com/in/anthonyjlombardi/",
 }
 
 export const Projects = [
