@@ -1,11 +1,10 @@
 ---
 import BaseWrapper from '../layouts/BaseWrapper.astro'
-
+import {ProjectSection} from '../components/Sections'
 ---
 
 <BaseWrapper>
-  <div>
-    <h1>Projects</h1>
-    <p>List of projects will go here.</p>
-  </div>
+  <main class="flex-1 h-screen overflow-y-scroll overflow-auto hide-scrollbar my-[10rem] sm:px-8">
+    <ProjectSection />
+  </main>
 </BaseWrapper>

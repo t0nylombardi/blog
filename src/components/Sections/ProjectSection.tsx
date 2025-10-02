@@ -5,7 +5,7 @@ import SectionHeader from '../UI/SectionHeader'
 
 const ProjectSection = () => {
   return (
-    <section id="projects" className="my-[12rem] mx-[2rem]">
+    <section id="projects" className="h-screen overflow-y-scroll overflow-auto hide-scrollbar">
       <SectionHeader header="_projects" />
       <div>
         <div id="projects-list" className="">
