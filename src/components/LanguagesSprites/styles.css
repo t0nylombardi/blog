@@ -12,7 +12,7 @@
 }
 
 .showcase {
-  max-width: calc(4 * 4rem + 3 * 4rem);
+  max-width: calc(4 * 4rem + 6 * 4rem);
 }
 
 .showcase svg {
@@ -25,7 +25,8 @@
 }
 
 .text-gradient {
-  background: -webkit-linear-gradient(90deg, #a478e8 0%, #3b82f6 100%);
+  background: -webkit-linear-gradient(90deg, var(--color-ctp-mauve-300) 0%, var(--color-ctp-blue-500) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }

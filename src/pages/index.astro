@@ -4,7 +4,7 @@ import BlogPostList from '../components/BlogPostList.astro'
 import MySocials from '../components/MySocials'
 import CTA from '../components/UI/CTA.astro'
 import AgeCounter from '../components/AgeCounter'
-import {AboutSection, ProjectSection} from '../components/Sections'
+import {AboutSection} from '../components/Sections'
 import {ContactForm} from '../components/ContactForm'
 import SectionHeader from '../components/UI/SectionHeader'
 ---
@@ -15,42 +15,44 @@ import SectionHeader from '../components/UI/SectionHeader'
       id="hello"
       class="h-screen snap-start pt-[1rem] mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center"
     >
-      <!-- Text Section -->
-      <div class="w-full md:w-1/2 flex flex-col justify-center">
-        <div class="text-ctp-text text-center md:text-left">
-          <p class="sm:text-2xl font-medium">Hey, I'm</p>
-          <h1 class="text-3xl sm:text-3xl font-bold mt-2">Anthony Lombardi</h1>
-          <h2 class="text-gradient text-2xl mt-1">&gt; Full-Stack Engineer</h2>
+      <div class="flex flex-col md:flex-row w-full h-full justify-center items-center">
+        <!-- Text Section -->
+        <div class="w-full md:w-1/2 flex flex-col justify-center">
+          <div class="text-ctp-text text-center md:text-left">
+            <p class="sm:text-2xl font-medium">Hey, I'm</p>
+            <h1 class="text-3xl sm:text-3xl font-bold mt-2">Anthony Lombardi</h1>
+            <h2 class="text-gradient text-2xl mt-1">&gt; Full-Stack Engineer</h2>
+          </div>
+
+          <div class="font-medium mt-6 space-y-1">
+            <p class="comment">// personal data</p>
+
+            <p>
+              <span class="text-ctp-mauve-500">let </span>
+              <span class="text-ctp-text">age</span> =
+              <span id="age" class="text-ctp-red-500 block pl-6 md:inline md:pl-0">
+                <AgeCounter client:only="react" /></span
+              >
+            </p>
+
+            <p>
+              <span class="text-ctp-mauve-500">let </span>
+              <span class="text-ctp-text">location</span> =
+              <span class="text-ctp-green-500 block pl-6 md:inline md:pl-0">"Westchester, New York"</span>
+            </p>
+
+            <MySocials />
+          </div>
+
+          <div class="mt-6">
+            <CTA link="resume" />
+          </div>
         </div>
 
-        <div class="font-medium mt-6 space-y-1">
-          <p class="comment">// personal data</p>
-
-          <p>
-            <span class="text-ctp-mauve-500">let </span>
-            <span class="text-ctp-text">age</span> =
-            <span id="age" class="text-ctp-red-500 block pl-6 md:inline md:pl-0">
-              <AgeCounter client:only="react" /></span
-            >
-          </p>
-
-          <p>
-            <span class="text-ctp-mauve-500">let </span>
-            <span class="text-ctp-text">location</span> =
-            <span class="text-ctp-green-500 block pl-6 md:inline md:pl-0">"Westchester, New York"</span>
-          </p>
-
-          <MySocials />
+        <!-- Avatar Section -->
+        <div class="h-full w-full md:w-1/2 flex justify-start md:justify-end items-start mt-[8rem]">
+          <img src="/amoji_avatar.svg" alt="Avatar" class="min-w-[800px]" />
         </div>
-
-        <div class="mt-6">
-          <CTA link="resume" />
-        </div>
-      </div>
-
-      <!-- Avatar Section -->
-      <div class="w-full md:w-1/2 flex justify-center md:justify-end items-center">
-        <img src="/amoji_avatar.svg" alt="Avatar" class="max-w-[200px] sm:max-w-xs md:max-w-sm lg:max-w-md" />
       </div>
     </section>
 

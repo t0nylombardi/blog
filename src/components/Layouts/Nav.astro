@@ -11,12 +11,16 @@ const routes = [
     label: '_about',
   },
   {
+    slug: '/#blog',
+    label: '_blog',
+  },
+  {
     slug: '/projects',
     label: '_projects',
   },
   {
-    slug: '/#blog',
-    label: '_blog',
+    slug: '/resume',
+    label: '_resume',
   },
 ]
 ---
@@ -65,7 +69,6 @@ const routes = [
       }
     })
 
-    // close hamburger menu after click
     links.forEach((link) =>
       link.addEventListener('click', () => {
         closeHamburger()
@@ -73,19 +76,13 @@ const routes = [
     )
   }
 
-  // Intersection Observer Script
   function setupObserver() {
-    // simple function to use for callback in the intersection observer
     const changeNav: IntersectionObserverCallback = (entries, observer) => {
       entries.forEach((entry) => {
-        // verify the element is intersecting
         if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
-          // remove old active class
           let lastActives = document.querySelectorAll('.active')
           if (lastActives) lastActives.forEach((lastActive) => lastActive.classList.remove('active'))
-          // get id of the intersecting section
           var id = entry.target.getAttribute('id')
-          // find matching link & add appropriate class
           var newLinks = document.querySelectorAll(`[href="#${id}"]`)
           newLinks.forEach((el) => el.classList.add('active'))
         }
