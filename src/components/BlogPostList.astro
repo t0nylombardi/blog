@@ -19,13 +19,13 @@ posts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.d
 if (limit) posts = posts.slice(0, limit)
 ---
 
-<div class='container mx-auto py-18'>
-  <div class='flex w-full flex-wrap'>
+<div class="">
+  <div class="flex w-full flex-wrap">
     {
       posts.length < 1 ? (
-        <h2 class='mt-6 text-center text-8xl text-[#6d6d8e]'>Coming Soon</h2>
+        <h2 class="mt-6 text-center text-8xl text-ctp-text">Coming Soon</h2>
       ) : (
-        <div class='px-16 mt-12 flex w-full flex-col gap-x-8 justify-between md:flex-row md:flex-wrap'>
+        <div class="px-2 mt-12 flex w-full flex-col gap-x-8 justify-between md:flex-row md:flex-wrap">
           {posts.map((post) => {
             const {title, image, tags, author, date, description} = post.data
             const url = '/' + post.collection + '/' + post.slug

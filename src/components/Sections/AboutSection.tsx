@@ -14,8 +14,8 @@ const AboutSection = () => {
 
       <div className="w-1/2 mb-8 md:mb-0 text-start md:text-left">
         <SectionHeader header="_about-me" />
-        <p className="comment mt-2">// get a small overview of who I am</p>
-        <p className="mt-9">{AboutMe}</p>
+        <p className="comment mt-2 text-ctp-text">// get a small overview of who I am</p>
+        <p className="mt-9 text-ctp-green-500">{AboutMe}</p>
       </div>
     </section>
   )

@@ -10,7 +10,7 @@ const MySocials = () => {
           <span className="text-ctp-text">{platform}</span> =
           <a
             href={url}
-            className="text-ctp-green-500 hover block pl-6 md:inline md:pl-0"
+            className="text-ctp-green-500 hover:text-ctp-text block pl-6 md:inline md:pl-0"
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -6,33 +6,15 @@ import CTA from '../components/UI/CTA.astro'
 import AgeCounter from '../components/AgeCounter'
 import {AboutSection, ProjectSection} from '../components/Sections'
 import {ContactForm} from '../components/ContactForm'
+import SectionHeader from '../components/UI/SectionHeader'
 ---
-
-<style>
-  section:last-of-type {
-    margin-top: 2rem;
-    margin-bottom: 16rem;
-  }
-
-  .icon svg {
-    width: 1rem;
-    height: 1rem;
-  }
-
-  .hover {
-    @apply hover:text-gray-200;
-  }
-
-  .text-gradient {
-    background: -webkit-linear-gradient(90deg, #a478e8 0%, #3b82f6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-</style>
 
 <BaseWrapper>
   <main class="snap-y snap-mandatory h-screen overflow-y-scroll overflow-auto hide-scrollbar">
-    <section id="hello" class="h-screen snap-start mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center">
+    <section
+      id="hello"
+      class="h-screen snap-start pt-[1rem] mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center"
+    >
       <!-- Text Section -->
       <div class="w-full md:w-1/2 flex flex-col justify-center">
         <div class="text-ctp-text text-center md:text-left">
@@ -75,9 +57,9 @@ import {ContactForm} from '../components/ContactForm'
     <AboutSection client:load />
 
     <section id="blog" class="h-screen snap-start flex flex-col items-center justify-center my-[12rem]">
-      <h3 class="text-4xl font-medium">_blog</h3>
+      <SectionHeader header="_blog" />
       <BlogPostList limit={3} />
-      <a href="/blog" class="btn-primary text-2xl block py-16">See more blog posts</a>
+      <a href="/blog" class="text-ctp-peach-500 hover:text-ctp-text text-2xl block py-8">See more blog posts</a>
     </section>
 
     <ContactForm client:only="react" />

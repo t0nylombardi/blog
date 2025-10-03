@@ -15,7 +15,7 @@ const SkillProgress = ({percent, skillname}) => {
   }
 
   return (
-    <div className="relative pt-1 text-gray-100">
+    <div className="relative pt-1 text-ctp-text">
       <div>{skillname}</div>
       <div className="wrap">
         <motion.div
@@ -33,7 +33,7 @@ const SkillProgress = ({percent, skillname}) => {
 
       <style>{`
         .wrap {
-          background-color: #f5f5f5;
+          background-color: var(--color-ctp-surface0);
           color: white;
           height: 14px;
           overflow: hidden;
@@ -43,7 +43,7 @@ const SkillProgress = ({percent, skillname}) => {
         .bar {
           height: 100%;
           border-radius: 10px;
-          background-color: #3B82F6;
+          background: -webkit-linear-gradient(180deg, var(--color-ctp-mauve-500) 0%, var(--color-ctp-blue-500) 100%);
         }
       `}</style>
     </div>
@@ -56,7 +56,7 @@ const SkillList = () => {
       {SkillsWeb.map((group, groupIndex) => (
         <div key={groupIndex}>
           <div className="py-4">
-            <span className="pt-8 pb-4 text-xl font-bold text-slate-500">// {group.category}</span>
+            <span className="pt-8 pb-4 text-xl font-bold text-ctp-green-500">// {group.category}</span>
           </div>
           <div className="pl-8">
             {group.skills.map(([percent, skillname], index) => (

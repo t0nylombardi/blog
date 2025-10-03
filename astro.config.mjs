@@ -50,7 +50,6 @@ export default defineConfig({
       {
         name: 'debug-resolve',
         resolveId(source) {
-          console.log(`[DEBUG] Resolving: ${source}`)
           return null
         },
       },

@@ -23,16 +23,18 @@ const FormattedDate = (date: Date) => {
 const {link, image, tags, title, description, author, date, slug} = Astro.props
 ---
 
-<div class="lg:w-[30%] py-6 bg-[#232339">
+<div
+  class="lg:w-[25%] py-6 bg-ctp-mauve-base shadow-xl rounded-lg mx-4 my-4 hover:scale-[1.02] transition-transform duration-200 ease-in-out"
+>
   <a href={link} class="block">
     <img class="w-full h-56 rounded-t-lg object-cover" src={image} />
-    <div class="py-6 px-4 h-[16rem] bg-[#27273f] drop-shadow-lg rounded-b-lg">
-      <p class="text-xl font-bold">{title}</p>
+    <div class="py-6 px-4 h-[16rem] drop-shadow-lg rounded-b-lg">
+      <p class="text-xl text-ctp-mauve-500 font-bold">{title}</p>
       <p class="comment mt-1 text-sm">// Written at: {FormattedDate(date)}</p>
-      <p class="mt-2 text-md">{description}</p>
-      <div class="mt-2 text-sm text-[#95AAFB]">
-        <a href={link} class="flex items-center cursor-pointer">
-          <span class="inline-flex w-6 h-6 justify-center items-center bg-[#2A337E] rounded-full">
+      <p class="mt-2 text-ctp-green-500 text-md">{description}</p>
+      <div class="mt-2 text-sm text-ctp-peach-500">
+        <a href={link} class="flex items-center hover:text-ctp-text cursor-pointer">
+          <span class="inline-flex w-6 h-6 justify-center items-center bg-ctp-peach-500 rounded-full">
             <Icon icon="mdi:book-open-blank-variant-outline" />
           </span>
           <span class="ml-3">Read more</span>

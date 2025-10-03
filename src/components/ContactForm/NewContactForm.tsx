@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import CodeHighlight from '../CodeHighlight'
 import SuccessPopup from './SuccessPopup'
 import './style.css'
+import SectionHeader from '../UI/SectionHeader'
 
 interface FormData {
   name: string
@@ -32,11 +33,8 @@ export default function ContactForm() {
     e.preventDefault()
     setStatus('pending')
     setError(null)
-    console.log('Event:', e)
     const formData = new FormData(e.target as HTMLFormElement)
     const body = new URLSearchParams(formData as any).toString()
-
-    console.log('Form Data:', body)
 
     await fetch('/__forms.html', {
       method: 'POST',
@@ -73,8 +71,9 @@ end
   `
 
   return (
-    <section id="contact" className="min-h-[80vh] flex items-center relative">
-      <div className="columns-2 gap-8 w-full justify-center">
+    <section id="contact" className="h-screen snap-start flex flex-col items-center justify-center my-[12rem]">
+      <SectionHeader header="_contact" />
+      <div className="columns-2 gap-8 py-18 w-full justify-center">
         <div className="h-full flex flex-col justify-center">
           <form
             name="contact-form"

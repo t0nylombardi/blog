@@ -1,9 +1,12 @@
 ---
 import BlogPostList from '../../components/BlogPostList.astro'
+import SectionHeader from '../../components/UI/SectionHeader'
 import BaseWrapper from '../../layouts/BaseWrapper.astro'
 ---
 
 <BaseWrapper>
-  <h1 class="text-center pt-56 text-5xl">Blog</h1>
-  <BlogPostList />
+  <main class="py-[7rem] flex flex-col items-center">
+    <SectionHeader header="_blog" />
+    <BlogPostList />
+  </main>
 </BaseWrapper>
