@@ -5,6 +5,7 @@ import netlify from '@astrojs/netlify'
 import tailwindcss from '@tailwindcss/vite'
 import mdx from '@astrojs/mdx'
 import fs from 'fs'
+import {BundledLanguage} from 'shiki/bundled/web'
 
 import sitemap from '@astrojs/sitemap'
 
@@ -25,7 +26,11 @@ export default defineConfig({
     }),
     mdx({
       syntaxHighlight: 'shiki',
-      shikiConfig: {theme: 'dracula'},
+      shikiConfig: {
+        theme: 'catppuccin-macchiato',
+        langs: [ruby, typescript, javascript, ts, bash, json, css, html, go],
+        wrap: true,
+      },
       gfm: false,
     }),
     sitemap(),
@@ -35,9 +40,9 @@ export default defineConfig({
   },
   markdown: {
     shikiConfig: {
-      theme: tokyoNight,
-      langs: [],
-      wrap: false,
+      theme: 'catppuccin-macchiato',
+      langs: [ruby, typescript, javascript, ts, bash, json, css, html, go],
+      wrap: true,
     },
   },
   vite: {
