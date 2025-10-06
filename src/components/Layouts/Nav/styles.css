@@ -1,0 +1,31 @@
+#navlinks a {
+  transition: all 0.3s ease-in-out;
+}
+
+#navlinks a:hover {
+  color: #95aafb;
+}
+
+#navlinks a.active {
+  color: #95aafb;
+  border-bottom: 2px solid #95aafb;
+}
+
+#hamburger span {
+  transition: all 0.3s ease-in-out;
+}
+
+#hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+#hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+#hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+#hamburger.active {
+  border: 2px solid #95aafb;
+}

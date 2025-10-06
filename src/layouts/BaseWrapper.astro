@@ -1,6 +1,6 @@
 ---
 import Footer from '../components/Layouts/Footer'
-import Nav from '../components/Layouts/Nav.astro'
+import {Nav} from '../components/Layouts/Nav'
 import Head from '../components/Layouts/Head.astro'
 import Analytics from '../components/Analytics'
 ---
@@ -9,7 +9,7 @@ import Analytics from '../components/Analytics'
 <html lang="en">
   <Head />
   <body class="min-h-screen mx-[4rem]">
-    <Nav />
+    <Nav client:only="react" />
     <slot />
     <Footer />
     <Analytics client:only="react" />

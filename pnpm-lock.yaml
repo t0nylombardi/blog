@@ -71,6 +71,9 @@ importers:
       remark-toc:
         specifier: ^9.0.0
         version: 9.0.0
+      scroll-snap:
+        specifier: ^5.0.2
+        version: 5.0.2
       shiki-languages:
         specifier: ^0.2.7
         version: 0.2.7
@@ -3958,6 +3961,9 @@ packages:
 
   scheduler@0.26.0:
     resolution: {integrity: sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA==}
+
+  scroll-snap@5.0.2:
+    resolution: {integrity: sha512-Uwd3gYQwryAnmhS5F4CdzI4jrdicXlKiSKywFTIOyrbGkECFec/w1O3BNspEXTcpQnGwZmJyDeBA4sQFmSBttw==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -9508,6 +9514,8 @@ snapshots:
   sax@1.4.1: {}
 
   scheduler@0.26.0: {}
+
+  scroll-snap@5.0.2: {}
 
   semver@6.3.1: {}
 

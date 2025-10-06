@@ -2,7 +2,7 @@
 import {SEO} from 'astro-seo'
 import type {CollectionEntry} from 'astro:content'
 import BaseHead from '../components/Layouts/BaseHeader.astro'
-import Nav from '../components/Layouts/Nav.astro'
+import {Nav} from '../components/Layouts/Nav'
 import Footer from '../components/Layouts/Footer'
 import {Icon} from '@iconify/react'
 import Analytics from '../components/Analytics'
@@ -85,7 +85,7 @@ const currentPath = Astro.url.pathname
   </head>
 
   <body class="bg-ctp-red-500">
-    <Nav />
+    <Nav client:only="react" />
     <div class="mb-10 max-w-screen-2xl container-2xl mx-auto py-20">
       <main class="overflow-auto">
         <div class="container mx-auto overflow-auto">

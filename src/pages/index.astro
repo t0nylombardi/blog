@@ -1,68 +1,20 @@
 ---
 import BaseWrapper from '../layouts/BaseWrapper.astro'
 import BlogPostList from '../components/BlogPostList.astro'
-import MySocials from '../components/MySocials'
-import CTA from '../components/UI/CTA.astro'
-import AgeCounter from '../components/AgeCounter'
-import {AboutSection} from '../components/Sections'
+import MainSection from '../components/Sections/MainSection'
+import AboutSection from '../components/Sections/AboutSection'
 import {ContactForm} from '../components/ContactForm'
 import SectionHeader from '../components/UI/SectionHeader'
+import BlogSection from '../components/Sections/blogSection'
 ---
 
 <BaseWrapper>
   <main class="snap-y snap-mandatory h-screen overflow-y-scroll overflow-auto hide-scrollbar">
-    <section
-      id="hello"
-      class="h-screen snap-start pt-[1rem] mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center"
-    >
-      <div class="flex flex-col md:flex-row w-full h-full justify-center items-center">
-        <!-- Text Section -->
-        <div class="w-full md:w-1/2 flex flex-col justify-center">
-          <div class="text-ctp-text text-center md:text-left">
-            <p class="sm:text-2xl font-medium">Hey, I'm</p>
-            <h1 class="text-3xl sm:text-3xl font-bold mt-2">Anthony Lombardi</h1>
-            <h2 class="text-gradient text-2xl mt-1">&gt; Full-Stack Engineer</h2>
-          </div>
+    <MainSection client:only="react" />
 
-          <div class="font-medium mt-6 space-y-1">
-            <p class="comment">// personal data</p>
+    <AboutSection client:only="react" />
 
-            <p>
-              <span class="text-ctp-mauve-500">let </span>
-              <span class="text-ctp-text">age</span> =
-              <span id="age" class="text-ctp-red-500 block pl-6 md:inline md:pl-0">
-                <AgeCounter client:only="react" /></span
-              >
-            </p>
-
-            <p>
-              <span class="text-ctp-mauve-500">let </span>
-              <span class="text-ctp-text">location</span> =
-              <span class="text-ctp-green-500 block pl-6 md:inline md:pl-0">"Westchester, New York"</span>
-            </p>
-
-            <MySocials />
-          </div>
-
-          <div class="mt-6">
-            <CTA link="resume" />
-          </div>
-        </div>
-
-        <!-- Avatar Section -->
-        <div class="h-full w-full md:w-1/2 flex justify-start md:justify-end items-start mt-[8rem]">
-          <img src="/amoji_avatar.svg" alt="Avatar" class="min-w-[800px]" />
-        </div>
-      </div>
-    </section>
-
-    <AboutSection client:load />
-
-    <section id="blog" class="h-screen snap-start flex flex-col items-center justify-center my-[12rem]">
-      <SectionHeader header="_blog" />
-      <BlogPostList limit={3} />
-      <a href="/blog" class="text-ctp-peach-500 hover:text-ctp-text text-2xl block py-8">See more blog posts</a>
-    </section>
+    <!-- <BlogSection client:only="react" /> -->
 
     <ContactForm client:only="react" />
   </main>

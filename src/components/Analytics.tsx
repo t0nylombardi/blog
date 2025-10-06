@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
-import { loadGtag } from '../untils/gtag';
+import {useEffect} from 'react'
+import {loadGtag} from '../utils/gtag'
 
 const Analytics = () => {
   useEffect(() => {
-    loadGtag();
-  }, []);
+    loadGtag()
+  }, [])
 
-  return null;
-};
+  return null
+}
 
-export default Analytics;
+export default Analytics

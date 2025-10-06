@@ -2,7 +2,7 @@ import LanguagesSprites from '../LanguagesSprites/LanguagesSprites'
 import {AboutMe} from '../../constants'
 import SectionHeader from '../UI/SectionHeader'
 
-const AboutSection = () => {
+function AboutSection() {
   return (
     <section
       id="about"

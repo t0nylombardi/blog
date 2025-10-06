@@ -1,4 +1,26 @@
-pre .shiki .catppuccin-macchiato {
-  background-color: none !important;
-  color: none !important;
+@reference 'tailwindcss';
+@import '@catppuccin/tailwindcss/macchiato.css';
+
+#shiki-container > pre {
+  background-color: transparent !important;
+  color: transparent !important;
+}
+
+form {
+  background-color: transparent;
+}
+
+*:focus {
+  @apply outline-none ring-0 ring-transparent bg-transparent!;
+}
+
+form input,
+form textarea {
+  @apply w-full py-2 px-4 mt-2  border-ctp-mauve-500 border rounded-sm;
+  @apply outline-none ring-0 ring-transparent bg-transparent!;
+}
+
+form input::after,
+form textarea::after {
+  @apply outline-none ring-0 ring-transparent bg-transparent! autofill:bg-transparent;
 }
