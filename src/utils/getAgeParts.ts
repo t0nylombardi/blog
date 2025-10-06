@@ -1,48 +1,40 @@
 import type { AgeParts } from "../types/age";
 
 export const getAgeParts = (birthDate: Date, now: Date): AgeParts => {
-  const birthMonth = birthDate.getMonth(); // March = 2
-  const birthDay = birthDate.getDate();
+  // Clone to avoid mutating inputs
+  let years = now.getFullYear() - birthDate.getFullYear();
+  let months = now.getMonth() - birthDate.getMonth();
+  let days = now.getDate() - birthDate.getDate();
 
-  const thisYearBirthday = new Date(now.getFullYear(), birthMonth, birthDay);
-  const lastBirthday =
-    now >= thisYearBirthday
-      ? thisYearBirthday
-      : new Date(now.getFullYear() - 1, birthMonth, birthDay);
-
-  const years = lastBirthday.getFullYear() - birthDate.getFullYear();
-
-  // Start from lastBirthday and move month by month until we reach "now"
-  let temp = new Date(lastBirthday);
-  let months = 0;
-
-  while (
-    temp.getFullYear() < now.getFullYear() ||
-    (temp.getFullYear() === now.getFullYear() && temp.getMonth() < now.getMonth())
-  ) {
-    temp.setMonth(temp.getMonth() + 1);
-    if (temp <= now) months++;
+  // Adjust if current month/day hasn’t reached birthday yet
+  if (days < 0) {
+    // borrow days from previous month
+    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+    days += prevMonth.getDate();
+    months--;
   }
 
+  if (months < 0) {
+    months += 12;
+    years--;
+  }
 
-  // Create a base date to calculate the diff (time since last birthday)
-  const diff = now.getTime() - lastBirthday.getTime();
-  const tempDate = new Date(diff); // epoch + delta
+  // Get time-of-day difference
+  const birthTime = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    birthDate.getHours(),
+    birthDate.getMinutes(),
+    birthDate.getSeconds(),
+    birthDate.getMilliseconds()
+  );
 
-  // const months = now.getMonth() - lastBirthday.getMonth() + (now.getFullYear() - lastBirthday.getFullYear()) * 12;
-  const days = tempDate.getUTCDate() - 1;
-  const hours = tempDate.getUTCHours();
-  const minutes = tempDate.getUTCMinutes();
-  const seconds = tempDate.getUTCSeconds();
-  const milliseconds = tempDate.getUTCMilliseconds();
+  const diffMs = now.getTime() - birthTime.getTime();
+  const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
+  const seconds = Math.floor((diffMs / 1000) % 60);
+  const milliseconds = diffMs % 1000;
 
-  return {
-    years,
-    months: months % 12,
-    days,
-    hours,
-    minutes,
-    seconds,
-    milliseconds,
-  };
+  return { years, months, days, hours, minutes, seconds, milliseconds };
 };

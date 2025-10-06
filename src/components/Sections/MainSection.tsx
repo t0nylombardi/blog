@@ -6,31 +6,38 @@ const MainSection = () => {
   return (
     <section
       id="hello"
-      className="h-screen snap-start! pt-[1rem] mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center"
+      className="h-screen snap-start! scroll-mt-20 pt-[1rem] mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center"
     >
       <div className="flex flex-col md:flex-row w-full h-full justify-center items-center">
         <div className="w-full md:w-1/2 flex flex-col justify-center">
-          <div className="text-ctp-text text-center md:text-left">
-            <p className="sm:text-2xl font-medium">Hey, I'm</p>
-            <h1 className="text-3xl sm:text-3xl font-bold mt-2">Anthony Lombardi</h1>
-            <h2 className="text-gradient text-2xl mt-1">&gt; Full-Stack Engineer</h2>
+          <div className="text-ctp-text text-center md:text-left pb-8">
+            <p className="text-3xl sm:text-2xl font-medium">Hey, I'm</p>
+            <h1 className="text-[3rem] sm:text-[4rem] font-medium mt-2">Anthony Lombardi</h1>
           </div>
 
-          <div className="font-medium mt-6 space-y-1">
+          <div className="font-medium mt-6 space-y-1 text-lg">
             <p className="comment">// personal data</p>
 
             <p>
               <span className="text-ctp-mauve-500">let </span>
-              <span className="text-ctp-text">age</span> =
-              <span id="age" className="text-ctp-red-500 block pl-6 md:inline md:pl-0">
-                <AgeCounter />
+              <span className="text-ctp-text">title</span> =
+              <span id="age" className="text-ctp-green-500 block pl-6 md:inline md:pl-0">
+                "Lead Ruby Software Engineer";
               </span>
             </p>
 
             <p>
               <span className="text-ctp-mauve-500">let </span>
               <span className="text-ctp-text">location</span> =
-              <span className="text-ctp-green-500 block pl-6 md:inline md:pl-0">"Westchester, New York"</span>
+              <span className="text-ctp-green-500 block pl-6 md:inline md:pl-0">"Westchester, New York";</span>
+            </p>
+
+            <p>
+              <span className="text-ctp-mauve-500">let </span>
+              <span className="text-ctp-text">focus</span> =
+              <span className="text-ctp-green-500 block pl-6 md:inline md:pl-0">
+                "Eat, Code, Think about life choices, sleep, repeat";
+              </span>
             </p>
 
             <MySocials />

@@ -4,7 +4,6 @@ import '../../../utils/mobileNavBar'
 
 export const Nav = () => {
   const [isScrolling, setIsScrolling] = useState(false)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const [y, setY] = useState(window.scrollY)
 
   const handleNavigation = useCallback(

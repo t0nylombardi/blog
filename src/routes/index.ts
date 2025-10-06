@@ -8,7 +8,7 @@ export const Routes = [
     label: '_about',
   },
   {
-    slug: '/#blog',
+    slug: '/blog',
     label: '_blog',
   },
   {

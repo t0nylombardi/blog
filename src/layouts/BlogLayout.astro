@@ -93,12 +93,15 @@ const currentPath = Astro.url.pathname
             <h1 class="text-[1.3rem] md:text-[4rem] py-4 font-medium title-font text-gray-100">
               {title}
             </h1>
-            <div class="m-4 text-gray-100 flex justify-center">
+
+            <div class="m-auto text-gray-100 flex flex-col justify-center">
               <h2 class="text-[1rem] md:text-[1.5rem] w-full font-thin">{description}</h2>
+              <div class="w-full flex flex-row items-center justify-center">
+                <h4 class="text-ctp-green-500 px-[5rem] text-[0.6rem] md:text-sm font-light title-font mb-1">
+                  by: {author} on {date ? <FormattedDate date={date} /> : originalDatePublished}
+                </h4>
+              </div>
             </div>
-            <h4 class="text-azure/50 tracking-widest px-[5rem] text-[0.6rem] md:text-sm font-light title-font mb-1">
-              by: {author} on {date ? <FormattedDate date={date} /> : originalDatePublished}
-            </h4>
           </div>
           <div class="hidden md:block my-8 md:my-16 object-contain object-center">
             {heroImage && <img class="hidden w-max md:block " src={heroImage} alt={title} />}
@@ -107,14 +110,14 @@ const currentPath = Astro.url.pathname
         <article class="w-full mt-8 mb-8 px-[1.5rem] md:px-[4rem] text-gray-100">
           <slot />
           <div class="mt-4 md:mt-[8rem]">
-            <p class="text-[1rem] md:text-[1.5rem]">
+            <p class="my-12text-[1rem] md:text-[1.5rem]">
               If you liked this article, please consider
               <a href="https://www.buymeacoffee.com/t0nylombardi" class="hover:underline hover:cursor-pointer">
                 buying me a coffee</a
               >
               <Icon icon="vscode-icons:file-type-coffeescript" />
             </p>
-            <p class="text-[1rem] md:text-[1.5rem]">Cheers!</p>
+            <p class="my-[4rem] text-[1rem] md:text-[1.5rem]">Cheers!</p>
           </div>
         </article>
       </main>

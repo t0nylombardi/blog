@@ -468,8 +468,10 @@
   </g>
   <defs>
     <linearGradient id="grad1" x1="-6.8767e-06" y1="121.001" x2="392.834" y2="443.378" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#c6a0f6"/>
-      <stop offset="1" stop-color="#8aadf4"/>
+      <!-- Start semi-transparent purple -->
+      <stop stop-color="#C6A0F6" stop-opacity="0.5" />
+      <!-- End semi-transparent blue -->
+      <stop offset="1" stop-color="#8AADF4" stop-opacity="0.5" />
     </linearGradient>
   </defs>
 </svg>
