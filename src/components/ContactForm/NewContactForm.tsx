@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import CodeHighlight from '../CodeHighlight'
 import SuccessPopup from './SuccessPopup'
 import './style.css'
+import SectionHeader from '../UI/SectionHeader'
 
 interface FormData {
   name: string
@@ -32,11 +33,8 @@ export default function ContactForm() {
     e.preventDefault()
     setStatus('pending')
     setError(null)
-    console.log('Event:', e)
     const formData = new FormData(e.target as HTMLFormElement)
     const body = new URLSearchParams(formData as any).toString()
-
-    console.log('Form Data:', body)
 
     await fetch('/__forms.html', {
       method: 'POST',
@@ -73,12 +71,13 @@ end
   `
 
   return (
-    <section id="contact" className="min-h-[80vh] flex items-center relative">
-      <div className="columns-2 gap-8 w-full justify-center">
-        <div className="h-full flex flex-col justify-center">
+    <section id="contact" className=" snap-start flex flex-col items-center justify-center my-[12rem]">
+      <SectionHeader header="_contact" />
+      <div className="grid grid-cols-2 gap-4 py-18 w-full">
+        <div className="row-start-1 row-end-2 h-full flex flex-col justify-center">
           <form
             name="contact-form"
-            className="flex justify-center flex-col w-full"
+            className="flex justify-between flex-col h-full w-full"
             data-netlify="true"
             netlify-honeypot="bot-field"
             data-netlify-recaptcha="true"
@@ -93,8 +92,8 @@ end
             <input
               name="name"
               type="text"
+              autoComplete="name"
               placeholder="What is your name?"
-              className="w-full py-2 px-4 border-[#A478E8] border bg-[#24273A] rounded-sm mt-2"
               required
               value={codeData.name}
               onChange={handleChange}
@@ -102,8 +101,8 @@ end
             <input
               name="email"
               type="email"
+              autoComplete="email"
               placeholder="what-is@your-email.question"
-              className="w-full py-2 px-4 bg-[#24273A] border-[#A478E8] border rounded-sm mt-2"
               required
               value={codeData.email}
               onChange={handleChange}
@@ -111,7 +110,6 @@ end
             <textarea
               name="message"
               placeholder="What do you want to talk about?"
-              className="w-full py-2 px-4 mt-2 bg-[#24273A] border-[#A478E8] border rounded-sm"
               rows={5}
               required
               value={codeData.message}
@@ -122,7 +120,7 @@ end
               id="submit-form"
               type="submit"
               className="border border-[#A478E8] hover:text-[#A478E8] font-bold mt-8 p-4"
-              disabled={status === 'pending'} // Disable button while submitting
+              disabled={status === 'pending'}
             >
               {status === 'pending' ? 'Submitting...' : 'Send Message'}
             </button>
@@ -130,8 +128,8 @@ end
           {status === 'error' && <div className="text-red-500 mt-2">{error}</div>}
         </div>
 
-        <div className="h-full flex flex-col justify-center pt-8">
-          <div className="flex justify-center items-center text-2xl">
+        <div className="row-span-2 row-end-2 h-full flex flex-col justify-center pt-8">
+          <div className="bg-none! flex justify-center items-center text-2xl">
             <CodeHighlight code={Code.trim()} />
           </div>
         </div>

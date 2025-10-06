@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import {getAgeParts} from '../untils/getAgeParts'
-import {getEasternTimeNow} from '../untils/getEsternTimeNow'
-import {pad} from '../untils/pad'
+import {getAgeParts} from '../utils/getAgeParts'
+import {getEasternTimeNow} from '../utils/getEsternTimeNow'
+import {pad} from '../utils/pad'
 import type {AgeParts} from '../types/age'
 import {BIRTHDAY} from '../constants'
 

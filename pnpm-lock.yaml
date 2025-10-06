@@ -17,30 +17,6 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.6.0
         version: 3.6.0
-      '@iconify-json/bi':
-        specifier: ^1.2.6
-        version: 1.2.6
-      '@iconify-json/carbon':
-        specifier: ^1.2.13
-        version: 1.2.13
-      '@iconify-json/emojione':
-        specifier: ^1.2.3
-        version: 1.2.3
-      '@iconify-json/fe':
-        specifier: ^1.2.4
-        version: 1.2.4
-      '@iconify-json/ion':
-        specifier: ^1.2.6
-        version: 1.2.6
-      '@iconify-json/logos':
-        specifier: ^1.2.9
-        version: 1.2.9
-      '@iconify-json/mdi':
-        specifier: ^1.2.3
-        version: 1.2.3
-      '@iconify-json/vscode-icons':
-        specifier: ^1.2.30
-        version: 1.2.30
       '@iconify/react':
         specifier: ^6.0.2
         version: 6.0.2(react@19.1.1)
@@ -87,14 +63,17 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
       react-shiki:
-        specifier: ^0.8.0
-        version: 0.8.0(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^0.9.0
+        version: 0.9.0(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react-visibility-sensor:
         specifier: ^5.1.1
         version: 5.1.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       remark-toc:
         specifier: ^9.0.0
         version: 9.0.0
+      scroll-snap:
+        specifier: ^5.0.2
+        version: 5.0.2
       shiki-languages:
         specifier: ^0.2.7
         version: 0.2.7
@@ -111,6 +90,9 @@ importers:
       '@astrojs/netlify':
         specifier: ^6.5.11
         version: 6.5.11(@types/node@24.5.2)(astro@5.13.10(@netlify/blobs@10.0.10)(@types/node@24.5.2)(jiti@2.6.0)(lightningcss@1.30.1)(rollup@4.52.0)(terser@5.39.0)(typescript@5.9.2)(yaml@2.8.1))(jiti@2.6.0)(lightningcss@1.30.1)(rollup@4.52.0)(terser@5.39.0)(yaml@2.8.1)
+      '@catppuccin/tailwindcss':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@shikijs/transformers':
         specifier: ^3.13.0
         version: 3.13.0
@@ -310,6 +292,10 @@ packages:
 
   '@capsizecss/unpack@2.4.0':
     resolution: {integrity: sha512-GrSU71meACqcmIUxPYOJvGKF0yryjN/L1aCuE9DViCTJI7bfkjgYDPD1zbNDcINJwSSP6UaBZY9GAbYDO7re0Q==}
+
+  '@catppuccin/tailwindcss@1.0.0':
+    resolution: {integrity: sha512-l8pOlcYe2ncGd8a1gUmL5AHmKlxR2+CHuG5kt4Me6IZwzntW1DoLmj89BH+DcsPHBsdDGLrTSv35emlYyU3FeQ==}
+    engines: {node: '>=22.0.0'}
 
   '@colors/colors@1.6.0':
     resolution: {integrity: sha512-Ir+AOibqzrIsL6ajt3Rz3LskB7OiMVHqltZmspbW/TJuTVuyOMirVqAkjfY6JISiLHgyNqicAC8AyHHGzNd/dA==}
@@ -683,30 +669,6 @@ packages:
 
   '@iarna/toml@2.2.5':
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
-
-  '@iconify-json/bi@1.2.6':
-    resolution: {integrity: sha512-fWfLr1/+DJDe8+rIUXxMwvmWBZFlxRtM59sYnrezJ2xX87QKyXVw3QuforJ4kF2Orrz85J+JTRG6305vaJ7flA==}
-
-  '@iconify-json/carbon@1.2.13':
-    resolution: {integrity: sha512-vXrFFKkfYaZSwf4WfnRQJQMnpEzxlPlupwZZlS1WvOAuNnWahsUudHycaMpoBzDqBfniH4KQ2b5qnw0VMKoJug==}
-
-  '@iconify-json/emojione@1.2.3':
-    resolution: {integrity: sha512-T9+T3HIbJNLKKsmxYKlaYhvnHYkz/HNYTV7SHCXVZPfeUi4FqskY70YeN8yYAZT8cCv7w5vJxS4Q1m8zb9CMMg==}
-
-  '@iconify-json/fe@1.2.4':
-    resolution: {integrity: sha512-TBfDSJOUKxd6QO+2WWcOC/trnsovRluk1jx05aGqMyoG+G9pkL661VO0ladWiWp+4ewOHDJ3s47W5bwx3EounQ==}
-
-  '@iconify-json/ion@1.2.6':
-    resolution: {integrity: sha512-JftEXKfjvJNn3SrGeSBrG/waRkjeTpLdMLNLwpAX4NgI14QgJoAeXEh2iZjNPqioAkeIgErX4Bi6mnFwpjk3BQ==}
-
-  '@iconify-json/logos@1.2.9':
-    resolution: {integrity: sha512-G6VCdFnwZcrT6Eveq3m43oJfLw/CX8plwFcE+2jgv3fiGB64pTmnU7Yd1MNZ/eA+/Re2iEDhuCfSNOWTHwwK8w==}
-
-  '@iconify-json/mdi@1.2.3':
-    resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
-
-  '@iconify-json/vscode-icons@1.2.30':
-    resolution: {integrity: sha512-dlTOc8w4a8/QNumZzMve+APJa6xQVXPZwo8qBk/MaYfY42NPrQT83QXkbTWKDkuEu/xgHPXvKZZBL7Yy12vYQw==}
 
   '@iconify/react@6.0.2':
     resolution: {integrity: sha512-SMmC2sactfpJD427WJEDN6PMyznTFMhByK9yLW0gOTtnjzzbsi/Ke/XqsumsavFPwNiXs8jSiYeZTmLCLwO+Fg==}
@@ -3805,8 +3767,8 @@ packages:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
     engines: {node: '>=0.10.0'}
 
-  react-shiki@0.8.0:
-    resolution: {integrity: sha512-ibZ89Y8Q7jLc1Qjsdsc43ca91OvgB80phuJ7mlcWfUsEc9TB24wvx4cLX8MT8Unfa1lt9tGjrZnFUSF9Bl3eqA==}
+  react-shiki@0.9.0:
+    resolution: {integrity: sha512-5t+vHGglJioG3LU6uTKFaiOC+KNW7haL8e22ZHSP7m174ZD/X2KgCVJcxvcUOM3FiqjPQD09AyS9/+RcOh3PmA==}
     peerDependencies:
       '@types/react': '>=16.8.0'
       '@types/react-dom': '>=16.8.0'
@@ -3999,6 +3961,9 @@ packages:
 
   scheduler@0.26.0:
     resolution: {integrity: sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA==}
+
+  scroll-snap@5.0.2:
+    resolution: {integrity: sha512-Uwd3gYQwryAnmhS5F4CdzI4jrdicXlKiSKywFTIOyrbGkECFec/w1O3BNspEXTcpQnGwZmJyDeBA4sQFmSBttw==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -5113,6 +5078,8 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  '@catppuccin/tailwindcss@1.0.0': {}
+
   '@colors/colors@1.6.0': {}
 
   '@dabh/diagnostics@2.0.3':
@@ -5330,38 +5297,6 @@ snapshots:
   '@humanwhocodes/momoa@2.0.4': {}
 
   '@iarna/toml@2.2.5': {}
-
-  '@iconify-json/bi@1.2.6':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/carbon@1.2.13':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/emojione@1.2.3':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/fe@1.2.4':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/ion@1.2.6':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/logos@1.2.9':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/mdi@1.2.3':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/vscode-icons@1.2.30':
-    dependencies:
-      '@iconify/types': 2.0.0
 
   '@iconify/react@6.0.2(react@19.1.1)':
     dependencies:
@@ -9287,7 +9222,7 @@ snapshots:
 
   react-refresh@0.17.0: {}
 
-  react-shiki@0.8.0(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+  react-shiki@0.9.0(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
       clsx: 2.1.1
       dequal: 2.0.3
@@ -9579,6 +9514,8 @@ snapshots:
   sax@1.4.1: {}
 
   scheduler@0.26.0: {}
+
+  scroll-snap@5.0.2: {}
 
   semver@6.3.1: {}
 

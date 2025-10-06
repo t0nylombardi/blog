@@ -28,7 +28,11 @@ article hr {
 }
 
 article pre {
-  @apply my-8 p-4 md:p-8;
+  @apply my-8 p-4 md:p-8 bg-[#1e1e2e]! rounded-lg overflow-x-auto flex flex-wrap;
+}
+
+article pre code {
+  @apply text-lg font-thin;
 }
 
 article ul,
@@ -66,14 +70,14 @@ article h6 {
 }
 
 article .copy-code {
-  @apply absolute top-0 right-0 bg-indigo-500 text-white px-2 py-1 text-xs leading-tight;
+  @apply absolute top-0 right-0 bg-ctp-red-500 text-white px-2 py-1 text-xs leading-tight;
 }
 article .copy-code:hover {
-  @apply bg-indigo-900;
+  @apply bg-ctp-red-700;
 }
 
 article code {
-  @apply text-[#7AA2F7] py-1 text-xl;
+  @apply text-ctp-red-500 py-1 text-xl;
 }
 
 article blockquote {

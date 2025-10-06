@@ -4,11 +4,6 @@ import sitemap from '@astrojs/sitemap'
 import netlify from '@astrojs/netlify'
 import tailwindcss from '@tailwindcss/vite'
 import mdx from '@astrojs/mdx'
-import fs from 'fs'
-
-import sitemap from '@astrojs/sitemap'
-
-const tokyoNight = JSON.parse(fs.readFileSync('./src/layouts/themes/tokyo-night.json', 'utf8'))
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,7 +20,21 @@ export default defineConfig({
     }),
     mdx({
       syntaxHighlight: 'shiki',
-      shikiConfig: {theme: 'dracula'},
+      shikiConfig: {
+        theme: 'catppuccin-macchiato',
+        langs: [
+          () => import('@shikijs/langs/ruby'),
+          () => import('@shikijs/langs/typescript'),
+          () => import('@shikijs/langs/javascript'),
+          () => import('@shikijs/langs/ts'),
+          () => import('@shikijs/langs/bash'),
+          () => import('@shikijs/langs/json'),
+          () => import('@shikijs/langs/css'),
+          () => import('@shikijs/langs/html'),
+          () => import('@shikijs/langs/go'),
+        ],
+        wrap: true,
+      },
       gfm: false,
     }),
     sitemap(),
@@ -35,9 +44,9 @@ export default defineConfig({
   },
   markdown: {
     shikiConfig: {
-      theme: tokyoNight,
-      langs: [],
-      wrap: false,
+      theme: 'catppuccin-macchiato',
+      langs: ['ruby', 'typescript', 'javascript', 'ts', 'bash', 'json', 'css', 'html', 'go'],
+      wrap: true,
     },
   },
   vite: {
@@ -50,7 +59,6 @@ export default defineConfig({
       {
         name: 'debug-resolve',
         resolveId(source) {
-          console.log(`[DEBUG] Resolving: ${source}`)
           return null
         },
       },

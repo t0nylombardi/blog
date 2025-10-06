@@ -1,0 +1,88 @@
+@reference 'tailwindcss';
+
+.resume {
+  margin: 2rem 2.5rem;
+}
+
+.resume hr {
+  background-color: transparent;
+  border: 1px solid transparent;
+  margin: 0.8rem 0 1.2rem 0;
+  width: 40px;
+  height: 0.3rem;
+}
+
+.resume h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.resume h2::after {
+  content: '';
+  width: 8px;
+  height: 20px;
+  background: var(--color-ctp-mauve-500);
+  display: inline-block;
+  animation: cursor-blink 1.5s steps(2) infinite;
+}
+
+.resume .resume-body-wrapper {
+  height: 100%;
+  display: flex;
+  margin-top: 2rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.resume .skills-hobbies {
+  width: 30%;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  margin-right: 1rem;
+}
+
+.resume .skills-hobbies .skills {
+  padding: 0 2rem 4rem 0;
+}
+
+.resume .skills-hobbies .skills h1 {
+  margin: 0.6rem 0;
+}
+
+.resume .skills-hobbies .skills h2 {
+  margin: 0.8rem 0;
+  line-height: 1;
+}
+
+.resume .resume-main {
+  width: 70%;
+  margin: 1.5rem 0;
+}
+
+.resume .resume-main .profile {
+  padding-bottom: 1.2rem;
+}
+
+.resume .resume-main .profile p {
+  padding-bottom: 1.6rem;
+  color: var(--color-ctp-green-500);
+}
+
+.resume .resume-main .profile .employment-history {
+  padding: 1rem 0;
+  color: var(--color-ctp-green-500);
+}
+
+.resume .resume-main .profile .employment-history .highlights {
+  padding: 2rem 0 0 1.5rem;
+}
+.employment {
+  color: var(--color-ctp-green-500);
+}
+
+@keyframes cursor-blink {
+  0% {
+    opacity: 0;
+  }
+}

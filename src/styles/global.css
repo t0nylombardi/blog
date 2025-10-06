@@ -1,7 +1,9 @@
 @import 'tailwindcss';
+@import '@catppuccin/tailwindcss/macchiato.css';
 @reference 'tailwindcss';
 
 @import './base.css';
 @import './utilities.css';
 @import './article.css';
 @import './comments.css';
+@import './resume.css';
