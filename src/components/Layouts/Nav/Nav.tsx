@@ -45,7 +45,7 @@ export const Nav = () => {
           <ul className="flex flex-col lg:flex-row px-8 pb-4 lg:py-4 space-y-1 lg:space-y-0 lg:space-x-8">
             {Routes.map((route) => (
               <li className="">
-                <a href={route.slug} className="flex items-center hover:text-gray-200">
+                <a href={route.slug} className="flex items-center text-ctp-text hover:text-ctp-mauve-500">
                   {route.label}
                 </a>
               </li>
@@ -61,8 +61,8 @@ export const Nav = () => {
           </div>
         </li>
 
-        <li className="px-8 py-4 hidden lg:block border-r border-[#1E2D3D]">
-          <a href="/#contact" className="hover:text-gray-200">
+        <li className="px-8 py-4 hidden lg:block">
+          <a href="/#contact" className="text-ctp-text hover:text-ctp-mauve-500">
             _contact-me
           </a>
         </li>

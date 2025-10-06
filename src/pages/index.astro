@@ -6,16 +6,17 @@ import AboutSection from '../components/Sections/AboutSection'
 import {ContactForm} from '../components/ContactForm'
 import SectionHeader from '../components/UI/SectionHeader'
 import BlogSection from '../components/Sections/blogSection'
+import Footer from '../components/Layouts/Footer'
 ---
 
 <BaseWrapper>
   <main class="snap-y snap-mandatory h-screen overflow-y-scroll overflow-auto hide-scrollbar">
     <MainSection client:only="react" />
-
     <AboutSection client:only="react" />
+    <!-- <ContactForm client:only="react" /> -->
 
-    <!-- <BlogSection client:only="react" /> -->
-
-    <ContactForm client:only="react" />
+    <div class="flex flex-col items-center justify-center py-[2rem] m-[2rem]">
+      <Footer />
+    </div>
   </main>
 </BaseWrapper>
