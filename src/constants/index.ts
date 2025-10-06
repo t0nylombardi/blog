@@ -50,10 +50,10 @@ export const Projects = [
   {
     img: "/projects/factuality.png",
     width: "w-[23rem]",
-    link: "https://factuality.wtf",
+    link: "https://factually.wtf",
     title: "Factuality WTF",
     technologies: "Go, React, NextJS, Tailwind",
-    description: "Factuallity is a website that gives random, useless that no one cares about. It was built with Go, React, NextJS and Tailwind. The website is a simple web app that uses the Factuality API to get random facts and display them on the page. The website is hosted on AWS EC2."
+    description: "Factually is a website that gives random, useless that no one cares about. It was built with Go, React, NextJS and Tailwind. The website is a simple web app that uses the Factuality API to get random facts and display them on the page. The website is hosted on AWS EC2."
   }
 ];
 
