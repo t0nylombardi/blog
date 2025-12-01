@@ -2,6 +2,7 @@
 import BaseWrapper from '../layouts/BaseWrapper.astro'
 import MainSection from '../components/Sections/MainSection'
 import AboutSection from '../components/Sections/AboutSection'
+import {ContactForm} from '../components/ContactForm'
 import Footer from '../components/Layouts/Footer'
 ---
 
@@ -9,7 +10,7 @@ import Footer from '../components/Layouts/Footer'
   <main class="snap-y snap-mandatory h-screen overflow-y-scroll overflow-auto hide-scrollbar">
     <MainSection client:only="react" />
     <AboutSection client:only="react" />
-    <!-- <ContactForm client:only="react" /> -->
+    <ContactForm client:only="react" />
 
     <div class="flex flex-col items-center justify-center py-[2rem] m-[2rem]">
       <Footer />
