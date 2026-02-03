@@ -17,5 +17,7 @@ const {Content} = await render(post)
 ---
 
 <BaseLayout {...post.data}>
-  <Content />
+  <main class="snap-y snap-mandatory h-screen">
+    <Content />
+  </main>
 </BaseLayout>

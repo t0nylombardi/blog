@@ -10,8 +10,10 @@ import Analytics from '../components/Analytics'
   <Head />
   <body class="min-h-screen mx-[4rem] flex flex-col">
     <Nav client:only="react" />
-    <slot />
-    <Footer />
+    <main class="flex-1 h-screen">
+      <slot />
+      <Footer />
+    </main>
     <Analytics client:only="react" />
   </body>
 </html>

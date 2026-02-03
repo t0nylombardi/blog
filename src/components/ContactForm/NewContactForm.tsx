@@ -71,7 +71,7 @@ end
   `
 
   return (
-    <section id="contact" className=" snap-start flex flex-col items-center justify-center my-[12rem]">
+    <section id="contact" className="fullscreen-section snap-none flex flex-col items-center justify-center my-[12rem]">
       <SectionHeader header="_contact" />
       <div className="grid grid-cols-2 gap-4 py-18 w-full">
         <div className="row-start-1 row-end-2 h-full flex flex-col justify-center">

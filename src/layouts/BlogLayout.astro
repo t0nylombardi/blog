@@ -84,11 +84,11 @@ const currentPath = Astro.url.pathname
     <BaseHead title={title} description={description} />
   </head>
 
-  <body class="bg-ctp-red-500">
+  <body class="">
     <Nav client:only="react" />
     <div class="mb-10 max-w-screen-2xl container-2xl mx-auto py-20">
-      <main class="overflow-auto">
-        <div class="container mx-auto overflow-auto">
+      <main class="">
+        <div class="container mx-auto">
           <div class="flex flex-col text-center w-full mt-10">
             <h1 class="text-[1.3rem] md:text-[4rem] py-4 font-medium title-font text-gray-100">
               {title}
@@ -127,9 +127,3 @@ const currentPath = Astro.url.pathname
     </div>
   </body>
 </html>
-
-<style>
-  Icon {
-    @apply w-8 h-8 mx-2 inline-block;
-  }
-</style>

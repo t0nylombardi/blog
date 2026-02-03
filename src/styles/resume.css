@@ -28,11 +28,8 @@
 }
 
 .resume .resume-body-wrapper {
-  height: 100%;
-  display: flex;
+  display: block;
   margin-top: 2rem;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .resume .skills-hobbies {

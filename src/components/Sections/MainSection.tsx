@@ -6,7 +6,7 @@ const MainSection = () => {
   return (
     <section
       id="hello"
-      className="h-screen snap-start! scroll-mt-20 pt-[1rem] mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center"
+      className="h-screen snap-none pt-[1rem] mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center"
     >
       <div className="flex flex-col md:flex-row w-full h-full justify-center items-center">
         <div className="w-full md:w-1/2 flex flex-col justify-center">
@@ -48,8 +48,8 @@ const MainSection = () => {
           </div>
         </div>
 
-        <div className="h-full w-full md:w-1/2 flex justify-start md:justify-end items-start mt-[8rem]">
-          <img src="/amoji_avatar.svg" alt="Avatar" className="min-w-[800px]" />
+        <div className="h-full w-full md:w-1/2 flex justify-center md:justify-end items-center">
+          <img src="/amoji_avatar.svg" alt="Avatar" className="w-full max-w-[800px] h-auto object-contain" />
         </div>
       </div>
     </section>

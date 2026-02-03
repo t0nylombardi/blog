@@ -6,7 +6,7 @@ function AboutSection() {
   return (
     <section
       id="about"
-      className="h-screen snap-start scroll-mt-20 flex justify-center items-center px-4 flex-col-reverse md:flex-row overflow-hidden"
+      className="h-screen snap-none  flex justify-center items-center px-4 flex-col-reverse md:flex-row"
     >
       <div className="w-1/2 hidden md:flex justify-start items-center">
         <LanguagesSprites />
