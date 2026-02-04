@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, devices } from '@playwright/test'
 
 test('main section renders hero content', async ({ page }) => {
   await page.goto('/')

@@ -12,7 +12,7 @@ function AboutSection() {
         <LanguagesSprites />
       </div>
 
-      <div className="w-1/2 mb-8 md:mb-0 text-start md:text-left">
+      <div className="w-1/2 sm:w-full mb-8 md:mb-0 text-start md:text-left">
         <SectionHeader header="_about-me" />
         <p className="comment mt-2 text-ctp-text">// get a small overview of who I am</p>
         <p className="mt-9 text-lg text-ctp-green-500">{AboutMe}</p>
