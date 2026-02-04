@@ -1,0 +1,54 @@
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body::before,
+  body::after {
+    filter: blur(120px);
+    opacity: 0.4;
+    animation-duration: 14s;
+  }
+
+  section {
+    min-height: auto;
+    height: auto;
+    width: full;
+    padding: 5rem 0;
+  }
+
+  main {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  hello {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-top: 6rem;
+    gap: 2rem;
+  }
+
+  #hello {
+    justify-content: center;
+    padding-top: 5rem;
+    min-height: auto;
+  }
+
+  #hello img {
+    max-height: 35vh;
+    margin-top: 1rem;
+  }
+
+  .hero-image {
+    display: none;
+  }
+
+  .btnAzureGradiant {
+    @apply sm:text-sm sm:px-5 sm:py-1.5;
+    @apply rounded shadow sm:w-auto;
+  }
+}

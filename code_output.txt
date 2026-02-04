@@ -1,0 +1,2084 @@
+=== /Users/sic/dev/t0nylombardi/blog/consts.ts ===
+// Place any global data in this file.
+// You can import this data from anywhere in your site by using the `import` keyword.
+
+export const SITE_TITLE = 'T0nylombardi | Full Stack Engineer';
+export const SITE_DESCRIPTION = 'Welcome to my website!';
+
+
+=== /Users/sic/dev/t0nylombardi/blog/playwright.config.ts ===
+import { defineConfig, devices } from '@playwright/test';
+
+/**
+ * Read environment variables from file.
+ * https://github.com/motdotla/dotenv
+ */
+// import dotenv from 'dotenv';
+// import path from 'path';
+// dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+/**
+ * See https://playwright.dev/docs/test-configuration.
+ */
+export default defineConfig({
+  testDir: './tests',
+  /* Run tests in files in parallel */
+  fullyParallel: true,
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  forbidOnly: !!process.env.CI,
+  /* Retry on CI only */
+  retries: process.env.CI ? 2 : 0,
+  /* Opt out of parallel tests on CI. */
+  workers: process.env.CI ? 1 : undefined,
+  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  reporter: 'html',
+  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  use: {
+    /* Base URL to use in actions like `await page.goto('')`. */
+    // baseURL: 'http://localhost:3000',
+
+    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    trace: 'on-first-retry',
+  },
+
+  /* Configure projects for major browsers */
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
+
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
+
+    /* Test against mobile viewports. */
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'] },
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: { ...devices['iPhone 12'] },
+    // },
+
+    /* Test against branded browsers. */
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    // },
+    // {
+    //   name: 'Google Chrome',
+    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    // },
+  ],
+
+  /* Run your local dev server before starting the tests */
+  // webServer: {
+  //   command: 'npm run start',
+  //   url: 'http://localhost:3000',
+  //   reuseExistingServer: !process.env.CI,
+  // },
+});
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/AgeCounter.tsx ===
+import React, {useEffect, useState} from 'react'
+import {getAgeParts} from '../utils/getAgeParts'
+import {getEasternTimeNow} from '../utils/getEsternTimeNow'
+import {pad} from '../utils/pad'
+import type {AgeParts} from '../types/age'
+import {BIRTHDAY} from '../constants'
+
+const AgeCounter: React.FC = () => {
+  const [ageParts, setAgeParts] = useState<AgeParts>(() => getAgeParts(BIRTHDAY, new Date()))
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAgeParts(getAgeParts(BIRTHDAY, getEasternTimeNow()))
+    }, 50)
+    return () => clearInterval(interval)
+  }, [])
+
+  const display = [
+    pad(ageParts.years, 2),
+    pad(ageParts.months, 2),
+    pad(ageParts.days, 2),
+    pad(ageParts.hours, 2),
+    pad(ageParts.minutes, 2),
+    pad(ageParts.seconds, 2),
+    pad(ageParts.milliseconds, 3),
+  ].join(':')
+
+  return display
+}
+
+export default AgeCounter
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Analytics.tsx ===
+import {useEffect} from 'react'
+import {loadGtag} from '../utils/gtag'
+
+const Analytics = () => {
+  useEffect(() => {
+    loadGtag()
+  }, [])
+
+  return null
+}
+
+export default Analytics
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/BlogCard.astro ===
+---
+import {Icon} from '@iconify/react'
+
+interface Props {
+  title: string
+  image: string
+  description: string
+  link: string
+  date: Date
+  tags: string[]
+  author: string
+  slug: string
+}
+
+const FormattedDate = (date: Date) => {
+  return date.toLocaleDateString('en-us', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
+}
+
+const {link, image, tags, title, description, author, date, slug} = Astro.props
+---
+
+<div
+  class="lg:w-[25%] py-6 bg-ctp-mauve-base shadow-xl rounded-lg mx-4 my-4 hover:scale-[1.02] transition-transform duration-200 ease-in-out"
+>
+  <a href={link} class="block">
+    <img class="w-full h-56 rounded-t-lg object-cover" src={image} />
+    <div class="py-6 px-4 h-[16rem] drop-shadow-lg rounded-b-lg">
+      <p class="text-xl text-ctp-mauve-500 font-bold">{title}</p>
+      <p class="comment mt-1 text-sm">// Written at: {FormattedDate(date)}</p>
+      <p class="mt-2 text-ctp-green-500 text-md">{description}</p>
+      <div class="mt-2 text-sm text-ctp-peach-500">
+        <a href={link} class="flex items-center hover:text-ctp-text cursor-pointer">
+          <span class="inline-flex w-6 h-6 justify-center items-center bg-ctp-peach-500 rounded-full">
+            <Icon icon="mdi:book-open-blank-variant-outline" />
+          </span>
+          <span class="ml-3">Read more</span>
+        </a>
+      </div>
+    </div>
+  </a>
+</div>
+
+<style>
+  Icon {
+    width: 1rem;
+    height: 1rem;
+  }
+</style>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/BlogPostList.astro ===
+---
+import {type CollectionEntry, getCollection} from 'astro:content'
+import BlogCard from './BlogCard.astro'
+
+type Props = {
+  limit?: number
+}
+
+const {limit} = Astro.props
+
+let posts = await getCollection('blog')
+posts = posts.filter((post) => !post.data.draft)
+posts = posts.filter((post) => {
+  const isScheduled = new Date(post.data.date).getTime() > Date.now()
+  return !isScheduled
+})
+posts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+
+if (limit) posts = posts.slice(0, limit)
+---
+
+<div class="">
+  <div class="flex w-full flex-wrap">
+    {
+      posts.length < 1 ? (
+        <h2 class="mt-6 text-center text-8xl text-ctp-text">Coming Soon</h2>
+      ) : (
+        <div class="px-2 mt-12 flex w-full flex-col gap-x-8 justify-between md:flex-row md:flex-wrap">
+          {posts.map((post) => {
+            const {title, image, tags, author, date, description} = post.data
+            const url = '/' + post.collection + '/' + post.slug
+
+            return (
+              <BlogCard
+                title={title}
+                slug={post.slug}
+                link={url}
+                image={image}
+                tags={tags}
+                description={description}
+                link={url}
+                date={date}
+                author={author}
+              />
+            )
+          })}
+        </div>
+      )
+    }
+  </div>
+</div>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/CodeHighlight.tsx ===
+import React from 'react'
+import ShikiHighlighter, {type Element} from 'react-shiki'
+
+interface CodeHighlightProps {
+  code: string
+}
+
+const CodeHighlight = ({code}: CodeHighlightProps) => {
+  return (
+    <ShikiHighlighter
+      language="ruby"
+      className="code-block"
+      theme="catppuccin-macchiato"
+      showLanguage={false}
+      addDefaultStyles={false}
+      as="div"
+      style={{
+        textAlign: 'left',
+      }}
+    >
+      {code.trim()}
+    </ShikiHighlighter>
+  )
+}
+
+export default CodeHighlight
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/ContactForm/BlurOverlay.tsx ===
+import React from 'react'
+import {motion} from 'framer-motion'
+
+interface BlurOverlayProps {
+  onClick: () => void
+}
+
+export default function BlurOverlay({onClick}: BlurOverlayProps) {
+  return (
+    <motion.div
+      initial={{opacity: 0}}
+      animate={{opacity: 1}}
+      exit={{opacity: 0}}
+      transition={{duration: 0.6}}
+      className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
+      onClick={onClick}
+    />
+  )
+}
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/ContactForm/NewContactForm.tsx ===
+import React, {useState} from 'react'
+import CodeHighlight from '../CodeHighlight'
+import SuccessPopup from './SuccessPopup'
+import './style.css'
+import SectionHeader from '../UI/SectionHeader'
+
+interface FormData {
+  name: string
+  email: string
+  message: string
+}
+
+export default function ContactForm() {
+  const [codeData, setCodeData] = useState<FormData>({
+    name: '',
+    email: '',
+    message: '',
+  })
+
+  const [status, setStatus] = useState<'pending' | 'ok' | 'error' | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [showPopup, setShowPopup] = useState(false)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const {name, value} = e.target
+    setCodeData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setStatus('pending')
+    setError(null)
+    const formData = new FormData(e.target as HTMLFormElement)
+    const body = new URLSearchParams(formData as any).toString()
+
+    await fetch('/__forms.html', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body,
+    })
+      .then((res) => {
+        if (!res.ok) {
+          setStatus('error')
+          setError(`Error: ${res.status} ${res.statusText}`)
+        }
+        setStatus('ok')
+        setShowPopup(true)
+        setCodeData({name: '', email: '', message: ''})
+      })
+      .catch((e) => {
+        setStatus('error')
+        setError(String(e))
+      })
+  }
+
+  const truncate = (str: string, maxLength: number) => (str.length > maxLength ? str.slice(0, maxLength) + '...' : str)
+
+  const Code = `
+class GetInTouch
+  def send_mail
+    name = "${truncate(codeData.name, 25)}"
+    email = "${truncate(codeData.email, 25)}"
+    message = "${truncate(codeData.message, 25)}"
+
+    ContactForm.new(name, email, message).submit!
+  end
+end
+  `
+
+  return (
+    <section id="contact" className="fullscreen-section snap-none flex flex-col items-center justify-center my-[12rem]">
+      <SectionHeader header="_contact" />
+      <div className="grid grid-cols-2 gap-4 py-18 w-full">
+        <div className="row-start-1 row-end-2 h-full flex flex-col justify-center">
+          <form
+            name="contact-form"
+            className="flex justify-between flex-col h-full w-full"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            data-netlify-recaptcha="true"
+            onSubmit={handleSubmit}
+          >
+            <p className="invisible">
+              <label>
+                Don’t fill this out if you’re human: <input name="bot-field" />
+              </label>
+            </p>
+            <input type="hidden" name="form-name" value="contact-form" />
+            <input
+              name="name"
+              type="text"
+              autoComplete="name"
+              placeholder="What is your name?"
+              required
+              value={codeData.name}
+              onChange={handleChange}
+            />
+            <input
+              name="email"
+              type="email"
+              autoComplete="email"
+              placeholder="what-is@your-email.question"
+              required
+              value={codeData.email}
+              onChange={handleChange}
+            />
+            <textarea
+              name="message"
+              placeholder="What do you want to talk about?"
+              rows={5}
+              required
+              value={codeData.message}
+              onChange={handleChange}
+            ></textarea>
+            <div data-netlify-recaptcha="true"></div>
+            <button
+              id="submit-form"
+              type="submit"
+              className="border border-[#A478E8] hover:text-[#A478E8] font-bold mt-8 p-4"
+              disabled={status === 'pending'}
+            >
+              {status === 'pending' ? 'Submitting...' : 'Send Message'}
+            </button>
+          </form>
+          {status === 'error' && <div className="text-red-500 mt-2">{error}</div>}
+        </div>
+
+        <div className="row-span-2 row-end-2 h-full flex flex-col justify-center pt-8">
+          <div className="bg-none! flex justify-center items-center text-2xl">
+            <CodeHighlight code={Code.trim()} />
+          </div>
+        </div>
+      </div>
+
+      {showPopup && <SuccessPopup onClose={() => setShowPopup(false)} />}
+    </section>
+  )
+}
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/ContactForm/SuccessPopup.tsx ===
+import React from 'react'
+import {motion} from 'framer-motion'
+import {X} from 'lucide-react'
+import BlurOverlay from './BlurOverlay'
+
+interface SuccessPopupProps {
+  onClose: () => void
+}
+
+export default function SuccessPopup({onClose}: SuccessPopupProps) {
+  return (
+    <>
+      {/* Background Blur Overlay */}
+      <BlurOverlay onClick={onClose} />
+
+      {/* Popup Container */}
+      <motion.div
+        initial={{opacity: 0, y: -50}}
+        animate={{opacity: 1, y: 0}}
+        exit={{opacity: 0, y: -50}}
+        transition={{duration: 0.5}}
+        className="fixed inset-0 flex items-center justify-center"
+      >
+        <div className="bg-blog-blue text-[#e5e9f0] px-6 py-4 rounded-lg shadow-lg w-[60rem] flex flex-col relative">
+          <button onClick={onClose} className="absolute top-2 right-2">
+            <X size={30} className="text-[#e5e9f0] hover:opacity-80 transition-opacity" />
+          </button>
+          <h3 className="text-6xl font-medium mb-5">_success</h3>
+
+          <p className="text-lg font-medium text-[#e5e9f0] my-4">
+            It is a dark time for the digital galaxy. Across the vast expanse of the internet, countless forms lay
+            abandoned, half-filled and forgotten, victims of distraction and doubt. The great Squirrel Distraction
+            Plague continues to claim would-be heroes, leading them astray before they can complete their sacred duty.
+          </p>
+          <p className="text-lg font-medium text-[#e5e9f0] my-4">
+            Yet, in the depths of cyberspace, a lone warrior emerges... you.
+          </p>
+          <p className="text-lg font-medium text-[#e5e9f0] my-4">
+            Defying all odds, you faced the Fields of Mandatory Input, braved the Checkbox of Infinite Bureaucracy, and
+            conquered the Captcha of the Unreadable Hieroglyphs. Others before you have faltered, surrendering to the
+            cursed "I'll finish this later" mentality—but not you. No, you are built different.
+          </p>
+          <p className="text-lg font-medium text-[#e5e9f0] my-4">
+            Somewhere, in a hidden fortress of inboxes, a signal appears—a humble collection of 1s and 0s forged in the
+            fires of commitment. It stands tall, proud, awaiting its moment to be read. The guardians of the inbox shall
+            respond, faster than a cheetah on an espresso shot, or at least faster than Congress passing a bill.
+          </p>
+          <p className="text-lg font-medium text-[#e5e9f0] my-4">
+            Until then, celebrate this victory. Take a moment to bask in your achievement. Revel in the knowledge that
+            you have done what so many could not. You have completed the form. You have submitted the contact. You have
+            taken the first step on a journey that will lead you to the stars.
+          </p>
+          <p className="text-lg font-medium text-[#e5e9f0] my-4">The reply is coming. Soon.</p>
+        </div>
+      </motion.div>
+    </>
+  )
+}
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/ContactForm/index.tsx ===
+export {default as ContactForm} from './NewContactForm'
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/FormSucess/FormSucess.tsx ===
+import './form-success.css'
+
+const FormSuccess = () => {
+  return (
+    <div className="">
+      <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center items-center container mx-auto px-40">
+          <h1 className="leading-[3.5rem]">Contact Submission Success.</h1>
+          <p>
+            It is a dark time for the digital galaxy. Across the vast expanse of the internet, countless forms lay
+            abandoned, half-filled and forgotten, victims of distraction and doubt. The great Squirrel Distraction
+            Plague continues to claim would-be heroes, leading them astray before they can complete their sacred duty.
+          </p>
+          <p>Yet, in the depths of cyberspace, a lone warrior emerges... you.</p>
+          <p>
+            Defying all odds, you faced the Fields of Mandatory Input, braved the Checkbox of Infinite Bureaucracy, and
+            conquered the Captcha of the Unreadable Hieroglyphs. Others before you have faltered, surrendering to the
+            cursed "I'll finish this later" mentality—but not you. No, you are built different.
+          </p>
+          <p>With a final, decisive click, you submitted the form.</p>
+          <p>
+            A great tremor shakes the digital universe. A million servers cry out in triumph, their data packets soaring
+            through the labyrinth of fiber optics at lightspeed. Your message embarks on a perilous journey, bouncing
+            between data centers powered by over-caffeinated engineers and hamsters sprinting on treadmills of destiny.
+          </p>
+          <p>
+            Somewhere, in a hidden fortress of inboxes, a signal appears—a humble collection of 1s and 0s forged in the
+            fires of commitment. It stands tall, proud, awaiting its moment to be read. The guardians of the inbox shall
+            respond, faster than a cheetah on an espresso shot, or at least faster than Congress passing a bill.
+          </p>
+          <p>
+            Until then, celebrate this victory. Take a moment to bask in your achievement. Revel in the knowledge that
+            you have done what so many could not. You have completed the form. You have submitted the contact. You have
+            taken the first step on a journey that will lead you to the stars.
+          </p>
+          <p>The reply is coming. Soon. Probably before the final season of Stranger Things.</p>
+          <p>But one thing is certain: the forms are strong with you.</p>
+          <p>May the Forms be with you.</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default FormSuccess
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/FormSucess/Index.tsx ===
+export {default as FormSuccess} from './FormSucess'
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/FormattedDate.astro ===
+---
+interface Props {
+	date: Date;
+}
+
+const { date } = Astro.props;
+---
+
+<time datetime={date.toISOString()}>
+	{
+		date.toLocaleDateString('en-us', {
+			year: 'numeric',
+			month: 'short',
+			day: 'numeric',
+		})
+	}
+</time>
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/LanguagesSprites/LanguagesSprites.tsx ===
+import {Icon} from '@iconify/react'
+import './styles.css'
+
+const LanguagesSprites = () => {
+  return (
+    <div className="flex-1 flex justify-start items-center">
+      <div className="flex flex-wrap showcase gap-16 mt-12 justify-center">
+        <Icon icon="catppuccin:ruby" width="128" height="128" />
+        <Icon icon="devicon-plain:rails" width="128" height="128" style={{color: '#91d7e3'}} />
+        <Icon icon="catppuccin:typescript-react" width="128" height="128" />
+        <Icon icon="catppuccin:typescript" width="128" height="128" />
+
+        <Icon icon="catppuccin:javascript" width="128" height="128" />
+        <Icon icon="catppuccin:astro" width="128" height="128" />
+        <Icon icon="catppuccin:html" width="128" height="128" />
+        <Icon icon="catppuccin:css" width="128" height="128" />
+
+        <Icon icon="catppuccin:folder-node" width="128" height="128" />
+        <Icon icon="catppuccin:database" width="128" height="128" />
+        <Icon icon="catppuccin:docker" width="128" height="128" />
+        <Icon icon="catppuccin:go" width="128" height="128" />
+
+        <Icon icon="catppuccin:git" className="text-azure" />
+        <Icon icon="catppuccin:vscode" />
+        <Icon icon="catppuccin:tailwind" />
+
+        <Icon icon="catppuccin:python" width="128" height="128" />
+        <Icon icon="catppuccin:folder-aws" width="128" height="128" />
+        <Icon icon="catppuccin:next" width="128" height="128" />
+        <Icon icon="catppuccin:api-blueprint" width="128" height="128" />
+        <Icon icon="catppuccin:pnpm" width="128" height="128" />
+      </div>
+    </div>
+  )
+}
+
+export default LanguagesSprites
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Layouts/BaseHeader.astro ===
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <BaseHead /> component.
+import '../../styles/global.css'
+
+interface Props {
+  title: string
+  description: string
+  image?: string
+}
+
+// const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const {title, description} = Astro.props
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+  rel="stylesheet"
+/>
+<meta property="og:type" content="website" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H56C6BEBLS"></script>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Layouts/Footer.tsx ===
+const today = new Date()
+
+const Footer = () => {
+  return (
+    <footer className="text-ctp-text bg-pink py-[2rem] m-[2rem]">
+      <div className="w-full flex flex-col justify-center items-center">
+        &copy; {today.getFullYear()} Anthony Lombardi. All rights reserved.
+      </div>
+    </footer>
+  )
+}
+
+export default Footer
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Layouts/Head.astro ===
+---
+import {SEO} from 'astro-seo'
+import {SITE_TITLE, SITE_DESCRIPTION} from '../../constants'
+import BaseHeader from './BaseHeader.astro'
+import amoji_avatar from '../../../public/amoji_avatar.svg'
+---
+
+<head>
+  <SEO
+    title={SITE_TITLE}
+    description={SITE_DESCRIPTION}
+    canonical={'https://t0nylombardi.dev'}
+    openGraph={{
+      basic: {
+        title: SITE_TITLE,
+        url: 'https://t0nylombardi.dev',
+        type: 'image/svg+xml',
+        image: amoji_avatar.src,
+      },
+    }}
+    twitter={{
+      creator: '@t0nylombardi',
+    }}
+    extend={{
+      link: [{rel: 'icon', href: '/favicon/favicon.ico'}],
+      meta: [
+        {
+          name: 'twitter:image',
+          content: 'https://pbs.twimg.com/profile_images/498278137092796416/FtXRi2RG_400x400.jpeg',
+        },
+        {name: 'twitter:title', content: 'Anthony Lombardi'},
+        {name: 'twitter:description', content: SITE_DESCRIPTION},
+        {name: 'twitter:card', content: 'summary'},
+        {name: 'twitter:site', content: '@t0nylombardi'},
+        {name: 'twitter:creator', content: '@t0nylombardi'},
+        {name: 'twitter:image:alt', content: 'Anthony Lombardi'},
+        {name: 'twitter:creator:id', content: 't0nylombardi'},
+        {name: 'twitter:site:id', content: 't0nylombardi'},
+        {name: 'twitter:card', content: 'summary_large_image'},
+        {name: 'twitter:domain', content: 't0nylombardi.dev'},
+      ],
+    }}
+  />
+  <BaseHeader title={SITE_TITLE} description={SITE_DESCRIPTION} />
+</head>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Layouts/Header.astro ===
+---
+import Nav from './Nav/Nav'
+---
+
+<header class="container p-4 flex items-center justify-between mx-auto">
+  <Nav />
+</header>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Layouts/Nav/Nav.tsx ===
+import {useEffect, useRef, useState, useCallback} from 'react'
+import {Routes} from '../../../routes'
+import '../../../utils/mobileNavBar'
+
+export const Nav = () => {
+  const [isScrolling, setIsScrolling] = useState(false)
+  const [y, setY] = useState(window.scrollY)
+
+  const handleNavigation = useCallback(
+    (e) => {
+      const window = e.currentTarget
+      if (y > window.scrollY) {
+        console.log('scrolling up')
+      } else if (y < window.scrollY) {
+        console.log('scrolling down')
+      }
+      setY(window.scrollY)
+    },
+    [y]
+  )
+
+  useEffect(() => {
+    setY(window.scrollY)
+    window.addEventListener('scroll', handleNavigation)
+
+    return () => {
+      window.removeEventListener('scroll', handleNavigation)
+    }
+  }, [handleNavigation])
+
+  return (
+    <nav
+      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 text-2xl text-ctp-text ${
+        isScrolling ? 'backdrop-blur-md bg-black/40' : 'bg-transparent backdrop-blur-0'
+      }`}
+    >
+      <ul className="flex flex-row justify-between min-w-full relative px-[4rem]">
+        <li className="px-8 py-4">
+          <a href="/" className="hover:text-ctp-mauve-600">
+            Anthony Lombardi
+          </a>
+        </li>
+
+        <li id="navlinks" className="hidden lg:block lg:border-x-0">
+          <ul className="flex flex-col lg:flex-row px-8 pb-4 lg:py-4 space-y-1 lg:space-y-0 lg:space-x-8">
+            {Routes.map((route) => (
+              <li className="">
+                <a href={route.slug} className="flex items-center text-ctp-text hover:text-ctp-mauve-500">
+                  {route.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+
+        <li id="hamburger" className="p-2 w-fit cursor-pointer absolute right-6 top-2 lg:hidden rounded-sm">
+          <div className="space-y-[0.3rem]">
+            <span className="block w-5 h-0.5 bg-[#7790a8]"></span>
+            <span className="block w-5 h-0.5 bg-[#7790a8]"></span>
+            <span className="block w-3 h-0.5 bg-[#7790a8] ml-auto"></span>
+          </div>
+        </li>
+
+        <li className="px-8 py-4 hidden lg:block">
+          <a href="/#contact" className="text-ctp-text hover:text-ctp-mauve-500">
+            _contact-me
+          </a>
+        </li>
+      </ul>
+    </nav>
+  )
+}
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Layouts/Nav/index.tsx ===
+export {Nav} from './Nav'
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/MySocials.tsx ===
+import {socials} from '../constants'
+
+const MySocials = () => {
+  return (
+    <div>
+      <p className="comment pt-4">// list of my social links</p>
+      {Object.entries(socials).map(([platform, url]) => (
+        <p key={platform}>
+          <span className="text-ctp-mauve-500">const </span>
+          <span className="text-ctp-text">{platform}</span> =
+          <a
+            href={url}
+            className="text-ctp-green-500 hover:text-ctp-text block pl-6 md:inline md:pl-0"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            “{url}”
+          </a>
+        </p>
+      ))}
+    </div>
+  )
+}
+
+export default MySocials
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/ProjectCard/ProjectCard.tsx ===
+import {Icon} from '@iconify/react'
+import './style.css'
+
+interface ProjectCardProps {
+  img: string
+  width: string
+  link?: string
+  title: string
+  technologies: string
+  description: string
+}
+
+const ProjectCard: React.FC<ProjectCardProps> = ({img, width, link, title, technologies, description}) => {
+  return (
+    <div className="project flex flex-row justify-between items-center w-full">
+      <div className="w-1/2 py-16 ">
+        <div className="project-img w-full md:w-auto flex-1 flex justify-center">
+          <img
+            src={img}
+            className={`${width} lg:h-auto object-center object-cover md:object-cover md:object-center rounded-md`}
+          />
+        </div>
+      </div>
+
+      <div className="w-1/2 project-info break-all">
+        <p className="text-xl font-bold mt-6">{title}</p>
+        <p className="comment text-[#7790A8] font-normal mt-1 text-sm">Built with:// {technologies}</p>
+        <p className="mt-2 px-[1rem]">{description}</p>
+        {link && (
+          <div className="mt-2 text-mm text-[#95AAFB]">
+            <a href={link} className="flex cursor-pointer items-center">
+              <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#2A337E]">
+                <Icon icon="mdi:link-variant" className="h-4 w-4" />
+              </span>
+              <span className="ml-3">{link}</span>
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default ProjectCard
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/ProjectCard/index.tsx ===
+export {default as ProjectCard} from './ProjectCard'
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Sections/AboutSection.tsx ===
+import LanguagesSprites from '../LanguagesSprites/LanguagesSprites'
+import {AboutMe} from '../../constants'
+import SectionHeader from '../UI/SectionHeader'
+
+function AboutSection() {
+  return (
+    <section
+      id="about"
+      className="h-screen snap-none  flex justify-center items-center px-4 flex-col-reverse md:flex-row"
+    >
+      <div className="w-1/2 hidden md:flex justify-start items-center">
+        <LanguagesSprites />
+      </div>
+
+      <div className="w-1/2 mb-8 md:mb-0 text-start md:text-left">
+        <SectionHeader header="_about-me" />
+        <p className="comment mt-2 text-ctp-text">// get a small overview of who I am</p>
+        <p className="mt-9 text-lg text-ctp-green-500">{AboutMe}</p>
+      </div>
+    </section>
+  )
+}
+
+export default AboutSection
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Sections/AnimatedSection.tsx ===
+import {useRef} from 'react'
+import {motion, useScroll, useTransform} from 'framer-motion'
+
+const AnimatedSection = ({id, children}: {id: string; children: React.ReactNode}) => {
+  const ref = useRef(null)
+  const {scrollYProgress} = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'], // you can tweak this
+  })
+
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '-30%']) // parallax offset
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0])
+
+  return (
+    <motion.section id={id} ref={ref} className="h-screen flex justify-center items-center" style={{y, opacity}}>
+      {children}
+    </motion.section>
+  )
+}
+
+export default AnimatedSection
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Sections/MainSection.tsx ===
+import AgeCounter from '../AgeCounter'
+import MySocials from '../MySocials'
+import CTA from '../UI/CTA'
+
+const MainSection = () => {
+  return (
+    <section
+      id="hello"
+      className="h-screen snap-none pt-[1rem] mx-auto px-4 sm:px-8 flex flex-col-reverse md:flex-row items-center"
+    >
+      <div className="flex flex-col md:flex-row w-full h-full justify-center items-center">
+        <div className="w-full md:w-1/2 flex flex-col justify-center">
+          <div className="text-ctp-text text-center md:text-left pb-8">
+            <p className="text-3xl sm:text-2xl font-medium">Hey, I'm</p>
+            <h1 className="text-[3rem] sm:text-[4rem] font-medium mt-2">Anthony Lombardi</h1>
+          </div>
+
+          <div className="font-medium mt-6 space-y-1 text-lg">
+            <p className="comment">// personal data</p>
+
+            <p>
+              <span className="text-ctp-mauve-500">let </span>
+              <span className="text-ctp-text">title</span> =
+              <span id="age" className="text-ctp-green-500 block pl-6 md:inline md:pl-0">
+                "Lead Ruby Software Engineer";
+              </span>
+            </p>
+
+            <p>
+              <span className="text-ctp-mauve-500">let </span>
+              <span className="text-ctp-text">location</span> =
+              <span className="text-ctp-green-500 block pl-6 md:inline md:pl-0">"Westchester, New York";</span>
+            </p>
+
+            <p>
+              <span className="text-ctp-mauve-500">let </span>
+              <span className="text-ctp-text">focus</span> =
+              <span className="text-ctp-green-500 block pl-6 md:inline md:pl-0">
+                "Eat, Code, Think about life choices, sleep, repeat";
+              </span>
+            </p>
+
+            <MySocials />
+          </div>
+
+          <div className="mt-6">
+            <CTA link="resume" />
+          </div>
+        </div>
+
+        <div className="h-full w-full md:w-1/2 flex justify-center md:justify-end items-center">
+          <img src="/amoji_avatar.svg" alt="Avatar" className="w-full max-w-[800px] h-auto object-contain" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default MainSection
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Sections/ProjectSection.tsx ===
+import React from 'react'
+import {ProjectCard} from '../ProjectCard'
+import {Projects} from '../../constants'
+import SectionHeader from '../UI/SectionHeader'
+
+const ProjectSection = () => {
+  return (
+    <section id="projects" className="h-screen overflow-y-scroll overflow-auto hide-scrollbar">
+      <SectionHeader header="_projects" />
+      <div>
+        <div id="projects-list" className="">
+          {Projects.map((project) => (
+            <ProjectCard
+              img={project.img}
+              width={project.width}
+              link={project.link}
+              title={project.title}
+              technologies={project.technologies}
+              description={project.description}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default ProjectSection
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Sections/blogSection.tsx ===
+import SectionHeader from '../UI/SectionHeader'
+import BlogPostList from '../BlogPostList.astro'
+
+function BlogSection() {
+  return (
+    <section
+      id="blog"
+      className="h-screen snap-start scroll-mt-20 flex flex-col items-center justify-center my-[12rem]"
+    >
+      <SectionHeader header="_blog" />
+      <BlogPostList limit={3} />
+      <a href="/blog" className="text-ctp-peach-500 hover:text-ctp-text text-2xl block py-8">
+        See more blog posts
+      </a>
+    </section>
+  )
+}
+
+export default BlogSection
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/Sections/index.tsx ===
+export {default as MainSection} from './MainSection'
+export {default as AboutSection} from './AboutSection'
+export {default as ProjectSection} from './ProjectSection'
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/UI/CTA.tsx ===
+import React from 'react'
+
+const CTA = ({link}) => {
+  return (
+    <div className="mt-10 text-center">
+      <a href={link} className="btnAzureGradiant">
+        {link.toUpperCase()}
+      </a>
+    </div>
+  )
+}
+
+export default CTA
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/UI/SectionHeader.tsx ===
+import React from 'react'
+
+type Props = {
+  header: string
+}
+
+const SectionHeader = ({header}: Props) => {
+  return <h3 className="text-3xl md:text-5xl font-medium text-ctp-mauve-500">{header}</h3>
+}
+
+export default SectionHeader
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/components/resume/skills.tsx ===
+import {motion} from 'framer-motion'
+import {SkillsWeb} from '../../constants/resume'
+
+const SkillProgress = ({percent, skillname}) => {
+  const barVariants = {
+    initial: {width: '0%'},
+    indeterminate: {
+      width: ['0%', '95%', `${percent}%`],
+      transition: {
+        ease: [0.35, 1, 0.65, 0.85],
+        duration: 1.5,
+        delay: 0.5,
+      },
+    },
+  }
+
+  return (
+    <div className="relative pt-1 text-ctp-text">
+      <div>{skillname}</div>
+      <div className="wrap">
+        <motion.div
+          className="bar"
+          initial={{width: '0%'}}
+          animate={{width: `${percent}%`}}
+          transition={{
+            type: 'spring',
+            stiffness: 45,
+            damping: 6,
+            mass: 0.75,
+          }}
+        />
+      </div>
+
+      <style>{`
+        .wrap {
+          background-color: var(--color-ctp-surface0);
+          color: white;
+          height: 14px;
+          overflow: hidden;
+          border-radius: 10px;
+          margin: 8px 0;
+        }
+        .bar {
+          height: 100%;
+          border-radius: 10px;
+          background: -webkit-linear-gradient(180deg, var(--color-ctp-mauve-500) 0%, var(--color-ctp-blue-500) 100%);
+        }
+      `}</style>
+    </div>
+  )
+}
+
+const SkillList = () => {
+  return (
+    <div>
+      {SkillsWeb.map((group, groupIndex) => (
+        <div key={groupIndex}>
+          <div className="py-4">
+            <span className="pt-8 pb-4 text-xl font-bold text-ctp-green-500">// {group.category}</span>
+          </div>
+          <div className="pl-8">
+            {group.skills.map(([percent, skillname], index) => (
+              <SkillProgress key={index} percent={percent} skillname={skillname} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default SkillList
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/constants/index.ts ===
+export const SITE_TITLE = 'T0nylombardi | Full Stack Engineer';
+export const SITE_DESCRIPTION = `Unlock the expertise of a self-taught,
+  meticulous, and motivated Full Stack Developer with over a decade of hands-on experience,
+  specializing in Ruby/Ruby on Rails, Javascript, Typescript, NextJS, AstroJS.
+  With a proven track record in e-commerce architecture, microservices, DevOps,
+  and team leadership, I've navigated the full stack life cycle with precision and passion.`;
+
+export const ASTRO_PUBLIC_GA_ID = 'G-H56C6BEBLS';
+
+export const DOB = '03/31/1983'
+export const BIRTHDAY = new Date(1983, 2, 31);
+
+export const socials = {
+  github: "https://github.com/t0nylombardi",
+  linkedin: "https://linkedin.com/in/t0nylombardi",
+  twitter: "https://twitter.com/t0nylombardi"
+};
+
+export const footerSocials = {
+  "twitter-bird": "https://twitter.com/t0nylombardi",
+  github: "https://github.com/t0nylombardi",
+  linkedin: "https://www.linkedin.com/in/anthonyjlombardi/",
+}
+
+export const Projects = [
+  {
+    img: "/projects/optimus-image.png",
+    width: "w-[12rem]",
+    link: "https://github.com/t0nylombardi/optimus-image",
+    title: "Optimus Image",
+    technologies: "Go",
+    description: "Optimus Image is a simple image optimization tool that uses Go to optimize images. The tool is a simple command line tool that takes an image and optimizes it for web use. The tool is built with Go and uses the Go image library to optimize images. The tool is hosted on AWS EC2."
+  },
+  {
+    img: "/projects/churp.png",
+    width: "w-[12rem]",
+    link: "https://github.com/t0nylombardi/churp",
+    title: "Churp Solical",
+    technologies: "Ruby on Rails 7.1, Redis, EslaticSearch, Docker",
+    description: "Let's face it. Twitter/X has become a dumpster fire🔥 This is my attempt to bring back the good ole days twitter used to be. This project is not an attempt to be a decentralized network or some blockchain application."
+  },
+  {
+    img: "/projects/rails_template.png",
+    width: "w-[23rem]",
+    link: "https://github.com/t0nylombardi/rails_template",
+    title: "Rails Template",
+    technologies: "Ruby",
+    description: "Alot of time starting a new Rails project can be tedious(for me at least). Mostly setting up all the tools/technologies you want to use. This template script attempts to making the setup of a new app faster. The app sets up A Rails project with Docker, Rspec, Devise, Sidekiq, Active Storage, Action Text and Tailwind."
+  },
+  {
+    img: "/projects/factuality.png",
+    width: "w-[23rem]",
+    link: "https://factually.wtf",
+    title: "Factuality WTF",
+    technologies: "Go, React, NextJS, Tailwind",
+    description: "Factually is a website that gives random, useless that no one cares about. It was built with Go, React, NextJS and Tailwind. The website is a simple web app that uses the Factuality API to get random facts and display them on the page. The website is hosted on AWS EC2."
+  }
+];
+
+export const AboutMe = `I am a self-taught, meticulous & motivated Full Stack Developer with 10+ years of hands-on experience,
+                        particularly in Ruby and Ruby on Rails. I have worked on Ruby on Rails e-commerce architecture,
+                        breaking down monoliths, working on microservices, helping with DevOps, and leading a team through
+                        the full-stack life cycle. From my first professional job as a junior developer, My journey has been
+                        driven by an insatiable curiosity for emerging technologies. With a passion for staying at the forefront
+                        of innovation, I'm excited to contribute to this dynamic field and participate in its remarkable journey.
+                        I am also committed to actively learning from every experience that I have. During every job and position
+                        I have held, I learned about what it takes to succeed in this field, and I've carried that lesson throughout
+                        the years as I've worked.`
+
+export const SuccessMessage = `Holy s#%t, you did it! You are an absolute legend! Do you know how many people start
+filling out forms and then abandon them because "ooh, shiny thing?" But not you. No, you're built different.
+
+Your message is now embarking on a perilous journey—starting as a humble collection of 1s and 0s, traveling through
+a tangled mess of fiber optics, bouncing between data centers powered by overworked hamsters on treadmills, and
+finally arriving in our inbox where it will stare at us, judgingly, until I respond.
+
+Then and only then, your reply shall materialize. Probably. Maybe. Look, I promise it'll happen faster than Congress passing a bill,
+so at least there's that. In the meantime, go grab a snack, or Google weird animal facts(did you know wombat poop is cube-shaped? Now you do).
+
+See you in your inbox soon. Or later. But definitely before Stranger Things last season. Maybe.
+
+Cheers! 🍻`
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/constants/resume.ts ===
+export const Profile = `A dynamic and results-oriented Full Stack Developer with over a decade of hands-on expertise.
+  Renowned for meticulous attention to detail and unwavering motivation,
+  I bring a wealth of experience across diverse technologies.
+  Proficient in Ruby/Ruby on Rails, JavaScript (including TypeScript), and cutting-edge frameworks like NextJS,
+  AstroJS, and ReactJS, I excel in crafting innovative solutions for complex challenges.
+  My command of SQL ensures robust database management, while my adeptness in
+  project management ensures seamless development from inception to deployment.
+  Moreover, my consulting prowess guides stakeholders through every phase of the software life cycle,
+  delivering exceptional results with every project undertaken.`
+
+export const SkillsWeb = [
+  {
+    category: "Programming Languages",
+    skills: [
+      [95, "Ruby"],
+      [80, "TypeScript"],
+      [45, "Go"],
+      [20, "Python"],
+    ],
+  },
+  {
+    category: "Frameworks & Libraries",
+    skills: [
+      [95, "Ruby on Rails"],
+      [85, "React"],
+      [80, "NodeJS"],
+      [70, "NextJS"],
+      [70, "AstroJS"],
+    ],
+  },
+  {
+    category: "Databases",
+    skills: [
+      [80, "PostgreSQL"],
+      [80, "MySQL"],
+      [65, "GraphQL"],
+    ],
+  },
+  {
+    category: "Cloud & Services",
+    skills: [
+      [75, "AWS Cognito"],
+      [80, "AWS EC2"],
+      [80, "AWS S3"],
+      [70, "Docker"],
+    ],
+  },
+  {
+    category: "Styling",
+    skills: [
+      [95, "HTML/CSS"],
+      [90, "Sass"],
+      [70, "TailwindCSS"],
+    ],
+  },
+  {
+    category: "Testing",
+    skills: [
+      [80, "RSpec"],
+      [70, "Cucumber"],
+      [60, "Jest"],
+      [60, "Cypress"],
+    ],
+  },
+];
+
+
+export const WorkHistory = [
+  {
+    title: "Lead Backend Engineer",
+    company: "Seamgen",
+    location: "San Diego, CA(remotely)",
+    date: "June 2022 - Present",
+    highlights: [
+      "Designed and developed a scalable application from the ground up using Rails 7.2 as an API.",
+      "Implemented authentication and authorization using AWS Cognito for secure user management.",
+      "Integrated GraphQL to enable efficient and flexible data querying for complex data manipulation.",
+      "Led software architecture planning and implementation, ensuring maintainability and scalability.",
+      "Mentored and guided software engineers through code reviews, sprint unblocking, and best practices.",
+      "Collaborated cross-functionally with the Project Manager, Product team, and UI/UX Designer to define epics and create user stories.",
+      "Broke down features into manageable development tasks to streamline implementation.",
+    ],
+  },
+  {
+    title: "Lead Consultant",
+    company: "Lombardi Consulting",
+    location: "South Salem, NY",
+    date: "June 2022 - Present",
+    highlights: [
+      "Created various websites using Javascript, Typescript, NextJS, AstroJS, and Ruby on Rails.",
+      "Converted websites from static websites to dynamic websites.",
+      "Built Point of Sale System with headless Shopify and Nextjs.",
+      "Built Twitter like social network using Ruby on Rails 7.1 and Hotwire.",
+      "Built analytics engine to track customer websites.",
+      "Developed and implemented strategic plans to improve operational efficiency and profitability, resulting in a 35% increase in revenue",
+      "Collaborated with cross-functional teams to identify customer needs and develop solutions to meet those needs.",
+    ],
+  },
+  {
+    title: "Lead Software Engineer",
+    company: "Avail by Realtor.com",
+    location: "Chicago, IL",
+    date: "September 2021 - June 2022",
+    highlights: [
+      "Coordinated with the development team to make successful products.",
+      "Worked along with other tech leads, product managers and engineering managers to plan and implement application changes from start to finish.",
+      "Applied best practices in development while following standardized coding conventions.",
+      "Mentored and coached junior team members, resulting in a 25% decrease in employee turnover.",
+      "Developed a microservices architecture that improved system modularity and reduced dependencies between components.",
+    ],
+  },
+  {
+    title: "Senior Software Engineer",
+    company: "Avail by Realtor.com",
+    location: "Chicago, IL",
+    date: "June 2021 - September 2021",
+    highlights: [
+      "Built applications using Ruby on Rails for the backend and React on the frontend.",
+      "Designed and implemented planning and execution of taking a monolith to microservices.",
+      "Implemented microservices for listing curated data in listing apartments.",
+      "Deployed better Logging for APIs and services.",
+      "Facilitated root cause analysis of common system issues to meet customer needs.",
+      "Monitored systems for defects and employed bug resolution.",
+      "Mentored teammates with code issues.",
+      "Developed a CI/CD pipeline that facilitated code quality checks and enabled automated testing and deployment.",
+    ],
+  },
+  {
+    title: "Software Engineer",
+    company: "LendKey Technologies",
+    location: "New York, NY",
+    date: "October 2017 - June 2020",
+    highlights: [
+      "Built and maintained APIs, moving away from Legacy Monolith infrastructure to a more domain-driven microservice through Docker, Ruby on Rails, Java Spring-Boot and ReactJS.",
+      "Worked with ReactJS and TypeScript to build a front end for a new markeyplace product.",
+      "Used higher order of components to make small, reusable sections",
+      "Built login feature using MS Azure, JWT, and Apigee",
+      "Utilized crucial design software skills to complete projects on time and within budget.",
+      "Effectively coded software changes and alterations based on specific design requirements.",
+      "Applied & stayed current with existing and emerging technologies and techniques.",
+      "Brought forth a passion and dedication to software development.",
+    ],
+  },
+  {
+    title: "Full-Stack Engineer",
+    company: "TMPG",
+    location: "White Plains, NY",
+    date: "August 2015 - October 2017",
+    highlights: [
+      "Managed a development team building rich, interactive websites.",
+      "Built and maintained new infrastructures while merging our legacy systems into a new platform infrastructure.",
+      "Brought forth extensive experience developing API’s to connect and curate new and existing data through multiple platforms.",
+      "Implemented procedural changes in server infrastructures to improve performance and security.",
+      "Created new internal portal for managing client data and assets.",
+      "Successfully worked to meet tight client deadlines.",
+      "Worked well with internal and external teams to ensure that all client needs were met.",
+    ],
+  },
+  {
+    title: "Software Engineer",
+    company: "LendKey Technologies",
+    location: "New York, NY",
+    date: "October 2017 - June 2020",
+    highlights: [
+        "Transformed a large e-commerce website with new Ruby on Rails backend technology and a modern front-end framework.",
+        "Maintained stores' locations, websites and backend databases for 250+ stores.",
+        "Developed a user-friendly SMS solution for customer service and marketing.",
+        "Developed and maintained employee authentication and authorization systems.",
+        "Tracked and resolved site speed and performance issues.",
+
+
+    ],
+  },
+];
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/content/config.ts ===
+// 1. Import utilities from `astro:content`
+import { z, defineCollection } from 'astro:content';
+
+// 2. Define a `type` and `schema` for each collection
+const blogCollection = defineCollection({
+  type: 'content', // v2.5.0 and later
+  schema: z.object({
+    title: z.string(),
+		description: z.string(),
+		heroImage: z.string().optional(),
+    date: z.coerce.date(),
+    coverImage: z.string().optional(),
+    originalDatePublished: z.coerce.date().optional(),
+    author: z.string().default('Anonymous'),
+    image: z.string(),
+    categories: z.array(z.string()),
+    tags: z.array(z.string()),
+    draft: z.boolean(),
+    seo: z.object({
+      title: z.string(),
+      description: z.string(),
+    }).optional(),
+  }),
+});
+
+// 3. Export a single `collections` object to register your collection(s)
+export const collections = {
+  'blog': blogCollection,
+};
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/env.d.ts ===
+/// <reference path="../.astro/types.d.ts" />
+/// <reference types="astro/client" />
+
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/global.d.ts ===
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/layouts/BaseLayout.astro ===
+---
+import BaseHeader from '../components/Layouts/BaseHeader.astro'
+import Header from '../components/Layouts/Header.astro'
+export interface Props {
+  title: string
+  description: string
+}
+
+const {title, description} = Astro.props as Props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHeader title={title} description={description} />
+  </head>
+
+  <body class="bg-slate-[rgb(36, 39, 58)] min-h-screen mx-[4rem] flex flex-col">
+    <Header />
+    <slot />
+  </body>
+</html>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/layouts/BaseWrapper.astro ===
+---
+import Footer from '../components/Layouts/Footer'
+import {Nav} from '../components/Layouts/Nav'
+import Head from '../components/Layouts/Head.astro'
+import Analytics from '../components/Analytics'
+---
+
+<!doctype html>
+<html lang="en">
+  <Head />
+  <body class="min-h-screen mx-[4rem] flex flex-col">
+    <Nav client:only="react" />
+    <main class="flex-1 h-screen">
+      <slot />
+      <Footer />
+    </main>
+    <Analytics client:only="react" />
+  </body>
+</html>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/layouts/BlogLayout.astro ===
+---
+import {SEO} from 'astro-seo'
+import type {CollectionEntry} from 'astro:content'
+import BaseHead from '../components/Layouts/BaseHeader.astro'
+import {Nav} from '../components/Layouts/Nav'
+import Footer from '../components/Layouts/Footer'
+import {Icon} from '@iconify/react'
+import Analytics from '../components/Analytics'
+import FormattedDate from '../components/FormattedDate.astro'
+
+type Props = CollectionEntry<'blog'>['data']
+
+const {title, description, date, originalDatePublished, heroImage, author, seo} = Astro.props
+const currentPath = Astro.url.pathname
+---
+
+<script>
+  let copyButtonLabel = 'Copy Code'
+  let codeBlocks = Array.from(document.querySelectorAll('pre'))
+
+  for (let codeBlock of codeBlocks) {
+    let wrapper = document.createElement('div')
+    wrapper.style.position = 'relative'
+
+    let copyButton = document.createElement('button')
+    copyButton.className = 'copy-code'
+    copyButton.innerHTML = copyButtonLabel
+
+    codeBlock.setAttribute('tabindex', '0')
+    codeBlock.appendChild(copyButton)
+    // wrap codebock with relative parent element
+    codeBlock?.parentNode?.insertBefore(wrapper, codeBlock)
+    wrapper.appendChild(codeBlock)
+
+    copyButton.addEventListener('click', async () => {
+      await copyCode(codeBlock, copyButton)
+    })
+  }
+
+  async function copyCode(block: HTMLElement, button: HTMLButtonElement) {
+    let code = block.querySelector('code')
+    let text = code ? code.innerText : ''
+
+    await navigator.clipboard.writeText(text)
+
+    // visual feedback that task is completed
+    button.innerText = 'Code Copied'
+
+    setTimeout(() => {
+      button.innerText = copyButtonLabel
+    }, 700)
+  }
+</script>
+
+<html lang="en">
+  <head>
+    <SEO
+      title={seo?.title}
+      description={seo?.description}
+      canonical={`https://t0nylombardi.dev${currentPath}`}
+      openGraph={{
+        basic: {
+          title: title,
+          url: `https://t0nylombardi.dev${currentPath}`,
+          type: 'Article',
+          image: heroImage || '',
+        },
+      }}
+      twitter={{
+        creator: '@t0nylombardi',
+      }}
+      extend={{
+        link: [{rel: 'icon', href: '/favicon.ico'}],
+        meta: [
+          {name: 'twitter:image', content: heroImage},
+          {name: 'twitter:title', content: title},
+          {name: 'twitter:description', content: description},
+          {name: 'twitter:card', content: 'summary_large_image'},
+          {name: 'twitter:site', content: '@t0nylombardi'},
+          {name: 'twitter:creator', content: '@t0nylombardi'},
+        ],
+      }}
+    />
+    <BaseHead title={title} description={description} />
+  </head>
+
+  <body class="">
+    <Nav client:only="react" />
+    <div class="mb-10 max-w-screen-2xl container-2xl mx-auto py-20">
+      <main class="">
+        <div class="container mx-auto">
+          <div class="flex flex-col text-center w-full mt-10">
+            <h1 class="text-[1.3rem] md:text-[4rem] py-4 font-medium title-font text-gray-100">
+              {title}
+            </h1>
+
+            <div class="m-auto text-gray-100 flex flex-col justify-center">
+              <h2 class="text-[1rem] md:text-[1.5rem] w-full font-thin">{description}</h2>
+              <div class="w-full flex flex-row items-center justify-center">
+                <h4 class="text-ctp-green-500 px-[5rem] text-[0.6rem] md:text-sm font-light title-font mb-1">
+                  by: {author} on {date ? <FormattedDate date={date} /> : originalDatePublished}
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="hidden md:block my-8 md:my-16 object-contain object-center">
+            {heroImage && <img class="hidden w-max md:block " src={heroImage} alt={title} />}
+          </div>
+        </div>
+        <article class="w-full mt-8 mb-8 px-[1.5rem] md:px-[4rem] text-gray-100">
+          <slot />
+          <div class="mt-4 md:mt-[8rem]">
+            <p class="my-12text-[1rem] md:text-[1.5rem]">
+              If you liked this article, please consider
+              <a href="https://www.buymeacoffee.com/t0nylombardi" class="hover:underline hover:cursor-pointer">
+                buying me a coffee</a
+              >
+              <Icon icon="vscode-icons:file-type-coffeescript" />
+            </p>
+            <p class="my-[4rem] text-[1rem] md:text-[1.5rem]">Cheers!</p>
+          </div>
+        </article>
+      </main>
+
+      <Footer />
+      <Analytics client:only="react" />
+    </div>
+  </body>
+</html>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/pages/404.astro ===
+---
+import BaseWrapper from '../layouts/BaseWrapper.astro'
+---
+
+<BaseWrapper>
+  <div class="container mx-auto px-4 md:px-0 py-24 lg:py-40 flex justify-center items-center">
+    <div class="text-2xl flex flex-col justify-center items-center">
+      <h1 class="404-text text-9xl rotate-180">404</h1><br />
+      <h2 class="mt-14">You're Lost ...</h2>
+    </div>
+  </div>
+</BaseWrapper>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/pages/blog/[...slug].astro ===
+---
+import {type CollectionEntry, getCollection, render} from 'astro:content'
+import BaseLayout from '../../layouts/BlogLayout.astro'
+
+export const prerender = true
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+  return posts.map((post) => ({
+    params: {slug: post.slug},
+    props: post,
+  }))
+}
+type Props = CollectionEntry<'blog'>
+
+const post = Astro.props
+const {Content} = await render(post)
+---
+
+<BaseLayout {...post.data}>
+  <main class="snap-y snap-mandatory h-screen">
+    <Content />
+  </main>
+</BaseLayout>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/pages/blog/index.astro ===
+---
+import BlogPostList from '../../components/BlogPostList.astro'
+import SectionHeader from '../../components/UI/SectionHeader'
+import BaseWrapper from '../../layouts/BaseWrapper.astro'
+---
+
+<BaseWrapper>
+  <section class="fullscreen-section min-h-screen py-[7rem] flex flex-col items-center">
+    <SectionHeader header="_blog" />
+    <BlogPostList />
+  </section>
+</BaseWrapper>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/pages/index.astro ===
+---
+import BaseWrapper from '../layouts/BaseWrapper.astro'
+import MainSection from '../components/Sections/MainSection'
+import AboutSection from '../components/Sections/AboutSection'
+import {ContactForm} from '../components/ContactForm'
+import Footer from '../components/Layouts/Footer'
+---
+
+<BaseWrapper>
+  <main class="snap-y snap-mandatory h-screen overflow-y-scroll overflow-auto hide-scrollbar">
+    <MainSection client:only="react" />
+    <AboutSection client:only="react" />
+    <ContactForm client:only="react" />
+
+    <div class="flex flex-col items-center justify-center py-[2rem] m-[2rem]">
+      <Footer />
+    </div>
+  </main>
+</BaseWrapper>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/pages/projects.astro ===
+---
+import BaseWrapper from '../layouts/BaseWrapper.astro'
+import {ProjectSection} from '../components/Sections'
+---
+
+<BaseWrapper>
+  <main class="flex-1 h-screen my-[10rem] sm:px-8">
+    <ProjectSection />
+  </main>
+</BaseWrapper>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/pages/resume.astro ===
+---
+import BaseWrapper from '../layouts/BaseWrapper.astro'
+import {Profile, WorkHistory} from '../constants/resume'
+import SkillList from '../components/resume/skills'
+---
+
+<BaseWrapper>
+  <main class="md:mx-auto py-25">
+    <div class="resume">
+      <div class="resume-header">
+        <a href="/">
+          <h1 class="text-2xl md:text-7xl text-ctp-text font-extrabold">ANTHONY LOMBARDI</h1>
+        </a>
+        <h3 class="text-xl text-ctp-peach-500 py-6">
+          Father &#8226; Consultant &#8226; Mentor &#8226; FullStack Engineer
+        </h3>
+      </div>
+      <div class="resume-body-wrapper border-t-2 border-ctp-text">
+        <div class="flex flex-row">
+          <div class="hidden md:block flex-row skills-hobbies border-r-2 border-ctp-text">
+            <div class="skills">
+              <h2 class="text-2xl text-ctp-text">|> SKILLS</h2>
+              <div class="py-4">
+                <SkillList client:only="react" />
+              </div>
+            </div>
+
+            <div class="hobbies text-ctp-text">
+              <h2 class="text-2xl text-ctp-text">|> HOBBIES</h2>
+              <hr />
+              <p>
+                Spending time with my two beautiful children, Exploring the Outdoors, Building guitars && Woodworking,
+                Playing Guitar, and Cooking. I am also a huge fan of the <span class="text-ctp-yellow-500"
+                  >Pittsburgh Steelers</span
+                > and the <span class="text-ctp-blue-500">New York Yankees</span>. Life's a grand adventure, my friends,
+                and I'm just here to soak it all in, one epic moment at a time. Cheers to family, hobbies, and sports
+                fandoms that never quit!
+              </p>
+            </div>
+          </div>
+          <div class="flex-auto w-full resume-main">
+            <div class="profile">
+              <h2 class="text-2xl text-ctp-text">|> PROFILE</h2>
+              <hr />
+              <p class="text-sm md:text-lg border-b-2 border-ctp-text mb-8">
+                {Profile}
+              </p>
+            </div>
+            <div class="employment-history border-b-2 border-ctp-text">
+              <h2 class="text-2xl text-ctp-text">|> EMPLOYMENT HISTORY</h2>
+              <hr />
+
+              {
+                WorkHistory.map((job, _i) => () => (
+                  <div class="employment mb-4">
+                    <div class="grid grid-cols-4">
+                      <div class="col-span-3 text-left text-lg font-bold text-ctp-mauve-500">{`${job.title}, ${job.company}`}</div>
+                      <div class="text-right font-bold text-ctp-peach-500">{job.location}</div>
+                    </div>
+
+                    <p class="employment-date text-ctp-text mb-2">{job.date}</p>
+
+                    <div class="highlights">
+                      <ul class="list-inside list-disc">
+                        {job.highlights.map((highlight, _index) => (
+                          <li class="text-sm pb-2 md:text-lg md:pl-2">{highlight}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+            <div class="education pt-5">
+              <h2 class="text-2xl text-ctp-text">|> EDUCATION</h2>
+              <hr />
+              <div class="grid grid-cols-4">
+                <div class="text-sm md:text-lg col-span-3 text-left font-bold text-ctp-mauve-500">
+                  CSM, College of Westchester
+                </div>
+                <div class="font-bold text-sm md:text-lg text-right text-ctp-peach-500">White Plains, NY</div>
+              </div>
+              <p class="employment-date text-ctp-text">Sep 2004 &hyphen; May 2006</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseWrapper>
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/routes/index.ts ===
+export const Routes = [
+  {
+    slug: '/#hello',
+    label: '_hello',
+  },
+  {
+    slug: '/#about',
+    label: '_about',
+  },
+  {
+    slug: '/blog',
+    label: '_blog',
+  },
+  {
+    slug: '/projects',
+    label: '_projects',
+  },
+  {
+    slug: '/resume',
+    label: '_resume',
+  },
+]
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/types/age.ts ===
+export interface AgeParts {
+  years: number;
+  months: number;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  milliseconds: number;
+}
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/utils/getAgeParts.ts ===
+import type { AgeParts } from "../types/age";
+
+export const getAgeParts = (birthDate: Date, now: Date): AgeParts => {
+  // Clone to avoid mutating inputs
+  let years = now.getFullYear() - birthDate.getFullYear();
+  let months = now.getMonth() - birthDate.getMonth();
+  let days = now.getDate() - birthDate.getDate();
+
+  // Adjust if current month/day hasn’t reached birthday yet
+  if (days < 0) {
+    // borrow days from previous month
+    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+    days += prevMonth.getDate();
+    months--;
+  }
+
+  if (months < 0) {
+    months += 12;
+    years--;
+  }
+
+  // Get time-of-day difference
+  const birthTime = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    birthDate.getHours(),
+    birthDate.getMinutes(),
+    birthDate.getSeconds(),
+    birthDate.getMilliseconds()
+  );
+
+  const diffMs = now.getTime() - birthTime.getTime();
+  const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
+  const seconds = Math.floor((diffMs / 1000) % 60);
+  const milliseconds = diffMs % 1000;
+
+  return { years, months, days, hours, minutes, seconds, milliseconds };
+};
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/utils/getEsternTimeNow.ts ===
+export const getEasternTimeNow = (): Date => {
+  const now = new Date();
+
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    fractionalSecondDigits: 3,
+    hour12: false,
+  });
+
+  const parts = formatter.formatToParts(now).reduce((acc, part) => {
+    if (part.type !== "literal") acc[part.type] = part.value;
+    return acc;
+  }, {} as Record<string, string>);
+
+  return new Date(
+    `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}.${parts.fractionalSecond}`
+  );
+};
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/utils/gtag.ts ===
+import {ASTRO_PUBLIC_GA_ID} from '../constants'
+
+declare global {
+  interface Window {
+    dataLayer: any[]
+  }
+}
+
+export function loadGtag() {
+  if (window.dataLayer) return
+
+  const gtagUrl = `https://www.googletagmanager.com/gtag/js?id=${ASTRO_PUBLIC_GA_ID}`
+
+  const script = document.createElement('script')
+  script.src = gtagUrl
+  script.async = true
+  document.head.appendChild(script)
+
+  window.dataLayer = window.dataLayer || []
+  function gtag(p0?: string, p1?: any) {
+    window.dataLayer.push(arguments)
+  }
+
+  gtag('js', new Date())
+  gtag('config', ASTRO_PUBLIC_GA_ID)
+}
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/utils/mobileNavBar.ts ===
+function setupHamburger() {
+  const hamburger = document.querySelector('#hamburger')
+  const nav = document.querySelector('#navlinks')
+  const links = document.querySelectorAll('#navlinks a')
+
+  if (!hamburger || !nav) return
+
+  const toggle = () => {
+    const isOpen = !nav.classList.contains('hidden')
+
+    nav.classList.toggle('hidden')
+    hamburger.classList.toggle('border-gray-300', !isOpen)
+    hamburger.classList.toggle('border-[#7790a8]', isOpen)
+
+    hamburger.querySelectorAll('span').forEach(bar => {
+      bar.classList.toggle('bg-gray-300', !isOpen)
+      bar.classList.toggle('bg-[#7790a8]', isOpen)
+    })
+  }
+
+  hamburger.addEventListener('click', toggle)
+  links.forEach(link => link.addEventListener('click', () => {
+    if (!nav.classList.contains('hidden')) toggle()
+  }))
+}
+
+function setupObserver() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
+        document.querySelectorAll('.active').forEach(el => el.classList.remove('active'))
+
+        const id = entry.target.id
+        if (id) {
+          document.querySelectorAll(`[href="#${id}"]`).forEach(el => el.classList.add('active'))
+        }
+      }
+    })
+  }, { threshold: 0.55 })
+
+  const header = document.querySelector('header')
+  const sections = document.querySelectorAll('section')
+
+  if (header) observer.observe(header)
+  sections.forEach(section => observer.observe(section))
+}
+
+document.addEventListener('astro:page-load', (ev) => {
+  setupHamburger()
+
+  const { pathname } = new URL((ev.target as Document).location.href)
+
+  if (pathname === '/') {
+    setupObserver()
+  } else if (pathname.startsWith('/blog')) {
+    document.querySelectorAll('#navlinks a').forEach(link => {
+      const href = link.getAttribute('href')
+      if (!href) return
+
+      if (href.startsWith('#blog')) {
+        link.setAttribute('href', '/blog')
+      } else if (!href.startsWith('/')) {
+        link.setAttribute('href', '/' + href)
+      }
+    })
+
+    document.querySelector('[href="/blog"]')?.classList.add('active')
+  }
+})
+
+
+=== /Users/sic/dev/t0nylombardi/blog/src/utils/pad.ts ===
+export const pad = (num: number, size: number): string => {
+  return num.toString().padStart(size, '0');
+};
+
+
+=== /Users/sic/dev/t0nylombardi/blog/tests/basic.spec.ts ===
+import { test, expect } from '@playwright/test'
+
+const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? 'http://localhost:3031'
+
+test('home page loads and has site title', async ({ page }) => {
+  await page.goto(`${baseURL}/`)
+  await expect(page).toHaveTitle(/T0nylombardi/i)
+})
+
+test('nav renders on home page', async ({ page }) => {
+  await page.goto(`${baseURL}/`)
+  await expect(page.getByRole('link', { name: 'Anthony Lombardi' })).toBeVisible()
+})
+
+test('blog index renders header', async ({ page }) => {
+  await page.goto(`${baseURL}/blog`)
+  await expect(page.getByRole('heading', { name: '_blog' })).toBeVisible()
+})
+
+test('resume page renders primary heading', async ({ page }) => {
+  await page.goto(`${baseURL}/resume`)
+  await expect(page.getByRole('heading', { name: 'ANTHONY LOMBARDI' })).toBeVisible()
+})
+
+test('unknown route shows 404', async ({ page }) => {
+  await page.goto(`${baseURL}/definitely-not-a-page`)
+  await expect(page.getByRole('heading', { name: '404' })).toBeVisible()
+})
+

@@ -8,9 +8,12 @@ import Analytics from '../components/Analytics'
 <!doctype html>
 <html lang="en">
   <Head />
-  <body class="min-h-screen mx-[4rem] flex flex-col">
+  <body class="min-h-screen overflow-hidden">
     <Nav client:only="react" />
-    <main class="flex-1 h-screen">
+
+    <main
+      class="flex-1 h-screen overflow-y-scroll overflow-x-hidden hide-scrollbar px-4 sm:px-6 md:px-10 lg:px-16 snap-none md:snap-y md:snap-mandatory"
+    >
       <slot />
       <Footer />
     </main>
