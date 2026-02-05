@@ -19,6 +19,7 @@ function setupHamburger() {
   }
 
   hamburger.addEventListener('click', toggle)
+  console.log("hamburger clicked")
   links.forEach(link => link.addEventListener('click', () => {
     if (!nav.classList.contains('hidden')) toggle()
   }))

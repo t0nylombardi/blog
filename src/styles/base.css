@@ -125,6 +125,11 @@ body::after {
 body {
   min-height: 100vh;
 }
+
+section {
+  margin: 12rem 0;
+}
+
 main {
   scrollbar-gutter: stable both-edges;
 }

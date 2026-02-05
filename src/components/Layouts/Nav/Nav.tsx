@@ -8,6 +8,7 @@ export const Nav = () => {
 
   const handleNavigation = useCallback(
     (e) => {
+      console.log('nav clicked')
       const window = e.currentTarget
       if (y > window.scrollY) {
         console.log('scrolling up')
@@ -35,7 +36,7 @@ export const Nav = () => {
       }`}
     >
       <ul className="flex flex-row justify-between min-w-full relative px-[4rem]">
-        <li className="px-8 py-4">
+        <li className="sm:hidden px-8 py-4">
           <a href="/" className="hover:text-ctp-mauve-600">
             Anthony Lombardi
           </a>

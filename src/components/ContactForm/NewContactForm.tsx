@@ -73,11 +73,11 @@ end
   return (
     <section
       id="contact"
-      className="fullscreen-section snap-none flex flex-col items-center justify-center sm:justify-start sm:w-full  sm:my-0 my-[12rem]"
+      className="fullscreen-section snap-none flex flex-col items-center justify-center sm:justify-start sm:w-full  my-[12rem]"
     >
       <SectionHeader header="_contact" />
       <div className="grid grid-cols-2 gap-4 py-18 sm:py-4 w-full responsive-grid">
-        <div className="row-start-1 row-end-2 h-full flex flex-col sm:flex-row sm:w-full  justify-center">
+        <div className="row-start-1 row-end-2 h-full flex flex-col sm:flex-row sm:w-full justify-center">
           <form
             name="contact-form"
             className="flex justify-between flex-col h-full w-full"
@@ -131,8 +131,8 @@ end
           {status === 'error' && <div className="text-red-500 mt-2">{error}</div>}
         </div>
 
-        <div className="sm:hidden sm:justify-center sm:w-full row-span-2 row-end-2 h-full flex flex-col justify-center pt-8">
-          <div className="bg-none! flex justify-center items-center text-2xl">
+        <div className=" sm:justify-center sm:w-full row-span-2 row-end-2 h-full hidden md:flex flex-col justify-center pt-8">
+          <div className="bg-none! h-full flex justify-center items-center text-md sm:text-lx">
             <CodeHighlight code={Code.trim()} />
           </div>
         </div>
