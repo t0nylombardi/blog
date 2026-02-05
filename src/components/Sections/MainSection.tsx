@@ -11,10 +11,10 @@ const MainSection = () => {
       <div className="intro w-full md:w-1/2 flex flex-col items-center md:items-start text-center sm:text-left md:text-left">
         <div className="text-ctp-text pb-8 sm:w-full">
           <p className="text-xl sm:text-2xl font-medium">Hey, I'm</p>
-          <h1 className="text-4xl sm:text-3xl md:text-6xl font-medium mt-2">Anthony Lombardi</h1>
+          <h1 className="text-3xl md:text-5xl font-medium mt-2">Anthony Lombardi</h1>
         </div>
 
-        <div className="sm:text-sm font-medium mt-6 space-y-1 text-base sm:text-left">
+        <div className="text-sm md:text-base font-medium mt-6 space-y-1  sm:text-left">
           <p className="comment">// personal data</p>
 
           <p className="">

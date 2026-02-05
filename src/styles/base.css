@@ -127,7 +127,8 @@ body {
 }
 
 section {
-  margin: 12rem 0;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 main {
@@ -143,6 +144,10 @@ footer {
   width: 100%;
   color: white;
   text-align: center;
+}
+
+.comment {
+  color: var(--catppuccin-color-overlay1);
 }
 
 @keyframes animateBefore {

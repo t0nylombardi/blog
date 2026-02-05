@@ -36,8 +36,8 @@ export const Nav = () => {
       }`}
     >
       <ul className="flex flex-row justify-between min-w-full relative px-[4rem]">
-        <li className="sm:hidden px-8 py-4">
-          <a href="/" className="hover:text-ctp-mauve-600">
+        <li className="hidden px-8 py-4">
+          <a href="/" className="hover:text-ctp-mauve-600 w-full">
             Anthony Lombardi
           </a>
         </li>
