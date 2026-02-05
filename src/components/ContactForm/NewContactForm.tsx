@@ -71,10 +71,13 @@ end
   `
 
   return (
-    <section id="contact" className="fullscreen-section snap-none flex flex-col items-center justify-center my-[12rem]">
+    <section
+      id="contact"
+      className="fullscreen-section snap-none flex flex-col items-center justify-center sm:justify-start sm:w-full  sm:my-0 my-[12rem]"
+    >
       <SectionHeader header="_contact" />
-      <div className="grid grid-cols-2 gap-4 py-18 w-full">
-        <div className="row-start-1 row-end-2 h-full flex flex-col justify-center">
+      <div className="grid grid-cols-2 gap-4 py-18 sm:py-4 w-full responsive-grid">
+        <div className="row-start-1 row-end-2 h-full flex flex-col sm:flex-row sm:w-full  justify-center">
           <form
             name="contact-form"
             className="flex justify-between flex-col h-full w-full"
@@ -119,7 +122,7 @@ end
             <button
               id="submit-form"
               type="submit"
-              className="border border-[#A478E8] hover:text-[#A478E8] font-bold mt-8 p-4"
+              className="btnAzureGradiant font-bold mt-8 p-4"
               disabled={status === 'pending'}
             >
               {status === 'pending' ? 'Submitting...' : 'Send Message'}
@@ -128,7 +131,7 @@ end
           {status === 'error' && <div className="text-red-500 mt-2">{error}</div>}
         </div>
 
-        <div className="row-span-2 row-end-2 h-full flex flex-col justify-center pt-8">
+        <div className="sm:hidden sm:justify-center sm:w-full row-span-2 row-end-2 h-full flex flex-col justify-center pt-8">
           <div className="bg-none! flex justify-center items-center text-2xl">
             <CodeHighlight code={Code.trim()} />
           </div>

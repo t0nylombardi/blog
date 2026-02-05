@@ -51,4 +51,10 @@
     @apply sm:text-sm sm:px-5 sm:py-1.5;
     @apply rounded shadow sm:w-auto;
   }
+
+  .responsive-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }

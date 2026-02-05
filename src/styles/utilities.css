@@ -9,7 +9,7 @@
 
   .btnAzureGradiant {
     @apply hover:text-white/75 text-white font-medium rounded-lg;
-    @apply text-2xl px-10 py-2.5 bg-gradient-to-r from-md-purple to-azure/75;
+    @apply text-2xl px-10 py-2.5 bg-linear-to-r from-md-purple to-azure/75;
     @apply rounded shadow sm:w-auto focus:outline-none focus:ring;
     @apply hover:scale-110 transform transition;
   }
