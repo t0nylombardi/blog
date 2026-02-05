@@ -9,14 +9,16 @@ const ProjectSection = () => {
       <SectionHeader header="_projects" />
       <div>
         <div id="projects-list" className="">
-          {Projects.map((project) => (
+          {Projects.map((project, index) => (
             <ProjectCard
+              key={project.title}
               img={project.img}
               width={project.width}
               link={project.link}
               title={project.title}
               technologies={project.technologies}
               description={project.description}
+              className={index % 2 === 1 ? 'project--reverse' : ''}
             />
           ))}
         </div>

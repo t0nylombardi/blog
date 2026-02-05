@@ -33,7 +33,7 @@ export const Projects = [
   },
   {
     img: "/projects/churp.png",
-    width: "w-[12rem]",
+    width: "w-[8rem]",
     link: "https://github.com/t0nylombardi/churp",
     title: "Churp Solical",
     technologies: "Ruby on Rails 7.1, Redis, EslaticSearch, Docker",
