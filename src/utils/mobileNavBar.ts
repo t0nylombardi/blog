@@ -1,30 +1,3 @@
-function setupHamburger() {
-  const hamburger = document.querySelector('#hamburger')
-  const nav = document.querySelector('#navlinks')
-  const links = document.querySelectorAll('#navlinks a')
-
-  if (!hamburger || !nav) return
-
-  const toggle = () => {
-    const isOpen = !nav.classList.contains('hidden')
-
-    nav.classList.toggle('hidden')
-    hamburger.classList.toggle('border-gray-300', !isOpen)
-    hamburger.classList.toggle('border-[#7790a8]', isOpen)
-
-    hamburger.querySelectorAll('span').forEach(bar => {
-      bar.classList.toggle('bg-gray-300', !isOpen)
-      bar.classList.toggle('bg-[#7790a8]', isOpen)
-    })
-  }
-
-  hamburger.addEventListener('click', toggle)
-  console.log("hamburger clicked")
-  links.forEach(link => link.addEventListener('click', () => {
-    if (!nav.classList.contains('hidden')) toggle()
-  }))
-}
-
 function setupObserver() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -47,8 +20,6 @@ function setupObserver() {
 }
 
 document.addEventListener('astro:page-load', (ev) => {
-  setupHamburger()
-
   const { pathname } = new URL((ev.target as Document).location.href)
 
   if (pathname === '/') {
