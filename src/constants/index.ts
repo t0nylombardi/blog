@@ -1,3 +1,5 @@
+import type { Project } from '../types/project';
+
 export const SITE_TITLE = 'T0nylombardi | Full Stack Engineer';
 export const SITE_DESCRIPTION = `Unlock the expertise of a self-taught,
   meticulous, and motivated Full Stack Developer with over a decade of hands-on experience,
@@ -22,13 +24,21 @@ export const footerSocials = {
   linkedin: "https://www.linkedin.com/in/anthonyjlombardi/",
 }
 
-export const Projects = [
+export const projects: Project[] = [
+  {
+    img: "projects/copy_code_logo.png",
+    width: "w-[12rem]",
+    title: "Copy Code",
+    link: 'https://rubygems.org/gems/copy_code',
+    technologies: ["Ruby"],
+    description: "A smart, flexible CLI tool to copy source code from a directory (or project) into your clipboard or a text file. A great tool for AI analisys"
+  },
   {
     img: "/projects/optimus-image.png",
     width: "w-[12rem]",
     link: "https://github.com/t0nylombardi/optimus-image",
     title: "Optimus Image",
-    technologies: "Go",
+    technologies: ["Go"],
     description: "Optimus Image is a simple image optimization tool that uses Go to optimize images. The tool is a simple command line tool that takes an image and optimizes it for web use. The tool is built with Go and uses the Go image library to optimize images. The tool is hosted on AWS EC2."
   },
   {
@@ -36,7 +46,7 @@ export const Projects = [
     width: "w-[8rem]",
     link: "https://github.com/t0nylombardi/churp",
     title: "Churp Solical",
-    technologies: "Ruby on Rails 7.1, Redis, EslaticSearch, Docker",
+    technologies: ["Ruby", "Rails", "Redis", "EslaticSearch", "Docker"],
     description: "Let's face it. Twitter/X has become a dumpster fire🔥 This is my attempt to bring back the good ole days twitter used to be. This project is not an attempt to be a decentralized network or some blockchain application."
   },
   {
@@ -44,7 +54,7 @@ export const Projects = [
     width: "w-[23rem]",
     link: "https://github.com/t0nylombardi/rails_template",
     title: "Rails Template",
-    technologies: "Ruby",
+    technologies: ["Ruby"],
     description: "Alot of time starting a new Rails project can be tedious(for me at least). Mostly setting up all the tools/technologies you want to use. This template script attempts to making the setup of a new app faster. The app sets up A Rails project with Docker, Rspec, Devise, Sidekiq, Active Storage, Action Text and Tailwind."
   },
   {
@@ -52,7 +62,7 @@ export const Projects = [
     width: "w-[23rem]",
     link: "https://factually.wtf",
     title: "Factuality WTF",
-    technologies: "Go, React, NextJS, Tailwind",
+    technologies: ["Go", "React", "NextJS", "Tailwind"],
     description: "Factually is a website that gives random, useless that no one cares about. It was built with Go, React, NextJS and Tailwind. The website is a simple web app that uses the Factuality API to get random facts and display them on the page. The website is hosted on AWS EC2."
   }
 ];

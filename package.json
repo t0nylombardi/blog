@@ -12,6 +12,7 @@
   "devDependencies": {
     "@astrojs/netlify": "^6.6.3",
     "@catppuccin/tailwindcss": "^1.0.0",
+    "@mdi/js": "^7.4.47",
     "@playwright/test": "^1.58.1",
     "@shikijs/transformers": "^3.18.0",
     "@types/graceful-fs": "^4.1.9",
@@ -30,6 +31,7 @@
     "@astrojs/mdx": "^4.3.12",
     "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.6.0",
+    "@iconify-json/mdi": "^1.2.3",
     "@iconify/react": "^6.0.2",
     "@tailwindcss/cli": "^4.1.17",
     "@tailwindcss/postcss": "^4.1.17",

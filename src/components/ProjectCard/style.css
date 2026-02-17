@@ -15,7 +15,7 @@
 }
 
 .project--reverse .project-img {
-  @apply md:col-start-2 md:justify-self-end;
+  @apply md:col-start-2 md:justify-end;
 }
 
 .project--reverse .project-info {

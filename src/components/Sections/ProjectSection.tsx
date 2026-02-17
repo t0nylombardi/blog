@@ -1,15 +1,18 @@
-import React from 'react'
+import type {JSX} from 'react'
 import {ProjectCard} from '../ProjectCard'
-import {Projects} from '../../constants'
 import SectionHeader from '../UI/SectionHeader'
+import type {Project} from '../../types/project'
 
-const ProjectSection = () => {
+interface Props {
+  projects: Project[]
+}
+const ProjectSection = ({projects}: Props): JSX.Element => {
   return (
     <section id="projects" className="h-screen overflow-y-scroll overflow-auto hide-scrollbar">
       <SectionHeader header="_projects" />
       <div>
         <div id="projects-list" className="">
-          {Projects.map((project, index) => (
+          {projects.map((project, index) => (
             <ProjectCard
               key={project.title}
               img={project.img}

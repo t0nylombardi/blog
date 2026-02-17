@@ -1,5 +1,5 @@
 ---
-import {Icon} from '@iconify/react'
+import {Icon} from 'astro-icon/components'
 
 interface Props {
   title: string
@@ -34,8 +34,8 @@ const {link, image, tags, title, description, author, date, slug} = Astro.props
       <p class="mt-2 text-ctp-green-500 text-md">{description}</p>
       <div class="mt-2 text-sm text-ctp-peach-500">
         <a href={link} class="flex items-center hover:text-ctp-text cursor-pointer">
-          <span class="inline-flex w-6 h-6 justify-center items-center bg-ctp-peach-500 rounded-full">
-            <Icon icon="mdi:book-open-blank-variant-outline" />
+          <span class="inline-flex w-8 h-8 justify-center items-center bg-ctp-peach-500 rounded-full">
+            <Icon name="mdi:book-open-blank-variant-outline" class="h-6 w-6 text-green-800" />
           </span>
           <span class="ml-3">Read more</span>
         </a>
