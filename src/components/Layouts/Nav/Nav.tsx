@@ -1,8 +1,9 @@
-import {useEffect, useRef, useState, useCallback} from 'react'
+import {useEffect, useState} from 'react'
 import {Routes} from '../../../routes'
 
 export const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
     if (menuOpen) {
@@ -16,8 +17,22 @@ export const Nav = () => {
     }
   }, [menuOpen])
 
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 0)
+    }
+
+    onScroll()
+    window.addEventListener('scroll', onScroll, {passive: true})
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <nav className="fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 text-2xl text-ctp-text">
+    <nav
+      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 text-2xl text-ctp-text ${
+        isScrolled ? 'backdrop-blur-sm bg-ctp-mantle/45 border-b border-ctp-surface0/50' : 'bg-transparent'
+      }`}
+    >
       <ul className="flex flex-row justify-between min-w-full relative px-[4rem]">
         <li className="hidden px-8 py-4">
           <a href="/" className="hover:text-ctp-mauve-600 w-full">

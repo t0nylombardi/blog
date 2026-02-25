@@ -30,17 +30,23 @@ You can absolutely write a test that passes while not truly verifying intent. Es
 Imagine you write this method:
 
 ```ruby
-def total_price(items)
-  items.sum(&:price)
+class Order < ApplicationRecord
+  has_many :line_items
+
+  def total_cents
+    line_items.sum(:price_cents)
+  end
 end
 ```
 
 You write a test for it:
 
 ```ruby
-it "returns the total price" do
-  items = [item1, item2]
-  expect(total_price(items)).to eq(items.sum(&:price))
+it "calculates the total" do
+  order = create(:order)
+  create_list(:line_item, 2, order: order, price_cents: 1000)
+
+  expect(order.total_cents).to eq(order.line_items.sum(:price_cents))
 end
 ```
 
@@ -49,14 +55,14 @@ It feels correct. It feels responsible. It feels like something your past self w
 If someone accidentally introduces a bug like:
 
 ```ruby
-def total_price(items)
-  items.sum(&:price) * 2
+def total_cents
+  line_items.map(&:price_cents).sum
 end
 ```
 
-Sure. That test probably catches it. But the real danger is subtler.
+Sure. That test probably passes. But the real danger is subtler.
 
-What happens when the implementation changes in a way that shifts behavior but not structure. Maybe a default scope changes. Maybe rounding logic moved. Maybe a Rails upgrade altered how a query builds under the hood. Your test still passes because it is coupled to how the method works internally, not what the user expects externally.
+What happens when the implementation changes in a way that shifts behavior but not structure. Maybe a someone adds a default scope to `Line Item`. Maybe rounding logic moved. Maybe little leprechauns altered how a query builds rainbows under the hood. Your test still passes because it is coupled to how the method works internally, not what the user expects externally.
 
 You are not testing outcomes. You are testing that the code agrees with itself. That is confirmation bias with better syntax highlighting.
 
@@ -71,15 +77,17 @@ Not: **“How does the current implementation happen to achieve it?”**
 A better test would be:
 
 ```ruby
-it "returns the correct total price" do
-  item1 = double(price: 10)
-  item2 = double(price: 15)
+it "returns the correct total in cents" do
+  order = create(:order)
 
-  expect(total_price([item1, item2])).to eq(25)
+  create(:line_item, order: order, price_cents: 1000)
+  create(:line_item, order: order, price_cents: 2000)
+
+  expect(order.total_cents).to eq(3000)
 end
 ```
 
-Now the behavior is explicit. 25 is the contract. It does not care how you compute it. You can sum, You can map and then sum, You can summon a wizard. As long as the result is 25, the behavior holds. That is what a test suite is supposed to protect. Not the shape of the code. Not the method calls. Not the clever little chain you wrote at 1 AM.
+Now the behavior is explicit. 3000 is the contract. It does not care how you compute it. You can sum, You can map and then sum, You can summon a wizard. As long as the result is 3000, the behavior holds. That is what a test suite is supposed to protect. Not the shape of the code. Not the method calls. Not the clever little chain you wrote at 1 AM.
 
 ## Danger!, Will Robinson
 
