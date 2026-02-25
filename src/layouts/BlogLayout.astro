@@ -68,16 +68,23 @@ const currentPath = Astro.url.pathname
       }}
       twitter={{
         creator: '@t0nylombardi',
+        card: 'summary_large_image',
+        site: '@t0nylombardi',
+        title: title,
+        description: description,
+        image: heroImage,
+        imageAlt: 'Software Engineering Image',
       }}
       extend={{
         link: [{rel: 'icon', href: '/favicon.ico'}],
         meta: [
-          {name: 'twitter:image', content: heroImage},
           {name: 'twitter:title', content: title},
           {name: 'twitter:description', content: description},
           {name: 'twitter:card', content: 'summary_large_image'},
           {name: 'twitter:site', content: '@t0nylombardi'},
           {name: 'twitter:creator', content: '@t0nylombardi'},
+          {name: 'twitter:image:alt', content: 'Software Engineering Image'},
+          {name: 'twitter:image', content: heroImage},
         ],
       }}
     />
@@ -109,7 +116,7 @@ const currentPath = Astro.url.pathname
         </div>
         <article class="w-full mt-8 mb-8 px-[1.5rem] md:px-[4rem] text-gray-100">
           <slot />
-          <div class="mt-4 md:mt-[8rem]">
+          <div id="coffee" class="mt-4 md:mt-[8rem]">
             <p class="my-12text-[1rem] md:text-[1.5rem]">
               If you liked this article, please consider
               <a href="https://www.buymeacoffee.com/t0nylombardi" class="hover:underline hover:cursor-pointer">
