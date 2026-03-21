@@ -11,6 +11,8 @@
   "devDependencies": {
     "@catppuccin/tailwindcss": "^1.0.0",
     "@mdi/js": "^7.4.47",
+    "@netlify/next": "^1.4.9",
+    "@netlify/plugin-nextjs": "^5.15.9",
     "@playwright/test": "^1.58.2",
     "@shikijs/transformers": "^4.0.2",
     "@tailwindcss/postcss": "^4.2.2",
@@ -35,7 +37,7 @@
     "lucide-react": "^0.577.0",
     "moment": "^2.30.1",
     "motion": "^12.38.0",
-    "next": "^16.0.0",
+    "next": "^16.2.1",
     "next-mdx-remote": "^5.0.0",
     "postcss": "^8.5.8",
     "react": "^19.2.4",
