@@ -5,6 +5,8 @@ dist/
 .cache/
 .vscode/
 .astro/
+.next/
+.next
 ~*
 
 # dependencies

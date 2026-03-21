@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+@import '@catppuccin/tailwindcss/macchiato.css';
+@reference 'tailwindcss';
+
+@import '../styles/base.css';
+@import '../styles/utilities.css';
+@import '../styles/article.css';
+@import '../styles/comments.css';
+@import '../styles/resume.css';
+@import '../styles/mobile.css';
+@import '../components/Layouts/Nav/styles.css';
+@import '../components/ProjectCard/style.css';
+@import '../components/LanguagesSprites/styles.css';
+@import '../components/ContactForm/style.css';

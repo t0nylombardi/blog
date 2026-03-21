@@ -1,3 +1,10 @@
+type SkillEntry = [number, string]
+
+type SkillCategory = {
+  category: string
+  skills: SkillEntry[]
+}
+
 export const Profile = `A dynamic and results-oriented Full Stack Developer with over a decade of hands-on expertise.
   Renowned for meticulous attention to detail and unwavering motivation,
   I bring a wealth of experience across diverse technologies.
@@ -8,7 +15,7 @@ export const Profile = `A dynamic and results-oriented Full Stack Developer with
   Moreover, my consulting prowess guides stakeholders through every phase of the software life cycle,
   delivering exceptional results with every project undertaken.`
 
-export const SkillsWeb = [
+export const SkillsWeb: SkillCategory[] = [
   {
     category: "Programming Languages",
     skills: [

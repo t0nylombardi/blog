@@ -1,7 +1,14 @@
+'use client'
+
 import {motion} from 'framer-motion'
 import {SkillsWeb} from '../../constants/resume'
 
-const SkillProgress = ({percent, skillname}) => {
+type SkillProgressProps = {
+  percent: number
+  skillname: string
+}
+
+const SkillProgress = ({percent, skillname}: SkillProgressProps) => {
   const barVariants = {
     initial: {width: '0%'},
     indeterminate: {

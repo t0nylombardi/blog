@@ -1,4 +1,3 @@
-import AgeCounter from '../AgeCounter'
 import MySocials from '../MySocials'
 import CTA from '../UI/CTA'
 
