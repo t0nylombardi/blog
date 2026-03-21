@@ -1,7 +1,8 @@
+'use client'
+
 import React, {useState} from 'react'
 import CodeHighlight from '../CodeHighlight'
 import SuccessPopup from './SuccessPopup'
-import './style.css'
 import SectionHeader from '../UI/SectionHeader'
 
 interface FormData {
@@ -29,7 +30,7 @@ export default function ContactForm() {
     }))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setStatus('pending')
     setError(null)

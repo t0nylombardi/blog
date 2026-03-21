@@ -1,5 +1,4 @@
 import {Icon} from '@iconify/react'
-import './style.css'
 
 interface Props {
   img: string

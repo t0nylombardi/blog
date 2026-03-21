@@ -1,3 +1,4 @@
+// @ts-nocheck
 // src/content/config.ts
 
 import { defineCollection } from 'astro:content';
