@@ -1,0 +1,20 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Yorktown Heights",
+			"country": {
+				"code": "US",
+				"name": "United States"
+			},
+			"subdivision": {
+				"code": "NY",
+				"name": "New York"
+			},
+			"timezone": "America/New_York",
+			"latitude": 41.2709,
+			"longitude": -73.7776,
+			"postalCode": "10598"
+		},
+		"timestamp": 1774051618800
+	}
+}
