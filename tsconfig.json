@@ -1,15 +1,58 @@
 {
-  "extends": "astro/tsconfigs/base",
-  "include": [".astro/types.d.ts", "**/*"],
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "ignoreDeprecations": "5.0",
+    "paths": {
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ],
+      "@src/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/app/**/*.ts",
+    "src/app/**/*.tsx",
+    "src/lib/**/*.ts",
+    "src/lib/**/*.tsx",
+    "src/components/**/*.ts",
+    "src/components/**/*.tsx",
+    "src/**/*.d.ts",
+    "mdx-components.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules",
-    "dist",
-    "studio",
-  ],
-  "compilerOptions": {
-    "strictNullChecks": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "verbatimModuleSyntax": true
-  }
+    "src/pages",
+    "src/layouts",
+    "src/content.config.ts",
+    "src/components/**/*.astro"
+  ]
 }

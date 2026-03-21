@@ -3,18 +3,17 @@
   "version": "0.3.0",
   "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build",
+    "lint": "next lint"
   },
   "devDependencies": {
-    "@astrojs/netlify": "^7.0.4",
     "@catppuccin/tailwindcss": "^1.0.0",
     "@mdi/js": "^7.4.47",
     "@playwright/test": "^1.58.2",
     "@shikijs/transformers": "^4.0.2",
+    "@tailwindcss/postcss": "^4.2.2",
     "@types/graceful-fs": "^4.1.9",
     "@types/gtag.js": "^0.0.20",
     "@types/node": "^25.5.0",
@@ -22,28 +21,22 @@
     "@types/react": "^19.2.14",
     "@types/react-reconciler": "^0.33.0",
     "@types/webxr": "^0.5.24",
-    "astro": "^6.0.8",
     "autoprefixer": "^10.4.27",
     "tailwindcss": "^4.2.2",
-    "vite": "^8.0.1"
+    "typescript": "6.0.0-beta"
   },
   "dependencies": {
-    "@astrojs/mdx": "^5.0.2",
-    "@astrojs/react": "^5.0.1",
-    "@astrojs/sitemap": "^3.7.1",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify/react": "^6.0.2",
     "@tailwindcss/cli": "^4.2.2",
-    "@tailwindcss/postcss": "^4.2.2",
-    "@tailwindcss/vite": "^4.2.2",
     "@types/react-dom": "^19.2.3",
-    "astro-compress": "^2.4.0",
-    "astro-icon": "^1.1.5",
-    "astro-seo": "^1.1.0",
     "framer-motion": "^12.38.0",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^0.577.0",
     "moment": "^2.30.1",
     "motion": "^12.38.0",
+    "next": "^16.0.0",
+    "next-mdx-remote": "^5.0.0",
     "postcss": "^8.5.8",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
@@ -54,7 +47,7 @@
     "shiki-languages": "^0.2.7",
     "styled-components": "^6.3.12",
     "tm-themes": "^1.12.2",
-    "typescript": "^5.9.3"
+    "zod": "^4.1.11"
   },
   "pnpm": {
     "ignoredBuiltDependencies": [
