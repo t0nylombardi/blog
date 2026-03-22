@@ -1,5 +1,5 @@
 import LanguagesSprites from '../LanguagesSprites/LanguagesSprites'
-import {AboutMe} from '../../constants'
+import {AboutMe} from '../../domain'
 import SectionHeader from '../UI/SectionHeader'
 
 function AboutSection() {

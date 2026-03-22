@@ -1,6 +1,6 @@
 ---
 import BaseWrapper from '../layouts/BaseWrapper.astro'
-import {Profile, WorkHistory} from '../constants/resume'
+import {Profile, WorkHistory} from '../domain/resume'
 import SkillList from '../components/resume/skills'
 ---
 
@@ -64,11 +64,11 @@ import SkillList from '../components/resume/skills'
                 WorkHistory.map((job, _i) => () => (
                   <div class="employment mb-4">
                     <div class="grid grid-cols-4">
-                      <div class="col-span-3 text-left text-lg font-bold text-ctp-mauve-500">{`${job.title}, ${job.company}`}</div>
+                      <div class="col-span-3 text-left text-lg font-bold text-ctp-mauve-500">{`${job.role}, ${job.company}`}</div>
                       <div class="text-left md:text-right font-bold text-ctp-peach-500">{job.location}</div>
                     </div>
 
-                    <p class="employment-date text-ctp-text mb-2">{job.date}</p>
+                    <p class="employment-date text-ctp-text mb-2">{job.startDate}</p>
 
                     <div class="highlights">
                       <ul class="list-inside list-disc">

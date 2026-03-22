@@ -1,7 +1,7 @@
 'use client'
 
 import {motion} from 'framer-motion'
-import {SkillsWeb} from '../../constants/resume'
+import {SkillsWeb} from '../../domain/resume'
 
 type SkillProgressProps = {
   percent: number
@@ -63,7 +63,7 @@ const SkillList = () => {
       {SkillsWeb.map((group, groupIndex) => (
         <div key={groupIndex}>
           <div className="py-4">
-            <span className="pt-8 pb-4 text-xl font-bold text-ctp-green-500">// {group.category}</span>
+            <span className="pt-8 pb-4 text-md font-bold text-ctp-green-500">// {group.category}</span>
           </div>
           <div className="pl-8">
             {group.skills.map(([percent, skillname], index) => (

@@ -1,5 +1,5 @@
 import {BaseWrapper} from '@components/layout/BaseWrapper'
-import {Profile, WorkHistory} from '@src/constants/resume'
+import {Profile, WorkHistory} from '../../domain/resume'
 import SkillList from '@src/components/resume/skills'
 
 export default function ResumePage() {
@@ -14,8 +14,8 @@ export default function ResumePage() {
 
             <div className="block md:hidden text-center text-ctp-peach-500 py-6 space-y-2">
               <p className="text-3xl font-bold">Father</p>
-              <p className="text-lg font-medium">Consultant &#8226; Mentor</p>
-              <p className="text-lg font-bold">FullStack Engineer</p>
+              <p className="text-md font-medium">Consultant &#8226; Mentor</p>
+              <p className="text-md font-bold">FullStack Engineer</p>
             </div>
 
             <h3 className="hidden md:block text-2xl text-ctp-peach-500 py-6">
@@ -27,7 +27,7 @@ export default function ResumePage() {
             <div className="flex flex-row">
               <div className="hidden md:block flex-row skills-hobbies border-r-2 border-ctp-text">
                 <div className="skills">
-                  <h2 className="text-2xl text-ctp-text">|&gt; SKILLS</h2>
+                  <h2 className="text-xl text-ctp-text">|&gt; SKILLS</h2>
                   <div className="py-4">
                     <SkillList />
                   </div>
@@ -51,7 +51,7 @@ export default function ResumePage() {
                 <div className="profile">
                   <h2 className="text-2xl text-ctp-text">|&gt; PROFILE</h2>
                   <hr />
-                  <p className="text-sm md:text-lg border-b-2 border-ctp-text mb-8">{Profile}</p>
+                  <p className="text-sm md:text-md border-b-2 border-ctp-text mb-8">{Profile}</p>
                 </div>
 
                 <div className="employment-history border-b-2 border-ctp-text">
@@ -59,18 +59,18 @@ export default function ResumePage() {
                   <hr />
 
                   {WorkHistory.map((job) => (
-                    <div className="employment mb-4" key={`${job.company}-${job.title}-${job.date}`}>
+                    <div className="employment mb-4" key={`${job.company}-${job.role}-${job.startDate}`}>
                       <div className="grid grid-cols-4">
-                        <div className="col-span-3 text-left text-lg font-bold text-ctp-mauve-500">{`${job.title}, ${job.company}`}</div>
+                        <div className="col-span-3 text-left text-md font-bold text-ctp-mauve-500">{`${job.role}, ${job.company}`}</div>
                         <div className="text-left md:text-right font-bold text-ctp-peach-500">{job.location}</div>
                       </div>
 
-                      <p className="employment-date text-ctp-text mb-2">{job.date}</p>
+                      <p className="employment-date text-ctp-text mb-2">{job.startDate}</p>
 
                       <div className="highlights">
                         <ul className="list-inside list-disc">
                           {job.highlights.map((highlight, index) => (
-                            <li className="text-sm pb-2 md:text-lg md:pl-2" key={`${job.company}-${index}`}>
+                            <li className="text-sm pb-2 md:text-md md:pl-2" key={`${job.company}-${index}`}>
                               {highlight}
                             </li>
                           ))}
@@ -84,12 +84,12 @@ export default function ResumePage() {
                   <h2 className="text-2xl text-ctp-text">|&gt; EDUCATION</h2>
                   <hr />
                   <div className="grid grid-cols-4">
-                    <div className="text-sm md:text-lg col-span-3 text-left font-bold text-ctp-mauve-500">
+                    <div className="text-sm md:text-md col-span-3 text-left font-bold text-ctp-mauve-500">
                       CSM, College of Westchester
                     </div>
-                    <div className="font-bold text-sm md:text-lg text-right text-ctp-peach-500">White Plains, NY</div>
+                    <div className="font-bold text-sm md:text-md text-right text-ctp-peach-500">White Plains, NY</div>
                   </div>
-                  <p className="employment-date text-ctp-text">Sep 2004 &hyphen; May 2006</p>
+                  <p className="employment-date text-ctp-text">Sep 2004 - May 2006</p>
                 </div>
               </div>
             </div>
