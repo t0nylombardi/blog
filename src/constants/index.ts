@@ -12,6 +12,13 @@ export const ASTRO_PUBLIC_GA_ID = 'G-H56C6BEBLS';
 export const DOB = '03/31/1983'
 export const BIRTHDAY = new Date(1983, 2, 31);
 
+export const personalData = {
+  title: "Lead Ruby Software Engineer",
+  location: "Westchester, New York",
+  focus: "Eat, Code, Think about life choices, repeat",
+}
+
+
 export const socials = {
   github: "https://github.com/t0nylombardi",
   linkedin: "https://linkedin.com/in/t0nylombardi",

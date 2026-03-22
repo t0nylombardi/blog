@@ -1,5 +1,5 @@
 import {BaseWrapper} from '@components/layout/BaseWrapper'
-import MainSection from '@src/components/Sections/MainSection'
+import MainSection from '@components/Sections/MainSection/MainSection'
 import AboutSection from '@src/components/Sections/AboutSection'
 import {ContactForm} from '@src/components/ContactForm'
 

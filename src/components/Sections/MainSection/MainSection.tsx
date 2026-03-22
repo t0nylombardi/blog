@@ -1,5 +1,6 @@
-import MySocials from '../MySocials'
-import CTA from '../UI/CTA'
+import MySocials from './MySocials'
+import CTA from '../../UI/CTA'
+import PersonalData from './PersonalData'
 
 const MainSection = () => {
   return (
@@ -16,27 +17,7 @@ const MainSection = () => {
         <div className="text-sm md:text-base font-medium mt-6 space-y-1  sm:text-left">
           <p className="comment">// personal data</p>
 
-          <p className="">
-            <span className="text-ctp-mauve-500">let </span>
-            <span className="text-ctp-text">title</span> =
-            <span id="age" className="text-ctp-green-500 block pl-6 md:inline md:pl-0">
-              "Lead Ruby Software Engineer";
-            </span>
-          </p>
-
-          <p>
-            <span className="text-ctp-mauve-500">let </span>
-            <span className="text-ctp-text">location</span> =
-            <span className="text-ctp-green-500 block pl-6 md:inline md:pl-0">"Westchester, New York";</span>
-          </p>
-
-          <p>
-            <span className="text-ctp-mauve-500">let </span>
-            <span className="text-ctp-text">focus</span> =
-            <span className="text-ctp-green-500 block pl-6 md:inline md:pl-0">
-              "Eat, Code, Think about life choices, sleep, repeat";
-            </span>
-          </p>
+          <PersonalData />
 
           <MySocials />
         </div>
