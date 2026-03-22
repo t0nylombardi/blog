@@ -1,10 +1,10 @@
 import type {JSX} from 'react'
 import {ProjectCard} from '../ProjectCard'
 import SectionHeader from '../UI/SectionHeader'
-import type {Project} from '../../types/project'
+import type {Project} from '../../domain/portfolio/projects.data'
 
 interface Props {
-  projects: Project[]
+  projects: ReadonlyArray<Project>
 }
 const ProjectSection = ({projects}: Props): JSX.Element => {
   return (

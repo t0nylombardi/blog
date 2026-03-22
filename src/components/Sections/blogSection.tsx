@@ -1,5 +1,5 @@
 import SectionHeader from '../UI/SectionHeader'
-import BlogPostList from '../BlogPostList.astro'
+import {BlogPostList} from '../blog/BlogPostList'
 
 function BlogSection() {
   return (

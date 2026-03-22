@@ -1,4 +1,4 @@
-import type { Project } from '../types/project';
+import type {Project} from '../domain/portfolio/projects.data'
 
 /**
  * Site Constants
@@ -11,7 +11,7 @@ specializing in Ruby/Ruby on Rails, Javascript, Typescript, NextJS, AstroJS.
 With a proven track record in e-commerce architecture, microservices, DevOps,
 and team leadership, I've navigated the full stack life cycle with precision and passion.` as const;
 
-export const ASTRO_PUBLIC_GA_ID = 'G-H56C6BEBLS' as const;
+export const NEXT_PUBLIC_GA_ID = 'G-H56C6BEBLS' as const;
 
 /**
  * Personal Info

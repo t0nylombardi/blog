@@ -49,10 +49,6 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "src/pages",
-    "src/layouts",
-    "src/content.config.ts",
-    "src/components/**/*.astro"
+    "node_modules"
   ]
 }

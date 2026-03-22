@@ -1,4 +1,4 @@
-import {ASTRO_PUBLIC_GA_ID} from '../constants'
+import {NEXT_PUBLIC_GA_ID} from '../constants'
 
 declare global {
   interface Window {
@@ -9,7 +9,7 @@ declare global {
 export function loadGtag() {
   if (window.dataLayer) return
 
-  const gtagUrl = `https://www.googletagmanager.com/gtag/js?id=${ASTRO_PUBLIC_GA_ID}`
+  const gtagUrl = `https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_ID}`
 
   const script = document.createElement('script')
   script.src = gtagUrl
@@ -22,5 +22,5 @@ export function loadGtag() {
   }
 
   gtag('js', new Date())
-  gtag('config', ASTRO_PUBLIC_GA_ID)
+  gtag('config', NEXT_PUBLIC_GA_ID)
 }

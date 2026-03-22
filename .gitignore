@@ -3,7 +3,6 @@ dist/
 .output/
 .cache/
 .vscode/
-.astro/
 .next/
 .next
 ~*
