@@ -1,1 +1,1 @@
-export {Nav} from './Nav'
+export {Nav} from '@/components/Layouts/Nav/Nav'

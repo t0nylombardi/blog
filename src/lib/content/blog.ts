@@ -3,7 +3,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import matter from 'gray-matter'
 import {unstable_cache} from 'next/cache'
-import {blogFrontmatterSchema, type BlogPost} from './schema'
+import {blogFrontmatterSchema, type BlogPost} from '@/lib/content/schema'
 
 const BLOG_DIR = path.join(process.cwd(), 'src', 'content', 'blog')
 

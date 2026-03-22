@@ -1,5 +1,5 @@
-import {getSortedPosts} from '@lib/content/blog'
-import {BlogCard} from './BlogCard'
+import {getSortedPosts} from '@/lib/content/blog'
+import {BlogCard} from '@/components/blog/BlogCard'
 
 export async function BlogPostList({limit}: {limit?: number}) {
   const posts = await getSortedPosts()

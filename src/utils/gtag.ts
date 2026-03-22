@@ -1,4 +1,4 @@
-import {NEXT_PUBLIC_GA_ID} from '../constants'
+import {siteConfig} from '@/domain/site/site.data'
 
 declare global {
   interface Window {
@@ -9,7 +9,8 @@ declare global {
 export function loadGtag() {
   if (window.dataLayer) return
 
-  const gtagUrl = `https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_ID}`
+  const gtagId = siteConfig.gaId
+  const gtagUrl = `https://www.googletagmanager.com/gtag/js?id=${gtagId}`
 
   const script = document.createElement('script')
   script.src = gtagUrl
@@ -22,5 +23,5 @@ export function loadGtag() {
   }
 
   gtag('js', new Date())
-  gtag('config', NEXT_PUBLIC_GA_ID)
+  gtag('config', gtagId)
 }

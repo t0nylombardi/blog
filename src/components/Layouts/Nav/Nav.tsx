@@ -1,7 +1,7 @@
 'use client'
 
 import {useEffect, useState} from 'react'
-import {Routes} from '../../../routes'
+import {Routes} from '@/routes'
 
 export const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false)

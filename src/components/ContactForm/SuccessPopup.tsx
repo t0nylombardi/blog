@@ -1,7 +1,7 @@
 import React from 'react'
 import {motion} from 'framer-motion'
 import {X} from 'lucide-react'
-import BlurOverlay from './BlurOverlay'
+import BlurOverlay from '@/components/ContactForm/BlurOverlay'
 
 interface SuccessPopupProps {
   onClose: () => void

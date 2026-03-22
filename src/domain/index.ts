@@ -1,5 +1,5 @@
 // domain/index.ts
-export * from './site/site.data';
-export * from './profile/personal.data';
-export * from './profile/social.data';
-export * from './portfolio/projects.data';
+export * from '@/domain/site/site.data';
+export * from '@/domain/profile/personal.data';
+export * from '@/domain/profile/social.data';
+export * from '@/domain/portfolio/projects.data';

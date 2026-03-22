@@ -2,11 +2,11 @@ import type {Metadata} from 'next'
 import Image from 'next/image'
 import {notFound} from 'next/navigation'
 import {compileMDX} from 'next-mdx-remote/rsc'
-import {BaseWrapper} from '@components/layout/BaseWrapper'
-import {mdxComponents} from '@components/blog/MDXComponents'
-import {CopyCodeButton} from '@components/blog/CopyCodeButton'
-import {FormattedDate} from '@components/blog/FormattedDate'
-import {getPostBySlug, getSortedPosts} from '@lib/content/blog'
+import {BaseWrapper} from '@/components/layout/BaseWrapper'
+import {mdxComponents} from '@/components/blog/MDXComponents'
+import {CopyCodeButton} from '@/components/blog/CopyCodeButton'
+import {FormattedDate} from '@/components/blog/FormattedDate'
+import {getPostBySlug, getSortedPosts} from '@/lib/content/blog'
 
 export const revalidate = 3600
 

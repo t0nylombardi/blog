@@ -1,1 +1,1 @@
-export {default as FormSuccess} from './FormSucess'
+export {default as FormSuccess} from '@/components/FormSucess/FormSucess'

@@ -1,5 +1,5 @@
 import {useEffect} from 'react'
-import {loadGtag} from '../utils/gtag'
+import {loadGtag} from '@/utils/gtag'
 
 const Analytics = () => {
   useEffect(() => {

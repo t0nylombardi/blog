@@ -1,4 +1,4 @@
-import {socials} from '../../../constants'
+import {socials} from '@/domain/profile/social.data'
 
 const MySocials = () => {
   return (

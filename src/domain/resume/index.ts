@@ -1,3 +1,3 @@
-export * from './resume.data'
-export * from './skills.data'
-export * from './workHistory.data'
+export * from '@/domain/resume/resume.data'
+export * from '@/domain/resume/skills.data'
+export * from '@/domain/resume/workHistory.data'

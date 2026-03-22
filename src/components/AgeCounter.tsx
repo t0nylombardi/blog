@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import {getAgeParts} from '../utils/getAgeParts'
-import {getEasternTimeNow} from '../utils/getEsternTimeNow'
-import {pad} from '../utils/pad'
-import type {AgeParts} from '../types/age'
-import {BIRTHDAY} from '../constants'
+import {getAgeParts} from '@/utils/getAgeParts'
+import {getEasternTimeNow} from '@/utils/getEsternTimeNow'
+import {pad} from '@/utils/pad'
+import type {AgeParts} from '@/types/age'
+import {BIRTHDAY} from '@/domain/profile/personal.data'
 
 const AgeCounter: React.FC = () => {
   const [ageParts, setAgeParts] = useState<AgeParts>(() => getAgeParts(BIRTHDAY, new Date()))

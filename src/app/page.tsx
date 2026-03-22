@@ -1,7 +1,7 @@
-import {BaseWrapper} from '@components/layout/BaseWrapper'
-import MainSection from '@components/Sections/MainSection/MainSection'
-import AboutSection from '@src/components/Sections/AboutSection'
-import {ContactForm} from '@src/components/ContactForm'
+import {BaseWrapper} from '@/components/layout/BaseWrapper'
+import MainSection from '@/components/Sections/MainSection/MainSection'
+import AboutSection from '@/components/Sections/AboutSection'
+import {ContactForm} from '@/components/ContactForm'
 
 export default function HomePage() {
   return (

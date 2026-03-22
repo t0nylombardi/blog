@@ -1,7 +1,7 @@
 import type {JSX} from 'react'
-import {ProjectCard} from '../ProjectCard'
-import SectionHeader from '../UI/SectionHeader'
-import type {Project} from '../../domain/portfolio/projects.data'
+import {ProjectCard} from '@/components/ProjectCard'
+import SectionHeader from '@/components/UI/SectionHeader'
+import type {Project} from '@/domain/portfolio/projects.data'
 
 interface Props {
   projects: ReadonlyArray<Project>

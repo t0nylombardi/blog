@@ -1,5 +1,5 @@
-import {Nav} from '@src/components/Layouts/Nav'
-import Footer from '@src/components/Layouts/Footer'
+import {Nav} from '@/components/Layouts/Nav'
+import Footer from '@/components/Layouts/Footer'
 
 export function BaseWrapper({children}: {children: React.ReactNode}) {
   return (

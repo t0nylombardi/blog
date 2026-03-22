@@ -24,13 +24,7 @@
     ],
     "ignoreDeprecations": "5.0",
     "paths": {
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@lib/*": [
-        "./src/lib/*"
-      ],
-      "@src/*": [
+      "@/*": [
         "./src/*"
       ]
     }

@@ -1,9 +1,9 @@
-import { personalData } from '../../../constants'
+import {profile} from '@/domain/profile/personal.data'
 const PersonalData = () => {
   return (
     <div>
           <p className=" pt-4">// list of my social links</p>
-          {Object.entries(personalData).map(([key, value]) => (
+          {Object.entries(profile).map(([key, value]) => (
             <p key={key}>
               <span className="text-ctp-mauve-500">const </span>
               <span className="text-ctp-text">{key}</span> =

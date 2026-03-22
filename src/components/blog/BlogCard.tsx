@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import {type BlogPost} from '@lib/content/schema'
-import {FormattedDate} from './FormattedDate'
+import {type BlogPost} from '@/lib/content/schema'
+import {FormattedDate} from '@/components/blog/FormattedDate'
 
 export function BlogCard({post}: {post: BlogPost}) {
   const imageSrc = post.image ?? post.heroImage ?? post.coverImage ?? '/avatar.jpg'

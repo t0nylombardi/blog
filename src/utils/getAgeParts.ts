@@ -1,4 +1,4 @@
-import type { AgeParts } from "../types/age";
+import type { AgeParts } from "@/types/age";
 
 export const getAgeParts = (birthDate: Date, now: Date): AgeParts => {
   // Clone to avoid mutating inputs

@@ -4,6 +4,9 @@ interface PersonalData {
   focus: string;
 }
 
+export const DOB = '03/31/1983' as const
+export const BIRTHDAY = new Date(1983, 2, 31)
+
 export const profile: PersonalData = {
   title: 'Lead Ruby Software Engineer',
   location: 'Westchester, New York',

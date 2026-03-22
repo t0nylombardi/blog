@@ -1,21 +1,21 @@
 import type {Metadata} from 'next'
 import Script from 'next/script'
 import './globals.css'
-import {SITE_DESCRIPTION, SITE_TITLE} from '@src/constants'
+import {siteConfig} from '@/domain/site/site.data'
 
 const siteUrl = 'https://t0nylombardi.dev'
-const gaId = process.env.NEXT_PUBLIC_GA_ID ?? 'G-H56C6BEBLS'
+const gaId = process.env.NEXT_PUBLIC_GA_ID ?? siteConfig.gaId
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: SITE_TITLE,
-  description: SITE_DESCRIPTION,
+  title: siteConfig.title,
+  description: siteConfig.description,
   icons: {
     icon: '/favicon/favicon.ico',
   },
   openGraph: {
-    title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
+    title: siteConfig.title,
+    description: siteConfig.description,
     url: siteUrl,
     images: [{url: '/amoji_avatar.svg'}],
   },

@@ -1,7 +1,7 @@
 'use client'
 
 import {motion} from 'framer-motion'
-import {SkillsWeb} from '../../domain/resume'
+import {SkillsWeb} from '@/domain/resume'
 
 type SkillProgressProps = {
   percent: number
