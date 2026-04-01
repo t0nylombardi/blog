@@ -21,7 +21,7 @@ const ProjectSection = ({projects}: Props): JSX.Element => {
               title={project.title}
               technologies={project.technologies}
               description={project.description}
-              className={index % 2 === 1 ? 'project--reverse' : ''}
+              isReversed={index % 2 === 1}
             />
           ))}
         </div>

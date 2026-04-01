@@ -1,0 +1,55 @@
+@reference 'tailwindcss';
+@import '@catppuccin/tailwindcss/macchiato.css';
+
+.form {
+  @apply flex justify-between flex-col h-full w-full;
+  background-color: transparent;
+}
+
+.form :is(input, textarea) {
+  @apply w-full py-2 px-4 mt-2 border rounded-sm;
+  border-color: var(--border);
+  color: var(--text-primary);
+  background: transparent !important;
+  outline: none;
+  box-shadow: none;
+}
+
+.form :is(input, textarea):focus {
+  outline: none;
+  box-shadow: none;
+  background: transparent !important;
+}
+
+.form :is(input, textarea)::placeholder {
+  color: var(--text-muted);
+}
+
+.form :global(input:-webkit-autofill),
+.form :global(input:-webkit-autofill:hover),
+.form :global(input:-webkit-autofill:focus),
+.form :global(input:-webkit-autofill:active) {
+  -webkit-text-fill-color: var(--text-primary) !important;
+}
+
+.submitButton {
+  color: var(--text-inverse);
+  background: linear-gradient(90deg, var(--color-md-purple) 0%, color-mix(in srgb, var(--color-azure) 75%, transparent) 100%);
+  @apply font-bold mt-8 p-4 text-2xl px-10 py-2.5 rounded-lg shadow sm:w-auto focus:outline-none focus:ring hover:scale-110 transform transition hover:opacity-75;
+}
+
+.codePreview {
+  @apply h-full flex justify-center items-center;
+  font-size: 1rem;
+}
+
+@media (min-width: 640px) {
+  .codePreview {
+    font-size: 1.125rem;
+  }
+}
+
+.codePreview :global(#shiki-container > pre) {
+  background-color: transparent !important;
+  color: transparent !important;
+}

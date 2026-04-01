@@ -1,0 +1,10 @@
+@reference 'tailwindcss';
+
+.footer {
+  @apply py-[2rem] m-[2rem];
+  color: var(--text-primary);
+}
+
+.inner {
+  @apply w-full flex flex-col justify-center items-center;
+}

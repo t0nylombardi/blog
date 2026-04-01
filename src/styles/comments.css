@@ -1,5 +1,5 @@
 .giscus {
-  background-color: aliceblue;
+  background-color: var(--bg-secondary);
 }
 
 .giscus-frame {

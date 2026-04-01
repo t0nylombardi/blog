@@ -1,0 +1,67 @@
+@reference 'tailwindcss';
+
+.project {
+  @apply grid grid-cols-1 gap-2 items-center py-0 md:grid-cols-2 md:py-12;
+  grid-auto-flow: row;
+}
+
+@media (max-width: 767px) {
+  .project {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.mediaColumn {
+  @apply hidden md:flex items-center;
+}
+
+.projectImage {
+  @apply w-full flex justify-start;
+  grid-row: 1;
+}
+
+.projectInfo {
+  @apply w-full py-12 wrap-break-word;
+  grid-row: 1;
+}
+
+.techMeta {
+  @apply font-normal mt-1 text-sm;
+  color: var(--text-muted);
+}
+
+.linkRow {
+  @apply mt-2;
+  font-size: 0.875rem;
+  color: var(--accent);
+}
+
+.linkIcon {
+  @apply inline-flex h-8 w-8 items-center justify-center rounded-full;
+  background: var(--accent);
+}
+
+.linkText {
+  @apply ml-3;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 768px) {
+  .projectImage {
+    @apply col-start-1;
+  }
+
+  .projectInfo {
+    @apply col-start-2 pl-[4rem];
+  }
+
+  .reverse .projectImage {
+    @apply col-start-2 justify-end;
+  }
+
+  .reverse .projectInfo {
+    @apply col-start-1 pr-[4rem] pl-0;
+  }
+}

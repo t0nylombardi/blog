@@ -15,7 +15,7 @@ const MainSection = () => {
         </div>
 
         <div className="text-sm md:text-base font-medium mt-6 space-y-1  sm:text-left">
-          <p className="comment">// personal data</p>
+          <p className="text-[color:var(--text-muted)]">// personal data</p>
 
           <PersonalData />
 

@@ -21,7 +21,7 @@
 }
 
 .hover {
-  @apply hover:text-gray-200;
+  @apply hover:opacity-80;
 }
 
 .text-gradient {

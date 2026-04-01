@@ -1,0 +1,109 @@
+@reference 'tailwindcss';
+
+.nav {
+  @apply fixed top-0 left-0 right-0 w-full z-50 text-2xl transition-all duration-300;
+  color: var(--text-primary);
+}
+
+.scrolled {
+  @apply backdrop-blur-sm border-b;
+  background: color-mix(in srgb, var(--bg-secondary) 70%, transparent);
+  border-color: color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+.navList {
+  @apply flex flex-row justify-between min-w-full relative px-[4rem];
+}
+
+.brandItem {
+  @apply hidden px-8 py-4;
+}
+
+.brandLink {
+  @apply w-full transition-colors;
+}
+
+.brandLink:hover {
+  color: var(--accent);
+}
+
+.linksShell {
+  @apply hidden absolute top-full left-0 w-full z-50 lg:block lg:static lg:border-x-0;
+}
+
+.linksShellOpen {
+  @apply block;
+}
+
+.linksList {
+  @apply px-8 pb-4 lg:py-4 space-y-1 lg:space-y-0 lg:space-x-8;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.navLink {
+  @apply flex items-center transition-all duration-300;
+  color: var(--text-primary);
+}
+
+.navLink:hover {
+  color: var(--accent);
+}
+
+.hamburger {
+  @apply p-2 w-fit cursor-pointer absolute right-6 top-2 rounded-sm lg:hidden;
+}
+
+.hamburgerOpen {
+  border: 2px solid var(--accent);
+}
+
+.hamburgerBars {
+  @apply space-y-[0.3rem];
+}
+
+.hamburgerBar {
+  @apply block w-5 h-0.5 transition-all duration-300;
+  background: var(--text-muted);
+}
+
+.hamburgerBarShort {
+  @apply w-3 ml-auto;
+}
+
+.hamburgerOpen .hamburgerBar {
+  background: var(--text-secondary);
+}
+
+.hamburgerOpen .hamburgerBar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburgerOpen .hamburgerBar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerOpen .hamburgerBar:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.contactItem {
+  @apply px-8 w-full text-right py-4 hidden lg:block;
+}
+
+.overlay {
+  @apply fixed inset-0 backdrop-blur-sm z-40 lg:hidden;
+  background: color-mix(in srgb, var(--bg-primary) 55%, black);
+}
+
+@media (min-width: 1024px) {
+  .brandItem {
+    @apply block;
+  }
+
+  .linksList {
+    @apply flex-row;
+    align-items: center;
+  }
+}

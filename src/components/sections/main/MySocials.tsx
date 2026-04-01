@@ -3,7 +3,7 @@ import {socials} from '@/domain/profile/social.data'
 const MySocials = () => {
   return (
     <div>
-      <p className="comment pt-4">// list of my social links</p>
+      <p className="pt-4 text-[color:var(--text-muted)]">// list of my social links</p>
       {Object.entries(socials).map(([platform, url]) => (
         <p key={platform}>
           <span className="text-ctp-mauve-500">const </span>

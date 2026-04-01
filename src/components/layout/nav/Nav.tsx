@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from 'react'
 import {Routes} from '@/routes'
+import styles from './Nav.module.css'
 
 export const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -31,27 +32,22 @@ export const Nav = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 text-2xl text-ctp-text ${
-        isScrolled ? 'backdrop-blur-sm bg-ctp-mantle/45 border-b border-ctp-surface0/50' : 'bg-transparent'
-      }`}
+      className={`${styles.nav} ${isScrolled ? styles.scrolled : ''}`}
     >
-      <ul className="flex flex-row justify-between min-w-full relative px-[4rem]">
-        <li className="hidden px-8 py-4">
-          <a href="/" className="hover:text-ctp-mauve-600 w-full">
+      <ul className={styles.navList}>
+        <li className={styles.brandItem}>
+          <a href="/" className={styles.brandLink}>
             Anthony Lombardi
           </a>
         </li>
 
-        <li
-          id="navlinks"
-          className={`${menuOpen ? 'block' : 'hidden'} lg:block lg:border-x-0 absolute lg:static top-full left-0 w-full z-50`}
-        >
-          <ul className="flex flex-colitems-center lg:flex-row px-8 pb-4 lg:py-4 space-y-1 lg:space-y-0 lg:space-x-8">
+        <li className={`${styles.linksShell} ${menuOpen ? styles.linksShellOpen : ''}`}>
+          <ul className={styles.linksList}>
             {Routes.map((route) => (
               <li key={route.slug}>
                 <a
                   href={route.slug}
-                  className="flex items-center text-ctp-text hover:text-ctp-mauve-500"
+                  className={styles.navLink}
                   onClick={() => setMenuOpen(false)}
                 >
                   {route.label}
@@ -62,26 +58,25 @@ export const Nav = () => {
         </li>
 
         <li
-          id="hamburger"
-          className="p-2 w-fit cursor-pointer absolute right-6 top-2 lg:hidden rounded-sm"
+          className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ''}`}
           onClick={() => setMenuOpen((prev) => !prev)}
         >
-          <div className="space-y-[0.3rem]">
-            <span className={`block w-5 h-0.5 ${menuOpen ? 'bg-gray-300' : 'bg-[#7790a8]'}`} />
-            <span className={`block w-5 h-0.5 ${menuOpen ? 'bg-gray-300' : 'bg-[#7790a8]'}`} />
-            <span className={`block w-3 h-0.5 ml-auto ${menuOpen ? 'bg-gray-300' : 'bg-[#7790a8]'}`} />
+          <div className={styles.hamburgerBars}>
+            <span className={styles.hamburgerBar} />
+            <span className={styles.hamburgerBar} />
+            <span className={`${styles.hamburgerBar} ${styles.hamburgerBarShort}`} />
           </div>
         </li>
 
-        <li className="px-8 w-full text-right py-4 hidden lg:block">
-          <a href="/#contact" className="text-ctp-text hover:text-ctp-mauve-500">
+        <li className={styles.contactItem}>
+          <a href="/#contact" className={styles.navLink}>
             _contact-me
           </a>
         </li>
       </ul>
       {menuOpen && (
         <div
-          className="fixed inset-0 bg-ctp-mantle/70 backdrop-blur-sm z-40 lg:hidden"
+          className={styles.overlay}
           onClick={() => setMenuOpen(false)}
         />
       )}

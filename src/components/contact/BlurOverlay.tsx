@@ -12,7 +12,8 @@ export default function BlurOverlay({onClick}: BlurOverlayProps) {
       animate={{opacity: 1}}
       exit={{opacity: 0}}
       transition={{duration: 0.6}}
-      className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
+      className="fixed inset-0 backdrop-blur-sm"
+      style={{background: 'var(--overlay)'}}
       onClick={onClick}
     />
   )

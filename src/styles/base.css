@@ -10,9 +10,9 @@
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
     /* Revert text color */
-    -webkit-text-fill-color: white !important;
-    color: white !important;
-    caret-color: white !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    color: var(--text-primary) !important;
+    caret-color: var(--text-primary) !important;
 
     /* Revert background color */
     transition: background-color 5000s ease-in-out 0s;
@@ -85,9 +85,9 @@ body {
 }
 
 html {
-  background-color: var(--catppuccin-color-base);
+  background-color: var(--bg-primary);
   font-family: 'Fira Mono', monospace;
-  color: #e5e9f0;
+  color: var(--text-primary);
   scroll-behavior: smooth;
 }
 
@@ -142,12 +142,7 @@ main {
 footer {
   bottom: 0;
   width: 100%;
-  color: white;
   text-align: center;
-}
-
-.comment {
-  color: var(--catppuccin-color-overlay1);
 }
 
 @keyframes animateBefore {

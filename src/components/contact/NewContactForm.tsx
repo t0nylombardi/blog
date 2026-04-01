@@ -4,6 +4,7 @@ import React, {useState} from 'react'
 import {CodeHighlight} from '@/components/blog/client'
 import {SectionHeader} from '@/components/ui'
 import SuccessPopup from './SuccessPopup'
+import styles from './NewContactForm.module.css'
 
 interface FormData {
   name: string
@@ -81,7 +82,7 @@ end
         <div className="row-start-1 row-end-2 h-full flex flex-col sm:flex-row sm:w-full justify-center">
           <form
             name="contact-form"
-            className="flex justify-between flex-col h-full w-full"
+            className={styles.form}
             data-netlify="true"
             netlify-honeypot="bot-field"
             data-netlify-recaptcha="true"
@@ -123,7 +124,7 @@ end
             <button
               id="submit-form"
               type="submit"
-              className="btnAzureGradiant font-bold mt-8 p-4"
+              className={styles.submitButton}
               disabled={status === 'pending'}
             >
               {status === 'pending' ? 'Submitting...' : 'Send Message'}
@@ -133,7 +134,7 @@ end
         </div>
 
         <div className=" sm:justify-center sm:w-full row-span-2 row-end-2 h-full hidden md:flex flex-col justify-center pt-8">
-          <div className="bg-none! h-full flex justify-center items-center text-md sm:text-lx">
+          <div className={styles.codePreview}>
             <CodeHighlight code={Code.trim()} />
           </div>
         </div>

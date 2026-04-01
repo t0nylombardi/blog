@@ -1,9 +1,11 @@
 article {
   @apply text-lg font-thin;
+  color: var(--text-primary);
 }
 
 article p {
   @apply my-6 mx-auto;
+  color: var(--text-secondary);
 }
 
 article p:has(img) {
@@ -11,7 +13,7 @@ article p:has(img) {
 }
 
 article p a {
-  @apply text-indigo-500;
+  color: var(--accent);
 }
 
 article img {
@@ -24,15 +26,18 @@ article hr {
   height: 5px;
   margin: 4rem auto;
   border: none;
-  background: radial-gradient(circle closest-side, #eaf6f6 98%, #0000) 0 / calc(100% / var(--n)) 100%;
+  background: radial-gradient(circle closest-side, var(--border) 98%, transparent) 0 / calc(100% / var(--n)) 100%;
 }
 
 article pre {
-  @apply my-8 p-4 md:p-8 bg-[#1e1e2e]! rounded-lg overflow-x-auto flex flex-wrap;
+  @apply my-8 p-4 md:p-8 rounded-lg overflow-x-auto flex flex-wrap;
+  background: var(--code-bg) !important;
+  color: var(--code-text);
 }
 
 article pre code {
   @apply text-lg font-thin;
+  color: var(--code-text);
 }
 
 article ul,
@@ -50,41 +55,50 @@ article strong {
 
 article h1 {
   @apply font-bold text-4xl;
+  color: var(--text-primary);
 }
 
 article h2 {
   @apply font-bold text-3xl pt-16;
+  color: var(--text-primary);
 }
 
 article h3 {
   @apply font-bold text-2xl pt-4;
+  color: var(--text-primary);
 }
 
 article h4 {
   @apply font-bold text-xl;
+  color: var(--text-primary);
 }
 
 article h5,
 article h6 {
   @apply font-bold;
+  color: var(--text-primary);
 }
 
 article .copy-code {
-  @apply absolute top-0 right-0 bg-ctp-red-500 text-white px-2 py-1 text-xs leading-tight;
+  @apply absolute top-0 right-0 px-2 py-1 text-xs leading-tight;
+  background: var(--accent);
+  color: var(--text-inverse);
 }
 article .copy-code:hover {
-  @apply bg-ctp-red-700;
+  filter: brightness(0.9);
 }
 
 article code {
-  @apply text-ctp-red-500 py-1 text-xl;
+  @apply py-1 text-xl;
+  color: var(--accent);
 }
 
 article blockquote {
   @apply flex justify-center mx-4 mb-8 md:mx-20 lg:mx-12;
 }
 article blockquote p {
-  @apply inline text-gray-400 text-lg font-thin;
+  @apply inline text-lg font-thin;
+  color: var(--text-muted);
 }
 
 /* Responsive styles */
@@ -126,7 +140,8 @@ article blockquote p {
   }
 
   article table thead {
-    @apply text-white text-xs font-bold text-left;
+    @apply text-xs font-bold text-left;
+    color: var(--text-primary);
   }
 
   article table tbody tr td {
