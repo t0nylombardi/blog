@@ -1,10 +1,8 @@
 import type {Metadata} from 'next'
 import Image from 'next/image'
 import {notFound} from 'next/navigation'
-import {BaseWrapper} from '@/components/layout/BaseWrapper'
-import {mdxComponents} from '@/components/blog/MDXComponents'
-import {CopyCodeButton} from '@/components/blog/CopyCodeButton'
-import {FormattedDate} from '@/components/blog/FormattedDate'
+import {CopyCodeButton, FormattedDate, mdxComponents} from '@/components/blog'
+import {BaseWrapper} from '@/components/layout'
 import {getPostBySlug, getSortedPosts} from '@/lib/content/blog'
 import {renderMdx} from '@/lib/content/renderMdx'
 

@@ -1,6 +1,6 @@
 import type {Metadata} from 'next'
-import {BaseWrapper} from '@/components/layout/BaseWrapper'
-import {BlogPostList} from '@/components/blog/BlogPostList'
+import {BlogPostList} from '@/components/blog'
+import {BaseWrapper} from '@/components/layout'
 
 export const revalidate = 3600
 

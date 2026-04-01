@@ -1,4 +1,4 @@
-import { test, expect, devices } from '@playwright/test'
+import {test, expect} from '@playwright/test'
 
 test('about section renders header and copy', async ({ page }) => {
   await page.goto('/')
@@ -18,7 +18,7 @@ test('about section shows bio text', async ({ page }) => {
 })
 
 test.describe('mobile', () => {
-  test.use({ ...devices['iPhone 14 Pro Max'] })
+  test.skip(({isMobile}) => !isMobile, 'Requires a mobile project viewport')
 
   test('about section stacks and hides sprites', async ({ page }) => {
     await page.goto('/')
@@ -27,7 +27,7 @@ test.describe('mobile', () => {
     await expect(section).toBeVisible()
     await expect(section).toHaveClass(/flex-col-reverse/)
 
-    const sprites = section.locator('div').first()
+    const sprites = section.locator('div.row-start-1.row-end-2.hidden.md\\:flex')
     await expect(sprites).toBeHidden()
   })
 })

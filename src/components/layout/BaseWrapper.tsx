@@ -1,5 +1,5 @@
-import {Nav} from '@/components/layout/nav'
-import Footer from '@/components/layout/Footer'
+import {Nav} from './nav'
+import Footer from './Footer'
 
 export function BaseWrapper({children}: {children: React.ReactNode}) {
   return (

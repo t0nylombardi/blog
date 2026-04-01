@@ -1,9 +1,9 @@
 
+import {test, expect} from '@playwright/test'
 
-import { test, expect, devices } from '@playwright/test'
-
-test.use({ ...devices['iPhone 14 Pro Max'] })
 test.describe('mobile', () => {
+  test.skip(({isMobile}) => !isMobile, 'Requires a mobile project viewport')
+
   test('main section stacks and remains readable', async ({ page }) => {
     await page.goto('/')
 

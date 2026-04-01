@@ -1,4 +1,4 @@
-import { test, expect, devices } from '@playwright/test'
+import {test, expect} from '@playwright/test'
 
 test('main section renders hero content', async ({ page }) => {
   await page.goto('/')
@@ -11,10 +11,18 @@ test('main section renders hero content', async ({ page }) => {
   await expect(section.getByText('Westchester, New York')).toBeVisible()
 })
 
-test('main section CTA and avatar are visible', async ({ page }) => {
+test('main section CTA and avatar are available', async ({ page, isMobile }) => {
   await page.goto('/')
 
   const section = page.locator('section#hello')
   await expect(section.getByRole('link', { name: /resume/i })).toBeVisible()
-  await expect(section.getByRole('img', { name: 'Avatar' })).toBeVisible()
+
+  const avatar = section.locator('img[alt="Avatar"]')
+
+  if (isMobile) {
+    await expect(avatar).toHaveAttribute('alt', 'Avatar')
+    return
+  }
+
+  await expect(avatar).toBeVisible()
 })

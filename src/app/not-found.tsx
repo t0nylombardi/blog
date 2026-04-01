@@ -1,4 +1,4 @@
-import {BaseWrapper} from '@/components/layout/BaseWrapper'
+import {BaseWrapper} from '@/components/layout'
 
 export default function NotFound() {
   return (
