@@ -24,7 +24,7 @@
 }
 
 .brandLink:hover {
-  color: var(--accent);
+  color: var(--color-ctp-mauve-600);
 }
 
 .linksShell {
@@ -48,7 +48,7 @@
 }
 
 .navLink:hover {
-  color: var(--accent);
+  color: var(--accent-strong);
 }
 
 .hamburger {
@@ -56,7 +56,7 @@
 }
 
 .hamburgerOpen {
-  border: 2px solid var(--accent);
+  border: 2px solid var(--link-muted);
 }
 
 .hamburgerBars {
@@ -65,7 +65,7 @@
 
 .hamburgerBar {
   @apply block w-5 h-0.5 transition-all duration-300;
-  background: var(--text-muted);
+  background: var(--meta-muted);
 }
 
 .hamburgerBarShort {
@@ -73,7 +73,7 @@
 }
 
 .hamburgerOpen .hamburgerBar {
-  background: var(--text-secondary);
+  background: var(--color-gray-300);
 }
 
 .hamburgerOpen .hamburgerBar:nth-child(1) {
@@ -94,7 +94,7 @@
 
 .overlay {
   @apply fixed inset-0 backdrop-blur-sm z-40 lg:hidden;
-  background: color-mix(in srgb, var(--bg-primary) 55%, black);
+  background: color-mix(in srgb, var(--color-ctp-mantle) 70%, transparent);
 }
 
 @media (min-width: 1024px) {

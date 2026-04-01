@@ -5,7 +5,7 @@ article {
 
 article p {
   @apply my-6 mx-auto;
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 article p:has(img) {
@@ -13,7 +13,7 @@ article p:has(img) {
 }
 
 article p a {
-  color: var(--accent);
+  color: var(--color-ctp-indigo-500);
 }
 
 article img {
@@ -98,7 +98,7 @@ article blockquote {
 }
 article blockquote p {
   @apply inline text-lg font-thin;
-  color: var(--text-muted);
+  color: var(--catppuccin-color-overlay1);
 }
 
 /* Responsive styles */

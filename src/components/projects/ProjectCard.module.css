@@ -29,13 +29,13 @@
 
 .techMeta {
   @apply font-normal mt-1 text-sm;
-  color: var(--text-muted);
+  color: var(--meta-muted);
 }
 
 .linkRow {
   @apply mt-2;
   font-size: 0.875rem;
-  color: var(--accent);
+  color: var(--link-muted);
 }
 
 .linkIcon {
