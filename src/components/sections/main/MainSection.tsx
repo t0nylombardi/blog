@@ -1,6 +1,6 @@
-import MySocials from '@/components/Sections/MainSection/MySocials'
-import CTA from '@/components/UI/CTA'
-import PersonalData from '@/components/Sections/MainSection/PersonalData'
+import MySocials from '@/components/sections/main/MySocials'
+import CTA from '@/components/ui/CTA'
+import PersonalData from '@/components/sections/main/PersonalData'
 
 const MainSection = () => {
   return (

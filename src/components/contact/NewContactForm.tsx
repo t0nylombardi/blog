@@ -1,9 +1,9 @@
 'use client'
 
 import React, {useState} from 'react'
-import CodeHighlight from '@/components/CodeHighlight'
-import SuccessPopup from '@/components/ContactForm/SuccessPopup'
-import SectionHeader from '@/components/UI/SectionHeader'
+import CodeHighlight from '@/components/blog/CodeHighlight'
+import SuccessPopup from '@/components/contact/SuccessPopup'
+import SectionHeader from '@/components/ui/SectionHeader'
 
 interface FormData {
   name: string
