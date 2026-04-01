@@ -1,9 +1,14 @@
+@reference 'tailwindcss';
 article {
-  @apply text-lg font-thin;
+  @apply text-lg font-thin text-ctp-text;
+}
+
+article :where(*):not(img):not(hr) {
+  color: inherit !important;
 }
 
 article p {
-  @apply my-6 mx-auto;
+  @apply text-ctp-text my-6 mx-auto;
 }
 
 article p:has(img) {
@@ -28,7 +33,7 @@ article hr {
 }
 
 article pre {
-  @apply my-8 p-4 md:p-8 bg-[#1e1e2e]! rounded-lg overflow-x-auto flex flex-wrap;
+  @apply my-8 p-4 md:p-8 bg-ctp-base rounded-lg overflow-x-auto flex flex-wrap;
 }
 
 article pre code {
@@ -70,8 +75,9 @@ article h6 {
 }
 
 article .copy-code {
-  @apply absolute top-0 right-0 bg-ctp-red-500 text-white px-2 py-1 text-xs leading-tight;
+  @apply absolute top-0 right-0 bg-ctp-red-500 text-ctp-text px-2 py-1 text-xs leading-tight;
 }
+
 article .copy-code:hover {
   @apply bg-ctp-red-700;
 }
@@ -84,7 +90,8 @@ article blockquote {
   @apply flex justify-center mx-4 mb-8 md:mx-20 lg:mx-12;
 }
 article blockquote p {
-  @apply inline text-gray-400 text-lg font-thin;
+  @apply inline text-lg font-thin;
+  color: var(--color-ctp-text);
 }
 
 /* Responsive styles */
@@ -94,11 +101,11 @@ article blockquote p {
   }
 
   article h1 {
-    @apply text-base my-4;
+    @apply text-ctp-text my-4;
   }
 
   article h2 {
-    @apply text-base font-bold;
+    @apply text-ctp-text font-bold;
   }
 
   article h3 {
@@ -126,7 +133,7 @@ article blockquote p {
   }
 
   article table thead {
-    @apply text-white text-xs font-bold text-left;
+    @apply text-ctp-text text-xs font-bold text-left;
   }
 
   article table tbody tr td {
