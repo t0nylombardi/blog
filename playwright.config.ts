@@ -1,7 +1,7 @@
 import {defineConfig, devices} from '@playwright/test'
 
 const playwrightPort = process.env.PLAYWRIGHT_PORT ?? '3031'
-const playwrightBaseUrl = process.env.PLAYWRIGHT_BASE_URL ?? `http://127.0.0.1:${playwrightPort}`
+const playwrightBaseUrl = process.env.PLAYWRIGHT_BASE_URL ?? `http://localhost:${playwrightPort}`
 
 /**
  * Read environment variables from file.

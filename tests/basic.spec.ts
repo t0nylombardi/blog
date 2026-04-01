@@ -5,9 +5,16 @@ test('home page loads and has site title', async ({ page }) => {
   await expect(page).toHaveTitle(/T0nylombardi/i)
 })
 
-test('nav renders on home page', async ({ page }) => {
+test('nav renders on home page', async ({ page, isMobile }) => {
   await page.goto('/')
-  await expect(page.getByRole('link', { name: 'Anthony Lombardi' })).toBeVisible()
+
+  if (isMobile) {
+    await expect(page.locator('#hamburger')).toBeVisible()
+    return
+  }
+
+  await expect(page.getByRole('link', {name: '_blog'})).toBeVisible()
+  await expect(page.getByRole('link', {name: '_contact-me'})).toBeVisible()
 })
 
 test('blog index renders header', async ({ page }) => {
