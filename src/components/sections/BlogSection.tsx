@@ -1,4 +1,4 @@
-import SectionHeader from '@/components/UI/SectionHeader'
+import SectionHeader from '@/components/ui/SectionHeader'
 import {BlogPostList} from '@/components/blog/BlogPostList'
 
 function BlogSection() {

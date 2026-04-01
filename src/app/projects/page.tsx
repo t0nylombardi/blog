@@ -1,5 +1,5 @@
 import {BaseWrapper} from '@/components/layout/BaseWrapper'
-import {ProjectSection} from '@/components/Sections'
+import {ProjectSection} from '@/components/sections'
 import {projects} from '@/domain/portfolio/projects.data'
 
 export default function ProjectsPage() {

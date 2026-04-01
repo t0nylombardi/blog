@@ -1,6 +1,6 @@
 import {BaseWrapper} from '@/components/layout/BaseWrapper'
 import {Profile, WorkHistory} from '@/domain/resume'
-import SkillList from '@/components/resume/skills'
+import SkillList from '@/components/resume/Skills'
 
 export default function ResumePage() {
   return (
