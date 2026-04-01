@@ -75,10 +75,8 @@ export default async function BlogPostPage({params}: PageProps) {
         <main>
           <div className="container mx-auto">
             <div className="flex flex-col text-center w-full mt-10">
-              <h1 className="text-[1.3rem] md:text-[4rem] py-4 font-medium title-font text-[color:var(--text-primary)]">
-                {post.title}
-              </h1>
-              <div className="m-auto text-[color:var(--text-primary)] flex flex-col justify-center">
+              <h1 className="text-[1.3rem] md:text-[4rem] py-4 font-medium title-font text-gray-100">{post.title}</h1>
+              <div className="m-auto text-gray-100 flex flex-col justify-center">
                 <h2 className="text-[1rem] md:text-[1.5rem] w-full font-thin">{post.description}</h2>
                 <div className="w-full flex flex-row items-center justify-center">
                   <h4 className="text-ctp-green-500 px-[5rem] text-[0.6rem] md:text-sm font-light title-font mb-1">
@@ -95,7 +93,7 @@ export default async function BlogPostPage({params}: PageProps) {
             )}
           </div>
 
-          <article className="w-full mt-8 mb-8 px-[1.5rem] md:px-[4rem] text-[color:var(--text-primary)]">{content}</article>
+          <article className="w-full mt-8 mb-8 px-[1.5rem] md:px-[4rem] text-gray-100">{content}</article>
         </main>
         <CopyCodeButton />
       </div>

@@ -2,13 +2,13 @@
 
 .nav {
   @apply fixed top-0 left-0 right-0 w-full z-50 text-2xl transition-all duration-300;
-  color: var(--text-primary);
+  color: var(--color-ctp-text);
 }
 
 .scrolled {
   @apply backdrop-blur-sm border-b;
-  background: color-mix(in srgb, var(--bg-secondary) 70%, transparent);
-  border-color: color-mix(in srgb, var(--border) 60%, transparent);
+  background: rgb(from var(--color-ctp-mantle) r g b / 45%);
+  border-color: rgb(from var(--color-ctp-surface0) r g b / 50%);
 }
 
 .navList {
@@ -44,11 +44,11 @@
 
 .navLink {
   @apply flex items-center transition-all duration-300;
-  color: var(--text-primary);
+  color: var(--color-ctp-text);
 }
 
 .navLink:hover {
-  color: var(--accent-strong);
+  color: var(--color-ctp-mauve-500);
 }
 
 .hamburger {
@@ -56,7 +56,7 @@
 }
 
 .hamburgerOpen {
-  border: 2px solid var(--link-muted);
+  border: 2px solid #95aafb;
 }
 
 .hamburgerBars {
@@ -65,7 +65,7 @@
 
 .hamburgerBar {
   @apply block w-5 h-0.5 transition-all duration-300;
-  background: var(--meta-muted);
+  background: #7790a8;
 }
 
 .hamburgerBarShort {
@@ -73,7 +73,7 @@
 }
 
 .hamburgerOpen .hamburgerBar {
-  background: var(--color-gray-300);
+  background: #d1d5dc;
 }
 
 .hamburgerOpen .hamburgerBar:nth-child(1) {
@@ -94,7 +94,7 @@
 
 .overlay {
   @apply fixed inset-0 backdrop-blur-sm z-40 lg:hidden;
-  background: color-mix(in srgb, var(--color-ctp-mantle) 70%, transparent);
+  background: rgb(from var(--color-ctp-mantle) r g b / 70%);
 }
 
 @media (min-width: 1024px) {

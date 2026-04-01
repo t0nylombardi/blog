@@ -10,9 +10,9 @@
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
     /* Revert text color */
-    -webkit-text-fill-color: var(--text-primary) !important;
-    color: var(--text-primary) !important;
-    caret-color: var(--text-primary) !important;
+    -webkit-text-fill-color: white !important;
+    color: white !important;
+    caret-color: white !important;
 
     /* Revert background color */
     transition: background-color 5000s ease-in-out 0s;
@@ -85,9 +85,9 @@ body {
 }
 
 html {
-  background-color: var(--bg-primary);
+  background-color: var(--catppuccin-color-base);
   font-family: 'Fira Mono', monospace;
-  color: var(--text-primary);
+  color: #e5e9f0;
   scroll-behavior: smooth;
 }
 

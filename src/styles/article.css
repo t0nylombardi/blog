@@ -5,7 +5,6 @@ article {
 
 article p {
   @apply my-6 mx-auto;
-  color: var(--text-primary);
 }
 
 article p:has(img) {
@@ -13,7 +12,7 @@ article p:has(img) {
 }
 
 article p a {
-  color: var(--color-ctp-indigo-500);
+  @apply text-indigo-500;
 }
 
 article img {
@@ -26,7 +25,7 @@ article hr {
   height: 5px;
   margin: 4rem auto;
   border: none;
-  background: radial-gradient(circle closest-side, var(--border) 98%, transparent) 0 / calc(100% / var(--n)) 100%;
+  background: radial-gradient(circle closest-side, #eaf6f6 98%, #0000) 0 / calc(100% / var(--n)) 100%;
 }
 
 article pre {
@@ -80,17 +79,14 @@ article h6 {
 }
 
 article .copy-code {
-  @apply absolute top-0 right-0 px-2 py-1 text-xs leading-tight;
-  background: var(--accent);
-  color: var(--text-inverse);
+  @apply absolute top-0 right-0 bg-ctp-red-500 text-white px-2 py-1 text-xs leading-tight;
 }
 article .copy-code:hover {
-  filter: brightness(0.9);
+  @apply bg-ctp-red-700;
 }
 
 article code {
-  @apply py-1 text-xl;
-  color: var(--accent);
+  @apply text-ctp-red-500 py-1 text-xl;
 }
 
 article blockquote {
@@ -139,9 +135,8 @@ article blockquote p {
     @apply table-auto;
   }
 
-  article table thead {
-    @apply text-xs font-bold text-left;
-    color: var(--text-primary);
+article table thead {
+    @apply text-white text-xs font-bold text-left;
   }
 
   article table tbody tr td {

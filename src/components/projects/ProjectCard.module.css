@@ -29,23 +29,23 @@
 
 .techMeta {
   @apply font-normal mt-1 text-sm;
-  color: var(--meta-muted);
+  color: #7790a8;
 }
 
 .linkRow {
   @apply mt-2;
   font-size: 0.875rem;
-  color: var(--link-muted);
+  color: #95aafb;
 }
 
 .linkIcon {
   @apply inline-flex h-8 w-8 items-center justify-center rounded-full;
-  background: var(--accent);
+  background: var(--color-ctp-peach-500);
 }
 
 .linkText {
   @apply ml-3;
-  color: var(--text-secondary);
+  color: var(--color-ctp-green-500);
 }
 
 @media (min-width: 768px) {

@@ -8,8 +8,8 @@
 
 .form :is(input, textarea) {
   @apply w-full py-2 px-4 mt-2 border rounded-sm;
-  border-color: var(--border);
-  color: var(--text-primary);
+  border-color: var(--color-ctp-mauve-500);
+  color: var(--color-white);
   background: transparent !important;
   outline: none;
   box-shadow: none;
@@ -29,7 +29,7 @@
 .form :global(input:-webkit-autofill:hover),
 .form :global(input:-webkit-autofill:focus),
 .form :global(input:-webkit-autofill:active) {
-  -webkit-text-fill-color: var(--text-primary) !important;
+  -webkit-text-fill-color: white !important;
 }
 
 .submitButton {

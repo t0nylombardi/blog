@@ -2,7 +2,7 @@
 
 .card {
   @apply mx-4 my-4 py-6 shadow-xl rounded-lg hover:scale-[1.02] transition-transform duration-200 ease-in-out lg:w-[25%];
-  background: var(--card-bg);
+  background: var(--color-ctp-mauve-base);
 }
 
 .link {
@@ -19,7 +19,7 @@
 
 .title {
   @apply text-xl font-bold;
-  color: var(--accent-strong);
+  color: var(--color-ctp-mauve-500);
 }
 
 .meta {
@@ -30,7 +30,7 @@
 .description {
   @apply mt-2;
   font-size: 1rem;
-  color: var(--text-secondary);
+  color: var(--color-ctp-green-500);
 }
 
 .readMoreRow {
@@ -39,7 +39,7 @@
 
 .readMore {
   @apply ml-3 transition-colors;
-  color: var(--accent);
+  color: var(--color-ctp-peach-500);
 }
 
 .readMore:hover {
