@@ -1,6 +1,5 @@
-import {BaseWrapper} from '@/components/layout/BaseWrapper'
-import MainSection from '@/components/sections/main/MainSection'
-import AboutSection from '@/components/sections/AboutSection'
+import {BaseWrapper} from '@/components/layout'
+import {AboutSection, MainSection} from '@/components/sections'
 import {ContactForm} from '@/components/contact'
 
 export default function HomePage() {

@@ -1,5 +1,5 @@
 import React from 'react'
-import ShikiHighlighter, {type Element} from 'react-shiki'
+import ShikiHighlighter, {type Element} from 'react-shiki/web'
 
 interface CodeHighlightProps {
   code: string

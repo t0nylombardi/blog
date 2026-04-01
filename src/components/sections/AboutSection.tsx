@@ -1,6 +1,6 @@
-import LanguagesSprites from '@/components/shared/languages/LanguagesSprites'
+import {LanguagesSprites} from '@/components/shared'
 import {AboutMe} from '@/domain'
-import SectionHeader from '@/components/ui/SectionHeader'
+import {SectionHeader} from '@/components/ui'
 
 function AboutSection() {
   return (

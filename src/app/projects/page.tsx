@@ -1,4 +1,4 @@
-import {BaseWrapper} from '@/components/layout/BaseWrapper'
+import {BaseWrapper} from '@/components/layout'
 import {ProjectSection} from '@/components/sections'
 import {projects} from '@/domain/portfolio/projects.data'
 

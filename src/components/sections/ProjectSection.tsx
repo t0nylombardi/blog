@@ -1,6 +1,6 @@
 import type {JSX} from 'react'
 import {ProjectCard} from '@/components/projects'
-import SectionHeader from '@/components/ui/SectionHeader'
+import {SectionHeader} from '@/components/ui'
 import type {Project} from '@/domain/portfolio/projects.data'
 
 interface Props {
