@@ -1,12 +1,12 @@
 import type {Metadata} from 'next'
 import Image from 'next/image'
 import {notFound} from 'next/navigation'
-import {compileMDX} from 'next-mdx-remote/rsc'
 import {BaseWrapper} from '@/components/layout/BaseWrapper'
 import {mdxComponents} from '@/components/blog/MDXComponents'
 import {CopyCodeButton} from '@/components/blog/CopyCodeButton'
 import {FormattedDate} from '@/components/blog/FormattedDate'
 import {getPostBySlug, getSortedPosts} from '@/lib/content/blog'
+import {renderMdx} from '@/lib/content/renderMdx'
 
 export const revalidate = 3600
 
@@ -69,13 +69,7 @@ export default async function BlogPostPage({params}: PageProps) {
     notFound()
   }
 
-  const {content} = await compileMDX({
-    source: post.content,
-    components: mdxComponents,
-    options: {
-      parseFrontmatter: false,
-    },
-  })
+  const content = await renderMdx(post.content, mdxComponents)
 
   return (
     <BaseWrapper>
