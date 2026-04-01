@@ -1,5 +1,7 @@
 import { test, expect, devices } from '@playwright/test'
 
+const mobileDevice = devices['iPhone 14 Pro Max']
+
 test('about section renders header and copy', async ({ page }) => {
   await page.goto('/')
 
@@ -18,7 +20,13 @@ test('about section shows bio text', async ({ page }) => {
 })
 
 test.describe('mobile', () => {
-  test.use({ ...devices['iPhone 14 Pro Max'] })
+  test.use({
+    viewport: mobileDevice.viewport,
+    userAgent: mobileDevice.userAgent,
+    deviceScaleFactor: mobileDevice.deviceScaleFactor,
+    isMobile: mobileDevice.isMobile,
+    hasTouch: mobileDevice.hasTouch,
+  })
 
   test('about section stacks and hides sprites', async ({ page }) => {
     await page.goto('/')
