@@ -35,7 +35,7 @@ export const blogFrontmatterSchema = z
     categories: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
-    seo: seoSchema.optional(),
+    seo: seoSchema.nullish().transform((value) => value ?? undefined),
     images: z.array(imageSchema).default([]),
     originalDatePublished: z.string().nullable().optional(),
   })
