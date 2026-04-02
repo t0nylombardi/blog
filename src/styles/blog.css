@@ -222,6 +222,10 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
+.code-block {
+  margin: 1.5em 0;
+}
+
 .blog-prose pre:hover,
 .blog-prose pre:focus,
 .blog-prose pre:active,
@@ -253,6 +257,10 @@
 .code-block pre code:focus-within {
   background: transparent;
   color: inherit;
+}
+
+.code-block span {
+  background: transparent;
 }
 
 .blog-prose hr {

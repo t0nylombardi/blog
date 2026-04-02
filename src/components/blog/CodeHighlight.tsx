@@ -1,19 +1,39 @@
+'use client'
+
 import React from 'react'
-import ShikiHighlighter, {type Element} from 'react-shiki/web'
+import ShikiHighlighter from 'react-shiki/web'
 
 interface CodeHighlightProps {
   code: string
+  language?: string
 }
 
-const CodeHighlight = ({code}: CodeHighlightProps) => {
+const languageAliases: Record<string, string> = {
+  bash: 'shellscript',
+  js: 'javascript',
+  rb: 'ruby',
+  shell: 'shellscript',
+  sh: 'shellscript',
+  zsh: 'shellscript',
+  ts: 'typescript',
+  erb: 'html',
+}
+
+const CodeHighlight = ({code, language = 'text'}: CodeHighlightProps) => {
+  const normalizedLanguage = languageAliases[language.toLowerCase()] ?? language.toLowerCase()
+
   return (
     <ShikiHighlighter
-      language="ruby"
+      language={normalizedLanguage}
       className="code-block"
-      theme="catppuccin-macchiato"
+      theme={{
+        light: 'catppuccin-frappe',
+        dark: 'catppuccin-macchiato',
+      }}
       showLanguage={false}
       addDefaultStyles={false}
       as="div"
+      outputFormat="react"
       style={{
         textAlign: 'left',
       }}
