@@ -71,32 +71,30 @@ export default async function BlogPostPage({params}: PageProps) {
 
   return (
     <BaseWrapper>
-      <div className="mb-10 max-w-screen-2xl container-2xl mx-auto py-20">
-        <main>
-          <div className="container mx-auto">
-            <div className="flex flex-col text-center w-full mt-10">
-              <h1 className="text-[1.3rem] md:text-[4rem] py-4 font-medium title-font text-gray-100">{post.title}</h1>
-              <div className="m-auto text-gray-100 flex flex-col justify-center">
-                <h2 className="text-[1rem] md:text-[1.5rem] w-full font-thin">{post.description}</h2>
-                <div className="w-full flex flex-row items-center justify-center">
-                  <h4 className="text-ctp-green-500 px-[5rem] text-[0.6rem] md:text-sm font-light title-font mb-1">
-                    by: {post.author} on <FormattedDate date={post.pubDate} />
-                  </h4>
-                </div>
-              </div>
-            </div>
+      <section className="blog-theme">
+        <div className="blog-shell">
+          <main className="blog-post blog-surface">
+            <header className="blog-post__header">
+              <h1 className="blog-post__title">{post.title}</h1>
+              <p className="blog-post__description">{post.description}</p>
+              <p className="blog-post__meta">
+                <span>By {post.author}</span>
+                <span>on</span>
+                <FormattedDate date={post.pubDate} />
+              </p>
+            </header>
 
             {post.heroImage && (
-              <div className="hidden md:block my-8 md:my-16 object-contain object-center">
-                <Image className="hidden w-max md:block" src={post.heroImage} alt={post.title} width={1280} height={720} />
+              <div className="blog-post__hero">
+                <Image src={post.heroImage} alt={post.title} width={1280} height={720} priority={false} />
               </div>
             )}
-          </div>
 
-          <article className="w-full mt-8 mb-8 px-[1.5rem] md:px-[4rem] text-gray-100">{content}</article>
-        </main>
-        <CopyCodeButton />
-      </div>
+            <article className="blog-prose">{content}</article>
+          </main>
+        </div>
+      </section>
+      <CopyCodeButton />
     </BaseWrapper>
   )
 }

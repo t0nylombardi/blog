@@ -1,10 +1,8 @@
 @import 'tailwindcss';
 @import '@catppuccin/tailwindcss/macchiato.css';
-@reference 'tailwindcss';
-
 @import '../styles/base.css';
 @import '../styles/utilities.css';
-@import '../styles/article.css';
+@import '../styles/blog.css';
 @import '../styles/comments.css';
 @import '../styles/resume.css';
 @import '../styles/mobile.css';
@@ -12,3 +10,5 @@
 @import '../components/projects/style.css';
 @import '../components/shared/languages/styles.css';
 @import '../components/contact/style.css';
+
+@reference 'tailwindcss';

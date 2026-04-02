@@ -1,6 +1,6 @@
 import type {ImgHTMLAttributes} from 'react'
 import type {MDXComponents} from 'mdx/types'
-import Image from 'next/image'
+import {Image} from '@/components/blog/Image/Image'
 
 function MdxImage(props: ImgHTMLAttributes<HTMLImageElement>) {
   const src = props.src
@@ -10,12 +10,26 @@ function MdxImage(props: ImgHTMLAttributes<HTMLImageElement>) {
   }
 
   const alt = props.alt ?? ''
-  const width = typeof props.width === 'number' ? props.width : 1200
-  const height = typeof props.height === 'number' ? props.height : 675
+  const width = typeof props.width === 'number' ? props.width : Number.parseInt(props.width ?? '', 10) || undefined
+  const height = typeof props.height === 'number' ? props.height : Number.parseInt(props.height ?? '', 10) || undefined
+  const hasIntrinsicDimensions = typeof width === 'number' && typeof height === 'number'
+  const className = ['blog-inline-image', props.className, hasIntrinsicDimensions ? null : 'blog-image-unsized']
+    .filter(Boolean)
+    .join(' ')
 
-  return <Image src={src} alt={alt} width={width} height={height} className="h-auto w-full" />
+  return (
+    <img
+      {...props}
+      src={src}
+      alt={alt}
+      {...(hasIntrinsicDimensions ? {width, height} : {})}
+      className={className}
+      loading="lazy"
+    />
+  )
 }
 
 export const mdxComponents: MDXComponents = {
+  Image,
   img: MdxImage,
 }
