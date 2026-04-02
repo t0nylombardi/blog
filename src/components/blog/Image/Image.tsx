@@ -1,9 +1,20 @@
 type Variant = 'hero' | 'wide' | 'inline' | 'left' | 'right'
 
-export function Image({src, alt, variant = 'inline'}: {src: string; alt?: string; variant?: Variant}) {
+type Props = {
+  src: string
+  alt?: string
+  variant?: Variant
+  width?: number
+  height?: number
+  className?: string
+}
+
+export function Image({src, alt, variant = 'inline', width, height, className}: Props) {
+  const mediaClassName = ['blog-image__media', className].filter(Boolean).join(' ')
+
   return (
-    <div className={`image image--${variant}`}>
-      <img src={src} alt={alt} />
-    </div>
+    <figure className={`blog-image blog-image--${variant}`}>
+      <img src={src} alt={alt} width={width} height={height} className={mediaClassName} />
+    </figure>
   )
 }

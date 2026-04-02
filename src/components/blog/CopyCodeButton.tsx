@@ -5,7 +5,7 @@ import {useEffect} from 'react'
 export function CopyCodeButton() {
   useEffect(() => {
     const copyButtonLabel = 'Copy Code'
-    const codeBlocks = Array.from(document.querySelectorAll('article pre'))
+    const codeBlocks = Array.from(document.querySelectorAll('.blog-prose pre'))
 
     codeBlocks.forEach((codeBlock) => {
       if (codeBlock.querySelector('.copy-code')) return

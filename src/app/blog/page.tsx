@@ -12,9 +12,11 @@ export const metadata: Metadata = {
 export default async function BlogIndexPage() {
   return (
     <BaseWrapper>
-      <section className="fullscreen-section min-h-screen py-[7rem] flex flex-col items-center">
-        <h3 className="text-3xl md:text-5xl font-medium text-ctp-mauve-500">_blog</h3>
-        <BlogPostList />
+      <section className="blog-theme blog-index">
+        <div className="blog-shell">
+          <h1 className="blog-index__title">_blog</h1>
+          <BlogPostList />
+        </div>
       </section>
     </BaseWrapper>
   )
