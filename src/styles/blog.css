@@ -1,18 +1,19 @@
 @reference 'tailwindcss';
 
 :root {
-  --blog-color-background: #ffffff;
+  --blog-color-background: var(--catppuccin-color-base);
   --blog-color-surface: #f8fafc;
-  --blog-color-text: #111111;
+  --blog-color-text: var(--catppuccin-color-text);
   --blog-color-heading: #0f172a;
   --blog-color-muted: #5f6b7a;
   --blog-color-border: #e2e8f0;
   --blog-color-link: #1d4ed8;
   --blog-color-link-hover: #1e40af;
-  --blog-color-inline-code: #b42318;
-  --blog-color-inline-code-bg: #f8fafc;
-  --blog-color-code-bg: #0f172a;
-  --blog-color-code-text: #e2e8f0;
+  --blog-color-inline-code: var(--catppuccin-color-red);
+  --blog-color-inline-code-bg: var(--catppuccin-color-surface0);
+  --blog-color-code-bg: var(--catppuccin-color-mantle);
+  --blog-color-code-text: var(--catppuccin-color-text);
+  --blog-color-code-border: var(--catppuccin-color-surface1);
   --blog-color-quote-border: #cbd5e1;
   --blog-color-quote-bg: #f8fafc;
   --blog-shadow-card: 0 18px 48px rgba(15, 23, 42, 0.12);
@@ -26,10 +27,12 @@
   --blog-radius-md: 1rem;
   --blog-radius-lg: 1.5rem;
   --blog-prose-width: 72ch;
+  --code-bg: var(--blog-color-code-bg);
+  --code-text: var(--blog-color-code-text);
 }
 
 .blog-theme {
-  color: var(--blog-color-text);
+  @apply text-ctp-text;
 }
 
 .blog-shell {
@@ -39,11 +42,11 @@
 }
 
 .blog-surface {
-  background: var(--blog-color-background);
-  color: var(--blog-color-text);
-  border: 1px solid color-mix(in srgb, var(--blog-color-border) 90%, white);
-  border-radius: var(--blog-radius-lg);
-  box-shadow: var(--blog-shadow-card);
+  /* background: var(--catppuccin-color-base); */
+  @apply text-ctp-text;
+  /* border: 1px solid color-mix(in srgb, var(--blog-color-border) 90%, white); */
+  /* border-radius: var(--blog-radius-lg); */
+  /* box-shadow: var(--blog-shadow-card); */
 }
 
 .blog-post {
@@ -102,7 +105,7 @@
 .blog-prose {
   width: min(100%, var(--blog-prose-width));
   margin: var(--blog-space-6) auto 0;
-  color: var(--blog-color-text);
+  @apply text-ctp-text;
   font-size: 1.125rem;
   line-height: 1.85;
 }
@@ -207,23 +210,49 @@
   font-size: 0.95em;
 }
 
-.blog-prose pre {
+.blog-prose pre,
+.code-block pre {
   position: relative;
   overflow-x: auto;
   padding: 1.25rem;
-  border: 1px solid #1e293b;
+  border: 1px solid var(--blog-color-code-border);
   border-radius: var(--blog-radius-md);
-  background: var(--blog-color-code-bg);
-  color: var(--blog-color-code-text);
+  background: var(--code-bg);
+  color: var(--code-text);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-.blog-prose pre code {
+.blog-prose pre:hover,
+.blog-prose pre:focus,
+.blog-prose pre:active,
+.blog-prose pre:focus-within,
+.code-block pre:hover,
+.code-block pre:focus,
+.code-block pre:active,
+.code-block pre:focus-within {
+  background: var(--code-bg);
+  color: var(--code-text);
+}
+
+.blog-prose pre code,
+.code-block pre code {
   padding: 0;
   background: transparent;
   color: inherit;
   font-size: 0.95rem;
   line-height: 1.7;
+}
+
+.blog-prose pre code:hover,
+.blog-prose pre code:focus,
+.blog-prose pre code:active,
+.blog-prose pre code:focus-within,
+.code-block pre code:hover,
+.code-block pre code:focus,
+.code-block pre code:active,
+.code-block pre code:focus-within {
+  background: transparent;
+  color: inherit;
 }
 
 .blog-prose hr {
@@ -356,7 +385,7 @@
 }
 
 .blog-card__description {
-  color: var(--blog-color-text);
+  @apply text-ctp-text;
   line-height: 1.65;
 }
 
@@ -374,18 +403,26 @@
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  border: 1px solid rgba(148, 163, 184, 0.45);
+  border: 1px solid var(--blog-color-code-border);
   border-radius: 999px;
-  background: rgba(15, 23, 42, 0.92);
-  color: #f8fafc;
+  background: color-mix(in srgb, var(--code-bg) 92%, var(--catppuccin-color-surface0));
+  color: var(--code-text);
   padding: 0.4rem 0.8rem;
   font-size: 0.75rem;
   line-height: 1;
   cursor: pointer;
 }
 
-.copy-code:hover {
-  background: rgba(30, 41, 59, 0.96);
+.copy-code:hover,
+.copy-code:focus,
+.copy-code:active {
+  background: color-mix(in srgb, var(--code-bg) 96%, var(--catppuccin-color-surface1));
+  color: var(--code-text);
+}
+
+.copy-code:focus-visible {
+  outline: 2px solid var(--catppuccin-color-blue);
+  outline-offset: 2px;
 }
 
 @media (max-width: 768px) {
