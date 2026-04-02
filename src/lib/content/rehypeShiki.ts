@@ -80,6 +80,32 @@ function normalizeLanguage(language: string | undefined): string {
   return languageAliases[normalized] ?? normalized
 }
 
+function createFallbackCodeBlock(code: string, language: string): HastElement {
+  return {
+    type: 'element',
+    tagName: 'pre',
+    properties: {
+      className: ['code-block'],
+      'data-language': language,
+    },
+    children: [
+      {
+        type: 'element',
+        tagName: 'code',
+        properties: {
+          className: [`language-${language}`],
+        },
+        children: [
+          {
+            type: 'text',
+            value: code,
+          },
+        ],
+      },
+    ],
+  }
+}
+
 async function highlightCodeBlock(node: HastNode): Promise<HastElement | null> {
   if (!isElement(node) || node.tagName !== 'pre' || !node.children) {
     return null
@@ -96,22 +122,30 @@ async function highlightCodeBlock(node: HastNode): Promise<HastElement | null> {
   const language = normalizeLanguage(languageClass?.replace('language-', ''))
   const code = getTextContent(codeNode)
 
-  const highlighted = await codeToHast(code, {
-    lang: language,
-    themes: {
-      light: 'catppuccin-frappe',
-      dark: 'catppuccin-macchiato',
-    },
-    defaultColor: false,
-  })
+  let highlightedPre: HastElement | null = null
 
-  const highlightedPreNode = highlighted.children[0] as HastNode | undefined
+  try {
+    const highlighted = await codeToHast(code, {
+      lang: language,
+      themes: {
+        light: 'catppuccin-frappe',
+        dark: 'catppuccin-macchiato',
+      },
+      defaultColor: false,
+    })
 
-  if (!highlightedPreNode || !isElement(highlightedPreNode)) {
-    return null
+    const highlightedPreNode = highlighted.children[0] as HastNode | undefined
+
+    if (highlightedPreNode && isElement(highlightedPreNode)) {
+      highlightedPre = highlightedPreNode
+    }
+  } catch (error) {
+    console.warn(`[rehypeShiki] Falling back to plain text for language "${language}"`, error)
   }
 
-  const highlightedPre: HastElement = highlightedPreNode
+  if (!highlightedPre) {
+    highlightedPre = createFallbackCodeBlock(code, language)
+  }
 
   const existingClasses = getClassNames(highlightedPre.properties)
 

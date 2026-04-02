@@ -2,20 +2,20 @@
 
 :root {
   --blog-color-background: var(--catppuccin-color-base);
-  --blog-color-surface: #f8fafc;
+  --blog-color-surface: var(--catppuccin-color-surface0);
   --blog-color-text: var(--catppuccin-color-text);
-  --blog-color-heading: #0f172a;
-  --blog-color-muted: #5f6b7a;
-  --blog-color-border: #e2e8f0;
-  --blog-color-link: #1d4ed8;
-  --blog-color-link-hover: #1e40af;
+  --blog-color-heading: var(--catppuccin-color-text);
+  --blog-color-muted: var(--catppuccin-color-subtext1);
+  --blog-color-border: var(--catppuccin-color-surface1);
+  --blog-color-link: var(--catppuccin-color-blue);
+  --blog-color-link-hover: var(--catppuccin-color-sapphire);
   --blog-color-inline-code: var(--catppuccin-color-red);
   --blog-color-inline-code-bg: var(--catppuccin-color-surface0);
   --blog-color-code-bg: var(--catppuccin-color-mantle);
   --blog-color-code-text: var(--catppuccin-color-text);
   --blog-color-code-border: var(--catppuccin-color-surface1);
-  --blog-color-quote-border: #cbd5e1;
-  --blog-color-quote-bg: #f8fafc;
+  --blog-color-quote-border: var(--catppuccin-color-overlay0);
+  --blog-color-quote-bg: var(--catppuccin-color-surface0);
   --blog-shadow-card: 0 18px 48px rgba(15, 23, 42, 0.12);
   --blog-space-1: 0.5rem;
   --blog-space-2: 0.75rem;
@@ -310,6 +310,12 @@
   border: 1px solid var(--blog-color-border);
   border-radius: var(--blog-radius-md);
   background: var(--blog-color-surface);
+}
+
+.blog-prose img.blog-image-unsized,
+.blog-inline-image.blog-image-unsized {
+  width: auto;
+  max-width: 100%;
 }
 
 .blog-inline-image {

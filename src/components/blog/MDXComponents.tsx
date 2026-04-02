@@ -12,9 +12,21 @@ function MdxImage(props: ImgHTMLAttributes<HTMLImageElement>) {
   const alt = props.alt ?? ''
   const width = typeof props.width === 'number' ? props.width : Number.parseInt(props.width ?? '', 10) || undefined
   const height = typeof props.height === 'number' ? props.height : Number.parseInt(props.height ?? '', 10) || undefined
-  const className = ['blog-inline-image', props.className].filter(Boolean).join(' ')
+  const hasIntrinsicDimensions = typeof width === 'number' && typeof height === 'number'
+  const className = ['blog-inline-image', props.className, hasIntrinsicDimensions ? null : 'blog-image-unsized']
+    .filter(Boolean)
+    .join(' ')
 
-  return <img {...props} src={src} alt={alt} width={width} height={height} className={className} loading="lazy" />
+  return (
+    <img
+      {...props}
+      src={src}
+      alt={alt}
+      {...(hasIntrinsicDimensions ? {width, height} : {})}
+      className={className}
+      loading="lazy"
+    />
+  )
 }
 
 export const mdxComponents: MDXComponents = {
