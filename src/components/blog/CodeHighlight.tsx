@@ -16,7 +16,6 @@ const languageAliases: Record<string, string> = {
   sh: 'shellscript',
   zsh: 'shellscript',
   ts: 'typescript',
-  erb: 'html',
 }
 
 const CodeHighlight = ({code, language = 'text'}: CodeHighlightProps) => {
