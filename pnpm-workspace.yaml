@@ -1,0 +1,9 @@
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: true
+  sharp: true
+minimumReleaseAgeExclude:
+  - postcss@8.5.24
+overrides:
+  postcss: 8.5.24
+  sharp: 0.35.3
