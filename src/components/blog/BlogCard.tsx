@@ -16,6 +16,7 @@ export function BlogCard({post}: {post: BlogPost}) {
           width={600}
           height={320}
           priority={false}
+          loading="eager"
         />
         <div className="blog-card__body">
           <h2 className="blog-card__title">{post.title}</h2>

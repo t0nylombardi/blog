@@ -69,7 +69,8 @@ const hydratePost = (post: BlogPost): BlogPost => ({
 
 export class BlogRepository {
   async getAllPosts(): Promise<BlogPost[]> {
-    const posts = await loadPostsCached()
+    // Read local edits immediately in development; retain production revalidation.
+    const posts = await (process.env.NODE_ENV === 'development' ? loadPosts() : loadPostsCached())
     return posts.map(hydratePost)
   }
 
