@@ -10,6 +10,15 @@ export interface Project {
 
 export const projects: Readonly<Project[]> = [
   {
+    img: 'projects/crbsh.png',
+    width: 'w-[20rem]',
+    title: 'CRBSH',
+    link: 'https://github.com/t0nylombardi/crbsh',
+    technologies: ['Rust'],
+    description:
+      'A crabby Unix shell written in Rust. Fast, structured, extensible, and built for developers.',
+  },
+  {
     img: 'projects/copy_code_logo.png',
     width: 'w-[12rem]',
     title: 'Copy Code',
