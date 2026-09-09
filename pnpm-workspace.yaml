@@ -6,4 +6,4 @@ minimumReleaseAgeExclude:
   - postcss@8.5.24
 overrides:
   postcss: 8.5.24
-  sharp: 0.35.3
+  sharp: 0.35.4
