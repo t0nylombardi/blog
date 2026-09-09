@@ -42,7 +42,6 @@
     "postcss": "8.5.24",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-shiki": "^0.11.0",
     "react-visibility-sensor": "^5.1.1",
     "remark-toc": "^9.0.0",
     "scroll-snap": "^5.0.2",

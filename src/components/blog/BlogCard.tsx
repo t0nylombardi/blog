@@ -3,7 +3,7 @@ import Link from 'next/link'
 import {type BlogPost} from '@/lib/content/schema'
 import {FormattedDate} from './FormattedDate'
 
-export function BlogCard({post}: {post: BlogPost}) {
+export function BlogCard({post, eager = false}: {post: BlogPost; eager?: boolean}) {
   const imageSrc = post.image ?? post.heroImage ?? post.coverImage ?? '/avatar.jpg'
 
   return (
@@ -15,8 +15,8 @@ export function BlogCard({post}: {post: BlogPost}) {
           alt={post.title}
           width={600}
           height={320}
-          priority={false}
-          loading="eager"
+          loading={eager ? 'eager' : 'lazy'}
+          sizes="(max-width: 768px) 100vw, (max-width: 1039px) 50vw, (max-width: 1351px) 33vw, 25vw"
         />
         <div className="blog-card__body">
           <h2 className="blog-card__title">{post.title}</h2>

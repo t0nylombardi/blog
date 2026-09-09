@@ -86,7 +86,7 @@ export default async function BlogPostPage({params}: PageProps) {
 
             {post.heroImage && (
               <div className="blog-post__hero">
-                <Image src={post.heroImage} alt={post.title} width={1280} height={720} priority={false} />
+                <Image src={post.heroImage} alt={post.title} width={1280} height={720} loading="eager" />
               </div>
             )}
 

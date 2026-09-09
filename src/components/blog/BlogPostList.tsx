@@ -9,5 +9,9 @@ export async function BlogPostList({limit}: {limit?: number}) {
     return <h2 className="blog-empty-state">Coming Soon</h2>
   }
 
-  return <div className="blog-card-grid">{visiblePosts.map((post) => <BlogCard key={post.slug} post={post} />)}</div>
+  return (
+    <div className="blog-card-grid">
+      {visiblePosts.map((post, index) => <BlogCard key={post.slug} post={post} eager={index === 0} />)}
+    </div>
+  )
 }

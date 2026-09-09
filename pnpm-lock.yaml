@@ -51,9 +51,6 @@ importers:
       react-dom:
         specifier: ^19.2.8
         version: 19.2.8(react@19.2.8)
-      react-shiki:
-        specifier: ^0.11.0
-        version: 0.11.1(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-visibility-sensor:
         specifier: ^5.1.1
         version: 5.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -667,10 +664,6 @@ packages:
   client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
 
-  clsx@2.1.1:
-    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
-    engines: {node: '>=6'}
-
   collapse-white-space@2.1.0:
     resolution: {integrity: sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw==}
 
@@ -1142,19 +1135,6 @@ packages:
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-
-  react-shiki@0.11.1:
-    resolution: {integrity: sha512-LCxMH0pij36TApfGq6QN22xAv1ndUDI0aA7OoIFhZBPaeqPdlDE97Zp7A7dVUp4q8+Nst4Jv/p9lfOa3v+BA6A==}
-    peerDependencies:
-      '@types/react': '>=16.14.0'
-      '@types/react-dom': '>=16.14.0'
-      react: '>=16.14.0'
-      react-dom: '>=16.14.0'
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
 
   react-visibility-sensor@5.1.1:
     resolution: {integrity: sha512-cTUHqIK+zDYpeK19rzW6zF9YfT4486TIgizZW53wEZ+/GPBbK7cNS0EHyJVyHYacwFEvvHLEKfgJndbemWhB/w==}
@@ -1807,8 +1787,6 @@ snapshots:
   character-reference-invalid@2.0.1: {}
 
   client-only@0.0.1: {}
-
-  clsx@2.1.1: {}
 
   collapse-white-space@2.1.0: {}
 
@@ -2487,21 +2465,6 @@ snapshots:
       scheduler: 0.27.0
 
   react-is@16.13.1: {}
-
-  react-shiki@0.11.1(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
-    dependencies:
-      clsx: 2.1.1
-      dequal: 2.0.3
-      hast-util-to-jsx-runtime: 2.3.6
-      react: 19.2.8
-      react-dom: 19.2.8(react@19.2.8)
-      shiki: 4.4.3
-      unist-util-visit: 5.1.0
-    optionalDependencies:
-      '@types/react': 19.2.18
-      '@types/react-dom': 19.2.7(@types/react@19.2.18)
-    transitivePeerDependencies:
-      - supports-color
 
   react-visibility-sensor@5.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:

@@ -1,9 +1,10 @@
 'use client'
 
 import React, {useState} from 'react'
-import {CodeHighlight} from '@/components/blog/client'
+import dynamic from 'next/dynamic'
 import {SectionHeader} from '@/components/ui'
-import SuccessPopup from './SuccessPopup'
+
+const SuccessPopup = dynamic(() => import('./SuccessPopup'))
 
 interface FormData {
   name: string
@@ -134,7 +135,9 @@ end
 
         <div className=" sm:justify-center sm:w-full row-span-2 row-end-2 h-full hidden md:flex flex-col justify-center pt-8">
           <div className="bg-none! h-full flex justify-center items-center text-md sm:text-lx">
-            <CodeHighlight code={Code.trim()} />
+            <div className="code-block">
+              <pre><code>{Code.trim()}</code></pre>
+            </div>
           </div>
         </div>
       </div>
