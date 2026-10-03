@@ -3,12 +3,12 @@ import Script from 'next/script'
 import './globals.css'
 import {siteConfig} from '@/domain/site/site.data'
 
-const siteUrl = 'https://t0nylombardi.dev'
+const siteUrl = siteConfig.url
 const gaId = process.env.NEXT_PUBLIC_GA_ID ?? siteConfig.gaId
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: siteConfig.title,
+  title: {default: siteConfig.title, template: '%s | Anthony Lombardi'},
   description: siteConfig.description,
   icons: {
     icon: '/favicon/favicon.ico',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     url: siteUrl,
-    images: [{url: '/amoji_avatar.svg'}],
+    images: [{url: siteConfig.image, alt: siteConfig.name}],
   },
   twitter: {
     creator: '@t0nylombardi',

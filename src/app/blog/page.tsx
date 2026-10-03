@@ -1,13 +1,16 @@
-import type {Metadata} from 'next'
+import {pageMetadata} from '@/lib/seo'
 import {BlogPostList} from '@/components/blog'
 import {BaseWrapper} from '@/components/layout'
 
 export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: '_blog | t0nylombardi.dev',
-  description: 'Blog posts by Anthony Lombardi',
-}
+
+
+export const metadata = pageMetadata(
+  'Software Engineering Blog',
+  'Practical articles by Anthony Lombardi on Ruby on Rails, software architecture, testing, and building web applications.',
+  '/blog',
+)
 
 export default async function BlogIndexPage() {
   return (

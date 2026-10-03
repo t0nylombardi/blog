@@ -1,6 +1,13 @@
+import {siteConfig} from '@/domain/site/site.data'
+import {pageMetadata} from '@/lib/seo'
 import {BaseWrapper} from '@/components/layout'
 import {AboutSection, MainSection} from '@/components/sections'
 import {ContactForm} from '@/components/contact'
+
+export const metadata = {
+  ...pageMetadata(siteConfig.title, siteConfig.description, '/'),
+  title: {absolute: siteConfig.title},
+}
 
 export default function HomePage() {
   return (

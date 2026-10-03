@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /form_success/
-Noindex: /form_success/
-

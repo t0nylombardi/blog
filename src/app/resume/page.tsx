@@ -1,6 +1,13 @@
+import {pageMetadata} from '@/lib/seo'
 import {BaseWrapper} from '@/components/layout'
 import {SkillList} from '@/components/resume'
 import {Profile, WorkHistory} from '@/domain/resume'
+
+export const metadata = pageMetadata(
+  'Full Stack Engineer Résumé',
+  'Explore Anthony Lombardi’s experience, technical skills, and work history in full stack engineering, Ruby on Rails, and web development.',
+  '/resume',
+)
 
 export default function ResumePage() {
   return (
