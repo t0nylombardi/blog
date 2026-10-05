@@ -32,7 +32,7 @@ test('robots advertises a sitemap of canonical public pages', async ({request}) 
 test('articles expose structured data and working social images', async ({page, request}) => {
   const path = '/blog/rails-service-objects-to-make-your-rails-controllers-skinny'
   await page.goto(path, {waitUntil: 'domcontentloaded'})
-  const article = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent())!)
+  const article = JSON.parse((await page.locator('#article-schema').textContent())!)
   expect(article['@type']).toBe('BlogPosting')
   expect(article.url).toBe(`${origin}${path}`)
   expect(article.headline).toBe(await page.locator('h1').textContent())
@@ -40,6 +40,17 @@ test('articles expose structured data and working social images', async ({page, 
   await expect(page.locator('meta[property="article:published_time"]')).toHaveAttribute('content', article.datePublished)
   const image = await request.get(new URL(article.image).pathname)
   expect(image.ok()).toBeTruthy()
+  const site = JSON.parse((await page.locator('#site-schema').textContent())!)
+  const person = site['@graph'].find((entity: {'@type': string}) => entity['@type'] === 'Person')
+  expect(article.publisher['@id']).toBe(person['@id'])
+  const breadcrumbs = JSON.parse((await page.locator('#breadcrumb-schema').textContent())!)
+  expect(breadcrumbs.itemListElement.map((item: {item: string}) => item.item)).toEqual([
+    `${origin}/`, `${origin}/blog`, `${origin}${path}`,
+  ])
+  const navigation = page.getByRole('navigation', {name: 'Breadcrumb'})
+  await expect(navigation.getByRole('link', {name: 'Blog', exact: true})).toHaveAttribute('href', '/blog')
+  await expect(navigation.locator('[aria-current="page"]')).toHaveText(article.headline)
+  await expect(page.locator('meta[name="googlebot"]')).toHaveAttribute('content', /max-image-preview:large/)
 })
 
 test('Netlify form helper is excluded from indexing', async ({request}) => {
