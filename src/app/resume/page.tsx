@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import {pageMetadata} from '@/lib/seo'
 import {BaseWrapper} from '@/components/layout'
 import {SkillList} from '@/components/resume'
@@ -15,9 +16,9 @@ export default function ResumePage() {
       <main className="md:mx-auto py-25">
         <div className="resume">
           <div className="resume-header">
-            <a href="/">
+            <Link href="/">
               <h1 className="text-2xl md:text-7xl text-ctp-text font-extrabold">ANTHONY LOMBARDI</h1>
-            </a>
+            </Link>
 
             <div className="block md:hidden text-center text-ctp-peach-500 py-6 space-y-2">
               <p className="text-3xl font-bold">Father</p>

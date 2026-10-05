@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import {useEffect, useState} from 'react'
 import {Routes} from '@/routes'
 
@@ -37,25 +38,25 @@ export const Nav = () => {
     >
       <ul className="flex flex-row justify-between min-w-full relative px-[4rem]">
         <li className="hidden px-8 py-4">
-          <a href="/" className="hover:text-ctp-mauve-600 w-full">
+          <Link href="/" className="hover:text-ctp-mauve-600 w-full">
             Anthony Lombardi
-          </a>
+          </Link>
         </li>
 
         <li
           id="navlinks"
           className={`${menuOpen ? 'block' : 'hidden'} lg:block lg:border-x-0 absolute lg:static top-full left-0 w-full z-50`}
         >
-          <ul className="flex flex-colitems-center lg:flex-row px-8 pb-4 lg:py-4 space-y-1 lg:space-y-0 lg:space-x-8">
+          <ul className="flex flex-col items-center lg:flex-row px-8 pb-4 lg:py-4 space-y-1 lg:space-y-0 lg:space-x-8">
             {Routes.map((route) => (
               <li key={route.slug}>
-                <a
+                <Link
                   href={route.slug}
                   className="flex items-center text-ctp-text hover:text-ctp-mauve-500"
                   onClick={() => setMenuOpen(false)}
                 >
                   {route.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -74,9 +75,9 @@ export const Nav = () => {
         </li>
 
         <li className="px-8 w-full text-right py-4 hidden lg:block">
-          <a href="/#contact" className="text-ctp-text hover:text-ctp-mauve-500">
+          <Link href="/#contact" className="text-ctp-text hover:text-ctp-mauve-500">
             _contact-me
-          </a>
+          </Link>
         </li>
       </ul>
       {menuOpen && (
