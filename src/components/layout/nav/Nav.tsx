@@ -22,18 +22,20 @@ export const Nav = () => {
 
   useEffect(() => {
     const onScroll = () => {
-      setIsScrolled(window.scrollY > 0)
+      const pageIsScrolled = Array.from(document.querySelectorAll('main')).some((element) => element.scrollTop > 0)
+      setIsScrolled(window.scrollY > 0 || pageIsScrolled)
     }
 
     onScroll()
-    window.addEventListener('scroll', onScroll, {passive: true})
-    return () => window.removeEventListener('scroll', onScroll)
+    // Capture scroll events from the page containers; element scroll events do not bubble.
+    window.addEventListener('scroll', onScroll, {passive: true, capture: true})
+    return () => window.removeEventListener('scroll', onScroll, {capture: true})
   }, [])
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 text-2xl text-ctp-text ${
-        isScrolled ? 'backdrop-blur-sm bg-ctp-mantle/45 border-b border-ctp-surface0/50' : 'bg-transparent'
+        isScrolled ? 'backdrop-blur-sm bg-ctp-mantle/45 shadow-2xl' : 'bg-transparent'
       }`}
     >
       <ul className="flex flex-row justify-between min-w-full relative px-[4rem]">

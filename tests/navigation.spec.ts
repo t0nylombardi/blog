@@ -1,5 +1,18 @@
 import {test, expect} from '@playwright/test'
 
+test('navbar blurs when page containers scroll and clears at the top', async ({page}) => {
+  await page.goto('/')
+  const navbar = page.locator('nav')
+  await expect(navbar).not.toHaveClass(/backdrop-blur-sm/)
+
+  await page.locator('#contact').evaluate((element) => element.scrollIntoView())
+  await expect(navbar).toHaveClass(/backdrop-blur-sm/)
+  await expect(navbar).toHaveCSS('backdrop-filter', /blur\(/)
+
+  await page.locator('#hello').evaluate((element) => element.scrollIntoView())
+  await expect(navbar).not.toHaveClass(/backdrop-blur-sm/)
+})
+
 test('contact link scrolls again when the contact hash is already active', async ({page, isMobile}) => {
   test.skip(isMobile, 'Contact navigation link is desktop-only')
   await page.goto('/')
