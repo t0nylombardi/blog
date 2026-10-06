@@ -60,22 +60,10 @@ export default function ContactForm() {
 
   const truncate = (str: string, maxLength: number) => (str.length > maxLength ? str.slice(0, maxLength) + '...' : str)
 
-  const Code = `
-class GetInTouch
-  def send_mail
-    name = "${truncate(codeData.name, 25)}"
-    email = "${truncate(codeData.email, 25)}"
-    message = "${truncate(codeData.message, 25)}"
-
-    ContactForm.new(name, email, message).submit!
-  end
-end
-  `
-
   return (
     <section
       id="contact"
-      className="fullscreen-section snap-none flex flex-col items-center justify-center sm:justify-start sm:w-full  my-[12rem]"
+      className="fullscreen-section snap-none flex flex-col items-center justify-center sm:justify-start sm:w-full  my-[18rem]"
     >
       <SectionHeader header="_contact" />
       <div className="grid grid-cols-2 gap-4 py-18 sm:py-4 w-full responsive-grid">
@@ -135,9 +123,25 @@ end
 
         <div className=" sm:justify-center sm:w-full row-span-2 row-end-2 h-full hidden md:flex flex-col justify-center pt-8">
           <div className="bg-none! h-full flex justify-center items-center text-md sm:text-lx">
-            <div className="code-block">
-              <pre><code>{Code.trim()}</code></pre>
-            </div>
+            <pre className="whitespace-pre-wrap wrap-break-word text-left text-ctp-text text-xl">
+              <code>
+                <span className="text-ctp-mauve-500">class </span>
+                {'GetInTouch\n  '}
+                <span className="text-ctp-mauve-500">def </span>
+                {'send_mail\n'}
+                {Object.entries(codeData).map(([key, value]) => (
+                  <span key={key}>
+                    {`    ${key} = `}
+                    <span className="text-ctp-green-500">{JSON.stringify(truncate(value, 25))}</span>
+                    {'\n'}
+                  </span>
+                ))}
+                {'\n    ContactForm.new(name, email, message).submit!\n  '}
+                <span className="text-ctp-mauve-500">end</span>
+                {'\n'}
+                <span className="text-ctp-mauve-500">end</span>
+              </code>
+            </pre>
           </div>
         </div>
       </div>

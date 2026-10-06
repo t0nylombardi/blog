@@ -6,16 +6,17 @@ test('main section renders hero content', async ({ page }) => {
   const section = page.locator('section#hello')
   await expect(section).toBeVisible()
 
-  await expect(section.getByRole('heading', { name: 'Anthony Lombardi' })).toBeVisible()
-  await expect(section.getByText('Lead Ruby Software Engineer')).toBeVisible()
-  await expect(section.getByText('Westchester, New York')).toBeVisible()
+  await expect(section.getByRole('heading', { name: 'Tony Lombardi' })).toBeVisible()
+  const personalData = section.locator('pre')
+  await expect(personalData).toContainText('const consultant = {')
+  await expect(personalData).toContainText('Full-Stack & Systems Engineering')
+  await expect(personalData).toContainText('Consulting & Contract Work')
 })
 
-test('main section CTA and avatar are available', async ({ page, isMobile }) => {
+test('main section avatar is available', async ({ page, isMobile }) => {
   await page.goto('/')
 
   const section = page.locator('section#hello')
-  await expect(section.getByRole('link', { name: /resume/i })).toBeVisible()
 
   const avatar = section.locator('img[alt="Avatar"]')
 

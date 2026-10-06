@@ -9,6 +9,6 @@
 @import '../components/layout/nav/styles.css';
 @import '../components/projects/style.css';
 @import '../components/shared/languages/styles.css';
-@import '../components/contact/style.css';
+@import '../components/sections/contact/style.css';
 
 @reference 'tailwindcss';

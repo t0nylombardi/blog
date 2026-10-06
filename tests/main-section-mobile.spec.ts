@@ -11,7 +11,6 @@ test.describe('mobile', () => {
     await expect(section).toBeVisible()
     await expect(section).toHaveClass(/flex-col/)
 
-    await expect(section.getByRole('heading', { name: 'Anthony Lombardi' })).toBeVisible()
-    await expect(section.getByRole('link', { name: /resume/i })).toBeVisible()
+    await expect(section.getByRole('heading', { name: 'Tony Lombardi' })).toBeVisible()
   })
 })

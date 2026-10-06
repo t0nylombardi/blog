@@ -1,23 +1,37 @@
 import {profile} from '@/domain/profile/personal.data'
+
 const PersonalData = () => {
+  const entries = Object.entries(profile)
+
   return (
-    <div>
-          <p className=" pt-4">// list of my social links</p>
-          {Object.entries(profile).map(([key, value]) => (
-            <p key={key}>
-              <span className="text-ctp-mauve-500">const </span>
-              <span className="text-ctp-text">{key}</span> =
-              <a
-                href={value}
-                className="text-ctp-green-500 hover:text-ctp-text block pl-6 md:inline md:pl-2"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                “{value}”
-              </a>
-            </p>
-          ))}
-        </div>
+    <pre className="whitespace-pre-wrap wrap-break-word text-left text-ctp-text text-xl">
+      <code>
+        <span className="text-ctp-mauve-500">const </span>
+        {'consultant = {\n'}
+        {entries.map(([key, value], index) => (
+          <span key={key}>
+            {`  ${key}: `}
+            {Array.isArray(value) ? (
+              <>
+                {'[\n'}
+                {value.map((item, itemIndex) => (
+                  <span key={item}>
+                    {'    '}
+                    <span className="text-ctp-green-500">{JSON.stringify(item)}</span>
+                    {itemIndex < value.length - 1 ? ',\n' : '\n'}
+                  </span>
+                ))}
+                {'  ]'}
+              </>
+            ) : (
+              <span className="text-ctp-green-500">{JSON.stringify(value)}</span>
+            )}
+            {index < entries.length - 1 ? ',\n' : '\n'}
+          </span>
+        ))}
+        {'}'}
+      </code>
+    </pre>
   )
 }
 

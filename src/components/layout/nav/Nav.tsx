@@ -75,7 +75,17 @@ export const Nav = () => {
         </li>
 
         <li className="px-8 w-full text-right py-4 hidden lg:block">
-          <Link href="/#contact" className="text-ctp-text hover:text-ctp-mauve-500">
+          <Link
+            href="/#contact"
+            className="text-ctp-text hover:text-ctp-mauve-500"
+            onClick={(event) => {
+              if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+              if (window.location.pathname !== '/' || window.location.hash !== '#contact') return
+
+              event.preventDefault()
+              document.getElementById('contact')?.scrollIntoView({block: 'start'})
+            }}
+          >
             _contact-me
           </Link>
         </li>

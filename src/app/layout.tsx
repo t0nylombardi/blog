@@ -29,30 +29,33 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
-        <JsonLd id="site-schema" data={{
-          '@context': 'https://schema.org',
-          '@graph': [
-            {
-              '@type': 'Person',
-              '@id': absoluteUrl('/#person'),
-              name: siteConfig.name,
-              url: siteUrl,
-              image: absoluteUrl(siteConfig.image),
-              sameAs: Object.values(footerSocialLinks),
-            },
-            {
-              '@type': 'WebSite',
-              '@id': absoluteUrl('/#website'),
-              name: siteConfig.name,
-              url: siteUrl,
-              description: siteConfig.description,
-              inLanguage: 'en-US',
-              publisher: {'@id': absoluteUrl('/#person')},
-            },
-          ],
-        }} />
+        <JsonLd
+          id="site-schema"
+          data={{
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'Person',
+                '@id': absoluteUrl('/#person'),
+                name: siteConfig.name,
+                url: siteUrl,
+                image: absoluteUrl(siteConfig.image),
+                sameAs: Object.values(footerSocialLinks),
+              },
+              {
+                '@type': 'WebSite',
+                '@id': absoluteUrl('/#website'),
+                name: siteConfig.name,
+                url: siteUrl,
+                description: siteConfig.description,
+                inLanguage: 'en-US',
+                publisher: {'@id': absoluteUrl('/#person')},
+              },
+            ],
+          }}
+        />
         {children}
         <Script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
         <Script id="ga-script" strategy="afterInteractive">
