@@ -63,7 +63,7 @@ export default function ContactForm() {
   return (
     <section
       id="contact"
-      className="fullscreen-section snap-none flex flex-col items-center justify-center sm:justify-start sm:w-full  my-[18rem]"
+      className="fullscreen-section snap-none flex flex-col items-center justify-center sm:w-full  my-[12rem]"
     >
       <SectionHeader header="_contact" />
       <div className="grid grid-cols-2 gap-4 py-18 sm:py-4 w-full responsive-grid">
