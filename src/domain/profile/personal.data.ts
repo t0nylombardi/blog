@@ -2,7 +2,6 @@ interface PersonalData {
   experience: string;
   specialty: string;
   focus: string[];
-  availability: string;
 }
 
 export const DOB = '03/31/1983' as const
@@ -17,7 +16,6 @@ export const profile: PersonalData = {
     'Performance & Reliability',
     'Application Modernization',
   ],
-  availability: 'Consulting & Contract Work',
 } as const;
 
 export const AboutMe = `I'm Anthony Lombardi, a Senior Software Engineer and technical consultant with 12+ years of professional experience building production software.

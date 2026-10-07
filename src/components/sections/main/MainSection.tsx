@@ -12,6 +12,9 @@ const MainSection = () => {
         <div className="text-ctp-text pb-8 px-8 sm:w-full">
           <p className="text-xl sm:text-2xl font-medium">Hey, I'm</p>
           <h1 className="text-3xl md:text-5xl font-medium mt-2">Tony Lombardi</h1>
+          <p className="text-xl sm:text-2xl font-medium py-4">
+            I help companies design, modernize, and scale production software.
+          </p>
         </div>
 
         <div className="text-sm md:text-base font-medium mt-6 px-6 space-y-1  sm:text-left">

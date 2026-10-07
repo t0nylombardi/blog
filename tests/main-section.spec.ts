@@ -10,7 +10,7 @@ test('main section renders hero content', async ({ page }) => {
   const personalData = section.locator('pre')
   await expect(personalData).toContainText('const consultant = {')
   await expect(personalData).toContainText('Full-Stack & Systems Engineering')
-  await expect(personalData).toContainText('Consulting & Contract Work')
+  await expect(section.getByText('I help companies design, modernize, and scale production software.')).toBeVisible()
 })
 
 test('main section avatar is available', async ({ page, isMobile }) => {
