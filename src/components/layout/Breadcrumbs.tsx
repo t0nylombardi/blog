@@ -10,17 +10,20 @@ export function Breadcrumbs({items}: {items: readonly BreadcrumbItem[]}) {
 
   return (
     <>
-      <JsonLd id="breadcrumb-schema" data={{
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: items.map((item, index) => ({
-          '@type': 'ListItem',
-          position: index + 1,
-          name: item.name,
-          item: absoluteUrl(item.href),
-        })),
-      }} />
-      <nav aria-label="Breadcrumb" className="mb-6 text-sm">
+      <JsonLd
+        id="breadcrumb-schema"
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: items.map((item, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: item.name,
+            item: absoluteUrl(item.href),
+          })),
+        }}
+      />
+      <nav aria-label="Breadcrumb" className="hidden mb-6 text-sm">
         <ol className="flex flex-wrap gap-2">
           {items.map((item, index) => (
             <li key={item.href}>

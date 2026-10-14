@@ -6,11 +6,9 @@
 }
 
 @media (max-width: 768px) {
-  body::before,
-  body::after {
+  .background-glow {
     filter: blur(120px);
     opacity: 0.4;
-    animation-duration: 14s;
   }
 
   section {

@@ -91,15 +91,14 @@ html {
   scroll-behavior: smooth;
 }
 
-body::before,
-body::after {
-  content: '';
+.background-glow {
+  pointer-events: none;
   position: fixed;
   z-index: -1;
   opacity: 0.2;
 }
 
-body::before {
+.background-glow-primary {
   background: var(--third-glow);
   border-radius: 50%;
   width: 50vw;
@@ -108,10 +107,9 @@ body::before {
   filter: blur(90px);
   top: calc(50vh - 50vw / 2);
   left: calc(50vw);
-  animation: animateBefore 7s cubic-bezier(0.47, 0, 0.745, 0.715) infinite;
 }
 
-body::after {
+.background-glow-secondary {
   background: var(--secondary-glow);
   border-radius: 50%;
   width: 500px;
@@ -119,7 +117,6 @@ body::after {
   filter: blur(90px);
   top: calc(50vh - 50vw / 2);
   left: calc(50vw - 50vw / 2);
-  animation: animateAfter 7s cubic-bezier(0.47, 0, 0.745, 0.715) infinite;
 }
 
 body {
@@ -148,28 +145,4 @@ footer {
 
 .comment {
   color: var(--catppuccin-color-overlay1);
-}
-
-@keyframes animateBefore {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(50vh) scale(0.8);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes animateAfter {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(50vw) scale(1.9);
-  }
-  100% {
-    transform: translateX(0);
-  }
 }

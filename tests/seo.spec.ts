@@ -47,8 +47,9 @@ test('articles expose structured data and working social images', async ({page, 
   expect(breadcrumbs.itemListElement.map((item: {item: string}) => item.item)).toEqual([
     `${origin}/`, `${origin}/blog`, `${origin}${path}`,
   ])
-  const navigation = page.getByRole('navigation', {name: 'Breadcrumb'})
-  await expect(navigation.getByRole('link', {name: 'Blog', exact: true})).toHaveAttribute('href', '/blog')
+  const navigation = page.locator('nav[aria-label="Breadcrumb"]')
+  await expect(navigation).toBeHidden()
+  await expect(navigation.locator('a[href="/blog"]')).toHaveText('Blog')
   await expect(navigation.locator('[aria-current="page"]')).toHaveText(article.headline)
   await expect(page.locator('meta[name="googlebot"]')).toHaveAttribute('content', /max-image-preview:large/)
 })

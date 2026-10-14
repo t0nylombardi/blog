@@ -4,6 +4,7 @@ import './globals.css'
 import {siteConfig} from '@/domain/site/site.data'
 import {footerSocialLinks} from '@/domain/profile/social.data'
 import {JsonLd} from '@/components/JsonLd'
+import {BackgroundGlow} from '@/components/layout/BackgroundGlow'
 import {absoluteUrl, pageMetadata} from '@/lib/seo'
 
 const siteUrl = siteConfig.url
@@ -31,6 +32,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
+        <BackgroundGlow />
         <JsonLd
           id="site-schema"
           data={{
