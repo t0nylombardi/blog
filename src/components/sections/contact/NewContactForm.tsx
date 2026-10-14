@@ -2,148 +2,211 @@
 
 import React, {useState} from 'react'
 import dynamic from 'next/dynamic'
-import {SectionHeader} from '@/components/ui'
+import CodeInput from './CodeInput'
+import {submitContactForm} from './submitContactForm'
 
 const SuccessPopup = dynamic(() => import('./SuccessPopup'))
 
-interface FormData {
+interface ContactFormData {
   name: string
   email: string
   message: string
 }
 
+type FormStatus = 'pending' | 'ok' | 'error' | null
+
+const INITIAL_FORM_DATA: ContactFormData = {
+  name: '',
+  email: '',
+  message: '',
+}
+
 export default function ContactForm() {
-  const [codeData, setCodeData] = useState<FormData>({
-    name: '',
-    email: '',
-    message: '',
+  const [codeData, setCodeData] = useState<ContactFormData>({
+    ...INITIAL_FORM_DATA,
   })
 
-  const [status, setStatus] = useState<'pending' | 'ok' | 'error' | null>(null)
+  const [status, setStatus] = useState<FormStatus>(null)
   const [error, setError] = useState<string | null>(null)
   const [showPopup, setShowPopup] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const {name, value} = e.target
-    setCodeData((prevData) => ({
-      ...prevData,
+    const {name, value} = e.currentTarget
+
+    setCodeData((previous) => ({
+      ...previous,
       [name]: value,
     }))
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (status === 'pending') return
+
     setStatus('pending')
     setError(null)
-    const formData = new FormData(e.target as HTMLFormElement)
-    const body = new URLSearchParams(formData as any).toString()
 
-    await fetch('/__forms.html', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body,
-    })
-      .then((res) => {
-        if (!res.ok) {
-          setStatus('error')
-          setError(`Error: ${res.status} ${res.statusText}`)
-        }
-        setStatus('ok')
-        setShowPopup(true)
-        setCodeData({name: '', email: '', message: ''})
-      })
-      .catch((e) => {
-        setStatus('error')
-        setError(String(e))
-      })
+    try {
+      await submitContactForm(new FormData(e.currentTarget))
+
+      setStatus('ok')
+      setShowPopup(true)
+      setCodeData({...INITIAL_FORM_DATA})
+    } catch (err) {
+      setStatus('error')
+
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred.')
+    }
   }
-
-  const truncate = (str: string, maxLength: number) => (str.length > maxLength ? str.slice(0, maxLength) + '...' : str)
 
   return (
     <section
       id="contact"
-      className="fullscreen-section snap-none flex flex-col items-center justify-center sm:w-full  my-[12rem]"
+      className="fullscreen-section snap-none flex flex-col items-center justify-center sm:w-full my-[12rem]"
     >
-      <SectionHeader header="_contact" />
-      <div className="grid grid-cols-2 gap-4 py-18 sm:py-4 w-full responsive-grid">
-        <div className="row-start-1 row-end-2 h-full flex flex-col sm:flex-row sm:w-full justify-center">
-          <form
-            name="contact-form"
-            className="flex justify-between flex-col h-full w-full"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            data-netlify-recaptcha="true"
-            onSubmit={handleSubmit}
-          >
-            <p className="invisible">
-              <label>
-                Don’t fill this out if you’re human: <input name="bot-field" />
-              </label>
-            </p>
-            <input type="hidden" name="form-name" value="contact-form" />
-            <input
-              name="name"
-              type="text"
-              autoComplete="name"
-              placeholder="What is your name?"
-              required
-              value={codeData.name}
-              onChange={handleChange}
-            />
-            <input
-              name="email"
-              type="email"
-              autoComplete="email"
-              placeholder="what-is@your-email.question"
-              required
-              value={codeData.email}
-              onChange={handleChange}
-            />
-            <textarea
-              name="message"
-              placeholder="What do you want to talk about?"
-              rows={5}
-              required
-              value={codeData.message}
-              onChange={handleChange}
-            ></textarea>
-            <div data-netlify-recaptcha="true"></div>
+      <div className="w-full max-w-5xl mx-auto py-12 px-4">
+        <form
+          name="contact-form"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          onSubmit={handleSubmit}
+          className="w-full"
+        >
+          <input type="hidden" name="form-name" value="contact-form" />
+
+          <p className="hidden" aria-hidden="true">
+            <label>
+              Don't fill this out:
+              <input name="bot-field" tabIndex={-1} autoComplete="off" />
+            </label>
+          </p>
+
+          <div className="w-full overflow-x-auto  p-6 md:p-10">
+            <div className="font-mono text-sm md:text-xl leading-8 text-ctp-text">
+              <div>
+                <span className="text-ctp-mauve-500">class</span>
+                {' GetInTouch'}
+              </div>
+
+              <div className="pl-4">
+                <span className="text-ctp-mauve-500">def</span>
+                {' send_mail'}
+              </div>
+
+              <div className="pl-8 flex items-baseline">
+                <label htmlFor="contact-name" className="shrink-0">
+                  name = <span className="text-ctp-green-500">"</span>
+                </label>
+
+                <CodeInput
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  placeholder="What is your name?"
+                  value={codeData.name}
+                  onChange={handleChange}
+                />
+
+                <span className="text-ctp-green-500">"</span>
+              </div>
+
+              <div className="pl-8 flex items-baseline">
+                <label htmlFor="contact-name" className="shrink-0">
+                  email = <span className="text-ctp-green-500">"</span>
+                </label>
+
+                <CodeInput
+                  id="contact-email"
+                  name="email"
+                  type="text"
+                  autoComplete="email"
+                  placeholder="what-is@your-email.question"
+                  value={codeData.email}
+                  onChange={handleChange}
+                />
+
+                <span className="text-ctp-green-500">"</span>
+              </div>
+
+              {/* Message */}
+              <div className="pl-8">
+                <label htmlFor="contact-message">
+                  message =<span className="text-ctp-green-500">{'"'}</span>{' '}
+                </label>
+
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  placeholder="What do you want to talk about?"
+                  aria-label="Your message"
+                  required
+                  rows={2}
+                  value={codeData.message}
+                  onChange={handleChange}
+                  className="
+                    block
+                    w-full
+                    bg-transparent
+                    border-none
+                    outline-none
+                    focus:ring-0
+                    resize-y
+                    p-0
+                    text-ctp-green-500
+                    placeholder:text-ctp-green-500/40
+                    font-mono
+                    caret-white
+                  "
+                />
+
+                <span className="text-ctp-green-500">{'"'}</span>
+              </div>
+
+              <div className="pl-8 mt-6">
+                <span className="text-ctp-text">ContactForm.new(name, email, message).submit!</span>
+              </div>
+
+              <div className="pl-4">
+                <span className="text-ctp-mauve-500">end</span>
+              </div>
+
+              <div>
+                <span className="text-ctp-mauve-500">end</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full flex flex-row justify-center items-center">
             <button
               id="submit-form"
               type="submit"
-              className="btnAzureGradiant font-bold mt-8 p-4"
               disabled={status === 'pending'}
+              className="
+                btnAzureGradiant
+                font-bold
+                mt-8
+                p-4
+                w-full
+                font-mono
+                disabled:opacity-50
+                disabled:cursor-not-allowed
+              "
             >
-              {status === 'pending' ? 'Submitting...' : 'Send Message'}
+              {status === 'pending' ? '> Executing...' : '> Run the code'}
             </button>
-          </form>
-          {status === 'error' && <div className="text-red-500 mt-2">{error}</div>}
-        </div>
-
-        <div className=" sm:justify-center sm:w-full row-span-2 row-end-2 h-full hidden md:flex flex-col justify-center pt-8">
-          <div className="bg-none! h-full flex justify-center items-center text-md sm:text-lx">
-            <pre className="whitespace-pre-wrap wrap-break-word text-left text-ctp-text text-xl">
-              <code>
-                <span className="text-ctp-mauve-500">class </span>
-                {'GetInTouch\n  '}
-                <span className="text-ctp-mauve-500">def </span>
-                {'send_mail\n'}
-                {Object.entries(codeData).map(([key, value]) => (
-                  <span key={key}>
-                    {`    ${key} = `}
-                    <span className="text-ctp-green-500">{JSON.stringify(truncate(value, 25))}</span>
-                    {'\n'}
-                  </span>
-                ))}
-                {'\n    ContactForm.new(name, email, message).submit!\n  '}
-                <span className="text-ctp-mauve-500">end</span>
-                {'\n'}
-                <span className="text-ctp-mauve-500">end</span>
-              </code>
-            </pre>
           </div>
-        </div>
+
+          {status === 'error' && (
+            <div
+              role="alert"
+              className="mt-4 rounded-lg bg-red-500/10 border border-red-500/30 p-4 font-mono text-red-400"
+            >
+              <span className="text-red-500">RuntimeError:</span> {error}
+            </div>
+          )}
+        </form>
       </div>
 
       {showPopup && <SuccessPopup onClose={() => setShowPopup(false)} />}
