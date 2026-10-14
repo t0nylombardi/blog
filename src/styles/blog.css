@@ -314,7 +314,7 @@
 
 .blog-prose img.blog-image-unsized,
 .blog-inline-image.blog-image-unsized {
-  width: auto;
+  /* width: auto; */
   max-width: 100%;
 }
 
