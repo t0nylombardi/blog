@@ -30,7 +30,9 @@ test('successful contact submission encodes all fields, shows the popup, and res
     email: 'anthony+blog@example.com',
     message: 'Hello & thanks = yes!',
   })
-  await expect(page.getByRole('heading', {name: '_success'})).toBeVisible()
+  await expect(page.getByRole('heading', {name: 'Message Successfully Executed.'})).toBeVisible()
+  await page.getByRole('button', {name: 'Close success message'}).click()
+  await expect(page.getByRole('heading', {name: 'Message Successfully Executed.'})).toHaveCount(0)
   for (const field of ['name', 'email', 'message']) {
     await expect(page.locator(`#contact-${field}`)).toHaveValue('')
   }
@@ -45,12 +47,12 @@ for (const failure of ['http', 'network'] as const) {
     await page.locator('#submit-form').click()
     await expect(page.locator('#contact').getByRole('alert')).toContainText('RuntimeError:')
     if (failure === 'http') await expect(page.locator('#contact').getByRole('alert')).toContainText('Error: 500')
-    await expect(page.getByRole('heading', {name: '_success'})).toHaveCount(0)
+    await expect(page.getByRole('heading', {name: 'Message Successfully Executed.'})).toHaveCount(0)
     await expect(page.locator('#contact-message')).toHaveValue('Hello & thanks = yes!')
     await expect(page.locator('#submit-form')).toBeEnabled()
     await page.route('**/__forms.html', (route) => route.fulfill({status: 200, body: 'OK'}))
     await page.locator('#submit-form').click()
-    await expect(page.getByRole('heading', {name: '_success'})).toBeVisible()
+    await expect(page.getByRole('heading', {name: 'Message Successfully Executed.'})).toBeVisible()
     await expect(page.locator('#contact').getByRole('alert')).toHaveCount(0)
   })
 }
