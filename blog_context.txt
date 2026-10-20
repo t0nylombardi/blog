@@ -1,0 +1,3018 @@
+=== src/content/blog/Sorry-I-hacked-you.md ===
+---
+title: Sorry, I hacked you.
+date: '2016-07-19'
+heroImage: '/blog/hacked/i-hacked-you.jpeg'
+originalDatePublished: '2016-07-19'
+description: " Someone I know from the interwebs posted a site with form that allowed you to sign up to a class of his and he had a huge google sheets security flaw"
+author: 'Anthony Lombardi'
+image: '/blog/hacked/i-hacked-you.jpeg'
+categories: [javascript]
+tags: [javascript]
+draft: false
+---
+
+My biggest concern in developing a website, especially in the current role I have, is to worry about how well a site will perform and how secure it will be. Someone I know from the interwebs posted a site with form that allowed you to sign up to a class of his. I like his work so I was intrigued into how he wrote his backend for the form since he is a front-end developer. His credentials of his backend was in his JS.
+
+```javascript
+function postContactToGoogle(f) {
+  var email = f.find('.form-email').val();
+  var name = f.find('.form-name').val();
+
+  $.ajax({
+    url: 'https://docs.google.com/forms/d/jeberish-google-id/formResponse',
+    data: {
+      entry_1111111111: email,
+      entry_1111111117: name,
+    },
+    type: 'POST',
+    dataType: 'xml',
+    statusCode: {
+      0: function () {
+        window.location.replace('/path/thanks');
+      },
+      200: function () {
+        window.location.replace('/path/thanks');
+      },
+    },
+  });
+}
+```
+
+So I looked at this telling myself it was wrong, or at least there had to be a better way of doing something like that.
+
+I blew up the database(or in this case to a google excel doc) as a challenge to myself to see if I was really right.
+
+```javascript
+function rText() {
+  var text = '';
+  var possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (var i = 0; i < 5; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+}
+
+function generateEmail() {
+  var username, email, full_email;
+  username = 'HueBin_';
+  email = 'Hacked';
+  full_email = username + rText() + '@' + rText() + email + '.com';
+  return full_email;
+}
+
+function postContactToGoogle() {
+  $.ajax({
+    url: 'https://docs.google.com/forms/d/jeberish-google-id/formResponse',
+    data: {
+      entry_1111111111: generateEmail(),
+      entry_1111111117: 'HueBin_',
+    },
+    type: 'POST',
+    dataType: 'xml',
+    crossDomain: true,
+    statusCode: {
+      0: function (data) {
+        console.log('BAD!', data);
+      },
+      200: function (data) {
+        console.log('GOOD', data);
+      },
+    },
+  });
+}
+
+$(function () {
+  var num = 1;
+  for (var i = 0; i < num; i++) {
+    setTimeout(postContactToGoogle(), 50000); // yes thats 50,000!
+  }
+});
+```
+
+this posted info into the database that looked simular to this:
+
+```
+  name: HueBun_,Email:HueBin_piMt6@vwq4WHacked.com
+  name: HueBun_,Email:HueBin_f7Txq@pzLm6Hacked.com
+  name: HueBun_,Email:HueBin_YBTNf@TluieHacked.com
+  name: HueBun_,Email:HueBin_QYqVm@jYWuUHacked.com
+```
+
+I wrote an email stating that I was really really sorry about it. More so, I meant to contact him sooner, but I just entered another year in my life and I took the weekend off from electronics (mainly because of beer)
+
+conclusion: don't smoke crack! No, when putting anything out in to the publics eyes, do not put the keys to the castle out there for everyone to see. Also, don't go my route. Instead inform of the person of potential bugs rather than acting on exploiting them.
+
+=== src/content/blog/all-you-need-is-love.md ===
+---
+title: All you need is love
+date: '2014-11-18'
+heroImage: '/blog/love/love.jpeg'
+image: '/blog/love/love.jpeg'
+originalDatePublished: '2014-11-18'
+description: 'My now wife asked me to make some vows for our wedding. I thought I would merge the two loves together and wrote this little code poem.'
+author: 'Anthony Lombardi'
+categories: [ruby]
+tags: [ruby]
+draft: false
+---
+
+
+So, picture this: there I am, standing at the altar, nerves kicking in like a freight train, and my beautiful, amazing, now-wife asks me to drop some vows. Now, most guys would go for the standard "I promise to love you forever" spiel, but not me. Oh no, I had to bring a little flair to the table.
+
+I whipped out my laptop, fired up some Ruy (yeah, I know, not exactly Shakespeare, but hey, it's my thing), and penned a code poem that merged my two loves: her and, well, coding.
+
+It went a little something like this:
+
+```ruby
+# all you need is love
+require 'date'
+require 'love'
+
+on_this_day = DateTime.now
+
+begin
+  if have_and_hold(better,worse)
+    love_and_cherish(richer,pooer)
+    get_sickness(status)
+    get_health(status)
+
+    puts "I #{name}, do love you"
+  else
+    divorce
+  end
+end while death(status) != nil
+```
+
+And let me tell you, the look on her face when I dropped that poetic PHP bombshell? Priceless. That's just how I roll, folks. Mixing romance with a dash of geekiness, because why the heck not?
+
+=== src/content/blog/creating-a-pixel-tracker-in-2022.md ===
+---
+title: 'Creating a Pixel Tracker with NextJS and Prisma (2022)'
+date: '2022-10-31T20:37:52.538Z'
+heroImage: '/blog/nextjs-pixel-tracker/nextjs-pixel-tracker.jpeg'
+originalDatePublished:
+description: 'An updated version of Pixel Tracking with NextJS and Prisma'
+author: 'Anthony Lombardi'
+image: 'https://images.unsplash.com/photo-1579616043939-95d87a6e8512'
+categories: [nextjs]
+tags: [nextjs]
+draft: false
+---
+
+Several thousand years ago I wrote about tracking pixels and how to implement it in Ruby on Rails using the Rack to collect data and store it into an api.  Here I am going to replicate the same thing using NextJS and Prisma.
+
+
+If you are sending out content to your customers, or a need to track viewership on a webpage, it’s pretty handy to know if the content is loading. I speak as if you are sending out emails, newsletters, ads, etc or tracking a webpage. If you have ever sent out an email newsletter from a service like MailChimp, you would have seen email open graphs. If you have used Google Analytics, you would have seen something similar. Of course, tracking this stuff is super important for a campaign, but it would also be interesting to see if users are seeing your content.
+
+
+## The idea
+The simplest way to do this is via a tracking pixel – a small, invisible image that is loaded from your server every time your medium is opened. This is fairly simple to achieve using Rails by building a simple Rack application. Picture you are creating ads for clients and you are sending them out to ad shops. If you are using a program like Google Doubleclick. Google DoubleClick allows you to track your ad through a pixel tracking url. This data can be gathered to figure out trends when those ads, emails, or newsletters are being opened.
+
+
+## The Setup
+
+
+```
+npx create-next-app@latest —typescript
+```
+
+
+This will give you a prompt of what to call the app.
+
+
+Next, you will set up Prisma and connect it to your PostgreSQL database. Start by installing the Prisma CLI via npm:
+```
+npm install prisma —save-dev
+```
+
+
+Now, you can use the Prisma CLI to bootstrap a basic Prisma setup using the following command:
+```
+npx prisma init
+```
+
+
+Open the **.env** file and replace the dummy connection URL with the connection URL of your PostgreSQL database.
+```
+// .env
+DATABASE_URL="postgresql://t0nylombardi@localhost:password1:5432/pixel?schema=public"
+```
+
+
+ ### Create your database schema with Prisma
+
+
+```javascript
+// schema.prisma
+
+
+generator client {
+ provider = "prisma-client-js"
+}
+
+
+datasource db {
+ provider = "postgresql"
+ url      = env("DATABASE_URL")
+}
+
+
+model Pixel {
+ id           String  @id @default(cuid())
+ ip_address   String
+ campaign     String
+ content_type String
+ city         String
+ state        String
+ user_agent   String
+}
+```
+
+
+To actually create the tables in your database, you now can use the following command of the Prisma CLI:
+
+```
+npx prisma db push
+```
+
+
+### Install Prisma client
+
+Before you can access your database from Next.js using Prisma, you first need to install Prisma Client in your app. You can install it via npm as follows:
+
+```shell
+npm install @prisma/client
+```
+
+Because Prisma Client is *tailored* to your own schema, you need to update it every time your Prisma schema file is changing by running the following command:
+
+```shell
+npx prisma generate
+```
+
+You’ll use a single PrismaClient instance that you can import into any file where it’s needed. The instance will be created in a prisma.ts file inside the lib/ directory. Go ahead and create the missing directory and file:
+
+```shell
+mkdir lib && touch lib/prisma.ts
+```
+
+```javascript
+// lib/prisma.ts
+import { PrismaClient } from '@prisma/client';
+
+let prisma: PrismaClient;
+
+if (process.env.NODE_ENV === 'production') {
+ prisma = new PrismaClient();
+} else {
+ if (!global.prisma) {
+   global.prisma = new PrismaClient();
+ }
+ prisma = global.prisma;
+}
+
+export default prisma;
+```
+
+## The Pixel Tracker.
+
+NextJS allows you to gather info via requests through their Api Routes.
+
+
+### Create an Api Route
+
+```shell
+mkdir pages/api && touch pages/api/tracker.ts
+```
+
+Add the following boilerplate code and we will walk through what we need from it:
+
+```javascript
+import type { NextApiRequest, NextApiResponse } from 'next'
+
+type Data = {
+ name: string
+}
+
+export default function handler(
+ req: NextApiRequest,
+ res: NextApiResponse<Data>
+) {
+ res.status(200).json({ name: 'John Doe' })
+}
+```
+
+Most of what we need from here is the request `req` We will change what is returned shortly as well.
+
+First we want to gather anything in the query string after the URL:
+
+```
+example.com/api/tracker?campaign=SomeCampaign&content_type=blog
+```
+
+
+```javascript
+import type { NextApiRequest, NextApiResponse } from 'next'
+
+type Data = {
+ name: string
+}
+
+export default function handler(
+ req: NextApiRequest,
+ res: NextApiResponse<Data>
+) {
+ query: { campaign, content_type }
+} = req;
+
+res.status(200).json({ name: 'John Doe' })
+```
+
+Next we want to gather info about the request. Ip address, and user_agent inside the handler
+
+
+```javascript
+.
+.
+.
+const forwarded = req.headers["x-forwarded-for"]
+const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
+const user_agent = req.headers['user-agent']
+
+```
+
+The following is to send the IP address to an api to get the location back:
+
+
+```javascript
+
+let headers = new Headers({
+  "Accept"       : "application/json",
+  "Content-Type" : "application/json",
+  "User-Agent"   : "keycdn-tools:https://localhost"
+});
+
+let locationData  = await fetch(`https://tools.keycdn.com/geo.json?host=${ip}`, {
+  method  : 'GET',
+  headers : headers
+})
+.then((response) => {
+  return response.json();
+})
+.then((json) => {
+  return json.data.geo
+});
+
+```
+
+Next thing is to do is save to the database:
+
+```javascript
+
+ // Create new Pixel
+ await prisma.pixel.create({
+   data: {
+     ip_address: `${locationData.host}`,
+     campaign: `${campaign}`,
+     content_type: `${content_type}`,
+     city: `${locationData.city}`,
+     state: `${locationData.region_code}`,
+     user_agent: `${user_agent}`,
+   },
+ });
+
+```
+
+The Last thing we want to do is return a 1x1 pixel:
+
+```javascript
+.
+.
+.
+res.setHeader('Content-Type', 'image/jpg')
+res.send(imageBuffer)
+}
+```
+
+
+## conclusion
+
+There you have it, I’ve created a 1x1 pixel and put it in a folder of the root directory. This could be made many different ways and could be googled to figure that out. I'm sure there is a purely JS way of generating a pixel on the fly. We've created a way to track user interactions with a pixel the same way Google Analytics, MailChimp and the like track interactions.
+
+### Repo:
+
+[Aries Pixel](https://github.com/t0nylombardi/ariesPixel)
+
+=== src/content/blog/dhh-says-stop-writing-code-whos-going-to-clean-up.md ===
+---
+title: "DHH Says Stop Writing Code. Cool. Who's Going to Clean Up the Mess?"
+date: '10-13-2026'
+heroImage: '/blog/is-coding-dead/is-coding-over.webp'
+image: '/blog/is-coding-dead/is-coding-over.webp'
+originalDatePublished:
+description: "AI is coming for software engineering. And I'm scared shitless!"
+author: 'Anthony Lombardi'
+categories: [AI, ruby, rails]
+tags: [ruby, AI]
+draft: false
+---
+
+
+
+I think we're having the wrong conversation right now. David Heinemeier Hansson (DHH), the guy who gave us Ruby on Rails and arguably saved millions of developers from writing the same boilerplate until their souls left their bodies, recently announced that 37signals has essentially gone "pencils down" on hand-written code.
+
+AI agents are writing the code now. DHH has even described himself as retired from professional programming.
+
+Awesome… Cool. Cool. Cool. Cool.
+
+![cool cool cool](/blog/is-coding-dead/coolcoolcool.gif)
+
+Apparently, we're done writing code. Pack it up, everyone. It's been a good run.
+
+I'm just going to sit here with my 13-plus years of professional software engineering experience, stare into the abyss, and contemplate whether I should've listened to my parents and become a doctor.
+
+At least the common virus doesn't get rewritten in Rust overnight…
+
+### I'm not entirely convinced DHH is right though.
+
+I'm not saying AI isn't changing software engineering. It absolutely is. I'm saying we're confusing the ability to generate code with the ability to engineer software.
+
+DHH is rewriting applications in different languages. Developers are rebuilding compilers in Rust. Entire services are being migrated with surprisingly little human intervention. That's genuinely impressive and Imma let them finish, but I keep coming back to one question. What happens when we put all this into a large, complicated production environment?
+
+![imma let you finish](/blog/is-coding-dead/imma-let-you-finish.gif)
+
+I'm not talking about a relatively isolated service with well-defined inputs and outputs. I'm talking about the kind of infrastructure where eight applications depend on each other, authentication flows through multiple systems, background jobs are processing thousands of records, and some undocumented business rule from 2017 is holding the entire thing together with duct tape and a dream.
+
+I've worked on those systems. They're not theoretical. They're just Tuesday. And in those environments, writing the code was rarely the hardest part.
+
+### The Bottleneck Isn't Code Review. It's Knowing Whether the Damn Thing Works.
+
+Here's where I think the conversation starts going sideways. As AI generates more code, people naturally question whether traditional code review can keep up. And they're right to. If an agent can generate a week's worth of code in twenty minutes, having three engineers manually inspect every line is an obvious bottleneck. But eliminating code review doesn't magically solve the problem. It just moves it.
+
+The real bottleneck becomes verification: how fast can we test a change against a realistic environment and know whether the system actually behaves correctly? Because passing a unit test doesn't mean your application works. Shocking, I know. Somewhere, a developer just whispered, "But it's green."
+
+In production, the question isn't whether the code compiles. It's:
+
+- Does it handle concurrency? Does it respect tenant boundaries?
+- What happens when a downstream service becomes unavailable?
+- What happens when a background job retries after partially completing its work?
+- Does the database survive the new query patterns?
+- Does it survive the one customer with 40,000 records and a Hotmail address from 2004?
+
+And my personal favorite: what happens when everything works perfectly in development and production decides to become a flaming dumpster at 2:37 AM on a Thursday?
+
+An AI agent can write code. Great! But if we can't give that agent a reliable way to determine whether its implementation works under realistic conditions, we're just generating failures faster. We've automated the construction of the house without checking whether the foundation can support it. Bold strategy.
+
+### Give AI an Environment Where It Can Fail Fast.
+
+Here's what I think the next major evolution in software engineering looks like. Not necessarily better code generation. Better environments for AI to validate its own work.
+
+Imagine an engineering workflow where an agent receives a task and can:
+
+1. Understand the architectural constraints and expected behavior.
+2. Generate an implementation.
+3. Spin up an isolated environment containing the necessary services and dependencies.
+4. Run unit, integration, contract, security, and performance tests.
+5. Observe the actual behavior of the system.
+6. Identify failures, revise the implementation, and repeat.
+7. Produce evidence that the changes satisfy the requirements before they're considered for production.
+
+Not just a green CI pipeline. An actual feedback loop. An environment where AI can fail repeatedly, cheaply, and safely until the implementation satisfies measurable expectations. Then we're cooking with petrol.
+
+Of course, this introduces another problem. Who defines those expectations? Who determines what correct behavior looks like? Who decides whether a performance regression is acceptable? Who identifies the architectural constraints that an agent shouldn't violate?
+
+And who makes sure the tests themselves aren't complete garbage? Because an AI agent generating its own implementation and then congratulating itself with tests designed around that implementation isn't exactly my definition of quality assurance. That's a participation trophy with a GitHub Actions badge.
+
+> "Quis custodiet ipsos custodes?" — Who watches the watchmen?
+
+If the agent wrote the code and the tests, the answer is nobody.
+
+### Architecture Doesn't Disappear Because Code Gets Cheap.
+
+I think there's going to be a significant market for engineers who understand how to design systems rather than simply implement features. Not because AI can't eventually learn architecture. It already shows some impressive capabilities. But architecture isn't just choosing between Rails, Go, Rust, or whatever language we're collectively obsessed with this week.
+
+- It's understanding trade-offs.
+- It's deciding where domain boundaries belong.
+- It's knowing when to split a service and when to leave the monolith alone.
+- It's designing data models that won't become an absolute nightmare six months later.
+- It's understanding that a technically elegant solution can still be a terrible business decision.
+
+And perhaps most importantly, it's recognizing problems that nobody explicitly told you to look for.
+
+Could AI eventually do all of that? Probably. But somebody still has to decide what the system is supposed to accomplish and which risks are acceptable. At least until the AI starts attending sprint planning and arguing with Product about scope creep.
+
+Actually, you know what? AI can have that one.
+
+### Rust Isn't the Answer. Neither Is Ruby. Neither Is Whatever Comes Next.
+
+Another interesting part of this conversation is the sudden enthusiasm for rewriting everything in Rust.
+
+Don't get me wrong. I'm a big fan of Rust. It's a fantastic language with strong safety guarantees and compelling performance characteristics. But watching the industry discover that AI can rewrite applications in Rust feels a little like watching someone buy a Ferrari because their commute takes too long.
+
+Sure, it's faster. But have we checked whether the problem was the car or the six miles of bumper-to-bumper traffic? Language choice matters. Memory safety matters. Runtime performance matters. Coffee matters. But so do maintainability, operational complexity, deployment constraints, and the architecture surrounding the application.
+
+A poorly designed system doesn't become well-designed because you rewrite it in Rust. It just becomes a poorly designed system with a borrow checker. Now it's poorly designed *and* memory safe, so it crashes with dignity.
+
+### So, Is DHH Right?
+
+Maybe. And that's what makes this uncomfortable (for me, at least).
+
+DHH has a long history of challenging conventional software development practices, and he's been right about plenty of things. I don't think dismissing his perspective because it threatens the way we've always worked is particularly productive. But I also don't think the conclusion should be that professional software engineering is becoming obsolete.
+
+I think the economics of implementation are changing faster than the economics of reliability. And that's an important distinction. If AI can generate a million lines of code tomorrow, we haven't necessarily solved software engineering. We've created a million lines of code that need to behave correctly.
+
+The companies that figure out how to build reliable verification systems, realistic testing environments, and effective architectural guardrails around autonomous agents are going to have an enormous advantage. And I suspect the engineers who understand those systems will be incredibly valuable.
+
+Maybe I'm wrong. Maybe five years from now, an AI agent will architect an entire enterprise platform, deploy it flawlessly, optimize the infrastructure, and write a thoughtful Slack message explaining why my services are no longer required, and I should go home, take a shower, and wash the shame off me.
+
+But until then, I think there's still plenty of work to do. Just maybe not the kind of work we've spent the last twenty years preparing for.
+
+AI might be coming for the code. But I'm not convinced it's finished coming for the engineers. And if I'm going to have an existential career crisis, I'd at least like to make sure we're arguing about the right problem.
+
+---
+
+I'm a senior software engineer who's spent over a decade building, breaking, fixing, and architecting software systems. These days, I'm spending a lot of time thinking about where AI fits into that process, and occasionally wondering whether I should've become a doctor.
+
+=== src/content/blog/following-users-because-stalking-is-so-2010.md ===
+---
+title: 'Following Users: Because Stalking is so 2010'
+date: '03-02-2024'
+heroImage: '/blog/follow-unfollow/following-users.jpeg'
+image: '/blog/follow-unfollow/following-users.jpeg'
+originalDatePublished:
+description: 'Adding Some Social Stalking Flair with follow/unfollow users'
+author: 'Anthony Lombardi'
+categories: [ruby, rails]
+tags: [ruby, social network]
+draft: false
+---
+
+In the world of social networking, being able to keep tabs on your friends, favorite influencers, and the occasional ex is practically an Olympic sport. So why not embrace it and learn how to implement follow/unfollow functionality in your Ruby on Rails app? Let's dive into the wonderfully creepy world of user stalking and build something truly captivating.
+
+### Modeling User Relationships: It's Complicated (Like All Good Relationships)
+
+So you want users to follow each other, huh? Sounds simple enough, but buckle up, because it's about to get as complicated as a Facebook relationship status. We'll start by trying to model it with a `has_many` relationship, but surprise, surprise, it's not that easy. Turns out, we need a little more finesse to make this work without creating a data model mess.
+
+Alright, so picture this: you're diving headfirst into the wild world of user stalking... uh, I mean, following. At first glance, you might think, "Hey, I'll just slap a `has_many` relationship on there and call it a day." But hold your horses, because this ain't your grandma's social network. Turns out, there's a twist in the tale, and we're about to embark on a journey through the mystical land of `has_many :through.` It's like discovering that the secret ingredient in grandma's famous cookies is actually unicorn tears. Intrigued? Let's dive in and uncover the magic behind building a data model that'll make even Dumbledore raise an eyebrow.
+
+Imagine you're strolling through the digital streets of your favorite social platform. You've got Morty, your average... piece of defication, just minding his own business. Then there's Rick, the cool cat everyone wants to hang with. Now, Morty decides he wants to be part of Rick's entourage, so he hits that follow button faster than you can say "wubba lubba dub dub." Boom! Morty's now a follower, and Rick? Well, he's officially _followed_ by Morty.
+
+Now, let's talk about labels. You see, in the world of Rails, everything's gotta have a label. So, naturally, Morty's got himself a sweet array of followers, because who wouldn't want to follow the guy who's pals with _the_ Rick, right? But here's where things get a bit wonky. By default, Rails wants to call the folks Morty's following the _followeds_. Yeah, try saying that three times fast without tripping over your own tongue. We're not about that life. So, we're taking a page out of X(formally know as Twitter)'s playbook. X might not be perfect(let's face it, it's a dumpster fire), but they got one thing right: calling them "followeds" just sounds wrong. We'll adopt their convention and stick with "following" for those you're stalking and "followers" for your loyal fans.
+
+This discussion suggests modeling the followed users, with a `following` table and a `has_many` association. Since `user.following` should be a collection of users, each row of the `following` table would need to be a user, as identified by the `followed_id`, together with the follower_id to establish the association. In addition, since each row is a user, we would need to include the user’s other attributes, including the name, email, password, etc.
+
+For simplicity, we omit the following table’s id column.
+
+![First Diagram](/blog/follow-unfollow/first_diagram.png)
+
+Alright, let's talk about being DRY. You know, that feeling you get when you realize you've got the same info stored in three different places? Yeah, not so ideal. Our data model is suffering from a severe case of redundancy. Each row in our `following` table not only contains the followed user's ID but also a whole bunch of other info that's already chilling in the `users` table. And don't even get me started on the nightmare of trying to keep everything up to date. I mean, imagine having to update every single row in both the `following` and `followers` tables just because someone changed their username. Talk about a headache.
+
+But fear not, my friends, because where there's a problem & there's a solution. And in this case, it's all about finding the right abstraction. When one user decides to follow another, what's really happening? It's not rocket science. We're creating a relationship, plain and simple. And when that relationship ends? We're destroying it. It's the circle of life(Sing it Elton!).
+
+### Active vs. Passive Relationships: Morty Can Stalk Rick Without Rick Even Noticing
+
+In the world of stalking...sorry, I mean following, relationships can be a bit one-sided. Morty might be obsessed with Rick, but Rick might not even know Morty exists. We'll dive into the nuances of active and passive relationships, so you can stalk... I mean, follow, with confidence.
+
+Unlike your typical Facebook-style friendships, where it's all about being BFFs forever, Twitter-style following is a bit more... flexible. Morty can follow Rick without Rick feeling obligated to return the favor. It's like having a one-sided bromance, and it's totally cool. So, to keep things straight, we're talking active and passive relationships. Morty's the active one, hitting that follow button like it's going out of style, while Rick's just chilling on the passive side, soaking up all the love.
+
+We're going to take those active relationships and turn them into something beautiful: an `active_relationships` table. No more redundant info cluttering up the place. Just clean, efficient data storage, the way it should be. And just like that, we've got ourselves a data model that's as sleek and stylish:
+
+![second diagram](/blog/follow-unfollow/second_diagram.png)
+
+Because we’ll end up using the same database table for both active and passive relationships, we’ll use the generic term _relationship_ for the table name, with a corresponding Relationship model. The result is the Relationship data model shown in the picture below. We’ll see how to use the Relationship model to simulate both Active Relationship and Passive Relationship models.
+
+![third diagram](/blog/follow-unfollow/third_diagram.png)
+
+To get started with the implementation, we first generate a migration:
+
+```shell
+$ rails generate model Relationship follower_id:integer followed_id:integer
+```
+
+This will generate:
+
+```ruby
+# db/migrate/[timestamp]_create_relationships.rb
+
+# frozen_string_literal: true
+
+class CreateRelationships < ActiveRecord::Migration[7.1]
+  def change
+    create_table :relationships do |t|
+      t.integer :follower_id
+      t.integer :followed_id
+
+      t.timestamps
+    end
+  end
+end
+```
+
+Because we will be finding relationships by `follower_id` and by `followed_id`, we should add indexes on each column for efficiency:
+
+```ruby
+# frozen_string_literal: true
+
+class CreateRelationships < ActiveRecord::Migration[7.1]
+  def change
+    create_table :relationships do |t|
+      t.integer :follower_id
+      t.integer :followed_id
+
+      t.timestamps
+    end
+    add_index :relationships, :follower_id
+    add_index :relationships, :followed_id
+    add_index :relationships, [:follower_id, :followed_id], unique: true
+  end
+end
+```
+
+Welcome to the wild and wacky world of multiple-key indexes, where we're about to make each relationship between users unique. We'll start with pairs of IDs, one for the follower and one for the followed, locked in an eternal embrace of digital love. We're saying, "Hey, you two, you're special. No one else can have a relationship quite like yours." It's like the social media version of monogamy. But here's the kicker: if some sneaky punk tries to slide in and create a duplicate relationship, we're shutting that down faster than you can say "Wubba Dubba Dub Dub." Because in the world of data integrity, there's no room for duplicates. It's like trying to wear the same underwear to two different parties—just not gonna fly (and gross).
+
+So, with our trusty multiple-key index, we're keeping those relationships clean, unique, and error-free. Just like Granny's sense of humor—it's one of a kind. And we're not afraid to kick some database butt to make sure everything runs smoothly. So buckle up, because we're about to embark on a trip through the world of data integrity, so let's do this! 🦄
+
+Migrate the `relationships` table to the database:
+
+```shell
+$ rails db:migrat
+```
+
+### User/Relationship Associations
+
+Before we dive into the juicy stuff like following and followers, we gotta set the stage. It's all about establishing the association between users and relationships. Think of it like setting up a blind date, but instead of awkward small talk, we're talking database relationships.
+
+So, here's the deal: a user is like the puppet master pulling the strings, and relationships are like the marionettes dancing to their tune. Each user `has_many` relationships, because let's face it, we're all social butterflies in this digital age. And since relationships involve two players, it's a two-way street. That's right, a relationship `belongs_to` both a follower and a followed user. It's like the ultimate love triangle, but without all the drama (hopefully). So, strap on, gents & ladies! We're about to embark on a wild ride through the tangled web we weaved of user relationships.
+
+We will create new relationships using the user association, with code such as:
+
+`user.active_relationships.build(followed_id: ...)`
+
+At this point, you might expect application code is similar, but there are two key differences.
+
+First, in the case of the user/post association, we could write
+
+```ruby
+class User < ApplicationRecord
+   has_many :posts
+   .
+   .
+   .
+end
+```
+
+We're about to dive into the inner workings of Rails. So, here's the deal: when Rails sees something like `has_many` `:posts`, it's not just randomly picking words out of a hat. No, sir, no siree bob! There's some serious magic going on behind the scenes. You see, Rails has this little trick up its sleeve called the classify method. It's like the Houdini of class naming, taking something like **"foo_bars"** and turning it into **"FooBar"** faster than han a knife fight in a phone booth. So when you see `has_many` `:posts`, just know that Rails is working its classify magic behind the scenes, making sure everything's running smoother than a baby's backside.
+
+`has_many :active_relationships`
+
+Even though the underlying model is called Relationship. We will thus have to tell Rails the model class name to look for.
+
+Second, we will write this in the Post model:
+
+```ruby
+class Post < ApplicationRecord
+   belongs_to :user
+   .
+   .
+   .
+end
+```
+
+Alright, let's take a stroll through the labyrinth of database connections, where foreign keys rule the roost and Rails is the master of puppets(🤘) pulling all the strings. When you see that posts table cozying up to a `user_id` attribute, that's not just some random hookup—it's a full-blown love affair. You see, in the land of databases, that `user_id` is like a secret handshake, linking those tables together faster than a toupee in a hurricane.
+
+Rails has this slick little trick tucked up its sleeve called the underscore method. It's like the magician of class naming, waving its wand and transforming **"FooBar"** into **"foo_bar"**. And just like that, Rails knows exactly where to find those foreign keys. But hold onto your hats, because when it comes to users following other users, we're throwing a curveball with that `follower_id`. Yeah, we're shaking things up, keeping Rails on its toes. By default, Rails expects a _foreign key_ of the form `<class>_id`, where `<class>` is the lowercase version of the class name. In the present case, although we are still dealing with users, the user following another user is now identified with the foreign key `follower_id`. So, next time you're knee-deep in database drama, just remember: Rails may be the mastermind, but we're the ones calling the shots. And with a touch of charm and a boat, anything is possible!
+
+```ruby
+# app/models/user.rb
+
+# frozen_string_literal: true
+
+class User < ApplicationRecord
+  has_many :posts, dependent: :destroy
+  has_many :active_relationships, class_name:   "Relationship",
+                                  foreign_key:  "follower_id",
+                                  dependent:    :destroy
+  .
+  .
+  .
+end
+```
+
+### Adding the belongs_to associations to the Relationship model.
+
+```ruby
+# ap/models/relationship.rb
+
+# frozen_string_literal: true
+
+class Relationship < ApplicationRecord
+  belongs_to :follower, class_name: "User"
+  belongs_to :followed, class_name: "User"
+end
+```
+
+Technically, we don't really need the followed association just yet. But, if you know me, I like to keep things symmetrical and sleek, like a well-tailored grundle area. So, why not go the extra mile and implement both follower and followed structures at the same time? It's like having peanut butter and jelly in the same sandwich! Sure, you could have one without the other, but together they just make life a whole lot tastier.
+
+By bringing in both sides of the equation, we're not just building a system, we're crafting a work of art.
+
+A summary of user/active relationship association methods:
+
+| Method                                                           | Purpose                                                                      |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `active_relationship.follower`                                   | returns the follower                                                         |
+| `active_relationship.followed `                                  | returns the followed user                                                    |
+| `user.active_relationships.create (followed_id: other_user.id)`  | creates an active relationship associated with `user`                        |
+| `user.active_relationships.create! (followed_id: other_user.id)` | creates an active relationship associated with `user` (exception on failure) |
+| `user.active_relationships.build (followed_id: other_user.id)`   | returns a new relationship object associated with `user`                     |
+
+### Adding the Relationship model validations
+
+We’ll add a couple of Relationship model validations for for HR transparancy.
+
+```ruby
+# app/models/relationship.rb
+
+# frozen_string_literal: true
+
+class Relationship < ApplicationRecord
+  belongs_to :follower, class_name: "User"
+  belongs_to :followed, class_name: "User"
+  validates :follower_id, presence: true
+  validates :followed_id, presence: true
+end
+```
+
+### Followed Users
+
+Buckle up, folks, because we're about to dive into the heart of the Relationship associations: following and followers. We're going to bust out the big guns and using `has_many :through` for the first time. It's like upgrading from a tricycle to a Ferrari. We're about to kick things into 4th gear. A user has many following through relationships. We're forging connections through the digital ether, linking users together in a beautiful web of social interaction. By default, Rails looks for a foreign key that matches the singular version of the association. Hey, let's face it, `user.followeds` is about as clunky as a grown out mullet. So instead, we're going with `user.following`. Smooth, elegant, like a fine whiskey🥃🎩
+
+But wait, there's more! Rails is all about customization. So, if we want to spice things up even further, we can use the `source` parameter to explicitly tell Rails where to find the `source` of our following array. It's like giving directions to a lost puppy except in this case, we're guiding Rails to the set of followed ids. Because let's be real, nobody likes getting lost in the database.
+
+### Adding the User model following association.
+
+```ruby
+# app/models/user.rb
+
+# frozen_string_literal: true
+
+class User < ApplicationRecord
+   has_many :microposts, dependent: :destroy
+   has_many :active_relationships, class_name:  "Relationship",
+                                   foreign_key: "follower_id",
+                                   dependent:   :destroy
+   has_many :following, through: :active_relationships, source: :followed
+   .
+   .
+   .
+end
+```
+
+The association leads to a powerful combination of Active Record and array-like behavior. For example, we can check if the followed users collection includes another user with the `include?` method, or find objects through the association:
+
+`user.following.include?(other_user)`
+`user.following.find(other_user)`
+
+We can also add and delete elements just as with arrays:
+
+`user.following << other_user`
+`user.following.delete(other_user)`
+
+Although in many contexts we can treat following like your favorite pair of jeans, comfortable and familiar. Rails is a sneaky little devil that's smarter than you think. Take, for example, code like `following.include?(other_user).` On the surface, it looks like we're about to embark on a database spelunking expedition, pulling all the followed users out of the database to do a comparison. But hold onto your hats, because Rails has a trick up its sleeve. You see, Rails is like a ninja in the night, silently orchestrating things behind the scenes. Instead of dragging every followed user out into the spotlight, it arranges for the comparison to happen directly in the database.
+
+To manipulate following relationships, we’ll introduce `follow` and `unfollow` utility methods so that we can write, e.g., `user.follow(other_user)`. We’ll also add an associated `following?` boolean method to test if one user is following another.
+
+Utility methods are like the punchlines. Sometimes you see them coming, sometimes you don't, but either way, it's all part of the fun. With experience comes the ability to predict these bad boys in advance, but even if you're caught off guard, don't sweat it. Software development is a journey of trial and error, where you write code, test it out, and if it starts to look as ugly as a chimichanga that's been sitting in the sun too long, you roll up your sleeves and refactor it. So, lets keep hacking away, there's always another joke, another punchline, and another chance to make it right 🍕🔥
+
+### Utility methods for following.
+
+```ruby
+# app/models/user.rb
+
+# frozen_string_literal: true
+
+class User < ApplicationRecord
+   .
+   .
+   .
+   # Follows a user.
+   def follow(other_user)
+      following << other_user unless self == other_user
+   end
+
+   # Unfollows a user.
+   def unfollow(other_user)
+      following.delete(other_user)
+   end
+
+   # Returns true if the current user is following the other user.
+   def following?(other_user)
+      following.include?(other_user)
+   end
+
+   private
+   .
+   .
+   .
+end
+```
+
+### Followers
+
+Like putting together a jigsaw puzzle, instead of a picture of a sunset, we're crafting a masterpiece of database wizardry. We're adding a `user.followers` method to complement the `user.following` method. It's like having yin without yang. All the juicy details we need to extract an array of followers are already chilling in the relationships table. And we're flipping the script, reversing the roles of `follower_id` and `followed_id`, and introducing `passive_relationships` to the mix. Like turning the world upside down and seeing it from a whole new perspective. The end result is going to be more beautiful than a unicorn riding a rainbow through a field of chimichangas 🦄🌈🔥
+
+![fourth diagram](/blog/follow-unfollow/fourth_diagram.png)
+
+### Implementing `user.followers` using passive relationships.
+
+```ruby
+# app/models/user.rb
+
+# frozen_string_literal: true
+
+
+class User < ApplicationRecord
+   has_many :microposts, dependent: :destroy
+   has_many :active_relationships,   class_name:   "Relationship",
+                                     foreign_key:  "follower_id",
+                                     dependent:    :destroy
+   has_many :passive_relationships,  class_name:   "Relationship",
+                                     foreign_key:  "followed_id",
+                                     dependent:    :destroy
+   has_many :following, through: :active_relationships, source: :followed
+   has_many :followers, through: :passive_relationships, source: :follower
+   .
+   .
+   .
+end
+```
+
+It’s worth noting that we could actually omit the `:source` key for `followers` using simply:
+
+`has_many :followers, through: :passive_relationships`
+
+This is because, in the case of a `:followers` attribute, Rails will singularize “followers” and automatically look for the foreign key `follower_id` in this case. This keeps the `:source` key to emphasize the parallel structure with the `has_many` `:following` association.
+
+### Sample Following Data
+
+I find it convenient to use `rails db:seed` to fill the database with seed data. Here we somewhat arbitrarily arrange for the first user to follow users 3 through 51, and then have users 4 through 41 follow that user back. The resulting relationships will suffice for developing the application interface:
+
+```ruby
+db/seeds.rb
+
+# Users
+User.create!(name:  "Example User",
+             email: "example@t0nylombardi.dev",
+             password:              "foobar",
+             password_confirmation: "foobar",
+             admin:      true,
+             activated:  true,
+             activated_at: Time.zone.now)
+
+99.times do |n|
+  name = Faker::Name.name
+  email = "example-#{n+1}@t0nylombardi.dev"
+  password = "password"
+  User.create!(name:    name,
+               email:   email,
+               password:              password,
+               password_confirmation: password,
+               activated: true,
+               activated_at: Time.zone.now)
+end
+
+# Posts
+users = User.order(:created_at).take(6)
+50.times do
+  content = Faker::Lorem.sentence(5)
+  users.each { |user| user.posts.create!(content: content) }
+end
+
+# Create following relationships.
+users = User.all
+user = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
+```
+
+To execute this code, we will reset and seed the database:
+
+```shell
+$ rails db:migrate:reset
+$ rails db:seed
+```
+
+### Adding following and followers actions to the Users controller.
+
+```ruby
+# config/routes.rb
+
+# frozen_string_literal: true
+
+Rails.application.routes.draw do
+   .
+   .
+   .
+   resources :users do
+      member do
+         get :following, :followers
+      end
+   end
+   .
+   .
+   .
+end
+```
+
+The intricacies of routing in Rails. Like a well-choreographed tango, each step is perfectly timed and executed. The URLs for following and followers `/users/1/following` and `/users/1/followers`, respectively are straightforward. With both pages showcasing data, we opt for the HTTP verb `GET`, ensuring the URLs respond just the way we want them to. And here's where it gets interesting: the `member` method ensures our routes respond to URLs containing the user ID, while the collection method works its magic without the need for IDs. So, whether you're stalking or being stalked, rest assured that Rails has got your back.
+
+For more details on such routing options, see the Rails Guides article on [Rails Routing from the Outside In ](https://guides.rubyonrails.org/routing.html).
+
+| HTTP request method | URL                | Action      | Named route              |
+| ------------------- | ------------------ | ----------- | ------------------------ |
+| GET                 | /users/1/following | `following` | `following_user_path(1)` |
+| GET                 | /users/1/followers | `followers` | `followers_user_path(1)` |
+
+### Adding the routes for user relationships.
+
+```ruby
+# config/routes.rb
+
+# frozen_string_literal: true
+
+Rails.application.routes.draw do
+   root     "static_pages#home"
+
+   resources :users do
+     member do
+        get :following, :followers
+     end
+   end
+   resources :relationships, only: [:create, :destroy]
+end
+```
+
+### Skills to the Test
+
+Now that you've mastered the art of stalking... I mean, following, it's time to show off your skills. We'll add some slick actions to your controllers so you can see who's stalking... I mean, following, you and who you're stalking... I mean, following. It's like a social networking power play, but with less drama and more Ruby.
+
+With these tips and tricks, you'll be the master of social stalking... I mean, following, in no time. So go forth, my wayward son, build that social network of your dreams. And remember: with great power comes great stalking... responsibility... and a whole lot of cat videos. Happy coding! 🚀🐱
+
+Cheers
+
+=== src/content/blog/from-streets-to-code.md ===
+---
+title: 'From Streets to Code'
+date: '03-27-2017'
+heroImage: '/blog/from-streets-to-code/streets-to-code.jpg'
+image: '/blog/from-streets-to-code/streets-to-code.jpg'
+originalDatePublished:
+description: 'High School dropout to Full Stack Developer'
+author: 'Anthony Lombardi'
+categories: [life]
+tags: [programing, life, pursuit of happyiness]
+draft: false
+---
+
+> "More than 1.3 million students drop out of high school every year in the US, making them ineligible for 90% of jobs in America”([DoSomething.org](DoSomething.org))…Or so they think
+
+If someone had told me 15-20 years ago that I would end up being a software developer, I probably would have laughed at them. You hear of stories where people in rural towns have fewer chances of getting out of their town and into a big city job. This is my story of over coming addiction and crime in my old neighborhood through hard grind and perseverance to get where I am today.
+
+I grew up in Yonkers, NY (Home of the Brave!). I am not going to lie, my childhood was rough. My brother and I were raised by our single mother. I grew up in a neighborhood where I was a minority (I’m white). My neighborhood was predominantly African American and Spanish. I went to a school in a time where computers and especially computers in school weren’t really a thing. I was lead to believe that the only way you can be successful, was to be either a doctor or a lawyer.
+
+### The Early Years
+
+As a kid, I grew up poor. My Mother was on welfare and struggled to make ends meet. Suffice it to say I didn’t have a lot of technology products around to play with. In the 80s and early 90s, I spent most of my time outside getting into trouble. There was so much crime going on around me, even from a small age, I thought it was ‘normal’ so when I tell people of my past, I’d just brush it off as that’s how it was. It’s not until I see the whites of their eyes I realize that it wasn’t normal, it was bad.
+
+Picture me hanging out on the streets, with no father and my mother trying the best she can, I was raised by drug addicts, gang members, murderers and felons. On the roof of the building across the street from me, they used to sell guns. I used to hear the guns go off almost on a nightly basis. It was here where I was instilled with the thought that I would never amount to anything, that to get anywhere, you needed to be in a good school and since we were not in a good school well, good luck with that.
+
+I remember being in the 3rd or 4th grade when a teacher explained to my mother that “he just can’t read very well.” As I got older, I found out I was actually dyslexic. However, this only served to make me more determined than ever. I had this huge drive to succeed. I needed to study harder and read something over and over before I could absorb and recall it.
+
+### High School
+
+With this in mind, I went to high school thinking I would like to become a doctor. I loved health and thought it was fascinating. Now even though I had a reading disability, I still loved to read. If it took me reading a book three times to get it, I would read it three times. But, high school didn’t go well with me. Teachers tended to fail me every chance they got it seemed. When I asked them to challenge me, instead I got sent to an easier class. I started ditching school and hanging out in parks getting drunk and high.
+
+I recall being in English class when I was asked to write out a list of books I had read from over the summer until present (it was December at the time). As I said before, I love reading. So, I listed 75–100 books, most of which were dog books that I read with my brother. The rest of those books where computer related such as HTML For Dummies, just so I could learn how to write funky text in chatrooms. My teacher was surprised by how many books I “claimed” to have read. So, she ridiculed me, saying that I couldn’t have possibly read all of those books. I suggested that I could write a book report on any of them if she needed proof. She then told me that I would “just get it off of my stupid computer.” Which may or may not have lead me to throw my copy of Romeo & Juliet at her! This incident lead me to eventually drop out of High School and seek my GED.
+
+> Even if you get a job, without graduating high school, it is a fact of the market that your earning potential, on average, will be severely limited both immediately and long-term. — [theamericanacademy.com](theamericanacademy.com)
+
+### College Part 1
+
+After I got my GED, I went to Allentown Business School in Pennsylvania with a friend to study computers. I really just went because it seemed like a cool idea to leave home and do the “college thing”. I became depressed there, I was far away from home and I had few friends. The friend I went there with was never around and we grew apart. I started writing my thoughts down into songs and poetry. A teacher found some of my writings and became concerned. This was the in “age of Columbine” so they took my depression seriously and decided to expel me because they decided that I was too much of a potential risk.
+
+This was a huge blow to me. I grew up being abused by my brother while my mother looked away. My brother never liked anything I did unless it was what he did. If he sold drugs, I sold drugs. Whatever he did, I was right by his side. My brother never went to high school. So me going to college, even just getting my GED, was a great achievement for me. Being the first person in my family to go to college was a huge deal — And now I was being kicked out?
+
+### College Part 2: The Developer Strikes Back?
+
+After a year of being a bum on my girlfriend at the time’s couch and then my moms, my mother arranged a meeting for me with a recruiter at a local college. I told him my story of my previous college and how I wanted to try my hand at programming.
+
+So I enrolled, however this college turned out to be very similar to my last college. It was labeled as a “business” school. Their claim was to learn your trade within 18 months and guaranteed to “get you a job!”. When it came to computer programming, their idea was to teach you the basics and you could potentially get picked up by a bank doing back-end work. The problem was that they taught only very basic programming and really nothing more than that. I was also told that they would guarantee me a job afterward. Towards the end of my schooling, I wasn’t able to afford the school fees anymore. Since I wasn’t able to continue schooling, I wasn’t able to get my diploma. I graduated, just no official diploma. Since I didn’t have a diploma they weren’t willing to work with me to find a job placement.
+
+### Nextel to Genius
+
+When I was in school I worked at A&P as a cashier. After school, I landed a job fixing Nextel phones in the Bronx. Since I had a computer background I became the unofficial IT guy. Complacency crept in when I would travel to bigger businesses and help their IT department set up Blackberries for their staff. In my mind, I started to replay the times I was told that I would never amount to anything. Since I had no official degree and my schooling sucked I learned that to get any decent job I would need to go back to college — Or at least a decent college. Then, my college dropped another bomb on me: 90% of my credits would not be transferable to other learning institutions. So there I was, stuck in a dead end job, unable to afford more schooling and on top of all that, my mother and I were battling eviction too.
+
+![alt text](https://miro.medium.com/v2/resize:fit:948/format:webp/1*iN69kthaZq3Dr_Jo_1OI1A.jpeg)
+
+Apple breathed new life into me. This was still computer repair work but it did teach me a lot of people skills and not to freak out when chaos is happening. I worked at Apple for 5 years and within those 5 years, I’ve saw a lot of change. The chances of you getting a job at “corporate” was slim but considered doable and seemed worth working towards. Eventually it became apparent that there’s very little chance of being promoted into corporate.
+
+### Web Developer?
+
+It was in the later portion of being at Apple when I started to get more web development experience by helping a co-worker make a website to track broken items in the store. At Apple, you have to sign a contract that states that any software developed there is owned by Apple. Which was great, because I didn’t know much about programming for desktops and iOS and here was a chance to get experience while getting paid. I picked up a book on PHP and began learning it and within a week I had a good grasp of it. I began helping my friend from work with his website. The Genius Bar had a script that was given to them from another store to help image hard drives so we had a hard drive with multiple OS’s on them for testing. Since I now had some solid programming knowledge, I was tasked with updating that script.
+
+---
+
+![alt text](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*RXSYl6D-tQOirWip5Wf9eQ.jpeg)
+
+Towards the last two years of my time at Apple, I met my wife, and we had our first child. At Apple, I was constantly being told that my opportunity is coming I just needed to wait a little longer. I was married and I just had a kid. I needed to act on something and I didn’t feel like Retail was doing it for me. I drafted up a resume and started looking for a job in web development. I sought the help of an employment recruiter to help. An opportunity presented itself when my recruiter told me a company was looking for a Ruby on Rails developer, a language I barely knew about at that time. I bought a book and wrote a program over the weekend to send in as a coding assignment. I got the job a few weeks later!
+
+> The distance between insanity and genius is measured only by success. — Bruce Feirstein
+
+I have since moved on from being a Junior Backend Developer to being a Full Stack Developer and I am now starting to lead a separate web development firm within my current company. Where I grew up, and from my high school, only a handful of people have made something of their lives. A good number of them have died from gang violence and drug abuse. I was always told that I would never amount to anything and a few times I came close to believing it. To this day my wife constantly reminds me of how far I have come.
+
+I’m married with two beautiful children, Logan and Harley. My son goes to a great school and we live in a nice community(something I am not familiar with). I am able to afford a house where I am able to maintain a decent living and support my mother. She lives with me and helps watched my kids.
+
+I am a high school dropout with a bootleg college degree. The streets told me I would never amount to anything, my family said the same, but through hard work, determination and perseverance I have escaped that life and shown that it is possible to succeed against the odds if you really put your mind to it. This is why I would like to share my story.
+
+### Resources:
+
+If you want to become a programmer like myself, these are some resources that helped me out learning to code. [Kevin Skoglund](https://www.lynda.com/Kevin-Skoglund/104-1.html) was the person who taught me PHP and later Ruby/Ruby on Rails. Between Books and online videos, It has cleared a way for me to become a better programer. Both [Travis Neilson](travisneilson.com)(DevTips) and [Mackenzie Child](https://www.mackenziechild.me/) have helped me become a better front-end developer.
+
+=== src/content/blog/image-conversion.md ===
+---
+title: 'Image Conversion'
+date: '2020-12-29'
+heroImage: '/blog/image-conversion/image-conversion.jpeg'
+image: '/blog/image-conversion/image-conversion.jpeg'
+originalDatePublished: '2014-11-18'
+description: "I wrote a script that allows me to take several images rename them, and then create two resized images in addition."
+author: 'Anthony Lombardi'
+categories: [ruby]
+tags: [ruby]
+draft: false
+---
+
+In the realm of digital content management, streamlining repetitive tasks can save invaluable time and effort. Recently, I embarked on a quest to simplify the process of renaming and resizing a batch of images. The goal was to create a script that allows me to take several images rename them, and then create two resized images. Not only does this accomplish these tasks efficiently but also ensures optimal image quality throughout the process.
+
+## The Challenge
+
+The initial challenge revolved around parsing through a directory of images, each with filenames in a specific format. While the images themselves had numerical identifiers, such as "1.jpg," "2.jpg," and so forth, there were instances where the filenames included additional text, like "OHV May1.jpg" or "OHV May39.jpg." This necessitated a method to extract and utilize the numerical component for renaming purposes.
+
+## Solution Approach
+To tackle this challenge, I leveraged the capabilities of Ruby 3.0 along with the mini_magick gem, a powerful tool for image processing. Here's a breakdown of the solution approach:
+
+- **Iterative Processing**: Utilizing Ruby's Dir.glob method, the script recursively traverses through the specified directory, identifying image files and initiating the renaming and resizing operations.
+- Filename Parsing: Employing regular expressions, the script extracts the numerical identifier from each filename, essential for the subsequent renaming process.
+- **Renaming Images**: With the numerical identifier obtained, the script systematically renames each image file to adhere to the desired naming convention, ensuring consistency and orderliness.
+
+- **Image Resizing**: The script employs the mini_magick gem to resize the images to predefined dimensions. Crucially, the resizing operation occurs in two stages, with the larger, higher-quality original image being used for the second resizing iteration to maintain optimal image fidelity.
+
+### idea
+I could easily just replace the order of the re-sizing, but I rather just go to the source again for quality sake(if there is one at all.)
+
+### Code Implementation
+
+```ruby
+require 'rubygems'
+require 'mini_magick'
+
+class ImageProcessor
+  THUMBNAIL_SIZE = "76x100"
+  RESIZED_IMAGE_SIZE = "770x1000"
+  FOLDER_PATH = "pages"
+
+  def initialize
+    @images = Dir.glob("#{FOLDER_PATH}/*").sort
+  end
+
+  def process_images
+    @images.each do |image_path|
+      number = extract_number(image_path)
+      renamed_file = rename_image(image_path, number)
+
+      create_thumbnail(renamed_file, number)
+      create_resized_image(renamed_file, number)
+
+      clear_console
+    end
+  end
+
+  private
+
+  def extract_number(image_path)
+    File.basename(image_path).scan(/[0-9]{1,}/).first
+  end
+
+  def rename_image(image_path, number)
+    new_filename = "#{FOLDER_PATH}/#{number}-large#{File.extname(image_path)}"
+    File.rename(image_path, new_filename)
+    new_filename
+  end
+
+  def create_thumbnail(image_path, number)
+    image = MiniMagick::Image.open(image_path)
+    image.resize "#{THUMBNAIL_SIZE}!"
+    image.write "#{FOLDER_PATH}/#{number}-thumb.jpg"
+    puts "Thumbnail created: #{number}-thumb.jpg"
+  end
+
+  def create_resized_image(image_path, number)
+    image = MiniMagick::Image.open(image_path)
+    image.resize "#{RESIZED_IMAGE_SIZE}!"
+    image.write "#{FOLDER_PATH}/#{number}.jpg"
+    puts "Resized image created: #{number}.jpg"
+  end
+
+  def clear_console
+    system('clear')
+  end
+end
+
+# Main
+processor = ImageProcessor.new
+processor.process_images
+
+```
+
+### Conclusion
+
+By harnessing the power mini_magick gem, I successfully automated the process of renaming and resizing images, thereby streamlining content management workflows. This endeavor not only exemplifies the versatility of Ruby for handling such tasks but also underscores the importance of optimizing image processing methodologies for superior results. With this script in hand, managing batches of images becomes a seamless and efficient endeavor, empowering content creators to focus on their creative endeavors with confidence.
+
+=== src/content/blog/javascript-execution-context-101-this-that-and-the-other-things.md ===
+---
+title: 'Javascript Execution Context 101: This, that, and the other things'
+date: '04-25-2024'
+heroImage: '/blog/javascript-context/code-unsplash.jpg'
+image: '/blog/javascript-context/code-unsplash.jpg'
+originalDatePublished:
+description: "Learn how to use this, call, apply, and bind like a Asgardian hammer-wielding mofo."
+author: 'Anthony Lombardi'
+categories: [javascript]
+tags: [javascript, context]
+draft: false
+---
+
+Today, we're exploring Javascript execution contexts. Yeah, I know. It sounds about as fun as a colonoscopy without anesthesia. But fear not, because by the time we're done here, you'll be navigating through Javascript contexts like a pro. I'm assuming you already know `functions`,` map`, `reduce`, and `forEach`. So, consider this just another thrilling chapter in our Javascript saga. And remember, with excellent coding skills comes great responsibility... or something like that. Let's do this!
+
+## Introducing Execution Context
+
+Whenever your Javascript code hits the stage, the Javascript engine sets up its backstage crew. It carves out a little space to keep track of all the variables and functions you've got going on. Then there's the VIP section. That's what we call the global execution context. It's where the big shots hang out, the ones that are defined at the tip-top level of your code.
+
+Now, when a function gets called to action, it's like opening up a whole new set. We're talking about the function execution context. It's like a cozy little corner where your function can do its thing, with all the variables and functions it needs close at hand.
+
+But here's where it gets interesting. Functions aren't just limited to their own little world. Oh no, they've got connections. They can reach out and tap into the execution contexts of their parents. So, not only do they have their own little party going on, but they can also crash the party in the global context or any function they're nested in. It's like having access to the entire guest list.
+
+And why does any of this matter? Well, think of execution context as the insider access Javascript uses to keep track of who's who and what's what. It's how it knows where to find the variables, what methods are up for grabs, and all that jazz. So yeah, it might sound a bit complicated now, but trust me, once you see it in action, it'll all start to make sense.
+
+Let's lay the groundwork for our Javascript journey with five key terms that'll be your trusty sidekicks. Consider this the pre-game pep talk, so when these terms pop up later, you'll be like, "Ah-ha, I've been expecting you!" Execution Context: At the global level, it's the global execution context. But inside a function, it's a whole new vibe, blending the function's execution context with its parent scopes.
+
+- `this`: This one's a bit of a mystery. It's a unique object that's part of the current execution context. But here's the kicker: its value changes based on where and how a function is called. Confused? Don't worry; we'll untangle this web of `this` in the upcoming lessons.
+- `call`: Think of this as the hotline bling for your function. When you dial `call`, you're essentially saying, "Hey, function, wake up! And oh, here's the object you should consider as `this` when you do your thing." Plus, you can throw in some extra arguments for good measure. It's like giving your function a personalized wake-up call.
+- `apply` is similar to `call` but with a twist. It's like saying, "Hey, function, time to shine! And by the way, here's the object you should treat as `this` when you do your magic." But instead of listing arguments one by one, you bundle them neatly in an array—efficiency at its finest.
+- `bind`: Last but not least, we've got `bind`—this one's like cloning your function but with a new identity. You're saying, "Hey, function, I want to prep you for a new environment. So, when you're called, make sure 'this' is set to this specific object." It's like giving your function a makeover for a special occasion.
+
+## Deciphering the Code: What Exactly is a 'Record'?
+
+Way, way...way back in the day, before TikTok, iPhones, TRL, and The World Wide Web took over the world, computers were a whole different breed. We're talking about the swinging 60s and even earlier, when memory was scarcer than a decent [cup of coffee](https://www.buymeacoffee.com/t0nylombardi) on a Monday morning.
+
+Hold onto your hats because this is where it gets wild. Records weren't just ones and zeros floating around in the digital ether back then. Oh no, they were tangible, physical things. Imagine that! We're talking about good ol' punch cards. Yeah, you heard me right. Little squares of paper packed a punch, quite literally.
+
+Take a gander at this beauty:
+
+![Old School Punch Card](/blog/javascript-context/punch-card.png)
+
+Now, these cards weren't just for show. Oh no, they were packed with juicy details, neatly organized into what we call "fields." You've got your `first_name` field, your `last_name field`, and even a field for how many hours you slaved away at the office.
+
+So, when payday rolled around, here's how the magic happened:
+
+- Step 1: Load up all those punch cards into a tray, like you're loading bullets into a gun. It's about to get real.
+- Step 2: Feed that tray into the belly of the beast—the computer. It's hungry for data; those punch cards are its favorite snack.
+- Step 3: The computer goes to work, reading through each card, crunching numbers faster than you can say, "Bob's your mother's brother." It's like a digital Sherlock Holmes, solving the mystery of how many hours each employee put in...Or didn't
+- Step 4: Hot off the press pops a shiny new card. But this isn't your grandma's punch card. No, sir, this one's got a unique field added, letting you know exactly how much dough each employee is owed. It's like winning the lottery but with less screaming and more numbers.
+- Step 5: And just for good measure, the computer spits out a neat little table, listing all the employees' names and the fat stacks they're about to cash in. It's payday, baby!
+- Step: 6 ...
+- Step: 7 Profit.
+
+> ASIDE: Come to think of it, iterating over a collection, performing a transformation, and emitting a new collection where every element has been transformed sounds an *awful* lot like `map` to us.
+
+So, it's time for a little analog action after our trusty computer does its thing and churns out the pay ledger. Imagine: strolling down to the payroll department, the ledger in hand, ready to write those checks the old-fashioned way—with pens and ink! There is none of that digital transfer nonsense here. It's all about the satisfying scratch of pen on paper, the faint scent of ink lingering in the air. But wait, there's more! When the bigwigs in the executive suite want to peek at the company's payroll costs, it's back to the punch cards we go. Load 'em up, run 'em through a different program, and boom!
+
+> ASIDE: Come to think of it, iterating over a collection, performing an evaluation on each element and emitting a new value based on those elements sounds an awful lot like `reduce` to us.
+
+![The Big Kahuna](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3lqZWh4eDE0a2EwMzllcGk1Nnl6aXg3N2R6NXZxdmo3ZHZnM2g4NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oz8xXUXODTG49GGaI/giphy.gif)
+
+## The Big Kahuna: Execution Context
+
+Let's peel back the curtain on how Javascript handles functions. So, every time you call a function, Javascript springs into action, creating what we call a 'function execution context.' It's like setting the stage for the star of the show—the function itself. And right there in the spotlight is this little object, quietly waiting to be acknowledged. We call it `this`, the key player in our Javascript drama.
+
+Now, here's where things get interesting. We can play matchmaker with `this` by using nifty methods like call, apply, or bind. It's like saying, "Hey, function, meet your new best friend!" And just like that, we explicitly pass along the object we want 'this' to refer to. Pretty neat?
+
+But what happens if we don't play matchmaker? How does Javascript know which object to pass along? Well, that's where the magic of Javascript's rules comes into play. It's like a secret code, hidden in plain sight. Javascript works its mojo and figures out the perfect object to pass along depending on how and where the function is called. It's like watching a master detective solve a case, one function call at a time.
+
+## How Javascript Implicitly Sets Execution Context
+
+Javascript does the heavy lifting when passing around `this` Most of the time, we're in luck—we don't need to play matchmaker with `call`, `apply`, or `bind`. Instead, we sit back and let Javascript work its magic, figuring out 'this' all on its own. Don't get too comfy just yet. It's crucial to wrap our heads around how Javascript pulls off this sleight of hand.
+
+Now, we've got two scenarios to mull over. First, we've got your "bare" function calls—no frills, no fuss. It's like throwing a dart blindfolded and hoping for a bullseye. But fear not because Javascript has a trick up its sleeve for handling these situations. Then, we've got calling a function expression that's cozying up as a property of an object. It's like inviting your favorite celebrity over for dinner and hoping they overlook the burnt lasagna. But don't worry, Javascript's got our back here, too.
+
+## How to Override Context Like a Asgardian Hammer-wielding Mofo with *call* and *apply*
+
+![Thor](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExenZxN2tubjlvYnNyY2s2ZGN1MGd5Y2Z5bXB3dDh4MXdibGlkNG1pOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1Nclw5CJ3N77G/giphy.gif)
+
+Now that I chewed your ear off, `call` and `apply` are more than just methods on functions—they're like the secret sauce that gives us ultimate control. Let me paint a picture for you. If you have a function and want to shake things up a bit, maybe switch up the context object. Well, that's where `call` and `apply` swoop in to save the day. Remember when we talked about punch cards? Ah, good times. Now, imagine invoking those functions like we always do, but with a twist. We'll throw in some `call` or `apply` action and watch the magic unfold. It's like adding a pinch of spice to an already delicious dish—the same great taste, but with an extra kick.
+
+```javascript
+const asgardianBrothers = [
+  {
+    firstName: "Thor",
+    familyName: "Odinsson"
+  },
+  {
+    firstName: "Loki",
+    familyName: "Laufeysson-Odinsson"
+  }
+]
+
+function intro(person, line) {
+  return `${person.firstName} ${person.familyName} says: ${line}`
+}
+
+const phrase = "I like this brown drink very much, bring me another!"
+intro(asgardianBrothers[0], phrase) //=> Thor Odinsson says: I like this brown drink very much, bring me another!
+```
+
+What if we told Javascript that instead of the record being a parameter, it could be assumed as a context and thus accessible via `this`. To accomplish this, we can use either `call` or `apply`:
+
+```javascript
+function introWithContext(line){
+  return `${this.firstName} ${this.familyName} says: ${line}`
+}
+
+introWithContext.call(asgardianBrothers[0], phrase) //=> Thor Odinsson says: I like this brown drink very much, bring me another!
+
+introWithContext.apply(asgardianBrothers[0], [phrase]) //=> Thor Odinsson says: I like this brown drink very much, bring me another!
+```
+
+Alright, let's break `this` down like a septic tank after Taco Tuesday. So, we've got this `introWithContext` function. It's like the sidekick to our primary intro function, but with a twist. Instead of taking a bunch of arguments, introWithContext needs one thing: a catchphrase. Simple enough, huh? But here's where things get interesting. We can take `introWithContext` for a spin and use either `call` or `apply` to shake things up. We toss in `thisArg` object as the first argument, and bam! Suddenly, that object becomes the star of the show inside the function. It's like passing the Olympic torch to a new hero.
+
+Now, let's talk about the nitty-gritty. When it comes to using `call` or `apply`, the game plan is pretty much the same. You've got your function, you've got your `thisArg` object, and you've got your catchphrase. The only difference? How you pass along any additional arguments. With call, it's like throwing a handful of confetti—each argument gets its own spotlight, listed out one by one after the `thisArg`. It's like a party, and everyone's invited. But with `apply`, it's a bit more laid-back. You bundle up those extra arguments in an array, and boom! They get passed along just like that. It's like tossing a whole pizza into the mix and watching everyone dig in.
+
+```javascript
+intro(asgardianBrothers[0], phrase) === introWithContext.call(asgardianBrothers[0], phrase) //=> true
+intro(asgardianBrothers[0], phrase) === introWithContext.apply(asgardianBrothers[0], [phrase]) //=> true
+
+const complaint = "I was falling for thirty minutes!"
+intro(asgardianBrothers[1], complaint) === introWithContext.call(asgardianBrothers[1], complaint) //=> true
+intro(asgardianBrothers[1], complaint) === introWithContext.apply(asgardianBrothers[1], [complaint]) //=> true
+```
+
+## Explicitly Lock Context For a Function With bind
+
+Alright, let's get all hypothetical for a moment. Lets say you've got your `introWithContext` function. It's like the show's star, but sometimes you want to lock it in and stick it to one spot like glue. Let's say we want to clone `this` function, but with a twist—where the context is locked in tighter than a celebrity's NDA. That's where bind comes swooping in, like a superhero with a cape made of Javascript code.
+
+```javascript
+const asgardianBrothers = [
+  {
+    firstName: "Thor",
+    familyName: "Odinsson"
+  },
+  {
+    firstName: "Loki",
+    familyName: "Laufeysson-Odinsson"
+  }
+]
+function introWithContext(line){
+  return `${this.firstName} ${this.familyName} says: ${line}`
+}
+
+const thorIntro = introWithContext.bind(asgardianBrothers[0])
+thorIntro("Hi, Jane") //=> Thor Odinsson says: Hi, Jane
+thorIntro("I love snakes") //=> Thor Odinsson says: I love snakes
+```
+
+We call the bind method on a function (`introWithContext` in this case) and pass one argument: the object we want to be bound to the function. The `bind` method returns a new function that needs to be called, which we've saved into the variable `thorIntro`. Then, when we call thorIntro, any `this` references inside the original function that bind was called on are "hard set" to `asgardianBrothers[0]`.
+
+## Conclusion
+
+To sum up the explicit overrides:
+
+- The context object can be explicitly set in a function by invoking `call` on the function and passing an object (`thisArg`) as the first argument; the object can then be accessed via `this` inside the function. Additional parameters to the function are listed after `thisArg`.
+- The context object can be explicitly set in a function by invoking `apply` on the function and passing an object (`thisArg`) as the first argument; the object can then be accessed via `this` inside the function. Additional parameters to the function are stored in an array which is passed as the second argument.
+- The context object can be locked in a function by invoking `bind` on the function and passing it a `thisArg`. The `bind` function makes a copy of the functionality of the function it was called on, but with all the `this` stuff locked in place, and returns that function. That new function can have arguments passed to it with `()` as usual.
+
+=== src/content/blog/let-loose-your-inner-sherlock-with-a-search-feature.md ===
+---
+title: 'Let Loose Your Inner Sherlock with a Search Feature'
+date: '03-15-2024'
+heroImage: '/blog/search-feature/inspector.png'
+image: '/blog/search-feature/inspector.png'
+originalDatePublished:
+description: 'Elevating Your Rails App with a Killer Search Feature'
+author: 'Anthony Lombardi'
+categories: [ruby, rails]
+tags: [search]
+draft: false
+---
+
+## Searching in Rails
+
+Alright, we're going to dive into the thrilling world of a search feature. Now, let me set the stage here. Picture yourself cruising through a bustling web app, looking for that one needle in a haystack of information. You know what I'm talking about—finding the perfect pair of shoes or hunting down that elusive meme you saw last week. Search functionality is your trusty sidekick in this digital adventure.
+
+How do we bring this magical search feature to life in a Rails app? Well, buckle up because we're about to embark on a journey that'll have you feeling like a modern-day Sherlock Holmes. We'll talk about the nitty-gritty of building a search feature in Rails from the ground up. We'll cover everything from setting up a search method to more advanced features like searching across multiple tables and handling search parameters. By the time we're done, you'll be ready to unleash your inner detective and build a search feature that'll have users feeling like they've got the world at their fingertips.
+
+![Excelsior!](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXJpa3RrdGxwNnEyM3AxdWd6NGZxc2ZjaHhsYjJ0c25nMW9hemFmbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26ufj9ZwxwEaZ8AWk/giphy.gif)
+
+## Implementing a Basic Search Feature
+
+Let's talk about the search method in the controller. This is where the real magic happens. We'll whip up a nifty search method that'll make your app feel like it has its detective on the case. We will use the all-mighty `scaffold` generator to whip up our search feature. When we talk about Rails Scaffold, we're talking about the holy grail of automatic file generation. We're talking controllers, views, models, routes, and migrations - the whole shebang.
+
+Now, to get that ball rolling and scaffold your post, all you have to do is fire off this command:
+
+```bash
+rails g scaffold post title body:text
+```
+
+And now it's time to bring it all together with a little thing called migration.
+
+```bash
+rails db:migrate
+```
+
+## Building the Search Form
+
+Once that's done, you're at the central part of the tutorial. So, let's add the form in the `app/views/posts/index.html.erb` file. This is where the magic happens. We're going to sprinkle a little HTML and tailwind magic to make that search bar pop like a fireworks display. And when users type in their queries, they'll be whisked away to a search page that's as sleek and stylish as a red carpet premiere.
+
+Note: I put a lot of the tailwind CSS inside 'application.css,' so it looks like everything is okay in this blog.
+
+```erb
+<div class="container flex flex-col">
+  <%= form_with url: search_posts_path, method: "get", class: "mt-8" do |f| %>
+    <label for="search" class="search-label">Post</label>
+    <div class="relative">
+      <div class="search-icon">
+        <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+        </svg>
+      </div>
+
+      <div data-controller="address">
+        <%= f.text_field :search,
+                        id: :search,
+                        placeholder: "Search Post",
+                        class: "search-input" %>
+
+      </div>
+      <button id="submit" type="submit" class="search-btn">Search</button>
+    </div>
+  <% end %>
+</div>
+```
+
+## Implementing the Search Route
+
+Now, let's talk about the search route in `routes.rb`. Think of this as laying down the tracks for your search feature to zoom through. With just a few lines of code, you'll be paving the way for users to find exactly what they're looking for in no time.
+
+Let's add that search route in `routes.rb`. Think of this as laying down the tracks for your search feature to zoom through. With just a few lines of code, you'll help users find exactly what they're looking for quickly.
+
+```ruby
+Rails.application.routes.draw do
+  resources :posts do
+    collection do
+      get :search
+    end
+  end
+end
+```
+
+We're using the `collection` method here to add a new route that doesn't require an ID. This is perfect for our search feature because we don't need to worry about specific post IDs when searching for something. We want to cast a wide net and find all the posts that match the user's query.
+
+## Implementing the Search Method
+
+Now, let's talk about the search method in the controller. This is where the real magic happens. We'll whip up a nifty little search method that'll make your app feel like it's got its own personal detective on the case.
+
+**Note**: We are using the turbo_stream to render the search results. This will allow us to update the posts without a full page reload. We'll talk more about this later.
+
+```ruby
+def search
+  @posts =
+    if params[:search].present?
+      Post.where('title LIKE ?', "%#{params[:search].downcase}%")
+    else
+      Post.all
+    end
+
+  render turbo_stream:
+    turbo_stream.update('posts',
+                        partial: 'posts',
+                        locals: { posts: @posts })
+end
+```
+
+Alright, folks, let's break it down like that rusty ole beater in your garage.
+
+- First up, we've got `params[:search]` - that's like your backstage pass from the search bar to the main event. It's passing along whatever you type in that search bar, so make it count!
+
+- Second `.downcase`. This bad boy's like your personal stylist, making sure all your letters are dressed in lowercase threads. Because, let's face it, who needs uppercase drama when you're just trying to find that perfect meme?
+
+- Third, pay attention, 'cause we're getting into the heavy stuff. When I say `Post` with a capital P, I mean the Posts table. That's where all the magic happens, folks.
+
+- Fourth, let's not forget about our good friend, the `%` sign. Stick it at the beginning, and you're opening the floodgates to all the posts that end with whatever letter you throw in there. Toss it at the end, and you're diving headfirst into a pool of posts that start with that same letter. It's like magic but with more databases.
+
+Fifth, onto the real MVP `.where()`. This little powerhouse is our ticket to filtering out all the noise and honing in on exactly what we're looking for. We're talking about searching through columns like a pro, zeroing in on that golden nugget of information.
+
+Last but not least, we've got the big guns `LIKE`. When I say `LIKE` in all caps, I mean business. It's like the matchmaker of the digital world, trying to find that perfect match between what you're searching for and what's hiding in the depths of your database. So when you see `LIKE` you know it's game on, baby!
+
+## Showing the Search Results
+
+Now, let's discuss the search results in the view. This is where the magic happens. We're going to add some HTML and tailwind magic to make those search results look a little more impressive.
+
+```erb
+<div class="container flex flex-col">
+  <%= form_with url: search_posts_path, method: "get", class: "mt-8" do |f| %>
+    .
+    .
+    .
+  <% end %>
+
+  <!--Search Results -->
+  <% if @posts.present? %>
+    <div class="mt-8">
+      <div class="mt-4">
+        <%= render 'posts', posts: @posts %>
+      </div>
+    </div>
+  <% end %>
+  <!-- Search Results -->
+</div>
+```
+
+Here, we add a conditional statement to check if the `@posts` variable is present. If so, we loop through each post and display the title and body.
+
+## Adding the Posts Partial with Turbo Streams
+
+`turbo_stream` is a Rails feature that allows you to update parts of a page without a full page reload. It's like having a magic wand that lets you sprinkle fairy dust on your app and make things happen in real-time. When you're in your controller and toss in the `turbo_stream update` method, you're telling your app, "Hey, buddy, when someone hits that submit button, let's fire up that search method, pronto!"
+
+What we are going to do is add a new file called `_posts.html.erb` inside `app/views/posts` and wrap the posts in a `turbo_frame_tag` and update the posts partial with the new posts. This will allow us to update the posts without a full page reload.
+
+```erb
+<%= turbo_frame_tag "posts" do %>
+  <% posts.each do |post| %>
+    <div class="flex items " data-controller="address">
+      <div class="flex-1 py-4">
+        <h3 class="text-xl font-bold text-white dark:text-gray-100"><%= post.title %></h3>
+        <p class="text-gray-400 dark:text-gray-500"><%= post.body %></p>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+```
+
+## Adding some data to the database
+
+Now, let's add some data to the database. We'll use the file `db/seeds.rb` to do this, which will give us some data to search through. Note that we will use a gem called [faker](https://github.com/faker-ruby/faker) to generate fake data.
+
+```ruby
+# frozen_string_literal: true
+
+titles = [
+  'Zen and the Art of Not Spilling Your tacos: A Guide to Mindful Eatings',
+  'Lucid Dreaming: Because Who Needs Reality Anyway?',
+  'The Pursuit of Happiness: A Quest for the Perfect Pizza Topping',
+  'Yoga for Couch Potatoes: Mastering the Art of Not Moving'
+]
+
+titles.each_with_index do |_v, i|
+  Post.create!(
+    title: titles[i],
+    body: Faker::Lorem.sentence
+  )
+end
+```
+
+Now, let's run the following command to add the data to the database.
+
+```bash
+rails db:seed
+```
+
+## Conclusion
+
+In conclusion, implementing a compelling search feature in a Rails app is crucial for enhancing user experience and application functionality. By following the steps outlined above, including setting up the search method, designing the search form, defining the search route, and utilizing Turbo Streams for real-time updates, developers can create a search feature that meets and exceeds user expectations. With the right tools and techniques, building a robust search functionality can transform an ordinary Rails app into a user-friendly, dynamic platform that keeps users engaged and satisfied. So, let loose your inner Sherlock and start building a search feature that'll make users feel like they've got the world at their fingertips.
+
+=== src/content/blog/old-school-twitter-bot.md ===
+---
+title: Old-school Twitter Bot in ruby
+date: '2014-11-18'
+heroImage: '/blog/twitter-bot/old-school-twitter-bot.jpeg'
+image: '/blog/twitter-bot/old-school-twitter-bot.jpeg'
+author: 'Anthony Lombardi'
+originalDatePublished: '2014-11-18'
+description: 'I had an idea to try to automate search results and reply back to each user with a message on twitter.'
+categories: [ruby]
+tags: [ruby]
+draft: false
+---
+
+### UPDATE: (2022)
+X formally know as Twitter no longer allows you to use their api freely and they're much more strict about which apps are allowed to use their api.
+
+ ---
+
+I been trying to help a friend gain more attention to his twitter and his music. I had an idea to try to automate search results and reply back to each user with a message. Upon doing this, I discovered it would take two ruby gems....
+
+First was twitter gem:
+
+```bash
+sudo gem install twitter
+```
+
+second is tweetstream:
+
+```bash
+sudo gem install tweetstream
+```
+
+The Twitter gem has streaming aspects in their latest version 5.8.0 say its experimental so I didn’t use it. This is a simple simple bot to run. The main hurtle is to tweet to users that are tweeting about my search field, is that I needed not to get caught by twitter.
+
+My Idea was get a large amount of sentences together and randomly select one of them and tweet it to that user. Each time I tweeted I would let the script sleep for a while anywhere be tween 1 and 120 seconds. Since this is done with a random generator, Most of the time the random number is above 1 minute. Since the tweets are spaced apart time wise, the sentences where different enough to fool Twitter. I’ve tested twice and each time I was able to keep it running for a few hours with no problems.
+
+here’s the script:
+
+```ruby
+
+require 'twitter'
+require 'tweetstream'
+
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
+count = 1
+tweets = []
+api_keys = {
+  consumer_key:         '1234',
+  consumer_secret:      '1234',
+  access_token:         '1234',
+  access_token_secret:  '1234'
+}
+
+file = File.open("tweets.txt", "r").each_line do |line|
+  tweets << line
+end
+
+file.close
+
+client = Twitter::REST::Client.new do |config|
+  config.consumer_key        = api_keys[:consumer_key]
+  config.consumer_secret     = api_keys[:consumer_secret]
+  config.access_token        = api_keys[:access_token]
+  config.access_token_secret = api_keys[:access_token_secret]
+end
+
+TweetStream.configure do |config|
+  config.consumer_key         = api_keys[:consumer_key]
+  config.consumer_secret      = api_keys[:consumer_secret]
+  config.oauth_token          = api_keys[:access_token]
+  config.oauth_token_secret   = api_keys[:access_token_secret]
+  config.auth_method          = :oauth
+end
+
+puts "Api keys conected ...\n"
+
+begin
+  TweetStream::Client.new.on_error do |message|
+    puts message
+    break
+  end.track('keyword', 'keyword2') do |status|
+    tweetn = rand(0..tweets.count)
+    sleepn = rand(1..120)
+    client.update("@#{status.user.screen_name} #{tweets[tweetn]}")
+    printf "%-5s %s\n\n",
+           "#{count}: #{status.user.screen_name.rjust(10)}",
+            tweets[tweetn]
+    # Twitter checks for bots like this. Therefore we randomly
+    # sleep betwen tweets between 1 - 120 minutes
+    sleep sleepn
+    count += 1
+  end
+rescue Twitter::Error
+  sleep(5)
+  puts "This request looks like it might be automated."
+rescue Exception
+  puts "some other error happened!"
+end
+
+```
+
+=== src/content/blog/parsing-an-email-list.md ===
+---
+title: Parsing An Email List
+date: '2020-12-29T20:57:55.934Z'
+heroImage: '/blog/parsing-email-list/parsing-emails.jpeg'
+image: '/blog/parsing-email-list/parsing-emails.jpeg'
+originalDatePublished: '2014-11-18'
+description: 'I been written a code to parse through an email list a client gave me that has roughly 94 emails.'
+author: 'Anthony Lombardi'
+categories: [ruby]
+tags: [ruby]
+draft: false
+---
+
+It's been a while since I last wrote here. I intend for this space to serve as a showcase for all the work I undertake, encompassing coding, graphics, music, and random thoughts. Recently, I have been focused on developing a code to parse through an email list provided by a client, comprising approximately 94 email addresses. Given the list's age and uncertainty regarding its accuracy, my approach involves two main steps.
+
+Firstly, I aim to identify and filter out misspelled email addresses. Subsequently, I plan to verify the existence of the MX record associated with each email address. This process generates three distinct lists: 'Bad_emails' (containing all misspelled addresses), 'Good_emails' (comprising addresses presumed to be valid), and 'Rejected_emails' (based on a regex code designed to identify typical email formats).
+
+The initial implementation of this approach yielded around 54,000 email addresses. I opted for categorization into three lists due to the ongoing debate surrounding what constitutes a genuine email address. Additionally, the verification of MX records introduces the possibility of false negatives and vice versa.
+
+Here is the code.
+
+```ruby
+# frozen_string_literal: true
+
+require 'validates_email_format_of'
+
+VALIDATION_OPTIONS = {
+  on: true,
+  check_mx: true,
+  local_length: 25,
+  domain_length: 10
+}
+
+def valid_email?(email)
+  email.match?(/^[\w+\-].?+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+$/i)
+end
+
+def process_email(line_number, email)
+  if valid_email?(email)
+    handle_valid_email(line_number, email)
+  else
+    handle_invalid_email(line_number, email)
+  end
+end
+
+def handle_valid_email(line_number, email)
+  results = ValidatesEmailFormatOf::validate_email_format(email, VALIDATION_OPTIONS)
+  if results.nil?
+    write_to_file("good_emails.txt", email)
+    print_formatted(line_number, email)
+  else
+    write_to_file("rejected_emails.txt", email)
+    print_rejected(line_number, email, results)
+  end
+end
+
+def handle_invalid_email(line_number, email)
+  write_to_file("bad_emails.txt", email)
+  printf("%-5s %s\n", line_number, email)
+end
+
+def print_formatted(line_number, email)
+  printf("%-5s %s", line_number, email)
+end
+
+def print_rejected(line_number, email, results)
+  print("\t\t#{email.chomp}: #{results.join(', ')}\n")
+end
+
+def write_to_file(file_name, email)
+  File.open(file_name, 'a+') { |file| file.write(email) }
+end
+
+File.open("emails.txt", "r") do |file|
+  line_number = 1
+  file.each_line do |email|
+    process_email(line_number, email)
+    line_number += 1
+  end
+end
+```
+
+=== src/content/blog/rails-console-command-simplified.md ===
+---
+title: Rails Console Simplified
+date: '2023-08-31T21:00:56.707Z'
+heroImage: '/blog/rails-console/rails-console.jpeg'
+image: '/blog/rails-console/rails-console.jpeg'
+originalDatePublished:
+description: 'An article on how to simplify the Rails console command with aliases'
+author: 'Anthony Lombardi'
+categories: ["rails"]
+tags: ["rails", "console"]
+draft: false
+---
+
+
+### What are Rails console commands?
+Rails console commands what you can politely ask Rails to execute, like launching a local web server, launch test, and so on.
+
+For example, `rails` new will create a new Rails application.
+
+Another example: `bin/rails server` to launch your local web server.
+
+**Side note**: I would advise to use `bin/rails` most of the time. Except maybe to create a new application, because at this moment the command is not available. However, there’s a clever trick for this.
+
+### How do I know which command needs a shortcut?
+It’s a matter of feeling. If it’s painful to write `bin/rails db:migrate` again and again, maybe it’s time to define an alias.
+
+How do I define a shortcut?
+In linux-based systems, aliases are available through the .bash_aliases or if you are on a newer macOS, it would be [.zshrc](https://ohmyz.sh/) file. Google around if you have never heard about it. It allows you to define shortcuts for the command line, the same way you use acronyms to shorten expressions in your spoken language.
+
+### My shortcut list
+This is part of my .zshrc for Rails.
+
+```ruby
+alias br='bin/rails'
+alias bd="./bin/dev"
+alias be='bundle exec'
+alias bi='bundle install'
+alias eec="export EDITOR='code -w'"
+alias brdrol='br db:rollback STEP=1 && bin/rails db:rollback STEP=1 RAILS_ENV=test'
+alias brdcm="br db:drop db:create db:migrate"
+alias brdcms="br db:drop db:create db:migrate db:seed"
+alias resetdbtest='bin/rails db:drop db:create db:migrate RAILS_ENV=test'
+alias resetdbdev='bin/rails db:drop db:create db:migrate RAILS_ENV=development'
+alias brg='bin/rails generate'
+alias spec='bundle exec rspec'
+alias fd="foreman start -f Procfile.dev"
+```
+
+### Wealthy Rails console commands
+**Use acronyms**
+
+In order to remember this list, I also use acronyms, the first letter of each word, so that I still remember what I’m actually typing. For example when I’m typing **“bd”**, in my mind, I’m thinkingabout the words **“bin”** and **“dev”**. If you find an alias that is too cryptic, you won’t be able to work on a teammate’s machine.
+
+### Make some shortcuts more difficult
+Sometimes I don’t use acronyms, especially if the command may hurt the application. Like resetting a database. In this case, I write resetdbdev and not rdb, so that I’m sure of what I’m doing
+
+### Cleaning the list from time to time
+I don’t know if there are some tools to track which shortcuts are more used. On my side, I just open my .zshrc from time to time to see if everything is
+
+- well written
+- still relevant
+
+### List of all Rails commands and options
+The official documentation about Rails commands covers most use cases.
+
+If you want to discover all Rails command, enter `$> bin/rails T`
+
+If you want to filter only things related to the database, you can do it like this: `$> bin/rails T db.`
+
+This will output (for Rails 7) :
+```ruby
+rails db:create # Creates the database from DATABASE_URL or config/database.yml for the current RAILS_...
+rails db:drop # Drops the database from DATABASE_URL or config/database.yml for the current RAILS_EN...
+rails db:encryption:init  # Generate a set of keys for configuring Active Record encryption in a given environment
+rails db:environment:set  # Set the environment value for the database
+rails db:fixtures:load  # Loads fixtures into the current environment's database
+rails db:migrate  # Migrate the database (options: VERSION=x, VERBOSE=false, SCOPE=blog)
+rails db:migrate:down # Runs the "down" for a given migration VERSION
+rails db:migrate:redo # Rolls back the database one migration and re-migrates up (options: STEP=x, VERSION=x)
+rails db:migrate:status # Display status of migrations
+rails db:migrate:up # Runs the "up" for a given migration VERSION
+rails db:prepare # Runs setup if database does not exist, or runs migrations if it does
+rails db:reset # Drops and recreates all databases from their schema for the current environment and ...
+rails db:rollback # Rolls the schema back to the previous version (specify steps w/ STEP=n)
+rails db:schema:cache:clear # Clears a db/schema_cache.yml file
+rails db:schema:cache:dump  # Creates a db/schema_cache.yml file
+rails db:schema:dump  # Creates a database schema file (either db/schema.rb or db/structure.sql, depending on...
+rails db:schema:load  # Loads a database schema file (either db/schema.rb or db/structure.sql, depending on ...
+rails db:seed # Loads the seed data from db/seeds.rb
+rails db:seed:replant # Truncates tables of each database for current environment and loads the seeds
+rails db:setup  # Creates all databases, loads all schemas, and initializes with the seed data (use db...
+rails db:version  # Retrieves the current schema version number
+rails test:db # Run tests quickly, but also reset db
+```
+
+If you want to discover all what a specific command can do, enter the `--help` flag, like this : `$> br db:migrate --help`
+
+You will discover some nice tricks. For example:
+
+```ruby
+$> br console --help
+
+Usage: rails console [options]
+
+Options:
+-e, [--environment=ENVIRONMENT] # Specifies the environment to run this console under (test/development/production).
+-s, [--sandbox], [--no-sandbox] # Rollback database modifications on exit.
+
+```
+This sandbox option seems really cool!
+
+Conclusion
+Maybe you already heard from your sysadmin that **“the command-line is the most efficient tool”**. By using aliases for Rails, we can push this assertion a little further.
+
+=== src/content/blog/rails-service-objects-need-a-job-description.md ===
+---
+title: 'Rails Service Objects Need a Job Description'
+date: '09-06-2026'
+heroImage: '/blog/rails-service-objects/rails-service-objects.jpg'
+image: '/blog/rails-service-objects/rails-service-objects.jpg'
+originalDatePublished:
+description: 'Moving code into a service object doesn’t automatically make Rails code cleaner. Learn how clear responsibilities, explicit contracts, and meaningful tests turn an extraction into a better design.'
+author: 'Anthony Lombardi'
+categories: [engineering, archetecture, software-development]
+tags: [ruby, rails]
+draft: false
+---
+
+A Rails controller with six lines looks great in a pull request. Unfortunately, the other eighty lines may have simply moved into a class called `DocumentService`, where they now have fewer witnesses.
+
+Extracting an object is easy. Deciding what it owns is the architectural work.
+
+This is where Rails teams often lie to themselves with excellent posture. We see a controller getting chunky, we whisper "single responsibility principle" like it's a spell from a bootcamp-branded Hogwarts, and then we move the mess into `ShareDocumentService`.
+
+The controller gets smaller. The code review gets calmer. The complexity remains in the building, wearing a fake mustache.
+
+The real question is not "Can I move this code out of the controller?" You can. Rails will let you. Ruby will let you. Your editor will autocomplete the betrayal.
+
+The better question is: "Does this new object have a real job?"
+
+Let's use a simplified example inspired by real product domains: document sharing inside a multi-tenant Rails app. Think law firms, loan applications, real estate workflows, client portals, that whole beautiful swamp where permissions matter and one wrong `firm_id` check can turn your Monday into a compliance-themed escape room.
+
+Imagine a controller action like this:
+
+```ruby
+class DocumentSharesController < ApplicationController
+  def create
+    document = Document.find(params[:document_id])
+    recipient = User.find(params[:recipient_id])
+
+    unless current_user.firm_id == document.firm_id
+      return render json: { error: "Not authorized" }, status: :forbidden
+    end
+
+    unless recipient.firm_id == document.firm_id
+      return render json: { error: "Recipient is outside the firm" }, status: :unprocessable_entity
+    end
+
+    share = DocumentShare.create!(
+      document: document,
+      sender: current_user,
+      recipient: recipient,
+      message: params[:message]
+    )
+
+    DocumentShareNotifierJob.perform_later(share.id)
+
+    render json: { id: share.id }, status: :created
+  end
+end
+```
+
+This action checks firm membership, authorizes access, saves a record, and schedules a notification. It is not the worst controller in the world. Nobody needs to throw a chair. But it has several responsibilities living together in a studio apartment.
+
+So we do the obvious Rails thing:
+
+```ruby
+class DocumentSharesController < ApplicationController
+  def create
+    share = ShareDocumentService.call(
+      document_id: params[:document_id],
+      recipient_id: params[:recipient_id],
+      sender: current_user,
+      message: params[:message]
+    )
+
+    render json: { id: share.id }, status: :created
+  rescue ShareDocumentService::Error => e
+    render json: { error: e.message }, status: e.status
+  end
+end
+```
+
+Clean. Tidy. Deceptively soothing. Like putting all your browser tabs into one window named "Research."
+
+Then the service:
+
+```ruby
+class ShareDocumentService
+  class Error < StandardError
+    attr_reader :status
+
+    def initialize(message, status:)
+      @status = status
+      super(message)
+    end
+  end
+
+  def self.call(document_id:, recipient_id:, sender:, message:)
+    document = Document.find(document_id)
+    recipient = User.find(recipient_id)
+
+    unless sender.firm_id == document.firm_id
+      raise Error.new("Not authorized", status: :forbidden)
+    end
+
+    unless recipient.firm_id == document.firm_id
+      raise Error.new("Recipient is outside the firm", status: :unprocessable_entity)
+    end
+
+    share = DocumentShare.create!(
+      document: document,
+      sender: sender,
+      recipient: recipient,
+      message: message
+    )
+
+    DocumentShareNotifierJob.perform_later(share.id)
+
+    share
+  end
+end
+```
+
+The controller shrank. Great. But what actually improved?
+
+Maybe not much.
+
+The service still knows how to find records, enforce tenant boundaries, create shares, decide failure semantics, and schedule async work. It is basically the controller wearing a blazer.
+
+That does not make the extraction useless. It means the extraction is unfinished. The new object needs a job description.
+
+A better service object owns an operation. Not a folder. Not a vibe. An operation.
+
+For this example, the operation is: "Share this document from this user to this recipient."
+
+That gives us sharper questions:
+
+- Who may share the document?
+- Who may receive it?
+- What happens when the operation fails?
+- Who owns the transaction?
+- When can the notification safely run?
+
+Only someone from the document's firm should be able to share it, and possibly only someone with document-level permission. Firm membership is the outer wall. It is not always the whole building.
+
+In this simplified version, only another user in the same firm can receive the document. In a real system, maybe external clients can receive documents through a different workflow. That matters because "share internally" and "send externally" may look similar in the UI while having very different risk profiles.
+
+A failed operation should return a predictable result. It should not leak random ActiveRecord exceptions into the controller and make the controller interpret five different failure modes like it is reading tea leaves in production logs.
+
+The operation should also own the transaction. If creating the share succeeds but something else inside the operation fails, we need to know whether the share should exist. Transaction ownership belongs where the business operation is defined.
+
+The notification should run only after the share is safely committed. Not "after we called `create!` and hoped the database was feeling emotionally available." If the transaction rolls back, no notification should go out.
+
+Now the service has a clearer contract:
+
+```ruby
+class ShareDocument
+  Result = Data.define(:success?, :share, :error)
+
+  def self.call(...)
+    new(...).call
+  end
+
+  def initialize(document:, sender:, recipient:, message:)
+    @document = document
+    @sender = sender
+    @recipient = recipient
+    @message = message
+  end
+
+  def call
+    return failure("Not authorized") unless sender_can_share?
+    return failure("Recipient is outside the firm") unless recipient_can_receive?
+
+    share = nil
+
+    DocumentShare.transaction do
+      share = DocumentShare.create!(
+        document: document,
+        sender: sender,
+        recipient: recipient,
+        message: message
+      )
+    end
+
+    DocumentShareNotifierJob.perform_later(share.id)
+
+    Result.new(success?: true, share: share, error: nil)
+  end
+
+  private
+
+  attr_reader :document, :sender, :recipient, :message
+
+  def sender_can_share?
+    sender.firm_id == document.firm_id
+  end
+
+  def recipient_can_receive?
+    recipient.firm_id == document.firm_id
+  end
+
+  def failure(message)
+    Result.new(success?: false, share: nil, error: message)
+  end
+end
+```
+
+There is still room to improve this. For example, in a production Rails app, I would usually schedule the notification with an `after_commit` hook or another explicit after-commit mechanism. The important point is the contract: rejected shares do not create records, and they do not notify anyone.
+
+Now the controller becomes boring in the best possible way:
+
+```ruby
+class DocumentSharesController < ApplicationController
+  def create
+    result = ShareDocument.call(
+      document: Document.find(params[:document_id]),
+      recipient: User.find(params[:recipient_id]),
+      sender: current_user,
+      message: params[:message]
+    )
+
+    if result.success?
+      render json: { id: result.share.id }, status: :created
+    else
+      render json: { error: result.error }, status: :unprocessable_entity
+    end
+  end
+end
+```
+
+The controller handles HTTP. The service handles the application operation. That separation is useful because each part now has a job you can explain without needing a corkboard and red string.
+
+But this is also where developers sometimes sprint directly into enterprise cosplay.
+
+Does this need a repository? Probably not.
+
+If this Rails app uses ActiveRecord directly everywhere else, creating a `DocumentShareRepository` just to wrap `DocumentShare.create!` may add ceremony without reducing complexity. Repositories can help when persistence rules are complex, when you need to isolate a truly unstable data source, or when the domain should not know about the database. But in a conventional Rails app, ActiveRecord is already the persistence abstraction. You do not get bonus architecture points for wrapping it in a trench coat.
+
+Does it need an interface?
+
+Again, probably not yet. If there is one implementation and no meaningful alternative, an interface may be a prediction disguised as design. Interfaces are useful when they protect you from volatility: multiple notification providers, external APIs, payment gateways, storage backends. They are less useful when they exist because someone saw a diagram once and got inspired.
+
+Does it need another service?
+
+Maybe, but make it earn rent.
+
+If authorization rules become shared across document actions, extract a policy object. If notification delivery becomes complex, extract a notifier. If tenant membership rules are central and subtle, give them a home. But do not split code just because the service reached line 40 and your linter started making eye contact.
+
+The goal is not smaller files. The goal is better containment.
+
+A meaningful test should prove the operation's promise, not just its implementation. For this example, the promise is simple: a user from another firm cannot share the document, and a rejected operation produces no notification.
+
+```ruby
+RSpec.describe ShareDocument do
+  describe ".call" do
+    it "rejects a sender from another firm and sends no notification" do
+      document = create(:document, firm: create(:firm))
+      sender = create(:user, firm: create(:firm))
+      recipient = create(:user, firm: document.firm)
+
+      expect {
+        result = described_class.call(
+          document: document,
+          sender: sender,
+          recipient: recipient,
+          message: "Please review"
+        )
+
+        expect(result).not_to be_success
+        expect(result.error).to eq("Not authorized")
+      }.not_to have_enqueued_job(DocumentShareNotifierJob)
+
+      expect(DocumentShare.count).to eq(0)
+    end
+  end
+end
+```
+
+That test matters because it describes the operation's boundary. It says: this object is responsible for preventing cross-tenant sharing, and it must not trigger side effects when the operation is rejected.
+
+That is the job description.
+
+The service is no longer "the place we moved controller code." It is the owner of a business operation with rules, failure behavior, and side-effect boundaries.
+
+That distinction is the difference between cleanliness and architecture.
+
+Folder structure can help people find code. Naming conventions can help people guess intent. Service objects can absolutely make Rails applications easier to change. But none of those things force good design.
+
+A `services/` directory does not save you. A `ShareDocumentService` class does not save you. Even the word "architecture" does not save you, though it does look expensive in a slide deck.
+
+The work is deciding what belongs together.
+
+In this case, authorization, share creation, transaction ownership, and notification timing belong together because they define one operation. If any of those rules change, you want the change contained in one place. If the controller changes from JSON to Turbo Streams, the operation should not care. If the notification system changes, the operation should still define when notification is allowed.
+
+That is when extracting a service improves a Rails app.
+
+Not when the controller gets smaller.
+
+When the new object can look you in the eye and answer: "Here is what I own."
+
+=== src/content/blog/rails-service-objects-to-make-your-rails-controllers-skinny.md ===
+---
+title: 'Rails Service Objects to Make your Rails Controllers Skinny'
+date: '10-11-2023'
+heroImage: '/blog/skinny-controllers/service-objects.jpeg'
+image: '/blog/skinny-controllers/service-objects.jpeg'
+originalDatePublished:
+description: 'Moving logic into services to keep your controllers/models skinny'
+author: 'Anthony Lombardi'
+categories: [ruby]
+tags: [ruby]
+draft: false
+---
+
+In the realm of web development, efficiency and maintainability are paramount. As applications grow in complexity, the need for clean, organized code becomes increasingly apparent. When studying Rails design patterns, you may have heard the axiom "fat model, skinny controller" (or the inverse, "fat controller, skinny model"). Both of these describe a pattern of where to put business logic, which tends to take up a lot of lines of code. In either case is ideal, we want our controllers and our models to be "skinny", with as little code as possible, so that they are easy to understand and maintain. In this blog post, we'll delve into the concept of Rails service objects, exploring their benefits and best practices.
+
+### Service Objects: Another place to put your business logic
+
+Rails service objects are plain old Ruby objects(PORO) and responsible for encapsulating business logic related to a specific task or operation within an application. They serve as an intermediary layer between controllers and models, isolating complex operations from the rest of the application.
+
+Service objects live in the /app/services/ directory, and any classes defined therein will be autoloaded (as the rest of the /app/ directory).
+We can define a service object class, move our business logic to it, and thus keep our controllers and models "skinny" by keeping only controller or model-related code in them. All that extra business logic can be invoked by instantiating a service object only when needed.
+
+Ergo, we achieve:
+
+- Improved Readability: By encapsulating specific functionality within service objects, code becomes more readable and understandable. Each service object represents a single responsibility, making it easier to navigate and maintain the codebase.
+- Reusability: Service objects promote code reusability by encapsulating reusable pieces of logic. Once defined, service objects can be invoked from multiple controllers or other service objects, reducing code duplication.
+- Testability: Service objects facilitate testing by isolating business logic from the rest of the application. With clear inputs and outputs, it becomes straightforward to write unit tests for individual service objects, ensuring the reliability of the codebase.
+- Decoupling: By extracting business logic into service objects, the application becomes less dependent on the Rails framework. This decoupling enhances the modularity of the codebase and simplifies future changes or migrations to different frameworks.
+
+#### Best practices:
+
+- Single Responsibility Principle (SRP): Each service object should adhere to the SRP, focusing on a single task or operation. This ensures that service objects remain cohesive and maintainable.
+- Descriptive Naming: Choose descriptive names for service objects that reflect their purpose and functionality within the application. Clear naming conventions enhance code readability and comprehension.
+- Dependency Injection: Avoid hardcoding dependencies within service objects. Instead, utilize dependency injection to inject required dependencies, making service objects more flexible and easier to test.
+- Error Handling: Implement robust error handling mechanisms within service objects to handle unexpected scenarios gracefully. Proper error handling improves the resilience of the application and enhances the user experience.
+- Documentation: Document the purpose, inputs, outputs, and usage of each service object to facilitate collaboration and understanding among team members. Clear documentation serves as a valuable resource for developers working on the codebase.
+
+### Example:
+
+A perfect example of a "fat controller" ripe for refactoring through service objects lies in a controller designed for an ElasticSearch implementation. This particular controller undertakes the task of searching Users, Hashtags, and first/last names within a Profile model. The initial logic of the code lacks the principles of DRY (Don't Repeat Yourself), primarily due to its repetitive nature in traversing three distinct models.
+
+Here, we defined a bunch of business logic in the mentions_controller.rb to query ElasticSearch:
+
+```ruby
+# /app/controller/mentions_controller.rb
+class MentionsController < ApplicationController
+
+  def index
+    @mentions = Searchkick.multi_search([hashtags, users, profiles]).flatten
+
+    respond_to do |format|
+      format.json { render json: @mentions.to_json }
+    end
+  end
+
+  private
+
+  def hashtags
+    HashTag.search(params[:query], boost_by_recency: { created_at: { scale: '7d', decay: 0.5 } },
+                                   limit: 5)
+  end
+
+  def users
+    User.search(params[:query], boost_by_recency: { created_at: { scale: '7d', decay: 0.5 } },
+                                limit: 5)
+  end
+
+  def profiles
+    Profile.search(params[:query], fields: [:first_name, :last_name],
+                                   boost_by_recency: { created_at: { scale: '7d', decay: 0.5 } },
+                                   limit: 5)
+  end
+end
+```
+
+Pretty much everything below the private keyword is NOT related to the controller--it's just logic to query a specific API.
+
+What if we wanted to add different models, and wrote a bunch of new functions to search and parse its data? Our controller could get out of control (and hard to understand/maintain) VERY quickly!
+
+So, let's create a new /app/services/ directory, and add a dedicated service object to handle the ElasticSearch querying logic --let's call it `mentions_query_service.rb`:
+
+```ruby
+# /app/services/mentions_query_service.rb
+# frozen_string_literal: true
+
+# This class encapsulates the logic for performing search operations on predefined models such as User, Profile, and Hashtag.
+#
+class MentionsQueryService < ApplicationService
+  SEARCH_MODELS = %w(HashTag User Profile).freeze
+  LIMIT = 5
+
+  # @!attribute query
+  #   @return [String] The search query string.
+  attr_accessor :query
+
+  # Initializes a new instance of the MentionsQueryService.
+  #
+  # @param query [String] The search query string.
+  def initialize(query: String)
+    @query = query
+  end
+
+  # Executes the search query across multiple models.
+  #
+  # @return [Hash] A hash containing the search results and success/error status.
+  def execute!
+    multi_search
+
+    if @mentions.nil?
+      errors.add(:base, 'query is empty')
+    else
+      { success: true, data: @mentions, errors: [] }
+    end
+  end
+
+  private
+
+  # Performs a search query across multiple models.
+  #
+  # @return [Boolean] Returns false if the query is blank, otherwise returns true.
+  def multi_search
+    return false if query.blank?
+
+    search_array = []
+    SEARCH_MODELS.each do |model|
+      search_array << mention_query(model)
+    end
+
+    @mentions = Searchkick.multi_search(search_array)
+  end
+
+  # Executes a search query on a specified model using ElasticSearch.
+  #
+  # @param model [String] The name of the model to search.
+  # @return [Array] The search results.
+  #
+  # @example Perform a search query on the User model
+  #   mention_query("User")
+  #
+  # @note This method relies on the ElasticSearch implementation for search functionality.
+  def mention_query(model)
+    model.constantize.search(query, fields: fields(model), boost_by_recency:, limit:)
+  end
+
+  # Defines the boosting parameters for recency in search results.
+  #
+  # @return [Hash] A hash specifying the boosting parameters.
+  def boost_by_recency
+    {
+      created_at: {
+        scale: '7d',
+        decay: 0.5
+      }
+    }
+  end
+
+  # Retrieves the fields to be searched for the specified model.
+  #
+  # @param model [String] The name of the model.
+  # @return [Array] An array of symbols representing the fields to search.
+  def fields(model)
+    case model.downcase.to_sym
+    when :user
+      %i(username)
+    when :profile
+      %i(first_name last_name)
+    when :hashtag
+      %i(name)
+    else
+      []
+    end
+  end
+
+  # Retrieves the limit for the number of search results.
+  #
+  # @return [Integer] The limit for search results.
+  def limit
+    LIMIT
+  end
+end
+
+```
+
+Note: to not use self for every method, I created `ApplicationService` that `MentionsQueryService` extends. you can check out the code [here](https://gist.github.com/t0nylombardi/c6671135e208e23cb71e46fd61c1ae37).
+
+And now, we can make our `mentions_controller.rb` much "skinnier" by completely removing those same methods:
+
+```ruby
+# /app/controllers/mentions_controller.rb
+# frozen_string_literal: true
+
+class MentionsController < ApplicationController
+  def index
+    @mentions ||= MentionsQueryService.new(params[:query]).call
+
+    respond_to do |format|
+      format.json { render json: @mentions.to_json }
+    end
+  end
+end
+```
+
+We can now call `MentionsQueryService` to handle all of the ElasticSearch-querying and data-parsing outside of the controller. This makes our controller a lot easier to read and understand!
+
+Note: Although the examples here are exclusively related to making "skinny" controllers, the same types of logic/methods can be moved from models to service objects as well.
+
+### Conclusion
+
+Utilizing Rails service objects constitutes a robust strategy for consolidating business logic and fortifying code organization within your application. By harnessing the advantages of service objects, we can elevate the maintainability, reusability, and testability of our controllers and models. Integrating service objects into your development workflow fosters clarity and enhances the long-term scalability of your application.
+
+When confronted with intricate business logic in your controllers or models, contemplate employing service objects to encapsulate that logic. This approach ensures streamlined and efficient controllers/models, fostering a codebase that is both agile and resilient over time.
+
+=== src/content/blog/rejection-emails-the-cold-dead-eyed-fish-of-the-hiring-world.mdx ===
+---
+title: 'Rejection Emails: The Corporate Equivalent of "It''s Not You, It''s Us" (But Worse)'
+date: '03-10-2025'
+heroImage: '/blog/rejection-emails/rejection-emails.jpg'
+image: '/blog/rejection-emails/rejection-emails.jpg'
+originalDatePublished:
+description: 'Why Are Job Rejections So Useless?'
+author: 'Anthony Lombardi'
+categories: [jobs]
+tags: [hiring, job-search, rejection]
+draft: false
+seo:
+---
+
+Ah yes, the rejection email. The beautifully soulless, copy-paste poetry of the corporate world. You ever get a rejection email and think, Wow, that was so informative! Now I know exactly what to improve for next time!?
+
+No? Yeah. Me neither.
+
+Instead, we get the same cold, lifeless email written by what I assume is an AI trained exclusively on corporate jargon and passive aggression:
+
+> "Dear Candidate, we appreciate your interest, but we've decided to move forward with other applicants. We wish you the best in your future endeavors."
+
+Cool. Awesome. Thanks, Karen. This totally helps me understand why I wasn't chosen. Was it my resume? My cover letter? The fact that I used the word “synergize” without irony? Did I blink too much? Not enough? Did my email signature offend someone? Did someone else apply with the exact same skills but a cooler name? Did you hate my font choice? (**It was Calibri, you monster!**)
+
+Or was it something more sinister? Did I remind you of your ex? Did my email land in your spam folder and you just assumed I was unqualified? Did I fail some secret hiring test where you drop a pencil on the floor and see if I pick it up to test my kindness? The mystery is killing me!
+
+I'm not even mad I got rejected. That's part of the game. I'm mad because there's absolutely nothing I can take away from this.
+
+## The “No Feedback” Vortex of Doom
+
+Now, you might think: Okay, I'll just ask for feedback! Ha. Ha ha. No.
+
+![Ha. Ha ha. No.](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjZwb2dvMDU3dWRmdXppeTJ4cGMwa3QxMG91OHV2aTI5aXAzcnJ1MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9RIESpHPpFK0w/giphy.gif)
+
+First, you realize the email is noreply@company.com. Great. Love the direct and personal touch. I feel truly valued. But wait! Maybe you applied through a recruiter. Surely they have answers. So you ask, and what do you get?
+
+> "Unfortunately, they decided to pass at this time. They don't provide feedback, so unfortunately, that's all I really know."
+
+Excuse me? You're telling me that an entire team of people sifted through applications, conducted interviews, and made a decision… and at no point did they take a single note on why they rejected me? I don't believe it. I think they know. They just don't want to tell us.
+
+## Rejection Emails: The Equivalent of Ghosting, But With Company Letterhead
+
+These emails are all the same. It's like they were written by AI who moonlights as an emotionally unavailable ex. No details. No hints. No clues as to why I've been sentenced to job-hunting purgatory.
+
+At this point, I'd rather get brutally honest feedback. Something like:
+
+- “Your resume was fine, but we had 200 others that were slightly shinier.”
+- “We went with someone else because they had experience with a very specific software that we didn't mention in the job description. Oops.”
+- “We picked another candidate because their Zoom background wasn't a pile of laundry.”
+
+At least then I'd know what to fix. But no. Instead, we get vague nonsense that translates to:
+
+> "We don't want you, but we also don't want to tell you why because that would require effort."
+
+## Why Are Companies Like This? Why Are they so weird about feedback?
+
+There are a few possible explanations:
+
+1. **Legal Fear** Companies are terrified that giving feedback could open them up to a **discrimination lawsuit** (\*"We rejected you because you don't have enough experience" → “Are you discriminating against my lack of experience??”)
+
+2. **Laziness** Let's be real. Providing actual feedback takes time. And some hiring managers simply don't care enough to do it.
+
+3. **Avoiding Awkwardness** Nobody wants to be the bad guy. It's easier to send a vague email and move on.
+
+4. **They Just… Don't Remember** If a company rejects 200 people for a role, the decision-making process can get fuzzy.
+
+Recruiters are busy. Hiring managers have a lot on their plate. And yes, there are legal reasons for not giving specifics. While I kind of get these reasons, they're still not good enough. Because the end result is that job seekers are left completely in the dark. Surely, there has to be a middle ground between “Nothing personal, kid” and a ten-page performance review on why my handshake was weak. I'm not saying every rejection needs to be a TED Talk on my professional shortcomings. But would it kill companies to include something useful? Even an automated checkbox system would help.
+
+## How Rejections _Should_ Be Done
+
+Let's say a company truly doesn't have time to write personal feedback. Fine. But at least give me a little data to work with!
+
+Imagine if a rejection email included something like this:
+
+- ✅ Not enough experience with X, Y, and Asembly Language which this job doesn't require but we're just being picky.
+- ✅ Interview performance didn't meet expectations(but we didn't actually tell you what those expectations were. Womp womp.)
+- ✅ Another candidate had more relevant experience in Quantum Mechanics, a doctorate in maths, and a Nobel Prize in Physics(But you were close!)
+- ✅ We were looking for skills in Y that weren't on your resume(but we didn't mention that in the job description. Oops.)
+
+Would that be so hard? Would that break HR? No. It would take five extra seconds. And it would help candidates actually improve instead of blindly applying to the next job and hoping for better luck. Because right now? Rejection emails are basically just corporate ghosting, and frankly, I'd rather get rejected by an actual ghost. At least they'd be more transparent about it. 👻
+
+## What Can We Do?
+
+Since companies refuse to be helpful, our only options are:
+
+- **Bribery**. (Kidding. Probably.)
+- **Resume Audits**. Get a second pair of eyes on your resume.
+- **Mock Interviews**. Because maybe the problem is that your nervous laugh sounds too much like a villain's.
+- **Networking**. Because let's be honest, half of hiring is just knowing the right people.
+- **Sheer, Unrelenting Persistence**. Keep applying until you question your own existence and make it through the mystical, unknowable hiring process. 60% of the time, it works every time.
+
+## Final Thoughts (Or: Please, Just Say It to My Face)
+
+Look, rejection sucks. But what sucks even more is rejection without context. If companies truly cared about building strong talent pools, they'd give at least some feedback. Because without it, all they're doing is leaving candidates stranded in an endless cycle of trial and error.
+
+And I don't know about you, but I'd rather not feel like I'm playing a job application slot machine and the house always wins and tells you no rules.
+
+So, to every recruiter, hiring manager, Dalai Lama of job hiring out there: **JUST TELL US WHY**. If you can reject us in 30 seconds, you can give us a reason in 10.
+
+But I won't hold my breath. I'll just be here, refreshing my inbox, waiting for the next soulless, feedback-free rejection. 💀
+
+---
+
+What's the worst rejection email you've ever gotten?
+
+=== src/content/blog/the-state-of-ruby-on-rails-unleashing-your-web-superpowers-to-dominate-2024.md ===
+---
+title: 'The state of ruby on rails: unleashing your web superpowers to dominate 2024'
+date: '03-11-2024'
+heroImage: '/blog/ruby-on-rails-2024/ruby-on-rails-2024_v2.png'
+image: '/blog/ruby-on-rails-2024/ruby-on-rails-2024_v2.png'
+originalDatePublished:
+description: 'The why, what, when, and where of using rails in 2024'
+author: 'Anthony Lombardi'
+categories: [ruby, rails, polymorphic]
+tags: [ruby]
+draft: false
+---
+
+Hey there, fellow web aficionados! Let's talk 2024 – the year where Ruby on Rails (Rails) refuses to fade into the digital sunset despite the shiny new toys trying to steal their thunder. Here's the lowdown, straight from the source.
+
+## Origins of Ruby On Rails
+
+Picture this: 20-odd years ago, a young, ambitious programmer named David Heinemeier Hansson(DHH) set out to conquer the web development world. At the same Time, he's working on a project management tool, Basecamp, at the web application company 37signals. Armed with a keen mind and a passion for simplicity, he creates Ruby On Rails—a web framework that's as sleek and stylish as a tailored suit on the red carpet. Rails was first released as open source in July 2004, and it has since become a cornerstone of web application development, influencing many other frameworks and languages. Rails' goal is to make web development powerful and pleasurable. And boy, did he succeed. Ruby on Rails quickly gains traction, attracting a legion of devoted followers who are drawn to its elegance and efficiency. From its early days powering the burgeoning startup scene to its current status as a staple of the tech industry, Rails has come a long way. It has evolved and matured along the journey, incorporating new features and improvements while staying true to its core principles.
+
+## The Charm of Ruby On Rails ⚡
+
+![charm](/blog/ruby-on-rails-2024/charm.png)
+
+Why choose Ruby On Rails, you ask? Well, imagine having the power to build robust, scalable web applications in record time. It's more than just a framework; it's a philosophy. With its elegant syntax and convention-over-configuration approach, Rails lets you focus on what truly matters—creating kick-ass digital experiences without getting bogged down in the nitty-gritty details. Ruby is a charming, elegant language, and Rails is the powerhouse framework that brings it all together. Together, they form a dynamic duo that makes web development not just efficient but downright enjoyable. So whether you're a seasoned veteran or a wide-eyed newcomer, Ruby on Rails welcomes you with open arms. It's more than just a framework; it's a community, a philosophy, and a way of life. Let's discover the magic of Ruby on Rails.
+
+## The Power of Community
+
+Let's remember the X-factor that sets Rails apart, the community. Thousands of developers from around the globe are coming together like some coding SEAL Team Six. Take the [2022 Ruby on Rails Community Survey](https://rails-hosting.com/2022/), for example. We're talking 2,660 Rails devs from a whopping 102 countries. That's like a United Nations summit, but with more tacos and fewer suits. This survey isn't just some checkbox exercise; it's a showcase of the global love affair with Rails, highlighting the active chatter about tools, frameworks, and workflows that keeps this community buzzing.
+
+Beyond the official squads and core contributors, an army of code warriors is out there making Rails better every day. From squashing bugs to writing docs to spreading the Rails gospel, these folks are the unsung heroes of the digital age. And don't even get me started on the Rails Contributors site – it's like the Hall of Fame for coding legends, showcasing the blood, sweat, and tears poured into this framework.
+
+But it doesn't stop there. Oh no, this community has its fingers in more pies than a bakery on cheat day. We're talking open-source projects, gem libraries—you name it, they've probably built it. Balancing all this with real-world work can feel like juggling chainsaws, but that's just part of the thrill, right?
+
+## Speed, Efficiency, and Agility
+
+![speed, efficiency, and agility](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTgzZnVtOGtqMjl0bXN5aXN1OTZhdGk0dHI3ZzFqMXB2a3NmNG0zNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6Zth7pE7aPKqAEEM/giphy.gif)
+
+Ruby on Rails is renowned for its speed, efficiency, and agility in web application development, thanks to several key features and principles that facilitate rapid development and maintainability:
+
+### Speed and Efficiency
+
+- **Agile Methodology**: Rails is built on Agile development principles, which break down those big tasks into bite-sized chunks. It's like going from climbing Mount Everest to conquering a flight of stairs. With Rails, you can sprint through development cycles in as little as six weeks, saving you Time and money.
+- **Fewer Lines Of Code**: Rails has a treasure trove of pre-loaded code libraries, so you're not reinventing the wheel whenever you fire up your editor. That means fewer errors, less stress, and more Time for coffee breaks.
+- **Principle of DRY (Don't Repeat Yourself)**: Rails adheres to the DRY principle, which encourages avoiding code duplication. So, you're not copy-pasting your way into a tangled mess of spaghetti code. Nah, you're keeping it clean, efficient, and oh-so-sexy.
+- **Convention over Configuration**: Rails's convention-based approach simplifies configuration, making development faster. Ergo, you spend less time configuring and more time coding like a boss.
+- **Modular Design**: The readability and self-documenting nature of Ruby code, along with RoR's modular design, increases productivity and makes it easier for developers to work on existing projects without extensive documentation.
+- **Mature Plugin Architecture**: The extensive library of Gems (libraries) available in the Rails community allows developers to extend or override any part of the Rails framework, accelerating development and maintenance time.
+
+### Agility
+
+- **Rapid Prototyping**: Rails's capability for rapid prototyping is a critical advantage for your unicorn startups, enabling them to develop and refine their ideas swiftly. This agility allows for quick iterations, adapting to market changes, and staying ahead of the competition. You've got an idea? Boom! Rails turns it into reality faster than a cheetah in a hotdog costume.
+- **Cross-Platform Compatibility**: Rails applications can run seamlessly on multiple platforms and cloud providers, offering businesses the flexibility and adaptability they need as they grow and expand.
+- **Enhanced Developer Productivity**: Rails's developer-friendly syntax and adherence to principles like Convention over Configuration (CoC) and DRY streamline development, empowering developers to focus on innovative solutions rather than complexities.
+- **Scalability and Reliability**: Rails provides a cost-effective approach to scalability, incorporating tools like load balancing and database optimization. Its reputation for stability and reliability makes it a preferred choice for mission-critical applications.
+
+## ORM: Mapping databases
+
+For the layman, An ORM, or Object-Relational Mapping, is a programming technique used to convert data between incompatible type systems: object-oriented programming languages and relational databases. In Ruby on Rails, an ORM called ActiveRecord is used.
+
+ActiveRecord is like having a loyal sidekick who does all the heavy lifting regarding database interactions. With ActiveRecord, you can easily manipulate your database, whether you're querying, updating, or migrating. It's database magic straight out of the box.
+
+ActiveRecord isn't just limited to traditional relational databases like MySQL and PostgreSQL. With Ruby on Rails, connecting to various database systems is as easy as pie. Whether you're working with SQLite for lightweight development, MongoDB for NoSQL flexibility, or any other database system your project requires, ActiveRecord provides seamless integration, allowing you to focus on building awesome features without worrying about the underlying database technology.
+
+And suppose you're looking to take your data querying to the next level. In that case, Rails makes it a breeze to incorporate GraphQL into your applications. With its intuitive query language and powerful schema definition capabilities, GraphQL enables you to fetch exactly the data you need, no more, no less. With Apollo, the leading GraphQL client, integration is a snap, allowing you to quickly build lightning-fast, data-driven applications.
+
+Whether you're building a simple API or a complex, data-intensive application, Rails provides the tools and guidance to get up and running quickly. With its clear, concise documentation and helpful community, you'll be harnessing the power of ActiveRecord in no time, leaving you free to focus on building great software.
+
+## Flexibility
+
+However, Ruby on Rails' most significant strength is its agility and flexibility. Whether you're building a simple blog or an e-commerce platform, Rails adapts to your needs gracefully and effortlessly. With its modular architecture and emphasis on convention over configuration, Rails lets you focus on what matters most: building awesome stuff.
+
+Need to whip up a RESTful API? Ruby on Rails has got you covered. With its built-in support for RESTful routes and controllers, you can create APIs that are as sleek and streamlined as a sports car on the open road.
+
+## Frontend and UI/UX
+
+But wait, there's more! Ruby on Rails takes front-end integration to the next level with its support for modern JavaScript frameworks. Whether you're building a single-page application or a more traditional, server-rendered website, Rails provides the tools to integrate seamlessly with your chosen front-end framework. With Importmaps, Bun, Webpack, Esbuild, or Rollup, and the asset pipeline, you can effortlessly manage and optimize your front-end assets, ensuring lightning-fast performance and a smooth user experience.
+
+And you're looking to take your front-end development even further. In that case, Rails easily incorporates cutting-edge technologies like [WebAssembly](https://webassembly.org/) and [WebRTC](https://webrtc.org/) into your applications. With WebAssembly, you can run high-performance, low-level code in the browser, opening up new possibilities for interactive web experiences. And with WebRTC, you can add real-time communication features like video chat and screen sharing to your applications, all with the power and simplicity of Rails.
+
+But ease of use continues beyond there. With Rails, configuring your application to work with front-end frameworks like [React](https://react.dev/), [Vue.js](https://vuejs.org/), and [Svelte](https://svelte.dev/) ans [Angular](https://angular.io/) is a breeze. Whether you prefer to use Rails' built-in support for JavaScript tooling or a more customized setup, Rails provides the flexibility and guidance you need to get up and running quickly. With a wealth of tutorials, guides, and community resources available, you'll never be at a loss for help or inspiration as you explore the exciting world of front-end development with Ruby on Rails.
+
+But wait, there's more! As solutions for more accessible UI/UX design grow, Ruby on Rails is more than just a backend powerhouse. Whether you're crafting beautiful interfaces with Bootstrap, Tailwind CSS, Tailkit, or your own custom styles, Rails provides the tools you need to create stunning user experiences that keep users coming back for more.
+
+## Scaling Up and Beyond
+
+![to infinity and beyond](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDlteWl2a2JybGxvYnR5bW41YzdiYXhpYzRvNXIzNTZmdjhvdW80OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/DgudTD5DSky3u/giphy.gif)
+
+With the introduction of Ruby 3.2, the game has been forever changed. Picture this: Just-In-Time (JIT) compiling, making your code faster and more efficient than ever before. No more waiting around for your applications to load; with JIT compiling, Ruby on Rails is lightning-fast, ready to tackle even the most demanding workloads with ease.
+
+But that's not all. Ruby 3.2 also improves memory efficiency, ensuring your applications run more smoothly even as they handle increasingly complex tasks. Say goodbye to bloated memory usage and hello to sleek, streamlined performance that keeps your users coming back for more. With Ruby on Rails, you can have your cake and eat it too—fast, efficient code that doesn't sacrifice an ounce of functionality.
+
+As your web empire grows, so too will your need for scalability. Fear not, intrepid coder, for Rails has your back. With its built-in support for caching, background processing, and more, scaling your application to infinity and beyond is a piece of cake. From startup darlings to tech giants, Rails has repeatedly proven that it's built to handle the big leagues. With features of database sharding, horizontal scaling, unparalleled productivity, scalability, and efficiency, Rails empowers developers to create web applications that meet and exceed expectations.
+
+## Job Opportunities: The Future of Web Development
+
+You know what's hotter than a chimichanga? The job market's love affair with Ruby on Rails. More and more job postings are shouting from the rooftops about their undying affection for Ruby on Rails. Programming languages differ from your Aunt Mildred's fruitcake, which gets shoved in the back of the pantry and forgotten about. Nah, they're more like the spice of the digital world, and Ruby? Well, Ruby's holding its own. According to [Stack Overflow's Developer Survey](https://insights.stackoverflow.com/survey) Ruby is sitting in 16th place out of 51. Not too shabby.
+
+![Stack Overflow's Developer Survey](/public/blog/ruby-on-rails-2024/graph-no-bg.png)
+
+And get this, in 2023, Ruby actually climbed up a few rungs on that ladder compared to previous years. So, rumors about Ruby kicking the bucket? It's as believable as me winning an Oscar for playing a potato in a rom-com. Sure, there might've been a slight dip in Ruby on Rails's popularity over the last decade, but even the stock market has its off days, right? Rails remains a popular framework for web development, particularly for startups and companies looking to build scalable web applications quickly. In the ever-evolving landscape of technology, it's essential to stay ahead of the curve. Rails has a long, healthy history behind many large companies(Airbnb, Shopify, Netflix, and Stripe), so the future of Rails opportunities looks brighter than ever. In a world where tech talent is worth its weight in gold, Rails opens doors to a treasure trove of career opportunities. Companies are clamoring for Rails developers who can hit the ground running and deliver results with style.
+
+So if you're an experienced dev, you're probably cruising along just fine in the job market. For all you fresh faces itching to dive into the world of web development, listen up. Rails is like that shiny toy everyone wants to play with. So yeah, there might just be a bunch of junior roles popping up like mushrooms after a rainstorm. But hey, no guarantees. Time's gotta do its thing and tell us how this whole situation pans out.
+
+### AI In 2024
+
+Now, let's talk about the big, bad AI wave crashing down on us all. Yeah, it's got us all wondering about job security. AI's impact on developers in 2024 is multifaceted, affecting various aspects of software development, from the skills required to the tools used. But it's not all bad news. AI has automated many software development tasks, such as code generation, refactoring, and bug detection, significantly boosting productivity and efficiency. AI has also contributed to the evolution of DevOps practices and CI/CD pipelines, providing insights on performance, quality, and potential issues through code analysis, test results, and production metrics. This helps streamline the software development lifecycle and improve overall software quality.
+
+While AI can speed up code generation, there are concerns about the quality of AI-generated code. Studies have shown an increase in code churn and the use of copy/paste code(what I like to call CopyPasta), which could lead to higher risks of mistakes being deployed into production. This highlights the need for developers to maintain code quality and understand the attributes that makeup quality code. The rise of AI in coding could also impact how engineers are compensated, mainly if salary decisions are based on lines of code changed. This could create incentives for hastily added code, potentially leading to technical debt.
+
+So, will our gigs get snatched up by robots? Well, maybe not snatched, but you gotta up your game, amigo. Embrace the AI mojo. Life is a river; you either ride with the current or stand still and get left behind. It's the name of the game in this brave new world.
+
+## Embracing the Rails Way
+
+Now, I know what you're thinking—why should I embrace the Rails way? Well, my friend, it's simple: because it works. By following Rails conventions, you'll write cleaner, more maintainable code and tap into the collective wisdom of thousands of developers who've walked the path before you.
+
+Cross-platform compatibility? Check. Whether deploying on Linux, macOS, or Windows, Ruby on Rails plays nicely with all major platforms. Say goodbye to compatibility headaches and hello to smooth sailing across the web development seas.
+
+## Conclusion
+
+OK, it's time to wrap this up tighter than an accountant during tax season! Building something unique isn't just about lines of code; it's about the thrill of creation and the satisfaction of seeing your vision come to life. With Rails as your trusty sidekick, you're not just coding but embarking on an epic adventure filled with twists, turns, and triumphs. Think of it this way: It's like the classic car you find tucked away in a garage – still turning heads and kicking asphalt. They've got this robust, mature framework that's like the Swiss Army knife of coding. Need a solution? Boom, there's probably a gem for that. And don't even get me started on the community – it's like a never-ending party where everyone's a coding rockstar.
+
+Before jumping on the Ruby bandwagon, let's address the elephant in the room: the learning curve. Yeah, it's there, but so is the satisfaction of mastering a craft. Sure, there might be some performance limitations, but things are looking brighter with Ruby 3.2 and beyond.
+
+Should you choose Ruby && Ruby on Rails for your project? Well, that depends on a few factors – your project's needs, your team's skills, and how many tacos you've had. But one thing's for sure: Ruby's simplicity, flexibility, and downright charm make it a programming language worth wrapping your brain around in 2024.
+
+![here's to you](https://media.giphy.com/media/14cDsqOkks6O8U/giphy.gif)
+
+=== src/content/blog/tracking-pixels-in-ruby.md ===
+---
+title: Tracking Pixels in ruby
+date: '2020-12-29T20:59:56.707Z'
+heroImage: '/blog/ruby-pixel-tracker/tracking-pixels-ruby.jpeg'
+image: '/blog/ruby-pixel-tracker/tracking-pixels-ruby.jpeg'
+originalDatePublished: '2014-11-18'
+description: "The simplest way to do this is via a tracking pixel – a small, invisible image that is loaded from your server every time your medium is opened."
+author: "t0nylombardi"
+categories: [ruby]
+tags: [ruby]
+draft: false
+---
+
+If you are sending out content to your customers, it pretty handy to know if the content is loading. I speak if you are sending out emails, newsletters, ads, etc. If you have ever sent out an email newsletter from a service like Mailchimp, you would have seen email open graphs. Of course, tracking this stuff is super important for a campaign, but it would also be interesting to see if users are seeing your content.
+
+The simplest way to do this is via a tracking pixel – a small, invisible image that is loaded from your server every time your medium is opened. This is fairly simple to achieve using Rails by building a simple Rack application.
+
+## The idea
+
+Picture you are creating ads for clients and you are sending them out to ad shops. If you are using a program like Google Doubleclick. Google DoubleClick allows you to track your ad through a pixel tracking url. This data can be gathered to figure out trends when those ads, emails, or newletters are being opened.
+
+## The Setup
+
+We’ll add one model: One to tracking pixels:
+
+`rails g model Pixel ip_address, campaign, content_type, created_at:date ,city, state, user_agent, referral, banner_size`
+
+All of these fields are strings except for created_at so by default they are created as strings.
+
+the general idea we have here is to get attach a url into an email or something to see if its being loaded such as:
+
+`yourUrl.com/assets/tracker.gif?campaign=SomeCampaign&banner_size=300x250&content_type=Email`
+
+## Right, now the magic bit:
+
+Create a directory called /lib/tracker and create a new file called rack.rb
+
+```ruby
+# app/lib/tracker/rack.rb
+
+module Tracker
+  class Rack
+
+    def initialize(app)
+      @app = app
+    end
+
+    def call(env)
+      @req = ::Rack::Request.new(env)
+      if @req.path_info =~ /tracker.gif/
+        result = Services::Params.deploy @req.query_string
+        location = Services::Locations.lookup(@req.ip)
+        ip_address = location["ip"] || @req.ip
+        params = {
+          ip_address:     ip_address,
+          campaign:       result[:campaign],
+          banner_size:    result[:banner_size],
+          content_type:   result[:content_type],
+          city:           location["city"],
+          state:          location["region_name"],
+          user_agent:     @req.user_agent,
+          referral:       @req.referer
+        }
+
+        if @pixels = Pixel.create!(params)
+          [
+            200, { 'Content-Type' => 'image/gif' },
+            [File.read(File.join(File.dirname(__FILE__), 'tracker.gif'))]
+          ]
+        else
+          Rails.logger.warn "\n\n Failed to create record on:#{Date.today}"
+        end
+      else
+        @app.call(env)
+      end
+    end
+
+  end
+end
+```
+
+Within the method call, several things happen. First is that it will listen to the incomming request for the pixel which we will get into that later. Second we will call on the module Services. The services module does nost if tge heavy lifting for us. In the in lib/servies/ folder will be two files.
+
+What we need to essentially do is to get the url params, brake them up and return a hash of values that can be entered into the database.
+
+##### Params:
+
+```ruby
+# lib/services/params.rb
+
+module Services
+  class Params
+    require 'active_support/all'
+
+    def self.deploy(obj)
+      @url_obj = obj
+      if obj.class == ActionController::Parameters
+        return_new_hash @url_obj
+      else
+        check_for_decode
+      end
+    end
+
+    def self.check_for_decode
+      if is_base_64 @url_obj
+        str = decode(@url_obj)
+        return_params(str)
+      else
+        return_params @url_obj
+      end
+    end
+
+    def self.return_new_hash(hash)
+      hash[:campaign] = hash.delete(:track)
+      campaign = hash[:campaign].split(/=/)
+      hash[:campaign] = campaign[1]
+      hash
+    end
+
+    def self.return_params(str)
+      arry  = str.split(/&/)
+      hash = {}
+      if arry.length <= 1
+        raise ActionController::RoutingError.new('Not Found')
+      else
+        arry.each{|a| hash[a.scan(/^\w*/).join('').to_sym] = a.gsub(/^(\w*=)/,'')}
+      end
+      hash
+    end
+
+    def self.decode(str)
+      str = Base64.urlsafe_decode64(str)
+    end
+
+    def self.is_base_64(str)
+      str =~ /^([A-Za-z0-9+\/]{4})*([A-Za-z0-9+\/]{4}|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{2}==)$/
+    end
+
+  end
+end
+```
+
+this class also works for encoding whole params into a single 64base string(don't ask why. it was a good idea at the time)
+
+The other part of the module handles location. This calls from a ip location service [http://freegeoip.net](http://freegeoip.net).
+
+##### Locations:
+
+```ruby
+# lib/services/locations.rb
+
+module Services
+  class Locations
+    require 'net/http'
+
+    def self.lookup(ip)
+      ip_address = ip
+      unless Rails.env.production?
+        ip_address = random_ip_address
+      end
+      url = "http://freegeoip.net/json/#{ip_address}"
+      begin
+        HTTParty.get(url, timeout: 2)
+      rescue Timeout::Error
+        Rails.logger.warn("Could not post to #{url}: timeout")
+        {city: nil, region_name: nil}
+      rescue
+        Rails.logger.warn("Could not post to #{url}")
+        {city: nil, region_name: nil}
+      end
+    end
+
+    def self.check_for_local(ip)
+      if ["127.0.0.1", "::1"].include? ip
+        "108.41.23.150"
+      else
+        ip
+      end
+    end
+
+    # These are fake IPS. Put real physical IPS when
+    # testing in developement enviorment.
+    def self.random_ip_address
+      %w{ 127.19.209.10
+          127.21.23.150
+          127.31.23.155
+          127.41.23.170
+          127.59.209.14
+          127.69.209.80 }.sample
+    end
+
+  end
+end
+```
+
+Last thing we need to do is to make a 1x1 opaque pixel and call it tracker.gif and put it app/assets/images && also in lib/tracker.
+
+You can also add some validations to your model
+
+```ruby
+class Pixel < ActiveRecord::Base
+  validates_presence_of :ip_address
+end
+```
+
+So there you have it. The heart of the program lies within your lib folder and calls on Rack to listen for that pixel. I am sure there is more we can add to this idea. There is no front end to this, you will have to take the numbers off your database.
+
+Happy Coding =)
+
+=== src/content/blog/unleashing-flexibility-mastering-polymorphic-association-in-ruby-on-rails.md ===
+---
+title: 'Unleashing Flexibility Mastering polymorphic Associations'
+date: '03-06-2024'
+heroImage: '/blog/polymorphic/ruby-polymorphic.png'
+image: '/blog/polymorphic/ruby-polymorphic.png'
+originalDatePublished:
+description: 'Empowering Your App with Flexibility'
+author: 'Anthony Lombardi'
+categories: [ruby, rails, polymorphic]
+tags: [ruby]
+draft: false
+---
+
+So, you wanna talk about polymorphic association in Ruby on Rails, huh? Buckle up, 'cause we're diving into some seriously spicy code! Imagine this: you've got your models mixin' and minglin' like a Hollywood party, and you want 'em to be flexible, adaptable, like a chameleon in a disco ball factory. That's where polymorphic association swoops in like a caped crusader.
+
+Polymorphic association? Yeah, it's a bit like the advanced class of associations, the cool kid in the Rails playground. But trust me, when you need to connect a model to a whole bunch of others, this bad boy is your golden ticket. So buckle up, buttercups, 'cause we're about to take your Rails game to the next level. Now, before we strap on our coding boots, let's make sure we've got our basics down pat. This tutorial assumes you've already dipped your toes into the wonderful world of Rails associations - you know your `belongs_to` from your `has_one` and `has_many`.
+
+With polymorphic association, you're basically saying, "Hey, this model can belong to multiple other models, and it's totally cool with that." It's like being the life of the party, able to hang out with anyone and everyone without any drama. So whether it's a comment that can be on a post or a video, or a like that can be on a photo or a status update, polymorphic association's got your back. But hey, let's not get too starry-eyed here. Like any superhero, polymorphic association comes with its own set of challenges. You gotta make sure your database schema is rock solid, your associations are properly set up, and you're not causing any performance bottlenecks. It's like walking a tightrope over a pit of fiery database errors.
+
+## Navigating the power of polymorphic associations
+
+So lets picture you gearing up to build the ultimate app, complete with posts, a forum, and event functionality. Initially, you're like, "Hey, let's slap a comment feature onto just the posts model. Easy peasy, right?" But then your app starts spreading its wings, growing in ways you never imagined. Suddenly, you're thinking, "Wait a minute, wouldn't it be awesome to have that same comment feature on the forum and event models too? And who knows, maybe even on some other models down the line?"
+
+Now, let's paint a mental picture of that scenario:
+
+![First Diagram](/blog/polymorphic/diagram1.png)
+
+Alright, let's break it down. So every time you wanna sprinkle some comment magic into your app, you're stuck adding a foreign key to the comments table. Sounds like a recipe for a headache, right? And trust me, ain't nobody got time for all that repetitive code. Sure, it might not be a big deal when your app's just a wee baby, but as it starts flexing its muscles and growing into something epic, this whole song and dance becomes a real pain in the you-know-what. Enter: polymorphic associations, the superhero your app deserves.
+
+## Polymorphic Associations: The Dynamic Duo Rescuing Your Code from Repetitive Drudgery
+
+So, how does this superhero swoop in and save the day? Well, imagine being able to define a single model that can cozy up to all sorts of other models without you having to write the same darn code over and over again. That's the beauty of polymorphic associations, my friends. Think about it: in our example, instead of cluttering up the comments table with foreign keys every time we want to add comments to different models, we can keep it clean and simple with just two columns. Talk about a breath of fresh air, huh? Stay tuned, 'cause I'm about to show you just how slick this solution really is.
+
+
+## How to Implement Polymorphic Associations
+
+Alright, time to roll up our sleeves and dive into the nitty-gritty of implementing polymorphic associations. Picture this: we're about to whip up a brand spankin' new model called PolyComment, and we're gonna do it with style.
+
+```bash
+rails g model Comment content:text commentable:references{polymorphic}
+```
+
+First up, fire up your command line and unleash the power of Rails with this beauty:
+
+```ruby
+class Comment < ApplicationRecord
+  belongs_to :commentable, polymorphic: true
+end
+```
+
+The migration file will look like this:
+
+```ruby
+class CreateComments < ActiveRecord::Migration[6.1]
+  def change
+    create_table :comments do |t|
+      t.text :content
+      t.references :commentable, polymorphic: true, null: false
+
+      t.timestamps
+    end
+  end
+end
+```
+
+Alright, time to kick things into high gear! Now that we've crafted our model with finesse, it's time to make it official. Fire up your trusty command line and let's rock this migration:
+
+```ruby
+rails db:migrate
+```
+With one swift command, we're updating the `schema`, adding a couple of intriguing columns to the mix. Buckle up, 'cause things are about to get real interesting around here!
+
+
+```ruby
+create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.string "commentable_type", null: false
+    t.integer "commentable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+  end
+```
+
+Alright, let's break it down. We've got these two sneaky columns called commentable_type and commentable_id, and they're the secret sauce behind our polymorphic associations.
+
+Now, commentable_type? Think of it like a name tag at a swanky party. It's where we store the names of models like Event, Post, or Forum – you know, the cool kids on the block.
+
+And then there's commentable_id. This bad boy holds the key – literally. It's where we stash the ID that links back to those models.
+
+Now, let's keep this train rolling. Whip out your command line and let's conjure up some magic with these commands:
+
+
+```bash
+rails g model Post title
+rails g model Event title
+rails g model Forum title
+```
+
+But hold onto your hats, 'cause we're not done yet. We've gotta sprinkle a little bit of that "has_many" magic into these models. Let's dive in!
+
+
+**Post.rb**
+
+```ruby
+class Post < ApplicationRecord
+    has_many :comments, as: :commentable
+end
+```
+
+**Event.rb**
+
+```ruby
+class Event < ApplicationRecord
+    has_many :comments, as: :commentable
+end
+```
+
+**Forum.rb**
+
+```ruby
+class Forum < ApplicationRecord
+    has_many :comments, as: :commentable
+end
+```
+
+Ah, now we're talking! With the power of polymorphic associations, you're not just limited to adding comments to one model. Oh no, my friends, you can spread that comment love far and wide, across as many models as your heart desires. Think about it: with just a sprinkle of that sweet, sweet logic we talked about earlier, you can turn any model into a comment hotspot. Events, posts, forums – you name it, you can comment on it. The possibilities? Endless. So go ahead, let your imagination run wild and start slapping those comments on every model in sight!
+
+
+
+
+### Conclusion
+
+In conclusion, folks, let's talk about the real MVP of the coding world: polymorphic associations. These bad boys not only keep your code sleek and DRY (that's "Don't Repeat Yourself" for the uninitiated), but they also serve up a piping hot plate of bug-free goodness.
+
+Here's the deal: if you're looking to connect a model with not just one, but multiple other models, then polymorphic associations are your golden ticket. With this slick approach, you can kiss goodbye to the days of defining separate associations for each and every model. Talk about a game-changer, right? So go ahead, dive into the world of polymorphic associations, and watch your code soar to new heights of efficiency and elegance. You can thank me later.
+
+=== src/content/blog/your-tests-shouldnt-be-polite-echo-chambers.md ===
+---
+title: "Your tests shouldn't be polite echo chambers"
+date: '02-25-2026'
+heroImage: '/blog/echo-chamber/echo-chamber.webp'
+image: '/blog/echo-chamber/echo-chamber.webp'
+originalDatePublished:
+description: 'Tests are a critical part of software development, but they can sometimes become polite echo chambers that fail to catch real issues.'
+author: 'Anthony Lombardi'
+categories: [engineering, testing, software-development]
+tags: [ruby, ruby-on-rails, rspec, tdd, testing, clean-code]
+draft: false
+---
+
+There is a quiet trap that even experienced engineers fall into.
+
+Writing tests that verify what the code does instead of what it is supposed to do. On the surface everything looks amazing. CI is green. Coverage is high. Slack is quiet. You feel powerful. You sip your coffee like someone who has mastered complexity. But sometimes your test suite is not protecting behavior. It is politely rubber stamping whatever your implementation happens to be doing today. That is how you end up with a very polite echo chamber.
+
+Polite echo chambers are dangerous because they clap for you right before production catches fire. There is a difference between writing code to satisfy a test and writing a test to protect a promise. That distinction sounds subtle. It is not. It is the difference between engineering and theater.
+
+Early on it is very easy to slip into this pattern. You write a test. It fails. You tweak the implementation just enough to make it pass. Green check. You push. CI explodes because the environment is slightly different. Or worse, CI passes and production becomes a dumpster fire because your tests never actually modeled real behavior.
+
+Technically you did test driven development. Practically you trained your brain to optimize for green dots instead of correctness. The goal quietly shifts from does this system behave correctly to does this test pass. Those are not the same question.
+
+You can absolutely write a test that passes while not truly verifying intent. Especially in Rails apps with heavy mocking, factory setup, callbacks, scopes, service objects, and all the magic hiding behind the curtain.
+
+![First Diagram](/blog/echo-chamber/code-review-quality.png)
+
+# The Subtle Failure Mode
+
+Imagine you write this method:
+
+```ruby
+class Order < ApplicationRecord
+  has_many :line_items
+
+  def total_cents
+    line_items.sum(:price_cents)
+  end
+end
+```
+
+You write a test for it:
+
+```ruby
+it "calculates the total" do
+  order = create(:order)
+  create_list(:line_item, 2, order: order, price_cents: 1000)
+
+  expect(order.total_cents).to eq(order.line_items.sum(:price_cents))
+end
+```
+
+It feels correct. It feels responsible. It feels like something your past self would high five you for. But look at what the test is actually doing. It is repeating the implementation. Your production code says sum the prices. Your test says sum the prices. That is not verification. That is code looking in the mirror and saying, you look great today.
+
+If someone accidentally introduces a bug like:
+
+```ruby
+def total_cents
+  line_items.map(&:price_cents).sum
+end
+```
+
+Sure. That test probably passes. But the real danger is subtler.
+
+What happens when the implementation changes in a way that shifts behavior but not structure. Maybe a someone adds a default scope to `Line Item`. Maybe rounding logic moved. Maybe little leprechauns altered how a query builds rainbows under the hood. Your test still passes because it is coupled to how the method works internally, not what the user expects externally.
+
+You are not testing outcomes. You are testing that the code agrees with itself. That is confirmation bias with better syntax highlighting.
+
+## Behavior > Implementation
+
+![First Diagram](/blog/echo-chamber/tddvsbdd.jpg)
+
+The test should answer one simple question: **“What does the system promise to the outside world?”**
+
+Not: **“How does the current implementation happen to achieve it?”**
+
+A better test would be:
+
+```ruby
+it "returns the correct total in cents" do
+  order = create(:order)
+
+  create(:line_item, order: order, price_cents: 1000)
+  create(:line_item, order: order, price_cents: 2000)
+
+  expect(order.total_cents).to eq(3000)
+end
+```
+
+Now the behavior is explicit. 3000 is the contract. It does not care how you compute it. You can sum, You can map and then sum, You can summon a wizard. As long as the result is 3000, the behavior holds. That is what a test suite is supposed to protect. Not the shape of the code. Not the method calls. Not the clever little chain you wrote at 1 AM.
+
+## Danger!, Will Robinson
+
+I have seen this pattern over and over.
+
+- A test stubs out too much.
+- A test asserts on the wrong thing.
+- A test verifies that a method was called rather than verifying the observable outcome.
+- A test uses the same logic as the production code inside the expectation.
+
+So the test passes. But it is not guarding the real contract.
+
+I have spent many late nights and weekends fixing dumpster fires because of this. Those are the tuition payments for learning that green does not mean safe.
+
+There is also a systems level angle here. In large Rails apps subtle changes ripple. A scope changes. A default value changes. A callback order changes. A background job fires twice. If your tests are tightly coupled to structure or heavily mocked they may never notice that outward behavior has drifted. The result is the worst kind of failure. Not an explosion. A slow leak.
+
+Slow leaks are what keep engineers up at night. Or worse. The real growth moment is when you stop asking how do I make this test pass and start asking what would prove this implementation wrong. Good tests are adversarial. They do not cooperate with your implementation. They challenge it. They assume you made a mistake. They try to break it. When you write code just to make the test pass you are optimizing for the test. When you write the test to enforce intent you are optimizing for reality. That is when tests stop being ceremony. That is when they start being armor.
+
+A Rule of Thumb, If your test logic looks suspiciously like your production logic, pause.
+
+Ask yourself: **“If I changed the internal implementation completely, would this test still make sense?”**
+
+If the answer is no, then you’re testing the wrong thing.
+
+Final Thought
+
+Your test suite is supposed to be a safety net. If it’s just an echo of the code, it won’t catch you when you fall.
+
+It’ll just politely agree while you drift into production hell.
