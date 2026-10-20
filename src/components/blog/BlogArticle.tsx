@@ -26,7 +26,7 @@ export async function BlogArticle({post}: {post: BlogPost}) {
                 {name: post.title, href: `/blog/${post.slug}`},
               ]}
             />
-            <header className="blog-post__header">
+            <header className="blog-post__header text-sm">
               <h1 className="blog-post__title">{post.title}</h1>
               <p className="blog-post__description">{post.description}</p>
               <p className="blog-post__meta">

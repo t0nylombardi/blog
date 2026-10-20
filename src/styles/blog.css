@@ -26,7 +26,7 @@
   --blog-radius-sm: 0.75rem;
   --blog-radius-md: 1rem;
   --blog-radius-lg: 1.5rem;
-  --blog-prose-width: 72ch;
+  --blog-prose-width: 120ch;
   --code-bg: var(--blog-color-code-bg);
   --code-text: var(--blog-color-code-text);
 }
@@ -479,6 +479,10 @@
 
   .blog-post {
     padding: 1.25rem;
+  }
+
+  .blog-post__title {
+    font-size: 1.8rem;
   }
 
   .blog-post__meta {
