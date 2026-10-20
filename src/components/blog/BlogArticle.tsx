@@ -8,6 +8,7 @@ import {CopyCodeButton} from './CopyCodeButton'
 import {FormattedDate} from './FormattedDate'
 import {mdxComponents} from './MDXComponents'
 import {ArticleSupport} from './ArticleSupport'
+import {CalcReadingTime} from './CalcReadTime'
 
 export async function BlogArticle({post}: {post: BlogPost}) {
   const content = await renderMdx(post.content, mdxComponents)
@@ -18,18 +19,22 @@ export async function BlogArticle({post}: {post: BlogPost}) {
       <section className="blog-theme">
         <div className="blog-shell">
           <main className="blog-post blog-surface">
-            <Breadcrumbs items={[
-              {name: 'Home', href: '/'},
-              {name: 'Blog', href: '/blog'},
-              {name: post.title, href: `/blog/${post.slug}`},
-            ]} />
+            <Breadcrumbs
+              items={[
+                {name: 'Home', href: '/'},
+                {name: 'Blog', href: '/blog'},
+                {name: post.title, href: `/blog/${post.slug}`},
+              ]}
+            />
             <header className="blog-post__header">
               <h1 className="blog-post__title">{post.title}</h1>
               <p className="blog-post__description">{post.description}</p>
               <p className="blog-post__meta">
-                <span>By {post.author}</span>
-                <span>on</span>
-                <FormattedDate date={post.pubDate} />
+                <FormattedDate date={post.pubDate} month="long" />
+                <span aria-hidden="true">·</span>
+                <CalcReadingTime content={post.content} />
+                <span aria-hidden="true">·</span>
+                <span>{post.author}</span>
               </p>
             </header>
 
