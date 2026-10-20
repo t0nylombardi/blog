@@ -2,7 +2,7 @@
 title: "Your tests shouldn't be polite echo chambers"
 date: '02-25-2026'
 heroImage: '/blog/echo-chamber/echo-chamber.webp'
-image: '/blog/echo-chamber/echo-chamber.webp'
+image: '/blog/echo-chamber/echo-chamber_thumb.webp'
 originalDatePublished:
 description: 'Tests are a critical part of software development, but they can sometimes become polite echo chambers that fail to catch real issues.'
 author: 'Anthony Lombardi'

@@ -2,7 +2,7 @@
 title: 'Unleashing Flexibility Mastering polymorphic Associations'
 date: '03-06-2024'
 heroImage: '/blog/polymorphic/ruby-polymorphic.png'
-image: '/blog/polymorphic/ruby-polymorphic.png'
+image: '/blog/polymorphic/ruby-polymorphic_thumb.webp'
 originalDatePublished:
 description: 'Empowering Your App with Flexibility'
 author: 'Anthony Lombardi'

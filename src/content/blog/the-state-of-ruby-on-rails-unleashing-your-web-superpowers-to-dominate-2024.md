@@ -2,7 +2,7 @@
 title: 'The state of ruby on rails: unleashing your web superpowers to dominate 2024'
 date: '03-11-2024'
 heroImage: '/blog/ruby-on-rails-2024/ruby-on-rails-2024_v2.png'
-image: '/blog/ruby-on-rails-2024/ruby-on-rails-2024_v2.png'
+image: '/blog/ruby-on-rails-2024/ruby-on-rails-2024_v2_thumb.webp'
 originalDatePublished:
 description: 'The why, what, when, and where of using rails in 2024'
 author: 'Anthony Lombardi'

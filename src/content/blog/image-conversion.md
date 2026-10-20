@@ -2,7 +2,7 @@
 title: 'Image Conversion'
 date: '2020-12-29'
 heroImage: '/blog/image-conversion/image-conversion.jpeg'
-image: '/blog/image-conversion/image-conversion.jpeg'
+image: '/blog/image-conversion/image-conversion_thumb.webp'
 originalDatePublished: '2014-11-18'
 description: "I wrote a script that allows me to take several images rename them, and then create two resized images in addition."
 author: 'Anthony Lombardi'

@@ -2,7 +2,7 @@
 title: 'Rails Service Objects to Make your Rails Controllers Skinny'
 date: '10-11-2023'
 heroImage: '/blog/skinny-controllers/service-objects.jpeg'
-image: '/blog/skinny-controllers/service-objects.jpeg'
+image: '/blog/skinny-controllers/service-objects_thumb.webp'
 originalDatePublished:
 description: 'Moving logic into services to keep your controllers/models skinny'
 author: 'Anthony Lombardi'

@@ -2,7 +2,7 @@
 title: 'Let Loose Your Inner Sherlock with a Search Feature'
 date: '03-15-2024'
 heroImage: '/blog/search-feature/inspector.png'
-image: '/blog/search-feature/inspector.png'
+image: '/blog/search-feature/inspector_thumb.webp'
 originalDatePublished:
 description: 'Elevating Your Rails App with a Killer Search Feature'
 author: 'Anthony Lombardi'

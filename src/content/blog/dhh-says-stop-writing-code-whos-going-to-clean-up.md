@@ -2,7 +2,7 @@
 title: "DHH Says Stop Writing Code. Cool. Who's Going to Clean Up the Mess?"
 date: '10-13-2026'
 heroImage: '/blog/is-coding-dead/is-coding-over.webp'
-image: '/blog/is-coding-dead/is-coding-over.webp'
+image: '/blog/is-coding-dead/is-coding-over_thumb.webp'
 originalDatePublished:
 description: "AI is coming for software engineering. And I'm scared shitless!"
 author: 'Anthony Lombardi'

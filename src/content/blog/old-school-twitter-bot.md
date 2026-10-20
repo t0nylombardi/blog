@@ -2,7 +2,7 @@
 title: Old-school Twitter Bot in ruby
 date: '2014-11-18'
 heroImage: '/blog/twitter-bot/old-school-twitter-bot.jpeg'
-image: '/blog/twitter-bot/old-school-twitter-bot.jpeg'
+image: '/blog/twitter-bot/old-school-twitter-bot_thumb.webp'
 author: 'Anthony Lombardi'
 originalDatePublished: '2014-11-18'
 description: 'I had an idea to try to automate search results and reply back to each user with a message on twitter.'

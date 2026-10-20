@@ -2,7 +2,7 @@
 title: 'From Streets to Code'
 date: '03-27-2017'
 heroImage: '/blog/from-streets-to-code/streets-to-code.jpg'
-image: '/blog/from-streets-to-code/streets-to-code.jpg'
+image: '/blog/from-streets-to-code/streets-to-code_thumb.webp'
 originalDatePublished:
 description: 'High School dropout to Full Stack Developer'
 author: 'Anthony Lombardi'

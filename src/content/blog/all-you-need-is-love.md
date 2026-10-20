@@ -2,7 +2,7 @@
 title: All you need is love
 date: '2014-11-18'
 heroImage: '/blog/love/love.jpeg'
-image: '/blog/love/love.jpeg'
+image: '/blog/love/love_thumb.webp'
 originalDatePublished: '2014-11-18'
 description: 'My now wife asked me to make some vows for our wedding. I thought I would merge the two loves together and wrote this little code poem.'
 author: 'Anthony Lombardi'

@@ -2,7 +2,7 @@
 title: 'Rails Service Objects Need a Job Description'
 date: '09-06-2026'
 heroImage: '/blog/rails-service-objects/rails-service-objects.jpg'
-image: '/blog/rails-service-objects/rails-service-objects.jpg'
+image: '/blog/rails-service-objects/rails-service-objects_thumb.webp'
 originalDatePublished:
 description: 'Moving code into a service object doesn’t automatically make Rails code cleaner. Learn how clear responsibilities, explicit contracts, and meaningful tests turn an extraction into a better design.'
 author: 'Anthony Lombardi'

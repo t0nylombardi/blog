@@ -2,7 +2,7 @@
 title: Tracking Pixels in ruby
 date: '2020-12-29T20:59:56.707Z'
 heroImage: '/blog/ruby-pixel-tracker/tracking-pixels-ruby.jpeg'
-image: '/blog/ruby-pixel-tracker/tracking-pixels-ruby.jpeg'
+image: '/blog/ruby-pixel-tracker/tracking-pixels-ruby_thumb.webp'
 originalDatePublished: '2014-11-18'
 description: "The simplest way to do this is via a tracking pixel – a small, invisible image that is loaded from your server every time your medium is opened."
 author: "t0nylombardi"

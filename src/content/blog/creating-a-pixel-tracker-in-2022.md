@@ -1,11 +1,11 @@
 ---
 title: 'Creating a Pixel Tracker with NextJS and Prisma (2022)'
 date: '2022-10-31T20:37:52.538Z'
-heroImage: '/blog/nextjs-pixel-tracker/nextjs-pixel-tracker.jpeg'
+heroImage: '/blog/nextjs-pixel-tracker/tracking-pixels-nextjs.jpeg'
 originalDatePublished:
 description: 'An updated version of Pixel Tracking with NextJS and Prisma'
 author: 'Anthony Lombardi'
-image: 'https://images.unsplash.com/photo-1579616043939-95d87a6e8512'
+image: '/blog/nextjs-pixel-tracker/tracking-pixels-nextjs_thumb.webp'
 categories: [nextjs]
 tags: [nextjs]
 draft: false
