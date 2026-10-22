@@ -1,6 +1,6 @@
 ---
 title: "Congratulations, You've Built a Distributed Monolith"
-date: '10-20-2026'
+date: '10-22-2026'
 heroImage: '/blog/distributed-microservices/distributed-monoliths.webp'
 image:  '/blog/distributed-microservices/distributed-monoliths_thumb.webp'
 originalDatePublished:
@@ -8,7 +8,7 @@ description: "Microservices didn't fail you. Your boundaries did."
 author: 'Anthony Lombardi'
 categories: [microservices, software-architecture, domain-driven-design]
 tags: [microservices, monoliths, distributed-systems, ddd, bounded-contexts, scalability, software-design, team-autonomy]
-draft: true
+draft: false
 ---
 
 Somewhere along the way, microservices became the villain of modern software architecture. Every few months, a company announces it’s returned to a monolith, and the internet reacts like someone just came back from a silent retreat.
